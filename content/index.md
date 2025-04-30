@@ -22,11 +22,12 @@ title: Forever young
 - $\mathbb{Z}_n$ := $\{0,1,\cdots,n-1\}$
 - $\mathbb{Z}_{\geq n}$ := $\{i \mid i \in \mathbb{Z} \wedge i \geq n\}$
 - $\overline{\mathbb{R}}$ := $\mathbb{R} \cup \{-\infty,+\infty\}$
-- for $X \subseteq \overline{\mathbb{R}}$, $X^+$ := $\{x\in X|x>0\}$
-- for $X \subseteq \overline{\mathbb{R}}$, $X^*$ := $\{x\in X|x\geq 0\}$
-- for $\mathbf{a}, \mathbf{b} \in \overline{\mathbb{R}}^n, \mathbf{a} \lt \mathbf{b}$ := $\forall i, a_i \leq b_i$
+- For $X \subseteq \overline{\mathbb{R}}$, $X^+$ := $\{x\in X|x>0\}$
+- For $X \subseteq \overline{\mathbb{R}}$, $X^*$ := $\{x\in X|x\geq 0\}$
+- For $\mathbf{a}, \mathbf{b} \in \overline{\mathbb{R}}^n, \mathbf{a} \lt \mathbf{b}$ := $\forall i, a_i \leq b_i$
 - Class of sets is denoted as calligraphic letter, e.g. $\mathcal{A}$, $\mathcal{B}$, $\mathcal{F}$
 - $\mathcal{P}(X)$ is the power set of $X$
+- $\biguplus$ represents the disjoint union of sets.
 
 ## Computer Symbols
 
