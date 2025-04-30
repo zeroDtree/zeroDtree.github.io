@@ -1,0 +1,127 @@
+---
+title: auto-grad
+---
+
+- [Base Principle](#base-principle)
+- [Useful Rules](#useful-rules)
+	- [Differential](#differential)
+	- [Trace](#trace)
+- [Common differential calculations](#common-differential-calculations)
+	- [MSE](#mse)
+	- [Eigenvalue and Eigenvector](#eigenvalue-and-eigenvector)
+		- [Eigenvalue](#eigenvalue)
+
+## Base Principle
+
+$l = f(A),f:\mathbb{R}^{m \times n} \to \mathbb{R},f \in \mathcal{C}^1$
+
+$$
+\begin{align*}
+\frac{\partial f}{\partial A} = \begin{bmatrix}
+\frac{\partial f}{\partial A_{1,1}} & \frac{\partial f}{\partial A_{1,2}} & \cdots & \frac{\partial f}{\partial A_{1,n}} \\
+\frac{\partial f}{\partial A_{2,1}} & \frac{\partial f}{\partial A_{2,2}} & \cdots & \frac{\partial f}{\partial A_{2,n}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f}{\partial A_{m,1}} & \frac{\partial f}{\partial A_{m,2}} & \cdots & \frac{\partial f}{\partial A_{m,n}}
+\end{bmatrix}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+d l &= tr(d l)\\
+&= tr(d f(A))\\
+&= tr(\sum_{i,j} \frac{\partial f}{\partial A_{i,j}} d A_{i,j})\\
+&= tr((\frac{\partial f}{\partial A})^T d A)
+\end{align*}
+$$
+
+$\forall d A, dl = tr(B^T d A) \Longrightarrow \frac{\partial f}{\partial A} = B$
+
+So all we need to do is to find a $B$ that satisfies the above equation.
+
+## Useful Rules
+
+### Differential
+
+- Addition rule: $d(X \pm Y) = dX \pm dY$
+- Product rule: $d(XY) = (dX)Y + XdY$
+- Inverse: $dX^{-1} = -X^{-1}dXX^{-1}$
+- Transpose: $d(X^T) = (dX)^T$
+- Trace: $d\text{tr}(X) = \text{tr}(dX)$
+- Determinant: $d|X| = \text{tr}(X^\# dX)$, where $X^\#$ is the adjugate matrix
+- Hadamard product: $d(X \odot Y) = dX \odot Y + X \odot dY$
+- Component-wise(element-wise) function: $d\sigma(X) = \sigma'(X) \odot dX$
+
+### Trace
+
+- Scalar trace: $a = \text{tr}(a)$
+- Transpose: $\text{tr}(A^T) = \text{tr}(A)$
+- Linearity: $\text{tr}(aA + bB) = a\text{tr}(A) + b\text{tr}(B)$
+- Cyclic property: $\text{tr}(AB) = \text{tr}(BA)$, where $A$ and $B^T$ are conformable. Both equal to $\sum_{i,j} A_{ij}B_{ji}$
+- Cyclic property with Hadamard product: $\text{tr}(A^T(B \odot C)) = \text{tr}((A \odot B)^TC)$, where $A, B, C$ have the same dimensions. Both equal to $\sum_{i,j} A_{ij}B_{ij}C_{ij}$
+
+## Common differential calculations
+
+- $n$ : dimension of output
+- $\bold{\hat{y}}$ : predicted value
+- $\bold{y}$ : target value
+
+### MSE
+
+$\bold{\hat{y}} = W\bold{x} + \bold{b}$
+
+$l = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = (\bold{\hat{y}} - \bold{y})^T(\bold{\hat{y}}- \bold{y})$
+
+let $\bold{t} = \bold{\hat{y}} - \bold{y}$,
+
+$
+dl = tr(dl) = tr(\bold{t}^T d\bold{t} + d\bold{t}^T \bold{t}) =  tr(\bold{t}^T d\bold{t}) + tr(d\bold{t}^T \bold{t}) = tr((2\bold{t})^T d\bold{t})
+$
+
+Thus.
+$\frac{\partial l}{\partial \bold{t}} = 2\bold{t}$
+
+$d \bold{t} = d(\bold{\hat{y}} - \bold{y}) = d\bold{\hat{y}}$
+
+$\frac{\partial l}{\partial \bold{\hat{y}}} = 2\bold{t}$
+
+$d \bold{\hat{y}} = d(W\bold{x} + \bold{b}) = dW\bold{x}$
+
+$dl = tr((\frac{\partial l}{\bold{\partial \hat{y}}})^T dW \bold{x}) = tr(\bold{x} (\frac{\partial l}{\bold{\partial \hat{y}}})^T dW) = tr(((\frac{\partial l}{\bold{\partial \hat{y}}}) \bold{x}^T)^T dW)$
+
+$\frac{\partial l}{\partial W} = (\frac{\partial l}{\bold{\partial \hat{y}}}) \bold{x}^T$ = $2\bold{t} \bold{x}^T$
+
+### Eigenvalue and Eigenvector
+
+Suppose $A \in \text{Sym}_n(\mathbb{R})$, then $A$ can be decomposed as
+
+$$
+A = Q \Lambda Q^T
+$$
+
+$$
+\Lambda = \text{diag}(\lambda_1, \lambda_2, \cdots, \lambda_n), \lambda_i \leq \lambda_{i+1}\\
+Q=(\mathbf{q}_1, \mathbf{q}_2, \cdots, \mathbf{q}_n) \in \mathbf{O}_n(\mathbb{R}), \text{where } \mathbf{O}_n(\mathbb{R}) = \{\mathbf{M} \in \mathbb{R}^{n \times n} \mid \mathbf{M}^T\mathbf{M} = \mathbf{I}\}
+$$
+
+where $\lambda_i$ are the eigenvalues of $A$ and $Q$ is the eigenvector matrix.
+
+#### Eigenvalue
+
+$$
+\begin{align*}
+\Lambda &= Q^T A Q\\
+d\Lambda &= Q^T dA Q\\
+dl &= tr(dl)\\
+& =tr((\frac{\partial l}{\partial \Lambda})^T d\Lambda) \\
+&= tr((\frac{\partial l}{\partial \Lambda})^T Q^T dA Q)\\
+&= tr(Q (\frac{\partial l}{\partial \Lambda})^T Q^T dA)\\
+&= tr((Q \frac{\partial l}{\partial \Lambda} Q^T)^T d A)
+\end{align*}
+$$
+
+Thus,
+
+$$
+\frac{\partial l}{\partial A} = Q \frac{\partial l}{\partial \Lambda} Q^T
+$$
