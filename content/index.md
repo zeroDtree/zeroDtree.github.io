@@ -28,6 +28,9 @@ title: Forever young
 - Class of sets is denoted as calligraphic letter, e.g. $\mathcal{A}$, $\mathcal{B}$, $\mathcal{F}$
 - $\mathcal{P}(X)$ is the power set of $X$
 - $\biguplus$ represents the disjoint union of sets.
+- $A^{\#}$ is the adjoint matrix of $A$
+- $(X, \tau)$ is a topological space, briefly written as $X$
+- $\mathcal{B}(X):= \sigma(\mathcal{\tau})$, where $(X, \tau)$ is a topological space
 
 ## Computer Symbols
 
