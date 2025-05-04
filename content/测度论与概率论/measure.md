@@ -69,6 +69,11 @@ $\sigma$ 有限：$\forall A\in \mathcal{E}, \exists \{A_n\}_{n=1}^{\infty}\in \
 
 称可测拓扑空间$(X, \mathcal{B}(X), \mathcal{T})$上的测度为**Borel测度**。
 
+### 性质
+
+1. 设$(\Omega, \mathcal{E}, \mu)$为测度空间,$\{A_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$，则
+   1. $\mu\left(\underline{\lim}_{n \to \infty} A_n\right) \leq \underline{\lim}_{n \to \infty} \mu(A_n)$
+
 ## 外测度
 
 称$\mu^*:\mathcal{P}(\Omega)\to \overline{\mathbb{R}}$为外测度，若$\mu^*$满足：
@@ -146,6 +151,7 @@ $$\forall B \in \mathcal{E}, \mu^*(B) = \mu^*(B \cap A) + \mu^*(B \cap A^c)$$
 $\overline{\mathcal{F}} := \{A \cup N \mid A \in \mathcal{F}, N \in \mathcal{N}_{\mu}\},\overline{\mu}(A \cup N) := \mu(A)$
 $\mathcal{F}^{\Delta}:= \{A \Delta N: A \in \mathcal{F}, N \in \mathcal{N}_{\mu}\}$, $\mu_{\Delta}(A \Delta N) := \mu(A)$
 $\mathcal{F}^* := \{ A \in \Omega \mid \exist A_1,A_2 \in \mathcal{F}, s.t. A_1 \subseteq A \subseteq A_2 \wedge  \mu(A_1)=\mu(A_2) \}$, $\mu^* (A) := \mu(A_1)$
+可以验证$\overline{\mu},\mu^{\Delta},\mu^*$都是良定义的。
 
 ### 性质
 
@@ -158,4 +164,9 @@ $\mathcal{F}^* := \{ A \in \Omega \mid \exist A_1,A_2 \in \mathcal{F}, s.t. A_1 
    - (4) $\overline{\mu}$是完备测度
    - (5) $(\Omega, \overline{\mathcal{F}}, \overline{\mu})$为$(\Omega, \mathcal{F}, \mu)$的最小的完备化测度空间。
 3. $\overline{\mathcal{F}} = \mathcal{F}^{\Delta} = \mathcal{F}^*$
-4. $\overline{\mu} = \mu_{\Delta}=\mu^*$
+4. $\overline{\mu} = \mu^{\Delta}=\mu^*$
+5. $(\Omega, \mathcal{U}_{\mu^*},\mu^*)$是$(\Omega, \mathcal{F}, \mu)$的完备化.
+6. 设$\Omega, \mathcal{F},\mu$为$\sigma$-有限测度空间，$\mu^*$为$\mu$诱导的外测度，$\mathcal{U}_{\mu^*}$为$\mu^*$-可测集类，则$(\forall A \in \mathcal{U}_{\mu^*},\exist B \in \mathcal{F}, \text{s.t. } A \subseteq B \wedge \mu^*(B\setminus A)=0)$
+7. 设$\Omega,\mathcal{F},\mu$为$\sigma$-有限测度空间，则:
+   1. $\mathcal{U}_{\mu^*}=\overline{\mathcal{F}}$
+   2. $\mu^*|_{\mathcal{U}_{\mu^*}}=\overline{\mu}$
