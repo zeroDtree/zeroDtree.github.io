@@ -27,10 +27,14 @@ title: Forever young
 - For $\mathbf{a}, \mathbf{b} \in \overline{\mathbb{R}}^n, \mathbf{a} \lt \mathbf{b}$ := $\forall i, a_i \leq b_i$
 - Class of sets is denoted as calligraphic letter, e.g. $\mathcal{A}$, $\mathcal{B}$, $\mathcal{F}$
 - $\mathcal{P}(X)$ is the power set of $X$
-- $\biguplus$ represents the disjoint union of sets.
+- $\biguplus$ represents the union of disjoint sets.
 - $A^{\#}$ is the adjoint matrix of $A$
 - $(X, \tau)$ is a topological space, briefly written as $X$
 - $\mathcal{B}(X):= \sigma(\mathcal{\tau})$, where $(X, \tau)$ is a topological space
+- $\wedge$ represents the **and** for logic, **min** for function
+- $\vee$ represents the **or** for logic, **max** for function
+- $A \implies B$ means $(A \rightarrow B)$ is True
+- $A \iff B$ means $(A \rightarrow B) \wedge (B \rightarrow A)$ is True
 
 ## Computer Symbols
 
