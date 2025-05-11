@@ -8,11 +8,11 @@ title: Lebesgue-Stieltjes测度
 
 设$F:\mathbb{R}^d \to \mathbb{R},\mathbf{e}:=(1,1,\cdots,1)\in \mathbb{R}^d,C(F):=\{x\in \mathbb{R}^d \mid F \text{在} x \text{处连续}\}$
 
-$F$在点$\mathbf{x}$处连续，等价于$\forall \epsilon > 0, \exist \delta > 0, \forall \mathbf{y}, \mathbf{x} - \delta \mathbf{e} < \mathbf{y} < \mathbf{x}+\delta \mathbf{e},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
+$F$在点$\mathbf{x}$处连续，等价于$\forall \epsilon > 0, \exists \delta > 0, \forall \mathbf{y}, \mathbf{x} - \delta \mathbf{e} < \mathbf{y} < \mathbf{x}+\delta \mathbf{e},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
 
-称$F$在$\mathbf{x}$处**上连续**，若$\forall \epsilon > 0, \exist \delta > 0, \forall \mathbf{y}, \mathbf{x} < \mathbf{y} < \mathbf{x}+\delta \mathbf{e},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
+称$F$在$\mathbf{x}$处**上连续**，若$\forall \epsilon > 0, \exists \delta > 0, \forall \mathbf{y}, \mathbf{x} < \mathbf{y} < \mathbf{x}+\delta \mathbf{e},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
 
-称$F$在$\mathbf{x}$处**下连续**，若$\forall \epsilon > 0, \exist \delta > 0, \forall \mathbf{y}, \mathbf{x} - \delta \mathbf{e} < \mathbf{y} < \mathbf{x},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
+称$F$在$\mathbf{x}$处**下连续**，若$\forall \epsilon > 0, \exists \delta > 0, \forall \mathbf{y}, \mathbf{x} - \delta \mathbf{e} < \mathbf{y} < \mathbf{x},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
 
 称$F:\mathbb{R}^d \to \mathbb{R}$为**Lebesgue-Stieltjes函数**，若
 
@@ -33,11 +33,11 @@ $\mathcal{E}:=\{(a,b] \mid a,b \in \mathbb{R}^d\}$，易得$\mathcal{E}$是$\mat
 
 $\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
 
-### 矩形
+### 问题2
 
 符合约定
 
-- Vector is denoted as bold letter, e.g. $\bold{a}$, $a_i$ means the $i$th element of $\mathbf{a}$.
+- Vector is denoted as bold letter, e.g. $\mathbf{a}$, $a_i$ means the $i$th element of $\mathbf{a}$.
 - $[d]:=\{1,2,\cdots,d\}$
 
 两个点$\mathbf{a},\mathbf{b} \in \mathbb{R}^d$，可以确定一个矩形$[\mathbf{a},\mathbf{b}]$，
