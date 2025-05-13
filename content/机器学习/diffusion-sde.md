@@ -67,7 +67,7 @@ $$
 \theta^* = \arg \min_\theta \mathbb{E}_t \left\{ \lambda(t) \mathbb{E}_{\mathbf{x}(0)} \mathbb{E}_{\mathbf{x}(t)} \mathbb{E}_{\mathbf{v} \sim p_{\mathbf{v}}} \left[ \mathbf{v}^\top \mathbf{s}_\theta(\mathbf{x}(t), t) \mathbf{v} +  \frac{1}{2} (\mathbf{v}^T \mathbf{s}_\theta(\mathbf{x}(t), t) )^2 \right] \right\}\\
 $$
 
-- Deterministic Score Matching:
+- Denoising Score Matching:
   $$
   \theta^* = \arg \min_\theta \mathbb{E}_{t \sim U(0, T)} \lambda(t) \mathbb{E}_{x_0 \sim p_0} \left[ \mathbb{E}_{x \sim p_{0t}} \left[ \left\| s_\theta (x,t) - \nabla_x \ln p_{0t} (x|x_0) \right\|_2^2 \right] \right]
   $$
