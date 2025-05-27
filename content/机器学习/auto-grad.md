@@ -2,16 +2,17 @@
 title: auto-grad
 ---
 
-- [Base Principle](#base-principle)
-- [Useful Rules](#useful-rules)
-	- [Differential](#differential)
-	- [Trace](#trace)
-- [Common differential calculations](#common-differential-calculations)
-	- [MSE](#mse)
-	- [Eigenvalue and Eigenvector](#eigenvalue-and-eigenvector)
-		- [Eigenvalue](#eigenvalue)
+- [1. Base Principle](#1-base-principle)
+- [2. Useful Rules](#2-useful-rules)
+	- [2.1. Differential](#21-differential)
+	- [2.2. Trace](#22-trace)
+- [3. Common differential calculations](#3-common-differential-calculations)
+	- [3.1. MSE](#31-mse)
+	- [3.2. Eigenvalue and Eigenvector](#32-eigenvalue-and-eigenvector)
+		- [3.2.1. Eigenvalue](#321-eigenvalue)
+		- [3.2.2. Eigenvector](#322-eigenvector)
 
-## Base Principle
+## 1. Base Principle
 
 $l = f(A),f:\mathbb{R}^{m \times n} \to \mathbb{R},f \in \mathcal{C}^1$
 
@@ -37,11 +38,11 @@ $$
 
 $\forall d A, dl = tr(B^T d A) \Longrightarrow \frac{\partial f}{\partial A} = B$
 
-So all we need to do is to find a $B$ that satisfies the above equation.
+So all we need to do is to find a $B$ that satisfies $\forall d A, dl = tr(B^T d A)$.
 
-## Useful Rules
+## 2. Useful Rules
 
-### Differential
+### 2.1. Differential
 
 - Addition rule: $d(X \pm Y) = dX \pm dY$
 - Product rule: $d(XY) = (dX)Y + XdY$
@@ -52,7 +53,7 @@ So all we need to do is to find a $B$ that satisfies the above equation.
 - Hadamard product: $d(X \odot Y) = dX \odot Y + X \odot dY$
 - Component-wise(element-wise) function: $d\sigma(X) = \sigma'(X) \odot dX$
 
-### Trace
+### 2.2. Trace
 
 - Scalar trace: $a = \text{tr}(a)$
 - Transpose: $\text{tr}(A^T) = \text{tr}(A)$
@@ -60,13 +61,13 @@ So all we need to do is to find a $B$ that satisfies the above equation.
 - Cyclic property: $\text{tr}(AB) = \text{tr}(BA)$, where $A$ and $B^T$ are conformable. Both equal to $\sum_{i,j} A_{ij}B_{ji}$
 - Cyclic property with Hadamard product: $\text{tr}(A^T(B \odot C)) = \text{tr}((A \odot B)^TC)$, where $A, B, C$ have the same dimensions. Both equal to $\sum_{i,j} A_{ij}B_{ij}C_{ij}$
 
-## Common differential calculations
+## 3. Common differential calculations
 
 - $n$ : dimension of output
 - $\bold{\hat{y}}$ : predicted value
 - $\bold{y}$ : target value
 
-### MSE
+### 3.1. MSE
 
 $\bold{\hat{y}} = W\bold{x} + \bold{b}$
 
@@ -91,7 +92,7 @@ $dl = tr((\frac{\partial l}{\bold{\partial \hat{y}}})^T dW \bold{x}) = tr(\bold{
 
 $\frac{\partial l}{\partial W} = (\frac{\partial l}{\bold{\partial \hat{y}}}) \bold{x}^T$ = $2\bold{t} \bold{x}^T$
 
-### Eigenvalue and Eigenvector
+### 3.2. Eigenvalue and Eigenvector
 
 Suppose $A \in \text{Sym}_n(\mathbb{R})$, then $A$ can be decomposed as
 
@@ -106,7 +107,7 @@ $$
 
 where $\lambda_i$ are the eigenvalues of $A$ and $Q$ is the eigenvector matrix.
 
-#### Eigenvalue
+#### 3.2.1. Eigenvalue
 
 $$
 \begin{align*}
@@ -124,4 +125,45 @@ Thus,
 
 $$
 \frac{\partial l}{\partial A} = Q \frac{\partial l}{\partial \Lambda} Q^T
+$$
+
+#### 3.2.2. Eigenvector
+
+$Q^T dQ + dQ^T Q = 0$, because $Q^T Q = \mathbf{I}$
+Let $H = Q^T dQ$
+
+$$
+\begin{align*}
+dA &=  dQ \Lambda Q^T + Q d\Lambda Q^T + Q \Lambda dQ^T\\
+Q^T dA Q &= (Q^T dQ) \Lambda + d\Lambda +  \Lambda (dQ^TQ)\\
+&= H \Lambda + d\Lambda +  \Lambda H\\
+\end{align*}
+$$
+
+$$
+\begin{align*}
+(Q^T dA Q)_{ii} &= d \Lambda_{ii}\\
+\forall i\not= j, (Q^T dA Q)_{ij} &= H_{ij}(\lambda_j - \lambda_i)\\
+\forall i\not= j, H_{ij} &= \frac{1}{\lambda_j - \lambda_i} (Q^T dA Q)_{ij}\\
+\forall i, H_{ii} &= 0\\
+\end{align*}
+$$
+
+Let $F_{ij} = \begin{cases}
+	\frac{1}{\lambda_j - \lambda_i} & \text{if } i\not= j\\
+	0 & \text{if } i=j
+\end{cases}$
+
+$
+H = F \odot (Q^T dA Q)
+$
+
+$$
+\begin{align*}
+tr(dl) &= tr(\frac{\partial l}{\partial Q}^T dQ)\\
+&= tr(\frac{\partial l}{\partial Q}^T QH)\\
+& = tr\left((Q^T \frac{\partial l}{\partial Q})^T (F \odot (Q^T dA Q))\right)\\
+& = tr\left( \left((Q^T \frac{\partial l}{\partial Q}) \odot F\right)^T (Q^T dA Q) \right)\\
+& = tr\left(Q\ \left( (Q^T\frac{\partial l}{\partial Q}) \odot F \right)^T Q^T d A\right)
+\end{align*}
 $$
