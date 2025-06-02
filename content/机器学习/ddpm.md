@@ -1,235 +1,133 @@
 ---
 title: DDPM
-date: 2024-11-15 20:45:45
 ---
 
 - [Denoising Diffusion Probabilistic Models](#denoising-diffusion-probabilistic-models)
-  - [1. 加噪过程](#1-加噪过程)
-    - [1.1. 重参数化](#11-重参数化)
-  - [2. 去噪过程](#2-去噪过程)
-      - [2.1. 利用重新参数话，消去 1 个随机变量，以减小方差。](#21-利用重新参数话消去-1-个随机变量以减小方差)
-  - [3. 训练过程](#3-训练过程)
-  - [4. 采样过程](#4-采样过程)
-  - [5. 用到的性质](#5-用到的性质)
-      - [5.1. 数学期望的性质](#51-数学期望的性质)
-      - [5.2. 加噪的递归展开](#52-加噪的递归展开)
-  - [6. 参考资料](#6-参考资料)
+  - [1. Forward Diffusion Process](#1-forward-diffusion-process)
+    - [1.1. Reparameterization](#11-reparameterization)
+  - [2. Training Process](#2-training-process)
+  - [3. Sampling Process](#3-sampling-process)
+  - [4. Useful Formulas](#4-useful-formulas)
 
 # Denoising Diffusion Probabilistic Models
 
-## 1. 加噪过程
+## 1. Forward Diffusion Process
 
-默认向量都是列向量，对于多维 Tensor,可以把它 flatten 成列向量。
+All vectors are column vectors. For multi-dimensional tensors, they can be flattened into column vectors.
 
-在前向过程中把一个数据分布 P 一步一步变成分布 $\mathcal{N}(0,I)$
+In the forward process, we gradually transform a data distribution $P_0$ into a distribution $\mathcal{N}(\mathbf{0},\mathbf{I})$.
 
-$P \rightarrow P_1 \rightarrow P_2 \rightarrow P_3 \rightarrow ... \rightarrow \mathcal{N}(0,I)$
+$x_0 \rightarrow x_1 \rightarrow x_2 \rightarrow x_3 \rightarrow ... \rightarrow x_T$
 
-$$
-x_0\sim{P}
-$$
+$P_0 \rightarrow P_1 \rightarrow P_2 \rightarrow P_3 \rightarrow ... \rightarrow P_T \approx \mathcal{N}(\mathbf{0},\mathbf{I})$
 
 $$
+\mathbf{x}_0\sim{P_0}
+$$
+
+Given noise schedule $(\beta_t)_{t=1}^T$,
+
+$$
+\begin{align}
 q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t\mathbf{I})
+\end{align}
 $$
 
-### 1.1. 重参数化
+or equivalently, let $\alpha_t = 1 - \beta_t$, we have
+
+$$
+\begin{align}
+q(\mathbf{x}_t|\mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{\alpha_t}\mathbf{x}_{t-1}, (1-\alpha_t)\mathbf{I})
+\end{align}
+$$
+
+### 1.1. Reparameterization
 
 $
 x_t = \sqrt{1-\beta_t}x_{t-1}+\sqrt{\beta_t}\epsilon,\epsilon\sim\mathcal{N}(0,1)
 $
 
-通过数学归纳法可证明
+By mathematical induction, we can prove that
 
 $$
-q(x_t|x_0) = \mathcal{N}(x_t; \sqrt{\prod_{i=1}^{t}(1-\beta_i)}x_0, (1-(\prod_{i=1}^{t}(1-\beta_i)))\mathbf{I})
+q(\mathbf{x}_t|\mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\prod_{i=1}^{t}(1-\beta_i)}\mathbf{x}_0, (1-(\prod_{i=1}^{t}(1-\beta_i)))\mathbf{I})
 $$
 
-即多次加噪可以表示为一次加噪
-
-且易知随着加噪次数的增多，会把数据的分布转化成标准正态分布
+That is, multiple noise additions can be expressed as one noise addition and it is easy to know that as the number of noise additions increases, the distribution of the data will be transformed into a standard normal distribution.
 
 ```python
 import torch
 n_steps = 500
-beta = torch.linspace(0.0001, 0.02, n_steps)
-beta = 1 - beta
-x = torch.prod(beta)
-expectation = x.sqrt()
-variance = (1 - x) * 1
-print(f"expectation: {expectation}, variance: {variance}")
+betas = torch.linspace(0.0001, 0.02, n_steps)
+alphas = 1 - betas
+alphas_cumprod = torch.cumprod(alphas, dim=0)
+expectation = alphas_cumprod.sqrt()
+variance = 1 - alphas_cumprod
+expectation_rounded = [round(x, 3) for x in expectation[::10].numpy().tolist()]
+variance_rounded = [round(x, 3) for x in variance[::10].numpy().tolist()]
+print(f"expectation: {expectation_rounded}")
+print(f"variance: {variance_rounded}")
 ```
 
 ```
-expectation: 0.07970395684242249, variance: 0.9936472773551941
+expectation: [1.0, 0.998, 0.995, 0.989, 0.982, 0.972, 0.961, 0.948, 0.934, 0.917, 0.9, 0.88, 0.86, 0.838, 0.815, 0.791, 0.767, 0.742, 0.716, 0.689, 0.662, 0.635, 0.608, 0.581, 0.554, 0.527, 0.501, 0.474, 0.449, 0.423, 0.399, 0.375, 0.352, 0.329, 0.308, 0.287, 0.267, 0.248, 0.23, 0.213, 0.196, 0.181, 0.166, 0.153, 0.14, 0.128, 0.116, 0.106, 0.096, 0.087]
+variance: [0.0, 0.003, 0.01, 0.021, 0.036, 0.054, 0.076, 0.101, 0.128, 0.159, 0.191, 0.225, 0.261, 0.298, 0.335, 0.374, 0.412, 0.45, 0.488, 0.525, 0.561, 0.596, 0.63, 0.662, 0.693, 0.722, 0.749, 0.775, 0.799, 0.821, 0.841, 0.859, 0.876, 0.891, 0.905, 0.918, 0.929, 0.938, 0.947, 0.955, 0.961, 0.967, 0.972, 0.977, 0.98, 0.984, 0.986, 0.989, 0.991, 0.992]
 ```
 
-## 2. 去噪过程
+## 2. Training Process
 
-更一般地设，$x_t=a_tx_{t-1} + b_t\epsilon_t,\epsilon_t\sim \mathcal{N}(0,I),a_t^2+b_t^2=1$
+Train a neural network $\mathbf{\epsilon}_{\theta}$ to predict the noise $\mathbf{\epsilon}$ in $\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\mathbf{\epsilon}$
 
-$x_{t-1} = \frac{1}{a_t}(x_t - b_t\epsilon_t)$
+To minimize:
 
-递归展开后 $x_t = (\prod_{i=1}^{t}a_i)x_0 + \sqrt{1-(\prod_{i=1}^{t}a_i)^2}\epsilon,\epsilon\sim\mathcal{N}(0,I)$
+$$
+\begin{align}
+\mathop{\mathbb{E}}\limits_{t, \mathbf{x}_0, \mathbf{\epsilon}} \left[ \left\| \mathbf{\epsilon} - \mathbf{\epsilon}_{\theta}(\mathbf{x}_t,t) \right\|^2 \right]
+\end{align}
+$$
 
-$(\prod_{i=1}^{t}a_i):=\bar{a}_t$
+## 3. Sampling Process
 
-$\sqrt{1-(\prod_{i=1}^{t}a_i)^2}:=\bar{b}_t$
+First, estimate an clean data $\hat{\mathbf{x}}_0:=\frac{1}{\sqrt{\bar{\alpha}_t}}(\mathbf{x}_t - \sqrt{1-\bar{\alpha}_t}\mathbf{\epsilon}_{\theta}(\mathbf{x}_t,t))$
 
-现在希望从$\mathcal{N}(0,I)$ 回到原始数据分布 P
+Then, we can use the following conditional distribution to sample $\mathbf{x}_{t-1}$(the data at the previous time step):
 
-令$\widehat{x}_{t-1}=u(x_t,t)=\frac{1}{\bar{a}_t}(x_t - \bar{b}_t\epsilon_{\theta}(x_t,t))$
+$$
+\begin{align}
+q(\mathbf{x}_{t-1}|\mathbf{x}_t, \hat{\mathbf{x}}_0) &= \frac{q(\mathbf{x}_t|\mathbf{x}_{t-1}, \hat{\mathbf{x}}_0)q(\mathbf{x}_{t-1}|\hat{\mathbf{x}}_0)}{q(\mathbf{x}_t|\hat{\mathbf{x}}_0)}\\
+&=\frac{q(\mathbf{x}_t|\mathbf{x}_{t-1})q(\mathbf{x}_{t-1}|\hat{\mathbf{x}}_0)}{q(\mathbf{x}_t|\hat{\mathbf{x}}_0)}\\
+&=\mathcal{N}\left( \boldsymbol{x}_{t-1}; \underbrace{\frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})\boldsymbol{x}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\alpha_t)\boldsymbol{x}_0}{1-\bar{\alpha}_t}}_{\mu_q(\boldsymbol{x}_t, \boldsymbol{x}_0)}, \underbrace{\frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\mathbf{I}}_{\Sigma_q(t)} \right)
+\end{align}
+$$
 
-$x_0 \xrightarrow{\bar{\epsilon}_t} x_{t-1} \xrightarrow{\epsilon_t} x_t$
+In practice, $\Sigma_q(t)$ is usually set to $\beta_t\mathbf{I}$.
 
-$x_0 \xrightarrow{\bar{\epsilon}_t} x_{t-1} \xleftarrow{\epsilon_{\theta}(t)} x_t$
-
-目标:最小化
+## 4. Useful Formulas
 
 $$
 \begin{align*}
-||x_{t-1}-\hat{x}_{t-1}||^2&=||\frac{1}{\bar{a}_t}(x_t - b_t\epsilon_t)- \frac{1}{\bar{a}_t}(x_t - b_t\epsilon_{\theta}(x_t,t))||^2\\
-&\propto||\epsilon_t - \epsilon_{\theta}(x_t,t)||\\
-&=||\epsilon_t - \epsilon_{\theta}(\bar{a}_tx_0 + a_t\bar{b}_{t-1}\bar{\epsilon}_{t-1} + b_t\epsilon_t,t)||^2 \tag{c}\\
+\mathbf{x}_t = a_t\mathbf{x}_{t-1} + b_t\mathbf{\epsilon}_t
 \end{align*}
 $$
 
-#### 2.1. 利用重新参数话，消去 1 个随机变量，以减小方差。
+By mathematical induction, we can prove that
 
 $$
 \begin{align*}
-a_t\bar{b}_{t-1}\bar{\epsilon}_{t-1}+b_t\epsilon_t \Leftrightarrow \sqrt{a_t^2\bar{b}_{t-1}^2 + b_t^2}\epsilon=\bar{b}_t\epsilon,\epsilon\sim\mathcal{N}(0,1) \tag{a}
+\mathbf{x}_t &= (\prod_{i=1}^{t}a_i)\mathbf{x}_0 + \sum_{i=1}^{t}(\prod_{j=i+1}^{t}a_j)b_i\mathbf{\epsilon}_i
 \end{align*}
 $$
 
-同理
-
-$$
-\begin{align*}
--a_t\bar{b}_{t-1}\epsilon_t+b_t\bar{\epsilon}_{t-1} \Leftrightarrow \bar{b}_t\omega,\omega\sim\mathcal{N}(0,1) \tag{b}
-\end{align*}
-$$
-
-这里$\epsilon$和$\omega$ 是独立的
-
-结合(a)和(b),解一个二元一次方程组把$\epsilon_t$表示出来
-
-$$
-\begin{align*}
-a_1x+b_1y&=c_1\\
-a_2x+b_2y&=c_2\\
-x=\bar{\epsilon}_{t-1},&y=\epsilon_t
-\end{align*}
-$$
-
-解得
-
-$$
-\begin{align*}
-\epsilon_t &= \frac{\bar{b}_tb_t\epsilon - \bar{b}_ta_t\bar{b}_{t-1}\omega}{b_t^2+a_t^2\bar{b}_{t-1}^2}\\
-&= \frac{b_t\epsilon - a_t\bar{b}_{t-1}\omega}{\bar{b}_t}
-\end{align*}
-$$
-
-把$\epsilon_t$代入(c),然后给(c)套一个期望，因为我们希望最小化的是期望
-
-$$
-\begin{align*}
-(c)&=E_{\bar{\epsilon}_{t-1},\epsilon_t}[||\epsilon_t - \epsilon_{\theta}(\bar{a}_tx_0 + a_t\bar{b}_{t-1}\bar{\epsilon}_{t-1} + b_t\epsilon_t,t)||^2]\\
-&=E_{\epsilon,\omega}[||\frac{b_t}{\bar{b}_{t}}\epsilon - \frac{a_t\bar{b}_{t-1}}{\bar{b}_{t}}\omega - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t)||^2]\\
-&=E_{\epsilon,\omega}[||(\frac{b_t}{\bar{b}_{t}}\epsilon - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t))- \frac{a_t\bar{b}_{t-1}}{\bar{b}_{t}}\omega||^2]\\
-&:=E_{\epsilon,\omega}[||\phi(\epsilon)-k\omega||^2]\\
-&=E_{\epsilon}[||\phi(\epsilon)||^2] + k^2E_{\omega}[||\omega||^2] - 2kE_{\epsilon,\omega}[\phi(\epsilon)^T\omega]
-\end{align*}
-$$
-
-其中$\phi(\epsilon)=\frac{b_t}{\bar{b}_{t}}\epsilon - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t)$,$k=\frac{a_t\bar{b}_{t-1}}{\bar{b}_{t}}$
-
-因为$\omega$和$\epsilon$是独立的，所以$\phi(\epsilon)$和$\omega$也是独立的(未证明)
-
-$$
-E[\phi(\epsilon)^T\omega] = E[\phi(\epsilon)]^TE[\omega] = 0
-$$
-
-因此我们的最小化目标为
-
-$$
-E_{\epsilon}[||\phi(\epsilon)||^2]=E_{\epsilon}[(||\frac{b_t}{\bar{b}_{t}}\epsilon - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t))||^2]
-$$
-
-所以损失函数设计为
-
-$$
-loss = ||\epsilon - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t)||^2
-$$
-
-对应到DDPM的论文中
-
-$a_t=\sqrt{1-\beta_t}:=\sqrt{\alpha_t}$， 
-
-$\bar{a}_t=\prod_{i=1}^{t}a_i=\prod_{i=1}^{t}\sqrt{\alpha_i}=\sqrt{\prod_{i=1}^{t}\alpha_i}=\sqrt{\bar{\alpha}_t}$
-
-## 3. 训练过程
-
-1. 采样一个样本$x_0 \sim P$
-2. 采样一个时间步$t$
-3. 采样一个高斯噪声$\epsilon \sim \mathcal{N}(0,I)$
-4. 前向传播计算$\epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t)$
-5. 反向传播最小化损失函数$|| \epsilon - \epsilon_{\theta}(\bar{a}_tx_0 + \bar{b}_t\epsilon,t)||^2$
-
-$\epsilon_{\theta}$ 是神经网络,输入和输出有相同的维度。
-
-## 4. 采样过程
-
-1. 采用一个高斯噪声$\epsilon \sim \mathcal{N}(0,I)$
-2. 倒着一步步去噪，$x_{t-1}=\frac{1}{a_t}(x_t - b_t\epsilon_{\theta}(x_t,t))$
-3. 直到$t=0$时，$x_0$就是我们想要的采样结果
-
-## 5. 用到的性质
-
-#### 5.1. 数学期望的性质
-
-$$
-    E[Y] = E[AX + b] = AE[X] + b = A\mu + b
-$$
-
-$$
-    \begin{align*}
-    Cov(Y) &= Cov(AX + b) \\
-    &= Cov(AX) \text{ (常数b不影响协方差)} \\
-    &= E[(AX - A\mu)(AX - A\mu)^T] \\
-    &= E[A(X - \mu)(X - \mu)^TA^T] \\
-    &= AE[(X - \mu)(X - \mu)^T]A^T \\
-    &= A\Sigma A^T
-    \end{align*}
-$$
-
-- 高斯分布经过线性变换仍然是高斯分布(未证明)
-- 独立的高斯分布相加之后还是高斯分布(未证明)
-
-#### 5.2. 加噪的递归展开
-
-$$
-\begin{align*}
-x_t &= a_tx_{t-1} + b_t\epsilon_t\\
-x_t &= (\prod_{i=1}^{t}a_i)x_0 + \sum_{i=i}^{t}(\prod_{j=i+1}^{t}a_j)b_i\epsilon_i
-\end{align*}
-$$
-
-如果$a_t^2+b_t^2=1$,则
+If $a_t^2+b_t^2=1$, then
 
 $$
 (\prod_{i=1}^{t}a_i)^2 + \sum_{i=1}^{t}(\prod_{j=i+1}^{t}a_j)^2b_i^2=1
 $$
 
+Then
+
 $$
-x_t = (\prod_{i=1}^{t}a_i) x_0 + \sqrt{1-(\prod_{i=1}^{t}a_i)^2}\epsilon,\epsilon\sim\mathcal{N}(0,I)
+\mathbf{x}_t = (\prod_{i=1}^{t}a_i)\mathbf{x}_0 + \sqrt{1-(\prod_{i=1}^{t}a_i)^2}\mathbf{\epsilon},\mathbf{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I})
 $$
 
-## 6. 参考资料
-
-```
-https://kexue.fm/archives/9119
-https://zhuanlan.zhihu.com/p/525106459
-https://arxiv.org/abs/2006.11239
-```
+In particular, for DDPM, we have $a_t = \sqrt{\alpha_t} = \sqrt{1-\beta_t}$ and $b_t = \sqrt{1-\alpha_t} = \sqrt{\beta_t}$.
