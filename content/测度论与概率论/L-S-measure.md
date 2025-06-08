@@ -2,7 +2,7 @@
 title: Lebesgue-Stieltjes测度
 ---
 
-本节利用(Caratheodory)测度扩张定理构造$\mathbb{R}$上的Lebesgue-Stieltjes测度。
+本节利用(Caratheodory)测度扩张定理构造$\mathbb{R}^d$上的Lebesgue-Stieltjes测度。
 
 ## 定义
 
@@ -27,38 +27,50 @@ $F$在点$\mathbf{x}$处连续，等价于$\forall \epsilon > 0, \exists \delta 
 
 $\mu_{F}:=\Delta_{(\mathbf{a},\mathbf{b}]}F$
 
+$\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R}^d\}$，$\mathcal{E}$是$\mathbb{R}^d$上的一个半环。
+
+称$F$为分布函数(distribution function, d.f.)，若$F$是Lebesgue-Stieltjes函数。且还满足以下三个条件：
+
+- $F$ 单调不减：$\mathbf{x}\leq\mathbf{y} \implies F(\mathbf{x}) \leq F(\mathbf{y})$
+- $\forall i \in [d],F(x_1,\cdots,x_{i-1},-\infty,x_{i+1},\cdots,x_d):= \lim\limits_{x_i \to -\infty}(x_1, \cdots, x_{i-1},x_i,x_{i+1},\cdots,x_d)=0$
+- $F(+\infty):=\lim\limits_{\mathbf{x} \to +\infty} F(\mathbf{x})=1$, 即$\forall \epsilon > 0, \exists M >0, s.t. \forall i \in [d], x_i > M, |F(\mathbf{x}) - 1| < \epsilon$
+
+称$F$为准分布函数(quasi-distribution function, q.d.f.)，若存在 d.f. $G$, s.t. $F(\mathbf{x})=\sigma^2G(\mathbf{x})$，其中$\sigma^2>0$
+
 ## 性质
 
-$\mathcal{E}:=\{(a,b] \mid a,b \in \mathbb{R}^d\}$，易得$\mathcal{E}$是$\mathbb{R}^d$上的一个半环。
+1. $\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
 
-$\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
+## 证明
 
-### 问题2
+1. $\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
 
-符合约定
-
-- Vector is denoted as bold letter, e.g. $\mathbf{a}$, $a_i$ means the $i$th element of $\mathbf{a}$.
-- $[d]:=\{1,2,\cdots,d\}$
-
-两个点$\mathbf{a},\mathbf{b} \in \mathbb{R}^d$，可以确定一个矩形$[\mathbf{a},\mathbf{b}]$，
-矩形的所有顶点构成的集合$D =\left\{(c_1,c_2,\cdots,c_d) \mid c_i \in \{a_i,b_i\},i\in [d] \right\}$
-
-设$I$为至多可数集，$\bigcup_{i \in I} [\mathbf{a}^i,\mathbf{b}^i] \supseteq [\mathbf{a},\mathbf{b}]$，且这些小矩形$[\mathbf{a}^i,\mathbf{b}^i]$只可能在边界处相交.
-
-小矩形$[\mathbf{a}^i,\mathbf{b}^i]$的所有顶点构成的集合为$D_i = \left\{(c_1,c_2,\cdots,c_d) \mid c_j \in \{a^i_j,b^i_j\},j\in [d]\right\}$
-
-对于$\mathbb{R}^d$中任意一点$\mathbf{c}$,都可以定义一个函数$f_{\mathbf{c}}:{I} \to \{0,1\}$，
+只需证明有限可加性，即若$\mathbf{I}^{(i)}:=(\mathbf{a}^{(i)},\mathbf{b}^{(i)}],i\in [m]$两两不交，且$\bigcup_{i=1}^m \mathbf{I}^{(i)}:= \mathbf{I} = (\mathbf{a},\mathbf{b}] \in \mathcal{E}$，则
 
 $$
-f_{\mathbf{c}}(i):=
-\begin{cases}
-1, & \text{if } \mathbf{c} \in D_i \\
-0, & \text{otherwise}
-\end{cases}
+\mu_{F}(\mathbf{I}) = \sum_{i=1}^m \mu_{F}(\mathbf{I}^{(i)})
 $$
 
-$S_{\mathbf{c}} := \sum_{i \in I} f_{\mathbf{c}}(i)$
+$m=2$ 时
+$(\mathbf{a},\mathbf{b}]=\bigcup_{i=1}^2 (\mathbf{a}^{(i)},\mathbf{b}^{(i)}]$
+不妨设包含$\mathbf{b}$的矩形为$\mathbf{I}^{(1)}=(\mathbf{a}^{(1)},\mathbf{b}^{(1)}]=\left((a^{(1)}_{1},a^{(1)}_{2},\cdots,a^{(1)}_{d}),(b_{1},b_{2},\cdots,b_{d})\right]$,
 
-$\forall \mathbf{c}, \forall i, S_{\mathbf{c}}(i) < +\infty$,因为每个点至多属于$C^{d}_{2d}$个小矩形的顶点。
+则$\mathbf{a}^{(1)}$一定不等于$\mathbf{a}$.
+因此存在$k \in [d]$,使得$a_{k} < a^{(1)}_{k}:=c$
 
-命题：$\forall i \in [d], \forall \mathbf{c} \in D_i$, if $\mathbf{c} \not\in D$, then $S_{\mathbf{c}} \equiv 0 (\text{mod} 2)$
+则$\mathbf{a}^{(1)}$一定等于$(a_1,\cdots,a_{k-1},c,a_{k+1},\cdots,a_{d})$, 即$\mathbf{I}^{(1)}=\left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$, $\mathbf{I}^{(2)}=\left((a_1, a_2, \cdots, a_d), (b_1,b_2, \cdots, c, \cdots, b_d) \right]$
+为什么呢？
+
+这里先给一个显然的引理：
+**Lemma 1**: 空间中任意两个点$\mathbf{a},\mathbf{b}$可以确定一个矩形$\mathbf{I}:=\left(\min(\mathbf{a},\mathbf{b}), \max(\mathbf{a},\mathbf{b}) \right]$,其中$\min$和$\max$都是**逐元素**取最小和最大。若$\mathbf{a},\mathbf{b}$都含于某个矩形$(\mathbf{c},\mathbf{d}]$，则$\mathbf{I} \subseteq (\mathbf{c},\mathbf{d}]$
+
+
+易知：$\mathbf{I}^{(1)}\subseteq \left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$
+
+若$\left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$中包含$\mathbf{I}^{(2)}$中的点$\mathbf{t}:=(t_1,t_2,\cdots,t_d)$。
+
+知：$\forall i \in [d], a_i < t_i \leq b_i \wedge c < t_k$
+
+知：$\mathbf{a} \in \mathbf{I}^{(2)}$
+
+根据Lemma 1，有$(\mathbf{a},\mathbf{t}] \subseteq \mathbf{I}^{(2)}$

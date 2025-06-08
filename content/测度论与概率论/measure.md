@@ -138,7 +138,7 @@ $$\forall B \in \mathcal{E}, \mu^*(B) = \mu^*(B \cap A) + \mu^*(B \cap A^c)$$
 设$(\Omega, \mathcal{F}, \mu)$为测度空间.
 
 零测集：称$A$ 为 零测集，若$A \in \mathcal{F} \wedge \mu(A)=0$
-可略集: 称$A$ 为 可略集，若 $\exist \text{零测集}B \text{ s.t. } A \subseteq B$，所有的可略集构成的集类记为$\mathcal{N}_{\mu}$
+可略集: 称$A$ 为 可略集，若 $\exists \text{零测集}B \text{ s.t. } A \subseteq B$，所有的可略集构成的集类记为$\mathcal{N}_{\mu}$
 称$(\Omega, F, \mu)$为完备测度空间，若$\mathcal{N}_{\mu} \subseteq F$
 
 设$(\Omega, \mathcal{F}_1, \mu_1)$和$(\Omega, \mathcal{F}_2, \mu_2)$为两个测度空间，称$(\Omega, \mathcal{F}_2, \mu_2)$是$(\Omega, \mathcal{F}_1, \mu_1)$的**完备化**，若
@@ -150,7 +150,7 @@ $$\forall B \in \mathcal{E}, \mu^*(B) = \mu^*(B \cap A) + \mu^*(B \cap A^c)$$
 设$(\Omega, \mathcal{F}, \mu)$为测度空间
 $\overline{\mathcal{F}} := \{A \cup N \mid A \in \mathcal{F}, N \in \mathcal{N}_{\mu}\},\overline{\mu}(A \cup N) := \mu(A)$
 $\mathcal{F}^{\Delta}:= \{A \Delta N: A \in \mathcal{F}, N \in \mathcal{N}_{\mu}\}$, $\mu_{\Delta}(A \Delta N) := \mu(A)$
-$\mathcal{F}^* := \{ A \in \Omega \mid \exist A_1,A_2 \in \mathcal{F}, s.t. A_1 \subseteq A \subseteq A_2 \wedge  \mu(A_1)=\mu(A_2) \}$, $\mu^* (A) := \mu(A_1)$
+$\mathcal{F}^* := \{ A \in \Omega \mid \exists A_1,A_2 \in \mathcal{F}, s.t. A_1 \subseteq A \subseteq A_2 \wedge  \mu(A_1)=\mu(A_2) \}$, $\mu^* (A) := \mu(A_1)$
 可以验证$\overline{\mu},\mu^{\Delta},\mu^*$都是良定义的。
 
 ### 性质
@@ -166,7 +166,7 @@ $\mathcal{F}^* := \{ A \in \Omega \mid \exist A_1,A_2 \in \mathcal{F}, s.t. A_1 
 3. $\overline{\mathcal{F}} = \mathcal{F}^{\Delta} = \mathcal{F}^*$
 4. $\overline{\mu} = \mu^{\Delta}=\mu^*$
 5. $(\Omega, \mathcal{U}_{\mu^*},\mu^*)$是$(\Omega, \mathcal{F}, \mu)$的完备化.
-6. 设$\Omega, \mathcal{F},\mu$为$\sigma$-有限测度空间，$\mu^*$为$\mu$诱导的外测度，$\mathcal{U}_{\mu^*}$为$\mu^*$-可测集类，则$(\forall A \in \mathcal{U}_{\mu^*},\exist B \in \mathcal{F}, \text{s.t. } A \subseteq B \wedge \mu^*(B\setminus A)=0)$
+6. 设$\Omega, \mathcal{F},\mu$为$\sigma$-有限测度空间，$\mu^*$为$\mu$诱导的外测度，$\mathcal{U}_{\mu^*}$为$\mu^*$-可测集类，则$(\forall A \in \mathcal{U}_{\mu^*},\exists B \in \mathcal{F}, \text{s.t. } A \subseteq B \wedge \mu^*(B\setminus A)=0)$
 7. 设$\Omega,\mathcal{F},\mu$为$\sigma$-有限测度空间，则:
    1. $\mathcal{U}_{\mu^*}=\overline{\mathcal{F}}$
    2. $\mu^*|_{\mathcal{U}_{\mu^*}}=\overline{\mu}$
