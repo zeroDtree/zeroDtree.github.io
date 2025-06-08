@@ -96,11 +96,25 @@ $$
 \begin{align}
 q(\mathbf{x}_{t-1}|\mathbf{x}_t, \hat{\mathbf{x}}_0) &= \frac{q(\mathbf{x}_t|\mathbf{x}_{t-1}, \hat{\mathbf{x}}_0)q(\mathbf{x}_{t-1}|\hat{\mathbf{x}}_0)}{q(\mathbf{x}_t|\hat{\mathbf{x}}_0)}\\
 &=\frac{q(\mathbf{x}_t|\mathbf{x}_{t-1})q(\mathbf{x}_{t-1}|\hat{\mathbf{x}}_0)}{q(\mathbf{x}_t|\hat{\mathbf{x}}_0)}\\
-&=\mathcal{N}\left( \boldsymbol{x}_{t-1}; \underbrace{\frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})\boldsymbol{x}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\alpha_t)\boldsymbol{x}_0}{1-\bar{\alpha}_t}}_{\mu_q(\boldsymbol{x}_t, \boldsymbol{x}_0)}, \underbrace{\frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\mathbf{I}}_{\Sigma_q(t)} \right)
+&=\mathcal{N}\left( \boldsymbol{x}_{t-1}; \underbrace{\frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})\boldsymbol{x}_t + \sqrt{\bar{\alpha}_{t-1}}(1-\alpha_t)\hat{\boldsymbol{x}}_0}{1-\bar{\alpha}_t}}_{\mu_q(\boldsymbol{x}_t, \hat{\boldsymbol{x}}_0)}, \underbrace{\frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t}\mathbf{I}}_{\Sigma_q(t)} \right)
 \end{align}
 $$
 
 In practice, $\Sigma_q(t)$ is usually set to $\beta_t\mathbf{I}$.
+
+Substitute $\hat{\mathbf{x}}_0$ into the formula above, we have
+
+$$
+\begin{align}
+\mu_{q}  = \frac{1}{\sqrt{\alpha_t}} \mathbf{x}_t - \frac{1 - \alpha_t}{\sqrt{1 - \bar{\alpha}_t} \sqrt{\alpha_t}} \mathbf{\epsilon}_t
+\end{align}
+$$
+
+Therefore,
+
+$$
+\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( \mathbf{x}_t - \frac{\sqrt{1-\alpha_t}}{1-\bar{\alpha}_t} \mathbf{\epsilon}_\theta(\mathbf{x}_t, t) \right) + (1-\alpha_t)\mathbf{\epsilon}
+$$
 
 ## 4. Useful Formulas
 
