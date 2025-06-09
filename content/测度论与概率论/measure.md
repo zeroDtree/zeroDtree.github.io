@@ -32,6 +32,7 @@ $\mathcal{E}$为$\Omega$上的集类，$\mu:\mathcal{E}\to \overline{\mathbb{R}}
 4. 若$\mu$为半环$\mathcal{E}$上有限可加测度，则$A,A_1,A_2,\cdots A_n \in \mathcal{E} \wedge A_i\cap A_j=\emptyset, i\neq j \wedge \biguplus_{i=1}^{n}A_i \subseteq A \Longrightarrow \sum_{i=1}^{n}\mu(A_i) \leq \mu(A)$
 5. 若$\mu$为半环$\mathcal{E}$上有限可加测度，则$A,A_1,A_2,\cdots \in \mathcal{E} \wedge A_i\cap A_j=\emptyset, i\neq j \wedge \biguplus_{i=1}^{\infty}A_i \subseteq A \Longrightarrow \sum_{i=1}^{\infty}\mu(A_i) \leq \mu(A)$
 6. 若$\mu$为半环$\mathcal{E}$上有限可加测度,则其具有有限次可加性
+7. 有限可加测度的容斥原理： $\mu(\bigcup_{i=1}^n A_i)=\sum_{k=1}^{n} (-1)^{k+1} \sum_{1\leq i_1 < \cdots < i_k \leq n} \mu(A_{i_1} \cap \cdots \cap A_{i_k})$
 
 ## 可列可加测度(简称测度)
 

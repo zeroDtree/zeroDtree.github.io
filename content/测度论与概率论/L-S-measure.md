@@ -37,13 +37,21 @@ $\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R
 
 称$F$为准分布函数(quasi-distribution function, q.d.f.)，若存在 d.f. $G$, s.t. $F(\mathbf{x})=\sigma^2G(\mathbf{x})$，其中$\sigma^2>0$
 
+设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度，则称$\mu$为Lebesgue-Stieltjes测度。
+
 ## 性质
 
 1. $\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
+2. 上连续函数的(实系数)线性组合为上连续函数。
+3. $\mu_{F}$在$\mathcal{E}$上的具有可列次可加性。
+4. $\mu_{F}$在$\mathcal{E}$上的测度
+5. $\mu_{F}$可以唯一地扩张成$\mathcal{B}(\mathbb{R}^d)$上的$\sigma$-有限测度。称$\mu_{F}$为$F$诱导的Lebesgue-Stieltjes测度。
 
 ## 证明
 
-1. $\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
+### 1.
+
+$\mu_{F}$是$\mathcal{E}$上的一个有限可加测度。
 
 只需证明有限可加性，即若$\mathbf{I}^{(i)}:=(\mathbf{a}^{(i)},\mathbf{b}^{(i)}],i\in [m]$两两不交，且$\bigcup_{i=1}^m \mathbf{I}^{(i)}:= \mathbf{I} = (\mathbf{a},\mathbf{b}] \in \mathcal{E}$，则
 
@@ -58,12 +66,11 @@ $(\mathbf{a},\mathbf{b}]=\bigcup_{i=1}^2 (\mathbf{a}^{(i)},\mathbf{b}^{(i)}]$
 则$\mathbf{a}^{(1)}$一定不等于$\mathbf{a}$.
 因此存在$k \in [d]$,使得$a_{k} < a^{(1)}_{k}:=c$
 
-则$\mathbf{a}^{(1)}$一定等于$(a_1,\cdots,a_{k-1},c,a_{k+1},\cdots,a_{d})$, 即$\mathbf{I}^{(1)}=\left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$, $\mathbf{I}^{(2)}=\left((a_1, a_2, \cdots, a_d), (b_1,b_2, \cdots, c, \cdots, b_d) \right]$
+则$\mathbf{a}^{(1)}$一定等于$(a_1,\cdots,a_{k-1},c,a_{k+1},\cdots,a_{d})$, 即$\mathbf{I}^{(1)}=\left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$, $\mathbf{I}^{(2)}=\left(\mathbf{a}, (b_1,b_2, \cdots, c, \cdots, b_d) \right]$
 为什么呢？
 
 这里先给一个显然的引理：
-**Lemma 1**: 空间中任意两个点$\mathbf{a},\mathbf{b}$可以确定一个矩形$\mathbf{I}:=\left(\min(\mathbf{a},\mathbf{b}), \max(\mathbf{a},\mathbf{b}) \right]$,其中$\min$和$\max$都是**逐元素**取最小和最大。若$\mathbf{a},\mathbf{b}$都含于某个矩形$(\mathbf{c},\mathbf{d}]$，则$\mathbf{I} \subseteq (\mathbf{c},\mathbf{d}]$
-
+**Lemma 1**: 空间中任意两个点$\mathbf{a},\mathbf{b}$可以确定一个矩形$\mathbf{I}:=\left(\min(\mathbf{a},\mathbf{b}), \max(\mathbf{a},\mathbf{b}) \right]$,其中$\min$和$\max$都是**逐元素**取最小和最大。若$\mathbf{a},\mathbf{b}$都属于某个矩形$(\mathbf{c},\mathbf{d}]$，则$\mathbf{I} \subseteq (\mathbf{c},\mathbf{d}]$. 更一般地， $(\mathbf{a}^{(i)})_{i=1}^n$可以确定一个矩形$\mathbf{I}:=(\min_i(\mathbf{a}^{(i)}),\max_i(\mathbf{a}^{(i)}))]$, 若每个$\mathbf{a}^{(i)}$都属于某个矩形$(\mathbf{c},\mathbf{d}]$, 则$\mathbf{I} \subseteq (\mathbf{c},\mathbf{d}]$
 
 易知：$\mathbf{I}^{(1)}\subseteq \left((a_1, a_2, \cdots, c,\cdots,a_{d}),\mathbf{b}\right]$
 
@@ -73,4 +80,55 @@ $(\mathbf{a},\mathbf{b}]=\bigcup_{i=1}^2 (\mathbf{a}^{(i)},\mathbf{b}^{(i)}]$
 
 知：$\mathbf{a} \in \mathbf{I}^{(2)}$
 
-根据Lemma 1，有$(\mathbf{a},\mathbf{t}] \subseteq \mathbf{I}^{(2)}$
+根据Lemma 1，有$\mathbf{x}:=(b_1, b_2,\cdots, b_{k-1},t_k, b_{k+1},\cdots, b_{d}) \in \mathbf{I}^{(2)}$
+
+又知，$\mathbf{x} \in \mathbf{I}^{(1)}$
+
+与$\mathbf{I}^{(1)} \cap \mathbf{I}^{(2)} = \emptyset$矛盾。
+
+不难证明$\mu_{F}$在$m=2$时的有限可加性。
+
+设$m=k-1$是$\mu_{F}$在$\mathcal{E}$上具有有限可加性。
+要证$m=k$时，$\mu_{F}$在$\mathcal{E}$上也具有有限可加性。
+
+这里需要再给一个引理
+**Lemma 2**: 若一个矩形$(\mathbf{a},\mathbf{b}]$可以被$m\geq 2$个两两不交的矩形$\mathbf{I}^{(i)}:=(\mathbf{a}^{(i)},\mathbf{b}^{(i)}],i\in [m]$覆盖，则存在矩形$U,V$,$U \cap V = \emptyset \wedge U \cup V = (\mathbf{a},\mathbf{b}]$,且$U$和$V$中都分别包含至少一个矩形$(\mathbf{a}^{(i)},\mathbf{b}^{(i)}]$
+
+Lemma 2的证明如下：
+还是设包含$\mathbf{b}$的矩形为$\mathbf{I}^{(1)}=(\mathbf{a}^{(1)},\mathbf{b}^{(1)}]$
+则$\mathbf{I}^{(1)} \subseteq (\mathbf{y}_j, \mathbf{b}]:=\mathbf{J}^{(j)}, \forall j \in [d]$, 其中$\mathbf{y}_j$为将$\mathbf{a}$的第$j$个分量替换为$\mathbf{a}^{(1)}$的第$j$个分量得到的。
+另任取一个不同于$\mathbf{I}^{(1)}$的矩形，不妨为$\mathbf{I}^{(2)}=(\mathbf{a}^{(2)},\mathbf{b}^{(2)}]$，则一定存在$l$，使得$\mathbf{I}^{(2)} \subseteq \mathbf{J}^{(l)}$, 否则$\mathbf{I}^{(2)}$与$\mathbf{I}^{(1)}$的交集将不为空。
+Q.E.D.
+
+根据Lemma 2, 存在矩形$U,V$,$U \cap V = \emptyset \wedge U \cup V = (\mathbf{a},\mathbf{b}]$,且$U$和$V$中都分别包含至少一个矩形$(\mathbf{a}^{(i)},\mathbf{b}^{(i)}]$, 不妨设$U$中包含$\mathbf{I}^{(1)}$，$V$中包含$\mathbf{I}^{(2)}$
+
+$$
+\begin{align}
+  \mu_{F}(\mathbf{I}) &=  \mu_{F}(\mathbf{I} \cap (U \cup V))\\
+  &= \mu_{F}(\mathbf{I} \cap U) + \mu_{F}(\mathbf{I} \cap V)\\
+  &=\mu_{F}(\bigcup_{i=1}^m \mathbf{I}^{(i)} \cap U) + \mu_{F}(\bigcup_{i=1}^m \mathbf{I}^{(i)} \cap V)\\
+  &=\mu_{F}(\bigcup_{i=1,i\not=2}^m \mathbf{I}^{(i)} \cap U) + \mu_{F}(\bigcup_{i=2}^m \mathbf{I}^{(i)} \cap V)\\
+  &= \sum_{i=1,i\not=2}^m \mu_{F}(\mathbf{I}^{(i)} \cap U) + \sum_{i=2}^m \mu_{F}(\mathbf{I}^{(i)} \cap V)\\
+  & = \sum_{i=1}^m \mu_{F}(\mathbf{I}^{(i)})
+\end{align}
+$$
+
+Q.E.D.
+
+### 2.
+
+从L-S 测度到 L-S 函数：设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度(即，L-S 测度)，则存在$\mathbb{R}^d$上的L-S函数$F$(但不唯一)，使得由$F$诱导的测度恰好为$\mu$,i.e. $\mu_{F}=\mu$.
+
+定义$F:= (-1)^{\#(\mathbf{x}>\mathbf{c})}\mu\left((\min(\mathbf{x},\mathbf{c}),\max(\mathbf{x},\mathbf{c}]\right)$,其中$\min$和$\max$都是逐元素取最小和最大。#表示$\mathbf{x}>\mathbf{c}$的元素(分量)个数。
+
+$$
+\Delta_{(\mathbf{a},\mathbf{b}]} F = \sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} F(\mathbf{x^{\epsilon}}), \mathbf{x^{\epsilon}}=\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a})
+$$
+
+下面证明$F$有非负增量，即$\Delta_{(\mathbf{a},\mathbf{b}]} F \geq 0$。
+
+将$\mu(\min(\mathbf{x}, \mathbf{y}),\max(\mathbf{x}, \mathbf{y}])$简记为$\mu\{\mathbf{x}, \mathbf{y}\}$
+
+提示：
+使用容斥原理,$\forall \mathbf{c} \in \mathbb{R}^d$，将$\mu(\mathbf{a},\mathbf{b}]$用$\mu\{\mathbf{x}^{\epsilon},\mathbf{c}\}\forall \epsilon \in \{0,1\}^d$表示出来。即证明:
+$\mu((\mathbf{a},\mathbf{b}])=\sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} (-1)^{\#(\mathbf{x}^{\epsilon}>\mathbf{c})}\mu\{\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a}),\mathbf{c}\}$
