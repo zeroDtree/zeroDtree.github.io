@@ -119,16 +119,42 @@ Q.E.D.
 
 从L-S 测度到 L-S 函数：设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度(即，L-S 测度)，则存在$\mathbb{R}^d$上的L-S函数$F$(但不唯一)，使得由$F$诱导的测度恰好为$\mu$,i.e. $\mu_{F}=\mu$.
 
-定义$F:= (-1)^{\#(\mathbf{x}>\mathbf{c})}\mu\left((\min(\mathbf{x},\mathbf{c}),\max(\mathbf{x},\mathbf{c}]\right)$,其中$\min$和$\max$都是逐元素取最小和最大。#表示$\mathbf{x}>\mathbf{c}$的元素(分量)个数。
+定义$F:= (-1)^{\#(\mathbf{x}<\mathbf{c})}\mu\left((\min(\mathbf{x},\mathbf{c}),\max(\mathbf{x},\mathbf{c})\right)$,其中$\min$和$\max$都是逐元素取最小和最大。#表示$\mathbf{x}<\mathbf{c}$的元素(分量)个数。
 
 $$
 \Delta_{(\mathbf{a},\mathbf{b}]} F = \sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} F(\mathbf{x^{\epsilon}}), \mathbf{x^{\epsilon}}=\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a})
 $$
 
-下面证明$F$有非负增量，即$\Delta_{(\mathbf{a},\mathbf{b}]} F \geq 0$。
+证明：
+
+下面只证明$F$有非负增量，即$\Delta_{(\mathbf{a},\mathbf{b}]} F \geq 0$。
 
 将$\mu(\min(\mathbf{x}, \mathbf{y}),\max(\mathbf{x}, \mathbf{y}])$简记为$\mu\{\mathbf{x}, \mathbf{y}\}$
 
-提示：
-使用容斥原理,$\forall \mathbf{c} \in \mathbb{R}^d$，将$\mu(\mathbf{a},\mathbf{b}]$用$\mu\{\mathbf{x}^{\epsilon},\mathbf{c}\}\forall \epsilon \in \{0,1\}^d$表示出来。即证明:
-$\mu((\mathbf{a},\mathbf{b}])=\sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} (-1)^{\#(\mathbf{x}^{\epsilon}>\mathbf{c})}\mu\{\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a}),\mathbf{c}\}$
+我们只需证明如下等式(后文称下式为**测度幂分解公式**)：
+
+$$
+\begin{align}
+\mu((\mathbf{a},\mathbf{b}])=\sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} (-1)^{\#(\mathbf{x}^{\epsilon}<\mathbf{c})}\mu\{\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a}),\mathbf{c}\}
+\end{align}
+$$
+
+首先对于$\mathcal{B}(\mathbb{R})$上的测度，容易验证上式成立。示意图如下，$\pm$的部分被抵消掉。
+![[测度论与概率论/images/mu_a_b.png]]
+
+对与$d$维情况，我们需要先发现如下事实：一个$\mathcal{B}(\mathbb{R}^d)$上的测度，固定其中$d-1$个分量，则以剩下的一个分量为变量的函数为$\mathcal{B}(\mathbb{R})$上的测度。形式化地，若$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的测度，则$\mu^{(i)}_{\mathbf{a},\mathbf{b}}((x,y]):=\mu(((a_1, a_2, \cdots, a_{i-1}, x, a_{i+1}, \cdots, a_d),(b_1, b_2, \cdots, b_{i-1}, y, b_{i+1}, \cdots, b_d)])$为$\mathcal{B}(\mathbb{R})$上的测度。
+
+然后对$1,2,3,\cdots,d$维依次累计使用一维的测度幂分解公式，即可得到$d$维的测度幂分解公式。
+
+### 3.
+
+$\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R}^d\}$，$\mathcal{E}$是$\mathbb{R}^d$上的一个半环。其中的元素被称作矩形。
+若$\mathbf{I}^{(i)}:=(\mathbf{a}^{(i)},\mathbf{b}^{(i)}],i\in [m]$两两不交，且$\bigcup_{i=1}^m \mathbf{I}^{(i)}:= \mathbf{I} = (\mathbf{a},\mathbf{b}] \in \mathcal{E}$
+
+$\forall k \in [d], D_k:=\{c \mid \exists i \text{ s.t. } c = b^{(i)}_k\}$
+
+谬论：存在$k \in [d]$，使得$\exists c_k \in D_k$, 使得超平面$x_k=c_k$将$\mathbf{I}^{(i)}$分成两组，且两组集合中没有矩形跨越这个超平面。
+
+反例如下：
+
+![[测度论与概率论/images/rect_example.png]]
