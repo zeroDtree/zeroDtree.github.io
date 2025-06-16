@@ -1,7 +1,5 @@
 ---
 title: smooth-manifold
-date: 2024-12-09 15:33:37
-tags: 光滑流形
 ---
 
 ## 流形定义

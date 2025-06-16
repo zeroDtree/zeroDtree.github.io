@@ -2,6 +2,8 @@
 title: 可测映射与随机变量
 ---
 
+## Prerequisites
+
 ## 定义
 
 - 可测映射：设$f:\Omega \rightarrow E$，其中$(\Omega, \mathcal{F})$和$(E,\mathcal{E})$是可测空间, 若$\mathcal{E}$中的元素在$f$下的逆像都是$\mathcal{F}$中的元素，则称$f$为可测映射。记作$f\in \mathcal{F}/\mathcal{E}$。

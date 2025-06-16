@@ -1,7 +1,5 @@
 ---
 title: transformer
-date: 2024-04-01 09:49:15
-tags: transformer
 ---
 
 - [transformer 结构](#transformer-结构)

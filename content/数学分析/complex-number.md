@@ -1,3 +1,13 @@
+---
+title: 复数
+---
+
+## Prerequisites
+
+- [[数学分析/real-number]]
+
+## 定义
+
 $\mathcal{D} = \mathbb{R} \times \mathbb{R}$
 
 定义$\mathcal{D}$上的加法和乘法：

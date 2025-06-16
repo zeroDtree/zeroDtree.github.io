@@ -2,6 +2,10 @@
 title: Diagonalization
 ---
 
+## Prerequisites
+
+- [[linear-algebra/matrix]]
+
 ## 1. Diagonalization
 
 $A \in F^{n \times n}$ is a matrix.

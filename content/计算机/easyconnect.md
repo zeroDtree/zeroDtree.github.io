@@ -1,7 +1,5 @@
 ---
 title: docker，proxychains，easyconnect， FreeFileSync
-date: 2024-06-27 14:05:17
-tags: vpn
 ---
 
 # docker deamon 代理 + docker封印easyconnect + proxychains使用easyconnect+ FreeFileSync使用easyconnect 的代理

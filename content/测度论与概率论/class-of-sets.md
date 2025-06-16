@@ -1,8 +1,11 @@
 ---
 title: 集类
-date: 2024-12-02 22:52:52
-tags: 测度论
 ---
+
+## Prerequisites
+
+- [[朴素集合论/naive-set-theory-2]]
+- [[测度论与概率论/拓扑空间]]
 
 ### 定义
 
@@ -28,7 +31,7 @@ tags: 测度论
 
 称$(X,\sigma(\tau),\tau)$为 可测拓扑空间，若$\sigma(\tau)$为$X$上的 Borel $\sigma$代数，$\tau$为$X$上的拓扑, $\sigma(\tau)$也被记作$\mathcal{B}(X)$
 
-![[测度论与概率论/class_of_sets/sigma.png]]
+![[测度论与概率论/images/sigma.png]]
 
 ### 性质
 

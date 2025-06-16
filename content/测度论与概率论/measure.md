@@ -2,6 +2,10 @@
 title: 测度论
 ---
 
+## Prerequisites
+
+- [[测度论与概率论/class-of-sets]]
+
 ## 广义实值集函数(extended real-valued set function)
 
 ### 定义

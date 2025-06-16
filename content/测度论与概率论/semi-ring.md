@@ -2,6 +2,10 @@
 title: semi-ring (in measure theory)
 ---
 
+## Prerequisites
+
+- [[测度论与概率论/class-of-sets]]
+
 称集类$\mathcal{E}$为半环，若
 
 - $\emptyset \in \mathcal{E}$

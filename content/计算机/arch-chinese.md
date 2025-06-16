@@ -1,7 +1,5 @@
 ---
 title: archlinux-kde 中文与中文输入 大致流程
-date: 2024-10-25 14:05:17
-tags: archlinux
 ---
 
 # archlinux-kde 中文与中文输入

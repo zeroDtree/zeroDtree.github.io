@@ -1,6 +1,9 @@
 ---
 title: 与R相关的Borel集
 ---
+## Prerequisites
+
+- [[测度论与概率论/class-of-sets]]
 
 ## $\mathcal{B}(\mathbb{R})$的生成元
 

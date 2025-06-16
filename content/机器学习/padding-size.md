@@ -1,7 +1,5 @@
 ---
 title: padding_side
-date: 2024-06-25 22:11:56
-tags: transformer
 ---
 
 # 语言模型的padding问题。

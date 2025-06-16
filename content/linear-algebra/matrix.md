@@ -2,6 +2,7 @@
 title: Matrix
 ---
 
+- [Prerequisites](#prerequisites)
 - [1. Matrix](#1-matrix)
 - [2. Matrix Addition](#2-matrix-addition)
 - [3. Scalar Multiplication](#3-scalar-multiplication)
@@ -20,6 +21,10 @@ title: Matrix
 	- [11.1. Alternating multilinear map](#111-alternating-multilinear-map)
 	- [11.2. Laplace expansion](#112-laplace-expansion)
 - [12. Adjugate matrix](#12-adjugate-matrix)
+
+## Prerequisites
+
+- [[抽象代数/环论(一)]]
 
 Let $F$ be a field(e.g. $F=\mathbb{Q},F=\mathbb{R}$ or $F=\mathbb{C}$)
 

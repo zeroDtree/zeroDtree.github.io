@@ -1,8 +1,11 @@
 ---
 title: homeomorphism
-date: 2024-12-12 22:37:24
-tags: 点集拓扑
 ---
+
+## Prerequisites
+
+- [[测度论与概率论/拓扑空间]]
+
 
 同胚(homeomorphism): 设$f:X \to Y$，若$f$是双射，且$f$和$f^{-1}$都是连续的，则称$f$为同胚映射，简称同胚，记为$X \cong Y$
 

@@ -1,7 +1,5 @@
 ---
 title: quantization
-date: 2024-03-09 08:22:03
-tags: 量化
 ---
 
 - [model compression](#model-compression)

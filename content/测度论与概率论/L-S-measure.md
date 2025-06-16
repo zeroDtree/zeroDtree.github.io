@@ -4,6 +4,10 @@ title: Lebesgue-Stieltjes测度
 
 本节利用(Caratheodory)测度扩张定理构造$\mathbb{R}^d$上的Lebesgue-Stieltjes测度。
 
+## Prerequisites
+
+- [[测度论与概率论/measure]]
+
 ## 定义
 
 设$F:\mathbb{R}^d \to \mathbb{R},\mathbf{e}:=(1,1,\cdots,1)\in \mathbb{R}^d,C(F):=\{x\in \mathbb{R}^d \mid F \text{在} x \text{处连续}\}$

@@ -2,7 +2,11 @@
 title: Matrix Norm
 ---
 
-All matrix is belong to $ \mathbb{C}^{m \times n} $ if not specified.
+## Prerequisites
+
+- [[linear-algebra/matrix]]
+
+All matrix is belong to $\mathbb{C}^{m \times n}$ if not specified.
 
 ## 1. Vector p norm
 

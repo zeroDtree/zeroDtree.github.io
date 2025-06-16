@@ -1,3 +1,11 @@
+---
+title: limit of functions
+---
+
+## Prerequisites
+
+- [[数学分析/converge]]
+
 ## Definition of convergence of functions at a point
 
 **Convergence of functions at a point**: Let $X$ be a subset of $\mathbb{R}^n$, let $f: X \rightarrow \mathbb{R}^m$ be a function, let $E$ be a subset of $X$, $x_0$ be an adherent point of $E$, and let $L \in \mathbb{R}^m$. We say that $f$ $\textit{converges to}$ $L$ $\textit{at}$ $x_0$ $\textit{in}$ $E$ and write
@@ -48,30 +56,30 @@ where we have dropped the restriction $x \in E$ for brevity
 
 ## For n>1
 
-$\bold{x} = (x_1, x_2, \cdots, x_n)^T \in \mathbb{R}^n$
+$\mathbf{x} = (x_1, x_2, \cdots, x_n)^T \in \mathbb{R}^n$
 
-$\bold{x}^n \to \bold{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(\bold{x}^n, \bold{y}) < \epsilon$
+$\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(\mathbf{x}^n, \mathbf{y}) < \epsilon$
 
 The following statements are equivalent:
 
-1. $\bold{x^n} \to \bold{y}$
+1. $\mathbf{x^n} \to \mathbf{y}$
 2. $\forall i \in \{1, 2, \cdots, n\}, (x_i^n)_{n=0}^{\infty} \to y_i$
 
 > proof:
 > (1) $\longrightarrow$ (2):
-> $\bold{x}^n \to \bold{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
+> $\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
 > so, $\forall i \in \{1, 2, \cdots, n\}, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| \leq \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
 > (2) $\longrightarrow$ (1):
 > $(x_i^n)_{n=0}^{\infty} \to y_i$ means that $\forall \epsilon > 0, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| < \epsilon/n$
 > Let $N = \max\{N_1, N_2, \cdots, N_n\}$
 > Then, $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} \leq \sum_{i=1}^{n} |x_i^n - y_i| < n (\epsilon/n) = \epsilon$
-> so, $\bold{x}^n \to \bold{y}$
+> so, $\mathbf{x}^n \to \mathbf{y}$
 
-Let $f: X \to \mathbb{R}^m, X \subseteq \mathbb{R}^n, f(\bold{x}) = (f_1(\bold{x}), f_2(\bold{x}), \cdots, f_m(\bold{x}))^T$
+Let $f: X \to \mathbb{R}^m, X \subseteq \mathbb{R}^n, f(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \cdots, f_m(\mathbf{x}))^T$
 
 From above, we can easily get that
 
-$\lim_{\bold{x} \to \bold{x}_0} f(\bold{x}) = (\lim_{\bold{x} \to \bold{x}_0} f_1(\bold{x}), \lim_{\bold{x} \to \bold{x}_0} f_2(\bold{x}), \cdots, \lim_{\bold{x} \to \bold{x}_0} f_m(\bold{x}))^T$
+$\lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) = (\lim_{\mathbf{x} \to \mathbf{x}_0} f_1(\mathbf{x}), \lim_{\mathbf{x} \to \mathbf{x}_0} f_2(\mathbf{x}), \cdots, \lim_{\mathbf{x} \to \mathbf{x}_0} f_m(\mathbf{x}))^T$
 
 Let $X \subseteq \mathbb{R}^n$, $f,g: X \to \mathbb{R}^m$
 
@@ -79,9 +87,9 @@ We can get the law of limit of functions in multi-variables from the law of limi
 
 $$
 \begin{align*}
-\lim_{\bold{x} \to \bold{x}_0} (f \pm g)(\bold{x}) &= \lim_{\bold{x} \to \bold{x}_0} f(\bold{x}) \pm \lim_{\bold{x} \to \bold{x}_0} g(\bold{x})\\
-\lim_{\bold{x} \to \bold{x}_0} (fg)(\bold{x}) &= \lim_{\bold{x} \to \bold{x}_0} f(\bold{x}) \lim_{\bold{x} \to \bold{x}_0} g(\bold{x})\\
-\lim_{\bold{x} \to \bold{x}_0} (f/g)(\bold{x}) &= \frac{\lim_{\bold{x} \to \bold{x}_0} f(\bold{x})}{\lim_{\bold{x} \to \bold{x}_0} g(\bold{x})}
+\lim_{\mathbf{x} \to \mathbf{x}_0} (f \pm g)(\mathbf{x}) &= \lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) \pm \lim_{\mathbf{x} \to \mathbf{x}_0} g(\mathbf{x})\\
+\lim_{\mathbf{x} \to \mathbf{x}_0} (fg)(\mathbf{x}) &= \lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x}) \lim_{\mathbf{x} \to \mathbf{x}_0} g(\mathbf{x})\\
+\lim_{\mathbf{x} \to \mathbf{x}_0} (f/g)(\mathbf{x}) &= \frac{\lim_{\mathbf{x} \to \mathbf{x}_0} f(\mathbf{x})}{\lim_{\mathbf{x} \to \mathbf{x}_0} g(\mathbf{x})}
 \end{align*}
 $$
 

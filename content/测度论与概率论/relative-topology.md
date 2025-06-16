@@ -1,8 +1,12 @@
 ---
 title: 相对拓扑
-date: 2024-12-12 21:14:56
-tags: 点集拓扑
 ---
+
+## Prerequisites
+
+- [[测度论与概率论/拓扑空间]]
+
+## 定义
 
 $(X,\tau)$为拓扑空间，称$(X_0,X_0 \cap \tau)$为相对拓扑(relative topology, 又称子空间)，简记为$X_0$
 

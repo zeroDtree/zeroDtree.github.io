@@ -2,6 +2,10 @@
 title: Rank
 ---
 
+## Prerequisites
+
+- [[linear-algebra/matrix]]
+
 ## Linear combination
 
 A linear combination of a sequence of vectors $v_1, v_2, \cdots, v_k$ is a vector of the form $c_1 v_1 + c_2 v_2 + \cdots + c_k v_k$, where $c_i \in F, v_i \in F^n$.
