@@ -14,22 +14,22 @@ $F$在点$\mathbf{x}$处连续，等价于$\forall \epsilon > 0, \exists \delta 
 
 称$F$在$\mathbf{x}$处**下连续**，若$\forall \epsilon > 0, \exists \delta > 0, \forall \mathbf{y}, \mathbf{x} - \delta \mathbf{e} < \mathbf{y} < \mathbf{x},d(F(\mathbf{x}), \mathbf{y})<\epsilon$
 
-称$F:\mathbb{R}^d \to \mathbb{R}$为**Lebesgue-Stieltjes函数**，若
+称$F:\mathbb{R}^d \to \mathbb{R}$为**Lebesgue-Stieltjes函数**(**L-S函数**)，若
 
 - $F$ 处处上连续
 - $F$ 在任意矩形$(\mathbf{a},\mathbf{b}]$上具有非负增量,即
 
   $$
-  \Delta_{(\mathbf{a},\mathbf{b}]}F:=\sum_{\mathbf{c} \in \{0,1\}^d} (-1)^{\mathbf{c}^T \mathbf{c}} F(\mathbf{\mathbf{d_c}}) \geq 0
+  \Delta_{(\mathbf{a},\mathbf{b}]}F:=\sum_{\mathbf{\epsilon} \in \{0,1\}^d} (-1)^{\#(\mathbf{\epsilon}=0)} F(\mathbf{\mathbf{\mathbf{a} + \epsilon(\mathbf{b} - \mathbf{a})}}) \geq 0
   $$
 
-  where $d_i=a_i$ if $c_i=1$ and $d_i=b_i$ if $c_i=0$
+  $\#(\mathbf{\epsilon}=0)$表示$\mathbf{\epsilon}$中$0$的个数。
 
 $\mu_{F}:=\Delta_{(\mathbf{a},\mathbf{b}]}F$
 
 $\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R}^d\}$，$\mathcal{E}$是$\mathbb{R}^d$上的一个半环。
 
-称$F$为分布函数(distribution function, d.f.)，若$F$是Lebesgue-Stieltjes函数。且还满足以下三个条件：
+称$F$为分布函数(distribution function, d.f.)，若$F$是Lebesgue-Stieltjes函数(L-S函数)。且还满足以下三个条件：
 
 - $F$ 单调不减：$\mathbf{x}\leq\mathbf{y} \implies F(\mathbf{x}) \leq F(\mathbf{y})$
 - $\forall i \in [d],F(x_1,\cdots,x_{i-1},-\infty,x_{i+1},\cdots,x_d):= \lim\limits_{x_i \to -\infty}(x_1, \cdots, x_{i-1},x_i,x_{i+1},\cdots,x_d)=0$
@@ -37,7 +37,17 @@ $\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R
 
 称$F$为准分布函数(quasi-distribution function, q.d.f.)，若存在 d.f. $G$, s.t. $F(\mathbf{x})=\sigma^2G(\mathbf{x})$，其中$\sigma^2>0$
 
-设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度，则称$\mu$为Lebesgue-Stieltjes测度。
+设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度，称$\mu$为Lebesgue-Stieltjes测度,若对于$\mathbb{R}^d$上的任意有限区间(矩形)$I$，都有$\mu(I)<+\infty$.
+
+$\mu(\mathbf{I})$可简记为$\mu \mathbf{I}$,例如$\mu((\mathbf{a},\mathbf{b}])= \mu(\mathbf{a},\mathbf{b}]$
+
+设$\mu$是$(\mathbb{R}^d, \mathcal{B}(\mathbb{R}^d))$上的一个有限测度，$A\in \mathcal{B}(\mathbb{R}^d),a\in \mathbb{R}^d, I \subseteq \mathbb{R}^d$为区间,定义如下三个概念：
+
+- 若$\mu(\partial A)=0$,则称$A$为$\mu$连续集
+- 若$I$为$\mu$连续集，则称$I$为$\mu$连续区间
+- 若$(-\infty, \mathbf{a}]$为连续区间，则称$\mathbf{a}$为$\mu$连续点，$\mu$连续点的全体记作$C({\mu})$
+
+$F_i:=F\left(\underbrace{+\infty,+\infty,..., +\infty }_{i-1},  x_i, \underbrace{+\infty,+\infty,..., +\infty }_{d-i}\right)$,可以得知$F_i$为$\mathbb{R}$上的q.d.f., 且$\mu_{F_i} = \mu_{F} \circ \pi_{i}^{-1}$
 
 ## 性质
 
@@ -46,6 +56,12 @@ $\mathcal{E}:=\{(\mathbf{a},\mathbf{b}] \mid \mathbf{a},\mathbf{b} \in \mathbb{R
 3. $\mu_{F}$在$\mathcal{E}$上的具有可列次可加性。
 4. $\mu_{F}$在$\mathcal{E}$上的测度
 5. $\mu_{F}$可以唯一地扩张成$\mathcal{B}(\mathbb{R}^d)$上的$\sigma$-有限测度。称$\mu_{F}$为$F$诱导的Lebesgue-Stieltjes测度。
+6. 设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个L-S 测度，则存在$\mathbb{R}^d$上的L-S函数$F$(但不唯一)，使得由$F$诱导的测度恰好为$\mu$,i.e. $\mu_{F}=\mu$.
+7. $\mathcal{B}(\mathbb{R}^d)$上的有限测度与$\mathbb{R}^d$上的q.d.f. 之间依 $\mu_{F}((\mathbf{a}, \mathbf{b}]=\Delta_{(\mathbf{a}, \mathbf{b}]}F$ 一一对应。
+8. 用$\mu_{F}$表示q.d.f. $F$诱导的L-S测度，则$\mu_{F}(-\infty, \mathbf{x}]=F(\mathbf{x})$
+9. 若区间$I$的每个顶点都是$\mu$连续点，则$I$为$\mu$连续区间。因为$\bigcup_{\epsilon \in \{0,1\}^d} \partial (-\infty, \mathbf{a} + \epsilon(\mathbf{b}-\mathbf{a}) ] \supseteq  \partial (\mathbf{a}, \mathbf{b}]$.
+10. 设$F$是$\mathbb{R}^d$上的q.d.f. ,$\mu_{F}$是$F$诱导的$(\mathbb{R}, \mathcal{B}(\mathbb{R}^d))$上的有限测度，$\mathbf{x} \in \mathbb{R}^d$， 则$x\in C(F) \iff x\in C(\mu_{F})$
+11. 设$F$是$\mathbb{R}^d$上的q.d.f.，$\mathbf{x}=(x_1,x_2,\cdots,x_d)$，若诸$x_i$都为$F_i$的连续点，则$\mathbf{x}$为$F$的连续点。
 
 ## 证明
 
@@ -117,9 +133,9 @@ Q.E.D.
 
 ### 2.
 
-从L-S 测度到 L-S 函数：设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个$\sigma$-有限测度(即，L-S 测度)，则存在$\mathbb{R}^d$上的L-S函数$F$(但不唯一)，使得由$F$诱导的测度恰好为$\mu$,i.e. $\mu_{F}=\mu$.
+从L-S 测度到 L-S 函数：设$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的一个L-S 测度，则存在$\mathbb{R}^d$上的L-S函数$F$(但不唯一)，使得由$F$诱导的测度恰好为$\mu$,i.e. $\mu_{F}=\mu$.
 
-定义$F:= (-1)^{\#(\mathbf{x}<\mathbf{c})}\mu\left((\min(\mathbf{x},\mathbf{c}),\max(\mathbf{x},\mathbf{c})\right)$,其中$\min$和$\max$都是逐元素取最小和最大。#表示$\mathbf{x}<\mathbf{c}$的元素(分量)个数。
+定义$F:= (-1)^{\#(\mathbf{x}<\mathbf{c})}\mu\left((\min(\mathbf{x},\mathbf{c}),\max(\mathbf{x},\mathbf{c})]\right)$,其中$\min$和$\max$都是逐元素取最小和最大。#表示$\mathbf{x}<\mathbf{c}$的元素(分量)个数。
 
 $$
 \Delta_{(\mathbf{a},\mathbf{b}]} F = \sum_{\epsilon \in \{0,1\}^d}(-1)^{\#(\epsilon=0)} F(\mathbf{x^{\epsilon}}), \mathbf{x^{\epsilon}}=\mathbf{a}+\epsilon(\mathbf{b}-\mathbf{a})
@@ -129,9 +145,9 @@ $$
 
 下面只证明$F$有非负增量，即$\Delta_{(\mathbf{a},\mathbf{b}]} F \geq 0$。
 
-将$\mu(\min(\mathbf{x}, \mathbf{y}),\max(\mathbf{x}, \mathbf{y}])$简记为$\mu\{\mathbf{x}, \mathbf{y}\}$
+将$\mu((\min(\mathbf{x}, \mathbf{y}),\max(\mathbf{x}, \mathbf{y})])$简记为$\mu\{\mathbf{x}, \mathbf{y}\}$
 
-我们只需证明如下等式(后文称下式为**测度幂分解公式**)：
+我们只需证明如下等式(后文称下式为**L-S测度幂分解公式**)：
 
 $$
 \begin{align}
@@ -144,7 +160,7 @@ $$
 
 对与$d$维情况，我们需要先发现如下事实：一个$\mathcal{B}(\mathbb{R}^d)$上的测度，固定其中$d-1$个分量，则以剩下的一个分量为变量的函数为$\mathcal{B}(\mathbb{R})$上的测度。形式化地，若$\mu$为$\mathcal{B}(\mathbb{R}^d)$上的测度，则$\mu^{(i)}_{\mathbf{a},\mathbf{b}}((x,y]):=\mu(((a_1, a_2, \cdots, a_{i-1}, x, a_{i+1}, \cdots, a_d),(b_1, b_2, \cdots, b_{i-1}, y, b_{i+1}, \cdots, b_d)])$为$\mathcal{B}(\mathbb{R})$上的测度。
 
-然后对$1,2,3,\cdots,d$维依次累计使用一维的测度幂分解公式，即可得到$d$维的测度幂分解公式。
+然后对$1,2,3,\cdots,d$维依次累计使用一维的L-S测度幂分解公式，即可得到$d$维的L-S测度幂分解公式。
 
 ### 3.
 
