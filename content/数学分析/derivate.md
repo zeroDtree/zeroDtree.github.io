@@ -35,8 +35,26 @@ real vector space can define inner product, which can induce norm, which can ind
 
 ## Properties
 
-1. Suppose $f$ and $g$ are defined on $[a, b]$ and are differentiable at a point $x \in [a, b]$. Then $f+g$, $f \cdot g$, and $\frac{f}{g}$ are differentiable at $x$, and
+1. Let $F$ be a field, $\langle F, F^n \rangle=:F^n$, $f: F^n \rightarrow F^m$ be a linear mapping. Then $\exists L \in F^{m \times n}$, s.t. $f(x) = Lx$. Furthermore, $L$ is unique.
+2. Suppose $f$ and $g$ are defined on $[a, b]$ and are differentiable at a point $x \in [a, b]$. Then $f+g$, $f \cdot g$, and $\frac{f}{g}$ are differentiable at $x$, and
    1. $(f+g)'(x) = f'(x) + g'(x)$
    2. $(fg)'(x) = f'(x)g(x) + f(x)g'(x)$
    3. $\left(\frac{f}{g}\right)'(x) = \frac{g(x)f'(x) - g'(x)f(x)}{g^2(x)}$
-2. Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$.
+3. Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$.
+
+## Proofs
+
+### 1.
+
+- Let $F$ be a field, $\langle F, F^n \rangle=:F^n$, $f: F^n \rightarrow F^m$ be a linear mapping. Then $\exists L \in F^{m \times n}$, s.t. $f(x) = Lx$. Furthermore, $L$ is unique.
+
+Let $(e_i)_{i=1}^n$ be the standard basis of $F^n$, then $f(e_i) = L_i$, $L_i \in F^m$. $L:=(L_1, L_2, \cdots, L_n)^T$.
+
+$x$ can be written as $x = \sum_{i=1}^n x_i e_i$, then $f(x) = \sum_{i=1}^n x_i f(e_i) = \sum_{i=1}^n x_i L_i = Lx$
+
+uniqueness is obvious.
+
+### 2.
+
+- Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$.
+
