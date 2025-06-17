@@ -5,12 +5,13 @@ title: Forever young
 - [Notation](#notation)
 	- [Math Symbols](#math-symbols)
 	- [Computer Symbols](#computer-symbols)
+	- [Folders with clear dependencies](#folders-with-clear-dependencies)
 
 # Notation
 
 ## Math Symbols
 
-- Vector is denoted as bold letter, e.g. $\bold{a}$, Matrix is denoted as capital letter, e.g. $A$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $A$
+- Vector is denoted as bold letter, e.g. $\mathbf{a}$, Matrix is denoted as capital letter, e.g. $A$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $A$
 - All vectors are column vectors
 - $\mathbb{Z}$ is the set of integers.
 - $\mathbb{Q}$ is the set of rational numbers.
@@ -42,3 +43,12 @@ title: Forever young
 - Host in local network is denoted as small letter, e.g. $a$,$b$,$c$ located in local network $A$,$B$,$C$
 - Public ip is denoted as Greek letter, e.g. $\alpha$,$\gamma$,$\beta$
 - Hosts in the same local network are distinguished by subscripts, e.g. $a_1$,$a_2$,$a_5$ located in local network $A$.
+
+## Folders with clear dependencies
+
+- [[linear-algebra]]
+- [[数学分析]]
+- [[抽象代数]]
+- [[数理逻辑]]
+- [[朴素集合论]]
+- [[测度论与概率论]]

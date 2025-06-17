@@ -5,6 +5,7 @@ title: 复数
 ## Prerequisites
 
 - [[数学分析/real-number]]
+- [[数学分析/向量空间]]
 
 ## 定义
 
@@ -35,3 +36,13 @@ $(a,b) \times (c,d) = (ac-bd,ad+bc)$
 因此$\mathcal{D}$关于上述加法和乘法构成一个域, 称为复数域, 记作$\mathbb{C}$
 
 将复数$(a,b)$记作$a+bi$
+
+## 内积
+
+$\mathbb{C}$可被看作向量空间$\langle \mathbb{C}, \mathbb{C} \rangle$
+
+定义$f(a, b) = a \overline{b}$, 易知$f$是$\mathbb{C}$上的内积
+
+内积诱导范数，范数诱导度量。
+
+且内积$f$诱导的度量空间与$R^2$上的度量空间同胚。
