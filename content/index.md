@@ -46,9 +46,9 @@ title: Forever young
 
 ## Folders with clear dependencies
 
-- [[linear-algebra]]
-- [[数学分析]]
-- [[抽象代数]]
-- [[数理逻辑]]
-- [[朴素集合论]]
-- [[测度论与概率论]]
+- linear-algebra
+- 数学分析
+- 抽象代数
+- 数理逻辑
+- 朴素集合论
+- 测度论与概率论
