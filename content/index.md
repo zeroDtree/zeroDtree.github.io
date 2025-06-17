@@ -46,6 +46,8 @@ title: Forever young
 
 # Folders with clear dependencies
 
+![[dependency_graph]]
+
 - linear-algebra
 - 数学分析
 - 抽象代

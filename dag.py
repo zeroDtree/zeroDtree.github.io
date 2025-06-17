@@ -8,6 +8,7 @@ from my_utils import Sniffer
 class DAGMermiad:
     def __init__(self):
         self.pattern = r"(?:!)?\[\[(?![^\]]*\.(?:png|jpg|jpeg|gif|svg|webp))[^\]]*\]\]"
+        self.ignore_filepaths = ["content/index.md", "content/dependency_graph.md"]
 
     def find_all_filepaths(self, dir_path: str) -> List[str]:
         sniffer = Sniffer()
@@ -35,6 +36,10 @@ class DAGMermiad:
                 text = f.read()
                 reference_list = re.findall(pattern, text)
                 result_dict[filepath] = reference_list
+
+        for filepath in self.ignore_filepaths:
+            if filepath in result_dict:
+                result_dict.pop(filepath)
         return result_dict
 
     def unify_format(self, dependencies_dict: Dict[str, List[str]]) -> Dict[str, List[str]]:
@@ -68,7 +73,7 @@ class DAGMermiad:
 
         for filepath, reference_list in dependencies_dict.items():
             for reference in reference_list:
-                result_str += f"{name_to_id[reference]}[\"{reference}\"] --> {name_to_id[filepath]}[\"{filepath}\"]\n"
+                result_str += f'{name_to_id[reference]}["{reference}"] --> {name_to_id[filepath]}["{filepath}"]\n'
         result_str += "```"
         return result_str
 
