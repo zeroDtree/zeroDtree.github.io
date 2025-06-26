@@ -113,7 +113,7 @@ $$
 Therefore,
 
 $$
-\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( \mathbf{x}_t - \frac{\sqrt{1-\alpha_t}}{1-\bar{\alpha}_t} \mathbf{\epsilon}_\theta(\mathbf{x}_t, t) \right) + (1-\alpha_t)\mathbf{\epsilon}
+\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( \mathbf{x}_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \mathbf{\epsilon}_\theta(\mathbf{x}_t, t) \right) + (1-\alpha_t)\mathbf{\epsilon}
 $$
 
 ## 4. Useful Formulas

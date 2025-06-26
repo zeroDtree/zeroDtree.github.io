@@ -10,7 +10,7 @@ title: smooth-manifold
 - Second countable：$M$ 是第二可数空间
 - Locally Euclidean：对任意 $x \in M$，都有 $x$ 的开邻域 $U_x$，同胚于 $\mathbb{R}^m$ 的某个开集
 
-称$(U,\phi)$为 卡(chart) 或坐标邻域(Coordinate Neighborhood),若$U$是$M$的开集，$U'$是$\mathbb{R}^m$的开集，$\phi$是$U$到$U'$的同胚映射，注意，同胚映射是连续映射，而连续映射是定义在拓扑空间上的，因此这里的$U$和$U'$应看作**相对拓扑空间**。
+称$(U,\phi)$为 卡(chart) 或坐标邻域(Coordinate Neighborhood)，若$U$是$M$的开集，$U'$是$\mathbb{R}^m$的开集，$\phi$是$U$到$U'$的同胚映射，注意，同胚映射是连续映射，而连续映射是定义在拓扑空间上的，因此这里的$U$和$U'$应看作**相对拓扑空间**。
 
 Let $k$ be a nonnegative integer. A real-valued function $f: U \to \mathbb{R}$ is said to be $\mathcal{C}^k$ at $p \in U$ if its partial derivatives
 
