@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 from typing import Dict, Set, List
-from my_utils import Sniffer
+from ls_mlkit.my_utils import Sniffer
 
 
 class DAGMermiad:

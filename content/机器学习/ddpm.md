@@ -15,7 +15,7 @@ title: DDPM
 
 All vectors are column vectors. For multi-dimensional tensors, they can be flattened into column vectors.
 
-In the forward process, we gradually transform a data distribution $P_0$ into a distribution $\mathcal{N}(\mathbf{0},\mathbf{I})$.
+In the forward process, we gradually transform a data distribution $P_0$ into a distribution $P_T$ which is close to $\mathcal{N}(\mathbf{0},\mathbf{I})$.
 
 $x_0 \rightarrow x_1 \rightarrow x_2 \rightarrow x_3 \rightarrow ... \rightarrow x_T$
 
@@ -113,7 +113,7 @@ $$
 Therefore,
 
 $$
-\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( \mathbf{x}_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \mathbf{\epsilon}_\theta(\mathbf{x}_t, t) \right) + (1-\alpha_t)\mathbf{\epsilon}
+\mathbf{x}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left( \mathbf{x}_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \mathbf{\epsilon}_\theta(\mathbf{x}_t, t) \right) + \sqrt{(1-\alpha_t)}\mathbf{\epsilon}
 $$
 
 ## 4. Useful Formulas
@@ -145,3 +145,5 @@ $$
 $$
 
 In particular, for DDPM, we have $a_t = \sqrt{\alpha_t} = \sqrt{1-\beta_t}$ and $b_t = \sqrt{1-\alpha_t} = \sqrt{\beta_t}$.
+
+
