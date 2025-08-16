@@ -5,7 +5,6 @@
   - [2. Expose a service through the firewall](#2-expose-a-service-through-the-firewall)
   - [3. Expose a service in the local network to the public](#3-expose-a-service-in-the-local-network-to-the-public)
   - [4. Proxy Forwarding](#4-proxy-forwarding)
-    - [4.1. Although](#41-although)
   - [5. ssh via proxy](#5-ssh-via-proxy)
   - [6. proxy using ssh](#6-proxy-using-ssh)
 
@@ -81,18 +80,6 @@ Purpose: Use your local ssh key on the server, for example, clone your private r
    	IdentityFile ~/.ssh/{private key}
    	ForwardAgent yes
    ```
-
-### 4.1. Although
-
-```
--A    Enables  forwarding  of  connections from an authentication agent such as ssh-agent(1).  This can also be specified on a per-host basis in a
-		configuration file.
-
-		Agent forwarding should be enabled with caution.  Users with the ability to bypass file permissions on the  remote  host  (for  the  agent's
-		Unix-domain  socket)  can  access  the local agent through the forwarded connection.  An attacker cannot obtain key material from the agent,
-		however they can perform operations on the keys that enable them to authenticate using the identities loaded into the agent.  A safer alter‐
-		native may be to use a jump host (see -J).
-```
 
 ## 5. ssh via proxy
 
