@@ -14,4 +14,6 @@ Dev Containers
 Markdown TOC & Chapter Number
 Comment Formula
 latex-formatter
+shfmt
+shell-format
 ```

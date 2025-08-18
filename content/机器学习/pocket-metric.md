@@ -1,14 +1,12 @@
 ---
-蛋白质口袋评估指标
+title: 蛋白质口袋评估指标
 ---
 
 - [Vina Score](#vina-score)
 	- [原理](#原理)
-	- [网址](#网址)
-	- [安装过程](#安装过程)
+	- [安装](#安装)
 	- [使用](#使用)
 	- [效果](#效果)
-	- [完整的安装脚本](#完整的安装脚本)
 - [UniGSSA](#unigssa)
 	- [原理](#原理-1)
 	- [安装流程](#安装流程)
@@ -17,7 +15,7 @@
 - [scRMSD](#scrmsd)
 	- [scRMSD](#scrmsd-1)
 
-# Vina Score
+# [Vina Score](https://autodock-vina.readthedocs.io/en/latest/index.html)
 
 ## 原理
 
@@ -45,58 +43,7 @@ $
 
 vina 分数取$(s_i)_{i=1}^n$ 的最小值。
 
-## 网址
-
-```
-https://autodock-vina.readthedocs.io/en/latest/index.html#
-```
-
-## 安装过程
-
-下载 vina 可执行程序
-
-```bash
-wget https://github.com/ccsb-scripps/AutoDock-Vina/releases/download/v1.2.7/vina_1.2.7_linux_x86_64
-```
-
-(安装 vina python 包)
-
-```
-uv pip install vina
-```
-
-安装输入预处理包
-
-- Meeko
-
-```
-pip install numpy scipy rdkit  meeko
-pip install git+https://github.com/prody/ProDy
-```
-
-- AutoGrid4
-
-```
-https://github.com/ccsb-scripps/AutoGrid.git
-```
-
-- ADFR software suite
-
-```
-https://ccsb.scripps.edu/adfr/downloads/
-```
-
-## 使用
-
-```
-https://autodock-vina.readthedocs.io/en/latest/docking_basic.html
-```
-
-## 效果
-
-![vina_score](./images/vina_score.png)
-
-## 完整的安装脚本
+## 安装
 
 ```bash
 set -e
@@ -136,10 +83,20 @@ tar -zxvf adfr.tar.gz
 cd ADFRsuite_x86_64Linux_1.0
 printf "yes\n" | ./install.sh -d Linux64 -c 0
 cd ..
-add_to_path_config $(pwd)/ADFRsuite_x86_64Linux_1.0/Linux64/bin
-add_to_path_config $(pwd)/AutoGrid/Linux64
-add_to_path_config $(pwd)
+# add_to_path_config $(pwd)/ADFRsuite_x86_64Linux_1.0/Linux64/bin
+# add_to_path_config $(pwd)/AutoGrid/Linux64
+# add_to_path_config $(pwd)
 ```
+
+## 使用
+
+```
+https://autodock-vina.readthedocs.io/en/latest/docking_basic.html
+```
+
+## 效果
+
+![vina_score](./images/vina_score.png)
 
 ---
 
@@ -162,7 +119,7 @@ conda activate gmxMMPBSA
 unigbsa
 
 ```bash
-uv pip install unigbsa lickit
+pip install unigbsa lickit
 ```
 
 ## 使用
