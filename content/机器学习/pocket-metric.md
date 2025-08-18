@@ -130,7 +130,6 @@ unigbsa-pipeline -i example/1ceb/1ceb_protein.pdb -l example/1ceb/1ceb_ligand.sd
 
 ## 效果
 
-![[机器学习/images/uniGBSA.png]]
 
 ---
 
@@ -146,5 +145,3 @@ self-consistency root mean square deviation
 - 然后用 ProteinMPNN 设计出氨基酸序列
 - 再用结构预测工具（如 AlphaFold2 或 ESMFold）从这个序列反推出结构，
 - 最后比对原始生成结构与预测结构的一致性。
-
-![[机器学习/images/esmfold.png]]
