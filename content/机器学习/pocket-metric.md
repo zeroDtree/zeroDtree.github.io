@@ -96,7 +96,7 @@ https://autodock-vina.readthedocs.io/en/latest/docking_basic.html
 
 ## 效果
 
-![vina_score](images/vina_score.png)
+![vina_score](./images/vina_score.png)
 
 ---
 
