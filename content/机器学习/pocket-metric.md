@@ -96,7 +96,7 @@ https://autodock-vina.readthedocs.io/en/latest/docking_basic.html
 
 ## 效果
 
-![vina_score](images/vina_score.png)
+![[机器学习/images/vina_score.png]]
 
 ---
 
@@ -130,7 +130,7 @@ unigbsa-pipeline -i example/1ceb/1ceb_protein.pdb -l example/1ceb/1ceb_ligand.sd
 
 ## 效果
 
-![unigbsa](./images/uniGBSA.png)
+![[机器学习/images/uniGBSA.png]]
 
 ---
 
@@ -147,4 +147,4 @@ self-consistency root mean square deviation
 - 再用结构预测工具（如 AlphaFold2 或 ESMFold）从这个序列反推出结构，
 - 最后比对原始生成结构与预测结构的一致性。
 
-![esmfold](./images/esmfold.png)
+![[机器学习/images/esmfold.png]]
