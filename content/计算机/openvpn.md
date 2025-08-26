@@ -137,7 +137,7 @@ client-config-dir ccd
 # Thelonious a fixed VPN IP address of 10.11.0.100.
 # First uncomment out these lines:
 client-config-dir ccd
-route 10.11.0.0 255.255.255.0
+# route 10.11.0.0 255.255.255.0
 # Then add this line to ccd/Thelonious:
 #   ifconfig-push 10.11.0.100 255.255.255.0
 ```
