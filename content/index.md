@@ -4,6 +4,7 @@ title: Forever young
 
 - [Notation](#notation)
 	- [Math Symbols](#math-symbols)
+	- [Logic Symbols](#logic-symbols)
 	- [Computer Symbols](#computer-symbols)
 - [Folders with clear dependencies](#folders-with-clear-dependencies)
 
@@ -34,8 +35,20 @@ title: Forever young
 - $\mathcal{B}(X):= \sigma(\mathcal{\tau})$, where $(X, \tau)$ is a topological space
 - $\wedge$ represents the **and** for logic, **min** for function
 - $\vee$ represents the **or** for logic, **max** for function
-- $A \implies B$ means $(A \rightarrow B)$ is True
-- $A \iff B$ means $(A \rightarrow B) \wedge (B \rightarrow A)$ is True
+
+## Logic Symbols
+
+- Little letters (e.g. $p,q,r$) are used to represent propostional variables
+- $\neg$ is used to represent negation
+- $\wedge$ is used to represent conjunction
+- $\vee$ is used to represent disjunction
+- $\to$ is used to represent implication
+- $\leftrightarrow$ is used to represent equivalence
+- $\mathscr{A} \implies \mathscr{B}$ means $(\mathscr{A} \rightarrow \mathscr{B})$ is True
+- $\mathscr{A} \iff \mathscr{B}$ means $((\mathscr{A} \rightarrow \mathscr{B}) \wedge (\mathscr{B} \rightarrow \mathscr{A}))$ is True
+- $\mathscr{L}_0$ is used to represent a zero-order language
+- $\mathscr{L}$ is used to represent a first-order language
+- `mathscr` upper letters (e.g. $\mathscr{A},\mathscr{B},\mathscr{C}$) are used to represent the formulas (well-formed formulas,wfs) of a language $\mathscr{L}$ and $\mathscr{L}_0$
 
 ## Computer Symbols
 
