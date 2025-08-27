@@ -1,7 +1,7 @@
 ---
 title: Lebesgue-Stieltjes测度
 ---
-
+                                                                                                  
 本节利用(Caratheodory)测度扩张定理构造$\mathbb{R}^d$上的Lebesgue-Stieltjes测度。
 
 ## Prerequisites
