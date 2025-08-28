@@ -4,7 +4,7 @@ title: 随机变量-像测度与概率分布
 
 ## 前置
 
-[[测度论与概率论/measurable_func]]
+[[测度论与概率论/measurable-func]]
 
 ## 定义
 
