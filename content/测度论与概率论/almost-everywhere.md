@@ -36,5 +36,5 @@ title: 几乎处处收敛
   \lim\limits_{n \to \infty} \mu \left( \left\{ \sup_{k \geq n} |f_k - f_n| \geq \varepsilon \right\} \right) = 0, \quad \forall \varepsilon > 0.$
      则 $\{f_n\}$ 为几乎处处收敛的基本列；
    - 当 $\{f_n\}$ 为几乎处处收敛的基本列，且 $\mu$ 为有限测度时，上式成立。
-7. 设 $\{f_n,\; n\ge 1\}$ 是 a.e. 有限的广义实值可测函数列，（且$\mu$为有限测度?）,则
+7. 设 $\{f_n,\; n\ge 1\}$ 是 a.e. 有限的广义实值可测函数列，且$\mu$为有限测度,则
    $\{f_n\}$ 为几乎处处收敛的基本列当且仅当存在某个广义实值可测函数 $f$，使得$f_n \xrightarrow{\text{a.e.}} f.$
