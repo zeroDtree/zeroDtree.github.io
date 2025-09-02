@@ -57,7 +57,7 @@ $\sigma$ 有限：$\forall A\in \mathcal{E}, \exists \{A_n\}_{n=1}^{\infty}\in \
 2. $\mu$为测度，若$\emptyset \in \mathcal{E}$，$\mu$为有限可加测度
 3. 半环上的测度具有可列次可加性
 4. 半环上的测度 向上(从下)连续，即$A_n \in \mathcal{E} \wedge A_n \uparrow \wedge \lim\limits_{n \to \infty} A_n \in \mathcal{E} \Longrightarrow \lim\limits_{n \to \infty} \mu(A_n) = \mu(\lim\limits_{n \to \infty} A_n)$
-5. 半环上的测度 向下(从上)连续，即$A_n \in \mathcal{E} \wedge A_n \downarrow \wedge \lim\limits_{n \to \infty} A_n \in \mathcal{E} \wedge \exist n_0 \text{ s.t. } \mu(A_{n_0})<\infty \Longrightarrow \lim\limits_{n \to \infty} \mu(A_n) = \mu(\lim\limits_{n \to \infty} A_n)$
+5. 半环上的测度 向下(从上)连续，即$A_n \in \mathcal{E} \wedge A_n \downarrow \wedge \lim\limits_{n \to \infty} A_n \in \mathcal{E} \wedge \exists n_0 \text{ s.t. } \mu(A_{n_0})<\infty \Longrightarrow \lim\limits_{n \to \infty} \mu(A_n) = \mu(\lim\limits_{n \to \infty} A_n)$
 6. 设$\mu$为半环$\mathcal{E}$上的有限可加测度，则下列各条件等价
    - $\mu$为测度
    - $\mu$为具有可列次可加性
