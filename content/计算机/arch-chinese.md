@@ -27,8 +27,12 @@ export LANG=en_US.UTF-8
 
 4. 安装中文字体
 
-```
+```bash
 yay -S 	adobe-source-han-sans-cn-fonts
+```
+
+```bash
+yay -S adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts  noto-fonts  noto-fonts-cjk  noto-fonts-emoji noto-fonts-sc wqy-microhei wqy-zenhei wqy-bitmapfont ttf-arphic-ukai  ttf-arphic-uming  opendesktop-fonts ttf-hannom ttf-sarasa-gothic  ttf-roboto ttf-dejavu
 ```
 
 ## 到这里可以就可以正常显示中文了，但还无法输入中文
