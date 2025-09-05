@@ -71,7 +71,7 @@ $\sum_{i=m}^{\infty} {a_i} = \lim_{n \to \infty} \sum_{i=m}^{n} {a_i}$
 2. (Zero test) Let $n=m$ an be a convergent(收敛到$\mathbb{R}$中的某个数) series of real numbers. Then we must have $\lim_{n \to \infty} a_n = 0$.
 3. 若存在$n_0 \in \mathbb{Z}_{\geq m}$使得$a_{n_0}=+\infty$,则$\sum_{i=m}^{\infty} a_i = +\infty$,特别地,若$n_0<n$, 则$\sum_{i=m}^{n}=+\infty$
 4. 若$a_n \to L,c \in \overline{\mathbb{R}}^*$,则$ca_n \to cL$
-5. $\sum_{i=m}^{\infty} ca_i = c \sum_{i=m}^{\infty} a_i$
+5. $\sum_{i=m}^{\infty} ca_i = c \sum_{i=m}^{\infty} a_i, c\geq 0$
 6. $\forall a_i \leq b_i \Longrightarrow \sum_{i=m}^{n} a_i \leq \sum_{i=m}^{n} b_i$
 7. $\forall a_i \leq b_i \Longrightarrow \sum_{i=m}^{\infty} a_i \leq \sum_{i=m}^{\infty} b_i$
 8. $\sum_{i=m}^{\infty} a_i + \sum_{i=m}^{\infty} b_i = \sum_{i=m}^{\infty} (a_i + b_i)$
