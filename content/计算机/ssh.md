@@ -54,6 +54,12 @@ Execute the following command on the local network computer
 ssh -R 8080:127.0.0.1:8080 {username}@{server}
 ```
 
+Then modify `/etc/ssh/sshd_config`
+
+```
+GatewayPorts yes
+```
+
 ## 4. Proxy Forwarding
 
 Purpose: Use your local ssh key on the server, for example, clone your private repository on the server
