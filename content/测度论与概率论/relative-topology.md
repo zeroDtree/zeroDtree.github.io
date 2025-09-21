@@ -27,8 +27,8 @@ $(X,\tau)$为拓扑空间，称$(X_0,X_0 \cap \tau)$为相对拓扑(relative top
     - The subspace topology is the unique topology on $S$ for which
       the characteristic property holds.
     - The inclusion map $\iota_S\colon S\to X$ is a topological embedding.
-12. - **Continuity Is Local**： Continuity is a local property, in the following sense:
-      if $F\colon X\to Y$ is a map between topological spaces such that every point $p\in X$ has a open neighborhood $U$ on which the restriction $F|_U$ is continuous, then $F$ is continuous.
+12. **Continuity Is Local**： Continuity is a local property, in the following sense:
+    if $F\colon X\to Y$ is a map between topological spaces such that every point $p\in X$ has a open neighborhood $U$ on which the restriction $F|_U$ is continuous, then $F$ is continuous.
 13. **Gluing Lemma for Continuous Maps**
     Let $X$ and $Y$ be topological spaces, and suppose one of the following conditions holds:
 
