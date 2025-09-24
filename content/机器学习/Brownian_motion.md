@@ -4,7 +4,7 @@ title: Brownian Motion
 
 
 
-The Wiener process \( W_t \) is characterized by four facts:
+The Wiener process $W_t$ is characterized by four facts:
 
 - $W_0 = 0$
 - $W_t$ is almost surely continuous

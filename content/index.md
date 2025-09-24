@@ -3,14 +3,15 @@ title: Forever young
 ---
 
 - [Notation](#notation)
-	- [Math Symbols](#math-symbols)
-	- [Logic Symbols](#logic-symbols)
-	- [Computer Symbols](#computer-symbols)
+	- [1. Math Symbols](#1-math-symbols)
+	- [2. Logic Symbols](#2-logic-symbols)
+	- [3. Computer Symbols](#3-computer-symbols)
 - [Folders with clear dependencies](#folders-with-clear-dependencies)
+- [友链](#友链)
 
 # Notation
 
-## Math Symbols
+## 1. Math Symbols
 
 - Vector is denoted as bold letter, e.g. $\mathbf{a}$, Matrix is denoted as capital letter, e.g. $A$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $A$
 - All vectors are column vectors
@@ -36,7 +37,7 @@ title: Forever young
 - $\wedge$ represents the **and** for logic, **min** for function
 - $\vee$ represents the **or** for logic, **max** for function
 
-## Logic Symbols
+## 2. Logic Symbols
 
 - Little letters (e.g. $p,q,r$) are used to represent propostional variables
 - $\neg$ is used to represent negation
@@ -50,7 +51,7 @@ title: Forever young
 - $\mathscr{L}$ is used to represent a first-order language
 - `mathscr` upper letters (e.g. $\mathscr{A},\mathscr{B},\mathscr{C}$) are used to represent the formulas (well-formed formulas,wfs) of a language $\mathscr{L}$ and $\mathscr{L}_0$
 
-## Computer Symbols
+## 3. Computer Symbols
 
 - Local network is denoted as capital letter, e.g. $A$,$B$,$C$
 - Host in local network is denoted as small letter, e.g. $a$,$b$,$c$ located in local network $A$,$B$,$C$
@@ -67,3 +68,7 @@ title: Forever young
 - 数理逻辑
 - 朴素集合论
 - 测度论与概率论
+
+# 友链
+
+![[友链]]
