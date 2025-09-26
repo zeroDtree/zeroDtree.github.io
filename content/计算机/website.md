@@ -1,5 +1,7 @@
 ```
 https://archlinux.org/packages/?name=torbrowser-launcher
+https://en.clash.wiki/
+https://downloads.clash.wiki/ClashPremium/
 https://github.com/lantongxue/clash_for_windows_pkg/releases
 https://pub-eac3eb5670f44f09984dee5c57939316.r2.dev/clash-linux-amd64-v1.18.0.gz
 http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion

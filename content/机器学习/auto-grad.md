@@ -64,33 +64,33 @@ So all we need to do is to find a $B$ that satisfies $\forall d A, dl = tr(B^T d
 ## 3. Common differential calculations
 
 - $n$ : dimension of output
-- $\bold{\hat{y}}$ : predicted value
-- $\bold{y}$ : target value
+- $\mathbf{\hat{y}}$ : predicted value
+- $\mathbf{y}$ : target value
 
 ### 3.1. MSE
 
-$\bold{\hat{y}} = W\bold{x} + \bold{b}$
+$\mathbf{\hat{y}} = W\mathbf{x} + \mathbf{b}$
 
-$l = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = (\bold{\hat{y}} - \bold{y})^T(\bold{\hat{y}}- \bold{y})$
+$l = \sum_{i=1}^n (y_i - \hat{y}_i)^2 = (\mathbf{\hat{y}} - \mathbf{y})^T(\mathbf{\hat{y}}- \mathbf{y})$
 
-let $\bold{t} = \bold{\hat{y}} - \bold{y}$,
+let $\mathbf{t} = \mathbf{\hat{y}} - \mathbf{y}$,
 
 $
-dl = tr(dl) = tr(\bold{t}^T d\bold{t} + d\bold{t}^T \bold{t}) =  tr(\bold{t}^T d\bold{t}) + tr(d\bold{t}^T \bold{t}) = tr((2\bold{t})^T d\bold{t})
+dl = tr(dl) = tr(\mathbf{t}^T d\mathbf{t} + d\mathbf{t}^T \mathbf{t}) =  tr(\mathbf{t}^T d\mathbf{t}) + tr(d\mathbf{t}^T \mathbf{t}) = tr((2\mathbf{t})^T d\mathbf{t})
 $
 
 Thus.
-$\frac{\partial l}{\partial \bold{t}} = 2\bold{t}$
+$\frac{\partial l}{\partial \mathbf{t}} = 2\mathbf{t}$
 
-$d \bold{t} = d(\bold{\hat{y}} - \bold{y}) = d\bold{\hat{y}}$
+$d \mathbf{t} = d(\mathbf{\hat{y}} - \mathbf{y}) = d\mathbf{\hat{y}}$
 
-$\frac{\partial l}{\partial \bold{\hat{y}}} = 2\bold{t}$
+$\frac{\partial l}{\partial \mathbf{\hat{y}}} = 2\mathbf{t}$
 
-$d \bold{\hat{y}} = d(W\bold{x} + \bold{b}) = dW\bold{x}$
+$d \mathbf{\hat{y}} = d(W\mathbf{x} + \mathbf{b}) = dW\mathbf{x}$
 
-$dl = tr((\frac{\partial l}{\bold{\partial \hat{y}}})^T dW \bold{x}) = tr(\bold{x} (\frac{\partial l}{\bold{\partial \hat{y}}})^T dW) = tr(((\frac{\partial l}{\bold{\partial \hat{y}}}) \bold{x}^T)^T dW)$
+$dl = tr((\frac{\partial l}{\mathbf{\partial \hat{y}}})^T dW \mathbf{x}) = tr(\mathbf{x} (\frac{\partial l}{\mathbf{\partial \hat{y}}})^T dW) = tr(((\frac{\partial l}{\mathbf{\partial \hat{y}}}) \mathbf{x}^T)^T dW)$
 
-$\frac{\partial l}{\partial W} = (\frac{\partial l}{\bold{\partial \hat{y}}}) \bold{x}^T$ = $2\bold{t} \bold{x}^T$
+$\frac{\partial l}{\partial W} = (\frac{\partial l}{\mathbf{\partial \hat{y}}}) \mathbf{x}^T$ = $2\mathbf{t} \mathbf{x}^T$
 
 ### 3.2. Eigenvalue and Eigenvector
 
