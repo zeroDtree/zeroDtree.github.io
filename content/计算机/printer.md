@@ -6,9 +6,9 @@ title: 打印机使用
 
 在archlinux上使用局域网内windows共享的打印机
 
-## 安装和使用流程
+## 1. 安装和使用流程
 
-#### 安装、启用、启动cups服务
+#### 1.1. 安装、启用、启动cups服务
 
 ```bash
 yay -S cups cups-pdf
@@ -16,13 +16,13 @@ sudo systemctl enable cups.service
 sudo systemctl start cups.service
 ```
 
-#### 再安装一个KDE的系统printer设置里提示安装的一个软件包。
+#### 1.2. 再安装一个KDE的系统printer设置里提示安装的一个软件包。
 
 ```bash
 yay -S system-config-printer
 ```
 
-#### 安装avahi ,用来发现局域网内的打印机.
+#### 1.3. 安装avahi ,用来发现局域网内的打印机.
 
 如果不安装这个包的话，就得手动输入windows的ip地址，如果windows没有固定ip的话，每次都需要重新输入ip地址。
 
@@ -42,7 +42,7 @@ zengls@archlinux ~> cat /etc/nsswitch.conf|grep host
 hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
 ```
 
-#### 探测局域网内的打印机
+#### 1.4. 探测局域网内的打印机
 
 ```bash
 sudo lpinfo --include-schemes dnssd -v
@@ -56,13 +56,17 @@ zengls@archlinux ~> sudo lpinfo --include-schemes dnssd -v
 network dnssd://HP%20LaserJet%20Pro%20MFP%203101-3108%20%5B469DA2%5D._ipp._tcp.local/?uuid=xxxxxxxxxxxxxxxx
 ```
 
-#### 添加打印机
+#### 1.5. 添加打印机
 
 ```bash
 sudo lpadmin -p printer_name -v "dnssd://HP%20LaserJet%20Pro%20MFP%203101-3108%20%5B469DA2%5D._ipp._tcp.local/?uuid=xxxxxxxxxxxxxxxx" -m everywhere -E
 ```
 
-## 参考资料
+## 2. 双面打印问题
+
+若KDE自带的Okular打印机设置里没有双面打印的选项，可使用wps打开文件后，再打印。
+
+## 3. 参考资料
 
 ```
 https://wiki.archlinux.org/title/CUPS
