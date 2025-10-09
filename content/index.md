@@ -21,6 +21,7 @@ title: Forever young
 - $\mathbb{C}$ is the set of complex numbers.
 - $\mathbb{F}$ is a filtration.
 - $\mathbb{P}$ is a probability measure.
+- $\mathbb{E}$ is the expectation operator.
 - $[n]$ := $\{1,2,\cdots,n\}$
 - $\mathbb{Z}_n$ := $\{0,1,\cdots,n-1\}$
 - $\mathbb{Z}_{\geq n}$ := $\{i \mid i \in \mathbb{Z} \wedge i \geq n\}$
