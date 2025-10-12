@@ -8,7 +8,9 @@ title: SDE Diffusion
 	- [3. Training (Unconditional)](#3-training-unconditional)
 	- [4. Score-based Diffusion through SDE (Conditional)](#4-score-based-diffusion-through-sde-conditional)
 	- [5. Special Case](#5-special-case)
-	- [6. Example: Continuous DDPM (Unconditional)](#6-example-continuous-ddpm-unconditional)
+	- [6. Examples:](#6-examples)
+		- [6.1. VPSDE（Continuous DDPM） (Unconditional)](#61-vpsdecontinuous-ddpm-unconditional)
+		- [6.2. VPSDE](#62-vpsde)
 
 # Score-based Generative Model through SDE
 
@@ -43,20 +45,20 @@ where $ \phi^i(\mathbf{x}) $ is the $ i $th row of $ \phi $.
 SDE of forward process(noise):
 
 $$
-dx = f(x, t) dt + g(x, t) dw\\
+d \mathbf{x} = f(\mathbf{x}, t) dt + g(\mathbf{x}, t) dw\\
 f: \mathbb{R}^d \times [0, T] \to \mathbb{R}^d, g: \mathbb{R}^d \times [0, T] \to \mathbb{R}^{d \times d}
 $$
 
 SDE of reverse process(denoise):
 
 $$
-dx = \left(f(x, t) - \nabla \cdot [g(x, t)g(x, t)^T]  -  g(x, t)g(x, t)^T \nabla_x \ln p_t (x)\right) dt + g(x, t) dw
+d \mathbf{x} = \left(f(\mathbf{x}, t) - \nabla \cdot [g(\mathbf{x}, t)g(\mathbf{x}, t)^T]  -  g(\mathbf{x}, t)g(\mathbf{x}, t)^T \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right) dt + g(\mathbf{x}, t) dw
 $$
 
 probability flow ODE:
 
 $$
-dx = \left(f(x, t) - \frac{1}{2} \nabla \cdot [g(x, t)g(x, t)^T]  -  \frac{1}{2} g(x, t)g(x, t)^T \nabla_x \ln p_t (x)\right) dt
+d \mathbf{x} = \left(f(\mathbf{x}, t) - \frac{1}{2} \nabla \cdot [g(\mathbf{x}, t)g(\mathbf{x}, t)^T]  -  \frac{1}{2} g(\mathbf{x}, t)g(\mathbf{x}, t)^T \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right) dt
 $$
 
 ## 3. Training (Unconditional)
@@ -69,63 +71,97 @@ $$
 
 - Denoising Score Matching:
   $$
-  \theta^* = \arg \min_\theta \mathbb{E}_{t \sim U(0, T)} \lambda(t) \mathbb{E}_{x_0 \sim p_0} \left[ \mathbb{E}_{x \sim p_{0t}} \left[ \left\| s_\theta (x,t) - \nabla_x \ln p_{0t} (x|x_0) \right\|_2^2 \right] \right]
+  \theta^* = \arg \min_\theta \mathbb{E}_{t \sim U(0, T)} \lambda(t) \mathbb{E}_{x_0 \sim p_0} \left[ \mathbb{E}_{x \sim p_{0t}} \left[ \left\| s_\theta (x,t) - \nabla_\mathbf{x} \ln p_{0t} (\mathbf{x}|\mathbf{x}_0) \right\|_2^2 \right] \right]
   $$
 
 ## 4. Score-based Diffusion through SDE (Conditional)
 
 $$
-dx = \left(f(x, t) - \nabla \cdot [g(x, t)g(x, t)^T]  -  g(x, t)g(x, t)^T \nabla_x \ln p_t (x|y)\right) dt + g(x, t) dw
+d \mathbf{x} = \left(f(\mathbf{x}, t) - \nabla \cdot [g(\mathbf{x}, t)g(\mathbf{x}, t)^T]  -  g(\mathbf{x}, t)g(\mathbf{x}, t)^T \nabla_\mathbf{x} \ln p_t (\mathbf{x}|\mathbf{y})\right) dt + g(\mathbf{x}, t) dw
 $$
 
 $$
-\nabla_x \ln p_t (x|y) = \nabla_x \ln \left(\frac{p_t (y|x)p_t (x)}{p_t (y)}\right) = \nabla_x \ln p_t (y|x) + \nabla_x \ln p_t (x)
+\nabla_\mathbf{x} \ln p_t (\mathbf{x}|\mathbf{y}) = \nabla_\mathbf{x} \ln \left(\frac{p_t (\mathbf{y}|\mathbf{x})p_t (\mathbf{x})}{p_t (\mathbf{y})}\right) = \nabla_\mathbf{x} \ln p_t (\mathbf{y}|\mathbf{x}) + \nabla_\mathbf{x} \ln p_t (\mathbf{x})
 $$
 
 $$
-dx = \left(f(x,t) -  \nabla \cdot [g(x, t)g(x, t)^T]  -  g(x, t)g(x, t)^T \left(\nabla_x \ln p_t (y|x) + \nabla_x \ln p_t (x)\right)\right) dt + g(x, t) dw
+d \mathbf{x} = \left(f(\mathbf{x}, t) -  \nabla \cdot [g(\mathbf{x}, t)g(\mathbf{x}, t)^T]  -  g(\mathbf{x}, t)g(\mathbf{x}, t)^T \left(\nabla_\mathbf{x} \ln p_t (\mathbf{y}|\mathbf{x}) + \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right)\right) dt + g(\mathbf{x}, t) dw
 $$
 
-We can train a neural network $c(x,t)$ to learn $\ln p_t (y|x)$
+We can train a neural network $c(\mathbf{x},t)$ to learn $\ln p_t (\mathbf{y}|\mathbf{x})$
 
-We can also use some prior knowledge to directly determine $\nabla_x \ln p_t (y|x)$
+We can also use some prior knowledge to directly determine $\nabla_\mathbf{x} \ln p_t (\mathbf{y}|\mathbf{x})$
 
 ## 5. Special Case
 
-If $\exists \tilde{g}(t) \in \mathbb{R}$ s.t. $g(x, t) = \tilde{g}(t) \cdot I$, then the reverse process can be written as:
+If $\exists \tilde{g}(t) \in \mathbb{R}$ s.t. $g(\mathbf{x}, t) = \tilde{g}(t) \cdot I$, then the reverse process can be written as:
 
 $$
-dx = \left(f(x, t) - \tilde{g}(t)^2 \nabla_x \ln p_t (x)\right) dt + \tilde{g}(t) dw
+d \mathbf{x} = \left(f(\mathbf{x}, t) - \tilde{g}(t)^2 \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right) dt + \tilde{g}(t) dw
 $$
 
-## 6. Example: Continuous DDPM (Unconditional)
+## 6. Examples:
+
+### 6.1. VPSDE（Continuous DDPM） (Unconditional)
 
 $$
-P(x_t|x_{t-1}) = \mathcal{N} (x_t; \sqrt{1 - \beta_t} \cdot x_{t-1}, \beta_t \cdot I)
-$$
-
-$$
-x_t = \sqrt{1 - \beta_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon, \quad \epsilon \sim \mathcal{N} (0, I)
+P(\mathbf{x}_t|\mathbf{x}_{t-1}) = \mathcal{N} (\mathbf{x}_t; \sqrt{1 - \beta_t} \cdot \mathbf{x}_{t-1}, \beta_t \cdot I)
 $$
 
 $$
-x_{t + \Delta t} - x_t = \sqrt{1 - \beta_{t+\Delta t}} \cdot x_t + \sqrt{\beta_{t + \Delta t}} \cdot \epsilon - x_t
+\mathbf{x}_t = \sqrt{1 - \beta_t} \cdot \mathbf{x}_{t-1} + \sqrt{\beta_t} \cdot \epsilon, \quad \epsilon \sim \mathcal{N} (0, I)
+$$
+
+$$
+\mathbf{x}_{t + \Delta t} - \mathbf{x}_t = \sqrt{1 - \beta_{t+\Delta t}} \cdot \mathbf{x}_t + \sqrt{\beta_{t + \Delta t}} \cdot \epsilon - \mathbf{x}_t
 $$
 
 Because $\sqrt{1-x} = 1 - \frac{x}{2} + o(x)$, we have:
 
 $$
-x_{t + \Delta t} - x_t = - \frac{\beta_{t + \Delta t}}{2} \cdot x_t + \sqrt{\beta_{t + \Delta t}} \cdot \epsilon + o(\beta_{t + \Delta t}) \cdot x_t
+\mathbf{x}_{t + \Delta t} - \mathbf{x}_t = - \frac{\beta_{t + \Delta t}}{2} \cdot \mathbf{x}_t + \sqrt{\beta_{t + \Delta t}} \cdot \epsilon + o(\beta_{t + \Delta t}) \cdot \mathbf{x}_t
 $$
 
 SDE of forward process(noise):
 
 $$
-dx = - \frac{\beta_t}{2} \cdot x dt + \sqrt{\beta_t} dw
+d \mathbf{x} = - \frac{\beta_t}{2} \cdot \mathbf{x} dt + \sqrt{\beta_t} dw
 $$
 
 SDE of reverse process(denoise):
 
 $$
-dx = \left(- \frac{\beta_t}{2} \cdot x - \beta_t \cdot \nabla_x \ln p_t (x)\right) dt + \sqrt{\beta_t} dw
+d \mathbf{x} = \left(- \frac{\beta_t}{2} \cdot \mathbf{x} - \beta_t \cdot \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right) dt + \sqrt{\beta_t} dw
+$$
+
+参数对比
+
+| model | beta        | n_step |
+| ----- | ----------- | ------ |
+| DDPM  | 0.0001-0.02 | 1000   |
+| VPSDE | 0.1-20      | 1000   |
+
+### 6.2. VPSDE
+
+$$
+\mathbf{x}_t \sim \mathcal{N}(\mathbf{x}_0, \sigma_t^2 I),\quad \sigma_t = \sigma_{min} (\sigma_{max}/\sigma_{min})^{t}
+$$
+
+$$
+\begin{align*}
+d x &= g(t) dw\\
+x_t &= x_0 + \int_0^t g(s) ds\\
+Var[x_t] &= \int_0^t g(s)^2 ds =: \sigma_t^2\\
+g(t) &= \sqrt{\frac{d}{dt} \sigma_t^2} = \sigma_t \sqrt{2\ln(\sigma_{max}/\sigma_{min})}
+\end{align*}
+$$
+
+离散情况下：
+
+$$
+\begin{align*}
+x_t &= x_{t-1} + g(t) \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, I)\\
+\sigma_t^2 &= \sigma_{t-1}^2 + g(t)^2\\
+g(t) &= \sqrt{\sigma_t^2 - \sigma_{t-1}^2}
+\end{align*}
 $$
