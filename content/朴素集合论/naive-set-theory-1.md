@@ -58,7 +58,9 @@ title: 朴素集合论(一)
 - 传递性(transitive): 若$R$是$A$上的关系，且$\forall a, b, c \in A, (a, b) \in R \wedge (b, c) \in R \implies (a, c) \in R$，则称$R$是传递的
 - 等价关系(equivalence relation): 若$R$是$A$上的关系，且$R$是自反的、对称的、传递的，则称$R$是等价关系
 - 偏序关系(partial order relation): 若$R$是$A$上的关系，且$R$是反自反的、反对称的、传递的，则称$R$是偏序关系
+- 偏序集(partially ordered set): 若$\leq$为$A$上的偏序关系，则称$(A, \leq)$为偏序集
 - 全序关系(total order relation): 若$R$是$A$上的偏序关系，且$\forall a, b \in A, a \neq b \implies (a, b) \in R \vee (b, a) \in R$，则称$R$是全序关系
+- 全序集(totally ordered set): 若$\leq$为$A$上的全序关系，则称$(A, \leq)$为全序集
 - 映射(mapping or function): 若$f\subseteq A\times B \wedge \forall a \in A, \exists ! b \in B, (a, b) \in f$，($\exists !$表示存在且唯一),则称$f$是$A$到$B$的映射
 - 单射(injection): 若$f$是$A$到$B$的映射，且$(\forall a, b \in A, f(a)=f(b) \implies a=b)$，则称$f$是单射，记作$f: A \hookrightarrow B$
 - 满射(surjection): 若$f$是$A$到$B$的映射，且$(\forall b \in B, \exists a \in A, f(a)=b)$，则称$f$是满射，记作$f: A \twoheadrightarrow B$
@@ -94,3 +96,4 @@ title: 朴素集合论(一)
 16. 若$f_i:A_i \to B_i$是双射,且$\forall i,A_i \cap A_j = \emptyset$，则$f=\bigcup_{i \in I} f_i: \bigcup_{i \in I} A_i \to \bigcup_{i \in I} B_i$是双射
 17. 若$f:A \to B$是双射，则$f[A] = B \wedge f^{-1}[B] = A$
 18. 若$f:A\to B$可逆，则$f^{-1} \circ f = id_A = \{(a,a)|a \in A\} \wedge f \circ f^{-1} = id_B = \{(b,b)|b \in B\}$
+19. 在任意偏序集上，若每个有上界的子集都有最小上界，则每个有下界的子集都有最大下界。
