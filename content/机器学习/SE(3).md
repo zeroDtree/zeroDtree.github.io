@@ -6,15 +6,15 @@ title: SE(3)
 
 ### Invariance
 
-Let $A=\{f\mid \text{ f is a function from X to Y}\}$ be a set of functions.
+Let $A=\{f\mid \text{ f is a function from X to X}\}$ be a set of functions.
 
 $g:X\to Y$ is invariant under $A$ if $g(x)=g(f(x))$ for all $f\in A$ and $x\in X$, denoted as $g\in \text{A-Invariant}$.
 
 ### Equivariance
 
-Let $A=\{f\mid \text{ f is a function from X to Y}\}$ be a set of functions.
+Let $A=\{f\mid \text{ f is a function from X to X}\}$ be a set of functions.
 
-$g:X\to Y$ is equivariant under $A$ if $g(f(x))=f(g(x))$ for all $f\in A$ and $x\in X$, denoted as $g\in \text{A-Equivariant}$.
+$g:X\to X$ is equivariant under $A$ if $g(f(x))=f(g(x))$ for all $f\in A$ and $x\in X$, denoted as $g\in \text{A-Equivariant}$.
 
 ## Group in $\mathbb{R}^3$
 

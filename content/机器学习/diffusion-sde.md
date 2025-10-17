@@ -16,11 +16,11 @@ title: SDE Diffusion
 
 ## 1. Notations
 
-The meaning of $ \nabla \cdot [\cdot] $:
+The meaning of $\nabla \cdot [\cdot]$:
 
-For scalar function $ \phi(\mathbf{x}): \mathbb{R}^d \to \mathbb{R} $, we know $ \nabla \phi(\mathbf{x}) $ is the gradient.
+For scalar function $\phi(\mathbf{x}): \mathbb{R}^d \to \mathbb{R}$, we know $ \nabla \phi(\mathbf{x}) $ is the gradient.
 
-For vector function $ \phi(\mathbf{x}): \mathbb{R}^d \to \mathbb{R}^d $, $\nabla \cdot \phi(\mathbf{x}) \in \mathbb{R} $ is the divergence, defined as the sum of the partial derivatives of each component:
+For vector function $\phi(\mathbf{x}): \mathbb{R}^d \to \mathbb{R}^d $, $\nabla \cdot \phi(\mathbf{x}) \in \mathbb{R}$ is the divergence, defined as the sum of the partial derivatives of each component:
 
 $$
 \nabla \cdot \phi(\mathbf{x}) = \sum_{i=1}^{d} \frac{\partial \phi_i}{\partial x_i}
