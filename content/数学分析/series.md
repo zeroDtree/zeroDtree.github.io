@@ -63,7 +63,7 @@ $\sum_{i=m}^{\infty} {a_i} = \lim_{n \to \infty} \sum_{i=m}^{n} {a_i}$
 
 有穷(有限)正项级数$S = \sum_{i=m}^{n} {a_i}$ 可看作无穷正项级数的一种特例，即令数列$a_n$ 在$i \geq n$时恒为 0。
 
-可数集上求和：$X$ 是可数集，$f:X \to \overline{\mathbb{R}}^*$ 是函数，$g:\mathbb{Z}_{\geq m} \to X$ 是双射, $f$ 在 $X$ 上的求和$\sum_{x \in X} f(x)=\sum_{i=m}^{\infty} f(g(i))$, 有正项级数的性质可得，以上定义的可数集上求和是良定义的。
+可数集上求和：$X$ 是可数集，$f:X \to \overline{\mathbb{R}}^*$ 是函数，$g:\mathbb{Z}_{\geq m} \to X$ 是双射, $f$ 在 $X$ 上的求和$\sum_{x \in X} f(x)=\sum_{i=m}^{\infty} f(g(i))$, 由正项级数的性质可得，以上定义的可数集上求和是良定义的。
 
 #### 性质
 
@@ -80,3 +80,5 @@ $\sum_{i=m}^{\infty} {a_i} = \lim_{n \to \infty} \sum_{i=m}^{n} {a_i}$
 11. 若$f:\mathbb{Z}_{\geq m} \to \mathbb{Z}_{\geq m}$为双射，则$\sum_{i=m}^{\infty} a_i = \sum_{i=m}^{\infty} a_{f(i)}$
 12. $\lim\limits_{n_2 \to \infty} \sum_{i=m_1}^{n} \sum_{j=m_2}^{n_2} f(i,j) = \sum_{i=m_1}^{n} \lim\limits_{n_2 \to \infty} \sum_{j=m_2}^{n_2} f(i,j)$
 13. 正项级数的 Fubini 定理：$\sum_{i=m_1}^{\infty} \sum_{j=m_2}^{\infty} f(i,j) = \sum_{j=m_2}^{\infty} \sum_{i=m_1}^{\infty} f(i,j)=\sum_{(i,j) \in \mathbb{Z}_{\geq m_1} \times \mathbb{Z}_{\geq m_2}} f(i,j)=\sum_{(j,i) \in \mathbb{Z}_{\geq m_2} \times \mathbb{Z}_{\geq m_1}} f(j,i)$
+14. 设$X$为可数集，$A \subseteq X$,则$\sum_{x \in A} f(x) = \sum_{x \in X} f(x)I_A(x)$, 因为总可以重排使得非零项都排到最前面。
+15. 设$X$为可数集，$A\cup B=X$, $A\cap B=\emptyset$,则$\sum_{x \in X} f(x) = \sum_{x\in X} (f(x)I_A(x) + f(x)I_B(x)) =\sum_{x \in A} f(x) + \sum_{x \in B} f(x)$
