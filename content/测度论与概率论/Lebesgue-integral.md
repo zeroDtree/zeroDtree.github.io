@@ -87,7 +87,7 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
 1. 非负可测函数的L积分存在
 2. 设$f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，则$|f|$的积分存在，并且$|\int f d\mu| \leq \int |f| d\mu$
 3. 设$f，g \in \overline{\mathcal{L}}^+(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$
-4. 设$f，g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$.
+4. 设$f，g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$f,g$中其中一个积存存在，另一个积分也存在，并且$\int f d\mu = \int g d\mu$.
 5. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ ， $A$ 为零测集，则 $\int_{A} f d\mu = 0$.
 6. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分存在，则
    1. $f$可积 $\implies$ $|f|<+\infty$ a.e.
