@@ -8,9 +8,9 @@ title: SDE Diffusion
 	- [3. Training (Unconditional)](#3-training-unconditional)
 	- [4. Score-based Diffusion through SDE (Conditional)](#4-score-based-diffusion-through-sde-conditional)
 	- [5. Special Case](#5-special-case)
-	- [6. Examples:](#6-examples)
-		- [6.1. VPSDE（Continuous DDPM） (Unconditional)](#61-vpsdecontinuous-ddpm-unconditional)
-		- [6.2. VPSDE](#62-vpsde)
+	- [6. Denoising Score Matching](#6-denoising-score-matching)
+	- [7. VPSDE（Continuous DDPM） (Unconditional)](#7-vpsdecontinuous-ddpm-unconditional)
+	- [8. VESDE](#8-vesde)
 
 # Score-based Generative Model through SDE
 
@@ -100,9 +100,39 @@ $$
 d \mathbf{x} = \left(f(\mathbf{x}, t) - \tilde{g}(t)^2 \nabla_\mathbf{x} \ln p_t (\mathbf{x})\right) dt + \tilde{g}(t) dw
 $$
 
-## 6. Examples:
+## 6. Denoising Score Matching
 
-### 6.1. VPSDE（Continuous DDPM） (Unconditional)
+Assume forward diffusion process can be written as $\mathbf{x}_t = a_t \mathbf{x}_0 + b_t \mathbf{\epsilon}, \mathbf{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$, then
+
+$$
+\mathbf{x}_t \sim \mathcal{N}(a_t \mathbf{x}_0, b_t^2 \mathbf{I})
+$$
+
+minimize
+
+$$
+\mathop{\mathbb{E}}\limits_{t,\mathbf{x}_0, \mathbf{x}_t \sim p_{0t}(\mathbf{x}_t|\mathbf{x}_0)} \|s_{\theta}(\mathbf{x}_t, t) - \nabla_{\mathbf{x}_t} \ln p_{0t}(\mathbf{x}_t|\mathbf{x}_0) \|_2^2
+$$
+
+- Equivalence of Epsilon Model and Score Model
+
+$$
+\begin{align*}
+\text{score} &= \nabla_{\mathbf{x}_t} \ln p_{0t}(\mathbf{x}_t|\mathbf{x}_0)\\
+&= -\frac{1}{b_t^2} (\mathbf{x}_t - a_t \mathbf{x}_0)\\
+&= -\frac{\mathbf{\epsilon}}{b_t}
+\end{align*}
+$$
+
+- Unconditional Score Matching
+
+$\argmin \|\frac{-1}{b_t}\epsilon_{\theta}(\mathbf{x}_t, t) - \frac{-1}{b_t} \mathbf{\epsilon}\|_2^2 \iff \argmin \|\epsilon_{\theta}(\mathbf{x}_t, t) - \mathbf{\epsilon}\|_2^2$
+
+- Conditional (Loss Guidance) Score Matching
+
+$\argmin \|\frac{-1}{b_t}\epsilon_{\theta}(\mathbf{x}_t, t) - \frac{-1}{b_t} \mathbf{\epsilon} - \nabla_{x}{-l(\mathbf{x}_t,\mathbf{x}_0)} \|_2^2 \iff \argmin \|\epsilon_{\theta}(\mathbf{x}_t, t) - \mathbf{\epsilon} - \nabla_{x}{b_t l(\mathbf{x}_t,\mathbf{x}_0)} \|_2^2$
+
+## 7. VPSDE（Continuous DDPM） (Unconditional)
 
 $$
 P(\mathbf{x}_t|\mathbf{x}_{t-1}) = \mathcal{N} (\mathbf{x}_t; \sqrt{1 - \beta_t} \cdot \mathbf{x}_{t-1}, \beta_t \cdot I)
@@ -141,7 +171,7 @@ $$
 | DDPM  | 0.0001-0.02 | 1000   |
 | VPSDE | 0.1-20      | 1000   |
 
-### 6.2. VPSDE
+## 8. VESDE
 
 $$
 \mathbf{x}_t \sim \mathcal{N}(\mathbf{x}_0, \sigma_t^2 I),\quad \sigma_t = \sigma_{min} (\sigma_{max}/\sigma_{min})^{t}
