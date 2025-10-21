@@ -47,7 +47,8 @@ $$
 
 例如，将四元数 \( q = a + bi + cj + dk \) 表示为下面的实 \( 4\times4 \) 矩阵：
 
-\[
+$$
+\begin{align*}
 M(q) =
 \begin{pmatrix}
 a & -b & -c & -d \\
@@ -55,12 +56,13 @@ b & a & -d & c \\
 c & d & a & -b \\
 d & -c & b & a
 \end{pmatrix}
-\]
+\end{align*}
+$$
 
 可以验证：
-\[
+$$
 M(q_1 q_2) = M(q_1) M(q_2)
-\]
+$$
 
 于是四元数乘法满足结合律。
 
