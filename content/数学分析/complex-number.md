@@ -45,5 +45,15 @@ $\mathbb{C}$可被看作向量空间$\langle \mathbb{C}, \mathbb{C} \rangle$
 
 内积诱导范数，范数诱导度量。qq
 
-
 且内积$f$诱导的度量空间与$R^2$上的度量空间同胚。
+
+## 共轭
+
+定义复数$z=a+bi$的共轭为$\overline{z}=a-bi$
+
+容易验证共轭满足如下性质
+
+- $\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}$
+- $\overline{z_1z_2}=\overline{z_1}\overline{z_2}$
+- $\overline{\overline{z}}=z$
+- $z\overline{z}=|z|^2$
