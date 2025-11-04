@@ -2,12 +2,12 @@
 title: SillyTavern
 ---
 
-- [工作原理](#工作原理)
-- [SillyTavern 的`Conversation`的组织方式](#sillytavern-的conversation的组织方式)
+- [1. 工作原理](#1-工作原理)
+- [2. SillyTavern 的`Conversation`的组织方式](#2-sillytavern-的conversation的组织方式)
 
 以下以`Chat Completion` API 为例。
 
-## 工作原理
+## 1. 工作原理
 
 `LLM` 接受`Prompt`(字符串)，生成`Response`(字符串)。
 
@@ -17,8 +17,8 @@ title: SillyTavern
 
 ```json
 {
-	"role": "角色",
-	"content": "内容"
+  "role": "角色",
+  "content": "内容"
 }
 ```
 
@@ -38,7 +38,7 @@ title: SillyTavern
 
 SillyTavern 的主要作用之一就是帮助用户虚构`Prompt`。
 
-## SillyTavern 的`Conversation`的组织方式
+## 2. SillyTavern 的`Conversation`的组织方式
 
 ```json
 {

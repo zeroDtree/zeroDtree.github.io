@@ -4,13 +4,13 @@ title: auto-grad
 
 - [1. Base Principle](#1-base-principle)
 - [2. Useful Rules](#2-useful-rules)
-	- [2.1. Differential](#21-differential)
-	- [2.2. Trace](#22-trace)
+  - [2.1. Differential](#21-differential)
+  - [2.2. Trace](#22-trace)
 - [3. Common differential calculations](#3-common-differential-calculations)
-	- [3.1. MSE](#31-mse)
-	- [3.2. Eigenvalue and Eigenvector](#32-eigenvalue-and-eigenvector)
-		- [3.2.1. Eigenvalue](#321-eigenvalue)
-		- [3.2.2. Eigenvector](#322-eigenvector)
+  - [3.1. MSE](#31-mse)
+  - [3.2. Eigenvalue and Eigenvector](#32-eigenvalue-and-eigenvector)
+    - [3.2.1. Eigenvalue](#321-eigenvalue)
+    - [3.2.2. Eigenvector](#322-eigenvector)
 
 ## 1. Base Principle
 
@@ -150,8 +150,8 @@ $$
 $$
 
 Let $F_{ij} = \begin{cases}
-	\frac{1}{\lambda_j - \lambda_i} & \text{if } i\not= j\\
-	0 & \text{if } i=j
+    \frac{1}{\lambda_j - \lambda_i} & \text{if } i\not= j\\
+    0 & \text{if } i=j
 \end{cases}$
 
 $

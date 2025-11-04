@@ -1,10 +1,17 @@
 ---
 title: 博客搭建
 ---
- 
+
+- [quartz 博客搭建流程](#quartz-博客搭建流程)
+  - [1. Install](#1-install)
+  - [2. 修改配置](#2-修改配置)
+  - [3. 同步github](#3-同步github)
+  - [4. 部署到 GitHub Pages](#4-部署到-github-pages)
+  - [5. 参考资料](#5-参考资料)
+
 # [quartz](https://quartz.jzhao.xyz/) 博客搭建流程
 
-## Install
+## 1. Install
 
 ```bash
 git clone https://github.com/jackyzha0/quartz.git
@@ -13,7 +20,7 @@ npm i
 npx quartz create
 ```
 
-## 修改配置
+## 2. 修改配置
 
 修改 `quartz.config.ts` 里的`baseUrl`
 
@@ -21,14 +28,14 @@ npx quartz create
     baseUrl: "${github_username}.github.io",
 ```
 
-## 同步github
+## 3. 同步github
 
 ```
 git remote set-url origin {REMOTE-URL}
 npx quartz sync --no-pull
 ```
 
-## 部署到 GitHub Pages
+## 4. 部署到 GitHub Pages
 
 (执行完这一步才能在 `{github_username}.github.io` 看到博客的网页)
 
@@ -82,7 +89,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-## 参考资料
+## 5. 参考资料
 
 ```
 https://quartz.jzhao.xyz/

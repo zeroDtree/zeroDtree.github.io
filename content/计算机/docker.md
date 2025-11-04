@@ -2,7 +2,10 @@
 title: Docker
 ---
 
-## docker pull 代理
+- [1. docker pull 代理](#1-docker-pull-代理)
+- [2. docker build 代理](#2-docker-build-代理)
+
+## 1. docker pull 代理
 
 ```bash
 sudo vim /etc/docker/daemon.json
@@ -20,7 +23,7 @@ sudo vim /etc/docker/daemon.json
 参考资料：https://docs.docker.com/config/daemon/proxy/#daemon-configuration
 ```
 
-## docker build 代理
+## 2. docker build 代理
 
 ```bash
 --build-arg HTTP_PROXY=172.17.0.1:17890 --build-arg HTTPS_PROXY=172.17.0.1:17890

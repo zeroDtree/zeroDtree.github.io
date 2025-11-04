@@ -4,15 +4,15 @@ title: 有限自动机(FA)
 
 《Introduction to the Theory of Computation》里的自动机部分的定义和定理。
 
-- [Finite automaton](#finite-automaton)
-- [Nondeterministic finite automaton](#nondeterministic-finite-automaton)
-- [Regular language](#regular-language)
-- [Regular operations](#regular-operations)
-- [Regular expression](#regular-expression)
-- [Regular language is equivalent to language described by regular expression](#regular-language-is-equivalent-to-language-described-by-regular-expression)
-- [Pumping lemma](#pumping-lemma)
+- [1. Finite automaton](#1-finite-automaton)
+- [2. Nondeterministic finite automaton](#2-nondeterministic-finite-automaton)
+- [3. Regular language](#3-regular-language)
+- [4. Regular operations](#4-regular-operations)
+- [5. Regular expression](#5-regular-expression)
+- [6. Regular language is equivalent to language described by regular expression](#6-regular-language-is-equivalent-to-language-described-by-regular-expression)
+- [7. Pumping lemma](#7-pumping-lemma)
 
-#### Finite automaton
+#### 1. Finite automaton
 
 A finite automaton is a 5-tuple $\left(Q, \Sigma, \delta, q_0, F\right)$, where
 
@@ -32,7 +32,7 @@ that M accepts A.
 A string w is rejected iff w is not accepted.
 ```
 
-#### Nondeterministic finite automaton
+#### 2. Nondeterministic finite automaton
 
 A nondeterministic finite automaton is a 5-tuple $\left(Q, \Sigma, \delta, q_0, F\right)$, where
 
@@ -62,13 +62,13 @@ two automaton is equivalent iff they recogize same language
 4. 初始状态：$E[q_0]$
 5. 接受状态：$\{X\in \mathcal{P}(Q)|X\cap F \neq \emptyset\}$
 
-#### Regular language
+#### 3. Regular language
 
 A language is called a regular language if some finite automatonrecognizes it.
 
 A language is regular if and only if some nondeterministic finite automaton recognizes it.
 
-#### Regular operations
+#### 4. Regular operations
 
 Let $A$ and $B$ be regular languages. We define the regular operations union, concatenation, and star as follows:
 
@@ -78,7 +78,7 @@ Let $A$ and $B$ be regular languages. We define the regular operations union, co
 
 the collection of regular languages is closed under all three of the regular operations.
 
-#### Regular expression
+#### 5. Regular expression
 
 Say that $R$ is a regular expression if $R$ is
 
@@ -98,11 +98,11 @@ language $R_1$, respectively.
 
 $L(R)$ to be the language of $R$.
 
-#### Regular language is equivalent to language described by regular expression
+#### 6. Regular language is equivalent to language described by regular expression
 
 A language is regular if and only if some regular expression describes it.
 
-#### Pumping lemma
+#### 7. Pumping lemma
 
 Pumping lemma If $A$ is a regular language, then there is a number $p$ (the pumping length) where if $s$ is any string in $A$ of length at least $p$, then $s$ may be divided into three pieces, $s=x y z$, satisfying the following conditions:
 

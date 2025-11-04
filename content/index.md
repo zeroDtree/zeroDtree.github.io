@@ -3,9 +3,9 @@ title: Forever young
 ---
 
 - [Notation](#notation)
-	- [1. Math Symbols](#1-math-symbols)
-	- [2. Logic Symbols](#2-logic-symbols)
-	- [3. Computer Symbols](#3-computer-symbols)
+  - [1. Math Symbols](#1-math-symbols)
+  - [2. Logic Symbols](#2-logic-symbols)
+  - [3. Computer Symbols](#3-computer-symbols)
 - [Folders with clear dependencies](#folders-with-clear-dependencies)
 - [友链](#友链)
 

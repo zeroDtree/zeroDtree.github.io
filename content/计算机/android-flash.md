@@ -2,6 +2,11 @@
 title: 安卓root 大致流程与注意事项
 ---
 
+- [1. 解锁bootloader](#1-解锁bootloader)
+- [2. 下载手机所对应的版本的 Fastboot ROM](#2-下载手机所对应的版本的-fastboot-rom)
+- [3. 手机上下载Magisk](#3-手机上下载magisk)
+- [4. 使用fastboot刷机](#4-使用fastboot刷机)
+
 `红米k30 pro`手机，电脑为archlinux。
 
 手机通过usb连接电脑，开启`文件传输`和`usb调试模式`

@@ -1,8 +1,12 @@
 ---
-title: docker，proxychains，easyconnect， FreeFileSync
+title: easyconnect
 ---
 
-# docker deamon 代理 + docker封印easyconnect + proxychains使用easyconnect+ FreeFileSync使用easyconnect 的代理
+- [1. docker-easyconnect](#1-docker-easyconnect)
+- [2. ssh 使用easyconnect的代理](#2-ssh-使用easyconnect的代理)
+- [3. FreeFileSync使用easyconnect的代理](#3-freefilesync使用easyconnect的代理)
+
+## 1. docker-easyconnect
 
 使用github上的一个项目：
 
@@ -14,7 +18,7 @@ https://github.com/docker-easyconnect/docker-easyconnect
 
 ![[计算机/docker#docker pull 代理]]
 
-2. docker pull 适合你的easyconnect版本的image</br>
+2. docker pull 适合你的easyconnect版本的image
 3. 执行下面这个脚本(不妨命名为vpn.sh)，然后给vpn.sh 添加可执行权限，运行vpn.sh, 就可以创建easyconnect的container，这个container是临时的，程序结束（例如CRTL-C）后会自动删除容器。
 
 ```bash
@@ -30,37 +34,39 @@ sudo docker run --name ${container_name} --rm --device /dev/net/tun --cap-add NE
 参考资料：https://github.com/docker-easyconnect/docker-easyconnect 这个项目的README.md
 ```
 
-# 现在已经可以通过 127.0.0.1:1080、127.0.0.1:8888 分别访问 socks5 和 http 代理了。
+## 2. ssh 使用easyconnect的代理
+
+现在已经可以通过 127.0.0.1:1080、127.0.0.1:8888 分别访问 socks5 和 http 代理了。
 
 例如ssh登陆虚拟局域网主机，可以使用proxychains强制给ssh设置代理，到端口1080
 
-```
+```bash
 proxxychains -f  your_proxychains_config_file ssh user@desthost
 ```
 
 your_proxychains_config_file的内容（形）如下：
 
-```
+```bash
 tcp_read_time_out 15000
 tcp_connect_time_out 8000
 [ProxyList]
 socks5  127.0.0.1 1080
 ```
 
-1. 这里我整理成了一个脚本，内容如下
+这里整理成了一个脚本，内容如下
 
-```
+```bash
 username=your_user_name
 host=your_host_addr
 conf_path=/path/to/your/proxychains.conf
 proxychains -f ${conf_path} ssh ${username}@${host}
 ```
 
-1. FreeFileSync如何使用easyconnect的代理呢?
+## 3. FreeFileSync使用easyconnect的代理
 
 可以使用proxychains强制FreeFileSync 使用easyconnect的代理，编辑FreeFileSync的.desktop文件.
 
-```
+```bash
 ➜  ~ cat .local/share/applications/FreeFileSync.desktop
 [Desktop Entry]
 Categories=Utility;FileTools;Archiving;

@@ -2,27 +2,27 @@
 title: openvpn
 ---
 
-- [openvpn 工作原理图](#openvpn-工作原理图)
-- [openvpn 安装流程(for archlinux)](#openvpn-安装流程for-archlinux)
-	- [easy-rsa 安装](#easy-rsa-安装)
-	- [服务器端 openvpn 安装](#服务器端-openvpn-安装)
-	- [证书拷贝](#证书拷贝)
-	- [openvpn 服务器端配置文件](#openvpn-服务器端配置文件)
-	- [openvpn 安装配置客户端配置文件](#openvpn-安装配置客户端配置文件)
-- [openvpn 内网客户端互通](#openvpn-内网客户端互通)
-- [固定客户端的内网ip](#固定客户端的内网ip)
+- [1. openvpn 工作原理图](#1-openvpn-工作原理图)
+- [2. openvpn 安装流程(for archlinux)](#2-openvpn-安装流程for-archlinux)
+  - [2.1. easy-rsa 安装](#21-easy-rsa-安装)
+  - [2.2. 服务器端 openvpn 安装](#22-服务器端-openvpn-安装)
+  - [2.3. 证书拷贝](#23-证书拷贝)
+  - [2.4. openvpn 服务器端配置文件](#24-openvpn-服务器端配置文件)
+  - [2.5. openvpn 安装配置客户端配置文件](#25-openvpn-安装配置客户端配置文件)
+- [3. openvpn 内网客户端互通](#3-openvpn-内网客户端互通)
+- [4. 固定客户端的内网ip](#4-固定客户端的内网ip)
 
-## openvpn 工作原理图
+## 1. openvpn 工作原理图
 
 ![[计算机/images/openvpn.png]]
 
-## openvpn 安装流程(for archlinux)
+## 2. openvpn 安装流程(for archlinux)
 
 假设在机器$a$上生成和签发密钥，在服务器$\gamma$上安装openvpn，在机器$b$上安装openvpn客户端。
 
 以下使用easy-rsa生成openvpn所需的证书和密钥
 
-### easy-rsa 安装
+### 2.1. easy-rsa 安装
 
 (在机器$a$上)下载安装easy-rsa
 
@@ -60,7 +60,7 @@ pki/reqs:
 client.req  server.req
 ```
 
-### 服务器端 openvpn 安装
+### 2.2. 服务器端 openvpn 安装
 
 (在服务器$\gamma$上)下载安装openvpn
 
@@ -68,7 +68,7 @@ client.req  server.req
 yay -S openvpn
 ```
 
-### 证书拷贝
+### 2.3. 证书拷贝
 
 在机器$a$上将生成的证书和密钥拷贝到服务器$\gamma$上
 
@@ -77,7 +77,7 @@ cd pki
 scp ca.crt dh.pem issued/server.crt private/server.key ta.key {username}@{server_ip}:/etc/openvpn/server/
 ```
 
-### openvpn 服务器端配置文件
+### 2.4. openvpn 服务器端配置文件
 
 (在服务器$\gamma$上)
 
@@ -96,11 +96,11 @@ systemctl enable openvpn@server
 systemctl start openvpn@server
 ```
 
-### openvpn 安装配置客户端配置文件
+### 2.5. openvpn 安装配置客户端配置文件
 
 (在机器$b$上)与服务器端类似，下载安装openvpn，并拷贝证书和密钥，根据需要改写配置文件。
 
-## openvpn 内网客户端互通
+## 3. openvpn 内网客户端互通
 
 在服务器$\gamma$上，将openvpn服务器端配置文件里的`client-to-client`取消注释
 
@@ -116,7 +116,7 @@ server.conf
 client-to-client
 ```
 
-## 固定客户端的内网ip
+## 4. 固定客户端的内网ip
 
 把openvpn的网络拓扑改成子网模式。
 然后创建一个目录ccd,对每个客户端进行单独配置。
@@ -147,4 +147,5 @@ ccd/Thelonious
 ```
 ifconfig-push 10.11.0.100 255.255.255.0
 ```
+
 注意：这个客户端名需要和easy-rsa里的客户端证书名一样。

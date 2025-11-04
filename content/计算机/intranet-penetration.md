@@ -1,10 +1,10 @@
 # 内网穿透
 
 - [内网穿透](#内网穿透)
-	- [1. 符号约定与目标](#1-符号约定与目标)
-	- [2. frp(fast reverse proxy)](#2-frpfast-reverse-proxy)
-		- [2.1. frp工作原理](#21-frp工作原理)
-	- [3. zerotier](#3-zerotier)
+  - [1. 符号约定与目标](#1-符号约定与目标)
+  - [2. frp(fast reverse proxy)](#2-frpfast-reverse-proxy)
+    - [2.1. frp工作原理](#21-frp工作原理)
+  - [3. zerotier](#3-zerotier)
 
 ## 1. 符号约定与目标
 

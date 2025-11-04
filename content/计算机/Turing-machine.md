@@ -1,4 +1,8 @@
-#### Turing machine
+- [1. 图灵机的(等价)变体](#1-图灵机的等价变体)
+    - [1.1. 逗留(stay)图灵机](#11-逗留stay图灵机)
+    - [1.2. 不同符号图灵机](#12-不同符号图灵机)
+
+#### 1. Turing machine
 
 A $\textit{Turing machine}$ is a 7-tuple, $(Q,\Sigma,\Gamma,\delta,q_0,q_{\text{accept}},q_{\text{reject}})$, where $Q,\Sigma,\Gamma$ are all finite sets and
 
@@ -41,7 +45,7 @@ flowchart TD
     style regular fill:none,stroke:#333
 ```
 
-## 图灵机的(等价)变体
+## 1. 图灵机的(等价)变体
 
 $\pi$表示投影映射，$\pi_i$表示取第一个分量
 
@@ -49,7 +53,7 @@ $\pi$表示投影映射，$\pi_i$表示取第一个分量
 
 $I_Q$表示$Q$的指标集
 
-#### 逗留(stay)图灵机
+#### 1.1. 逗留(stay)图灵机
 
 A $\textit{Turing machine}$ is a 7-tuple, $(Q,\Sigma,\Gamma,\delta,q_0,q_{\text{accept}},q_{\text{reject}})$, where $Q,\Sigma,\Gamma$ are all finite sets and
 
@@ -75,7 +79,7 @@ A $\textit{Turing machine}$ is a 7-tuple, $(Q,\Sigma,\Gamma,\delta,q_0,q_{\text{
 - if $\delta(q_{1},a)=(q_{2},b,R)$
   - $\delta'(q_{1},a):=(q_{2},b,R)$
 
-#### 不同符号图灵机
+#### 1.2. 不同符号图灵机
 
 将设有两个图灵机$M_1$和$M_2$，它们有不同符号集$\Gamma_1$和$\Gamma_2$
 

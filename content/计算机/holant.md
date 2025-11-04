@@ -2,7 +2,10 @@
 title: holant problem
 ---
 
-## 定义
+- [1. 定义](#1-定义)
+- [2. 结论](#2-结论)
+
+## 1. 定义
 
 - signature(local constraint function): A map $f:A\to B$ is a signature if (($\exists n \in \mathbb{N}, q\in \mathbb{Z}^+$ s.t. $A=[q]^n$) and ($\exists$ a commutative semiring $R$ s.t. $B=R$)). The set of signatures is denoted by $\mathcal{F}$
 - symmetric signature: A signature $f:[q]^n\to R$ is symmetric if $f$ is invariant under permutation of the variables
@@ -15,7 +18,7 @@ title: holant problem
 - tractable: polynomial-time computable
 - #P is the set of functions $f : \{0,1\}^* \to \mathbb{N}$ such that there exists a polynomial $p : \mathbb{N} \to \mathbb{N}$ and a polynomial-time deterministic Turing machine $V$, called the verifier, such that for every $x \in \{0,1\}^*$, $f(x) = |\{y \in \{0,1\}^{p(|x|)} : V(x,y) = 1\}|$ (In other words, $f(x)$ equals the size of the set containing all of the polynomial-size certificates).
 
-## 结论
+## 2. 结论
 
 - $CSP_q^d(\mathcal{F}) \equiv_T Holant_q(\mathcal{EQ}_d|\mathcal{F})=Holant_q(\mathcal{EQ}_d \cup \mathcal{F})$
 - Let $\mathcal{F}$ be a set of signatures over a domain of size $q$. If there exists an $\mathcal{F}$-gate with signature $f$, then $\text{Holant}_q(\mathcal{F}, f) \leq_T \text{Holant}_q(\mathcal{F})$.

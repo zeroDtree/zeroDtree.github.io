@@ -1,11 +1,12 @@
 ---
 title: 与R相关的Borel集
 ---
-## Prerequisites
+
+## 1. Prerequisites
 
 - [[测度论与概率论/class-of-sets]]
 
-## $\mathcal{B}(\mathbb{R})$的生成元
+## 2. $\mathcal{B}(\mathbb{R})$的生成元
 
 1. $\mathbb{R}$上的所有开集
 2. $\mathbb{R}$上的所有闭集
@@ -16,7 +17,7 @@ title: 与R相关的Borel集
 7. $\mathbb{R}$上的$\{[a,b):a\lt b \wedge a,b \in \mathbb{Q}\}$
 8. $\mathbb{R}$上的$\{(a,b):a\lt b \wedge a,b \in \mathbb{Q}\}$
 
-## $\mathbb{R}^n$上的度量空间 与 积拓扑
+## 3. $\mathbb{R}^n$上的度量空间 与 积拓扑
 
 $\mathbb{R}$上的绝对值可以作为度量函数，从而使得$\mathbb{R}$成为一个度量空间(拓扑空间)$(X, \tau)$,简记为$X$
 
@@ -36,7 +37,7 @@ $n$个$\mathbb{R}$可以制作一个积空间，从而使得$\mathbb{R}^n$成为
 
 又显然所有的开矩形构成的集合也是$B$的一个基。因此，$A$的基等于$B$的基。，因此$A=B$。
 
-## $\mathcal{B}(\mathbb{R}^n)$的生成元
+## 4. $\mathcal{B}(\mathbb{R}^n)$的生成元
 
 1. $\mathbb{R}^n$中的所有开集
 2. $\mathbb{R}^n$中的所有闭集
@@ -50,7 +51,7 @@ $n$个$\mathbb{R}$可以制作一个积空间，从而使得$\mathbb{R}^n$成为
 10. $\{ (\mathbf{a}, +\infty) : \mathbf{a} \in \mathbb{Q}^n\}$
 11. $\{ [\mathbf{a}, +\infty) : \mathbf{a} \in \mathbb{Q}^n\}$
 
-## $\mathcal{B}(\overline{\mathbb{R}})$的生成元
+## 5. $\mathcal{B}(\overline{\mathbb{R}})$的生成元
 
 这里$\overline{\mathbb{R}}$的拓扑是指序拓扑
 
@@ -62,5 +63,3 @@ $n$个$\mathbb{R}$可以制作一个积空间，从而使得$\mathbb{R}^n$成为
 6. $\{(a,+\infty]:a \in \mathbb{Q}\}$
 7. $\{[-\infty,a):a \in \overline{\mathbb{R}}\}$
 8. $\{[a,b]: a,b \in \overline{\mathbb{R}} \wedge a \lt b\}$
-
-

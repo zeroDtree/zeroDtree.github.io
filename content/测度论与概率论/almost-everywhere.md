@@ -9,11 +9,11 @@ title: 几乎处处收敛和依测度收敛
 在本节的所有定义和性质中，大部分都可以 将函数的陪域替换为更一般的可测空间、拓扑空间或度量空间。
 可替换的部分将依次在开头使用【可】、【拓】、【度】来标记。
 
-## 前置
+## 1. 前置
 
 [[测度论与概率论/measurable-func]]
 
-## 关系图
+## 2. 关系图
 
 ```mermaid
 graph TD
@@ -25,8 +25,7 @@ graph TD
     AE -- 有限测度 --> AUN
 ```
 
-
-## 定义
+## 3. 定义
 
 - 设$f,g$均为定义在测度空间$(\Omega,\mathcal{F},\mu)$上的广义实值函数
   - 若$\mu(f\not=\pm\infty)=0$,则称$f$**几乎处处有限**(finite almost everywhere)(a.e. 有限)
@@ -41,7 +40,7 @@ graph TD
 - 【度】设$\{f_n, n\geq 1\}$是a.e.有限的广义实值可测函数列，若$\lim\limits_{m,n\to\infty}\mu\{|f_m -f_n|\geq \epsilon\}=0,\forall \epsilon>0$，则称$\{f_n\}$为**依测度收敛的基本列**。
 - 设$\{\mathbf{X},\mathbf{X}_n, n\geq 1\}$为$d$维R.V.序列，若$\lim\limits_{n\to\infty}P\{|\mathbf{X}_n - \mathbf{X}|\geq \epsilon\}=0,\forall \epsilon>0$，则称$\{\mathbf{X}_n\}$为**依概率收敛**于$\mathbf{X}$。记作$\mathbf{X}_n \overset{\text{P}}{\to} \mathbf{X}$。
 
-## 性质
+## 4. 性质
 
 1. 【可】若$\mu$是$\mathcal{F}$上的完备测度，则
    - 几乎处处相等的函数要么都可测，要么都不可测。

@@ -2,7 +2,11 @@
 title: archlinux-kde 中文与中文输入 大致流程
 ---
 
-# archlinux-kde 中文与中文输入
+- [1. archlinux-kde 中文与中文输入](#1-archlinux-kde-中文与中文输入)
+- [2. 到这里可以就可以正常显示中文了，但还无法输入中文](#2-到这里可以就可以正常显示中文了但还无法输入中文)
+- [3. 参考资料：](#3-参考资料)
+
+## 1. archlinux-kde 中文与中文输入
 
 最终结果：终端可以{显示，输入}中文但不把英文翻译成中文
 
@@ -35,7 +39,7 @@ yay -S 	adobe-source-han-sans-cn-fonts
 yay -S adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts  noto-fonts  noto-fonts-cjk  noto-fonts-emoji noto-fonts-sc wqy-microhei wqy-zenhei wqy-bitmapfont ttf-arphic-ukai  ttf-arphic-uming  opendesktop-fonts ttf-hannom ttf-sarasa-gothic  ttf-roboto ttf-dejavu
 ```
 
-## 到这里可以就可以正常显示中文了，但还无法输入中文
+## 2. 到这里可以就可以正常显示中文了，但还无法输入中文
 
 5. 安装输入框架 fcitx5
 
@@ -63,7 +67,7 @@ GLFW_IM_MODULE=ibus
 
 ctrl-space 就可以切换输入法了
 
-## 参考资料：
+## 3. 参考资料：
 
 ```
 https://wiki.archlinux.org/title/Localization/Simplified_Chinese
