@@ -11,7 +11,9 @@ title: Galois Theory
 - Let $E$ be a field. An **automorphism** of $E$ is a isomorphism of $E$ onto itself.
 - If $E$ and $K$ are both field extensions of a field $F$ and $\sigma : E \rightarrow K$ is a field isomorphism, then an element $\alpha \in E$ is **fixed** by $\sigma$ if $\sigma (\alpha) = \alpha$. An element $\alpha \in E$ is **fixed** by a collection of isomorphisms if $\alpha$ is fixed by every isomorphism in the collection. A subset $L$ of $E$ is **fixed** by a collection of isomorphisms if every $\alpha \in L$ is fixed by the collection. Often write **remains fixed** instead of simply **fixed**.
 - Let $F \leq K$ be a field extension. The set $G(K/F)$ is the set of all automorphisms of the field $K$ that fix every element of the field $F$.
-- Let $E$ be an algebraic extension of the field $F$. Two elements $\alpha$ and $\beta$ in $E$ are conjugates over $F$, if both have the same minimal polynomial over $F$. That is,$\text{irr}(\alpha, F) = \text{irr}(\beta, F)$.
+- Let $E$ be an algebraic extension of the field $F$. Two elements $\alpha$ and $\beta$ in $E$ are **conjugates over $F$**, if both have the same minimal polynomial over $F$. That is,$\text{irr}(\alpha, F) = \text{irr}(\beta, F)$.
+- **分裂域**：Let $F$ be a field and $P = \{f_1 (x), f_2 (x), \cdots, f_s (x)\}$ be a finite set of polynomials in $F[x]$. An extension field $K$ of $F$ is a splitting field of $P$ over $F$ if every polynomial $f_k (x) \in P$ factors into linear factors in $K[x]$ and for any intermediate field $E$, $F \leq E < K$, at least one polynomial $f_j (x) \in P$ does not factor into linear factors in $E[x]$. A field $K$ is a splitting field for $F$ if $E$ is a **splitting field** for some finite set of polynomials.
+- Let $\sigma : F \rightarrow F$ be a field isomorphism; then $\sigma_x : F[x] \rightarrow F [x]$, defined by $\sigma_x(a_0 + a_1x + \cdots + a_n x^n ) = \sigma (a_0 ) + \sigma (a_1 )x + \cdots + \sigma (a_n )x^n$, is the **polynomial extension** of $\sigma$.
 
 ## 3. 性质
 
@@ -22,6 +24,9 @@ title: Galois Theory
 5. **(The Conjugation Isomorphism)** Let $F$ be a field, $K$ an extension field of $F$, and $\alpha, \beta ∈ K$ algebraic over $F$ with $deg(\alpha, F) = n$. The map $\psi_{\alpha,\beta} : F(\alpha) → F(\beta)$ defined by $\psi_{\alpha,\beta} (c_0 + c_1 \alpha + c_2 \alpha^2 + \cdots + c_{n-1} \alpha^{n-1} ) = c_0 + c_1 \beta + c_2 \beta^2 + \cdots + c_{n-1} \beta^{n-1} $, for $c_i ∈ F$, is an isomorphism of $F(\alpha)$ onto $F(\beta)$ if and only if $\alpha$ and $\beta$ are conjugate over $F$.
 6. Let $K$ be a field extension of $F$ with $\alpha \in K$ algebraic over $F$. Suppose that $\psi$ is an isomorphism of $F(\alpha)$ onto a subfield of $K$, with the property that every element of $F$ is fixed by $\psi$. Then $\psi$ maps $\alpha$ to a conjugate over $F$ of $\alpha$. Conversely, if $\beta \in K$ is conjugate over $F$ with $\alpha$, then there is a unique isomorphism $\psi_{\alpha,\beta}$ mapping $F(\alpha)$ onto a subfield of $K$ with the properties that each $a \in F$ is fixed by $\sigma$ and $\sigma (\alpha) = \beta$.
 7. Let $f(x) \in F[x]$. If $a, b \in F$ and $f(a + bi) = 0$, then $f(a - bi) = 0$.
+8. Let $F$ be a field and $P = \{f_1 (x), f_2 (x), \cdots, f_s (x)\}$ a finite set of polynomials in $F[x]$. Then there is a splitting field $K$ of $P$ over $F$. Furthermore $K$ is a finite extension of $F$.
+9. if $\sigma : F \mapsto F$ is an isomorphism, then $\sigma_x : F[x] \mapsto F [x]$ is also an isomorphism. 
+10. Let $K = F(\alpha)$, where $\alpha$ is algebraic over $F$, and let $\sigma : F \mapsto F'$ be a field isomorphism. If $K$ is an extension field of $F$ and $\beta \in K$ is a zero of $\sigma_x (\text{irr}(\alpha, F))$, then there is a unique isomorphism $\varphi : F(\alpha) \mapsto F'(\beta)$ with $\sigma (a) = \varphi(a)$ for all $a \in F$ and $\varphi(\alpha) = \beta$.
 
 ## 4. 关系图
 
@@ -41,7 +46,7 @@ graph LR
     z_p["`$$x+\langle p(x)\rangle $$`"] -->|零点| Fx_p
 ```
 
-### 4.2. 单扩域
+### 4.2. 单扩域(单拓域)
 
 设$F$为一个域，$E$为$F$的扩域，$\alpha \in E$为$F$的代数元, $p(x):=\text{irr}(\alpha, F)$为$\alpha$的不可约多项式。$\phi(x):F[x]\mapsto E$为估值环同态映射，$F[\alpha]$为$\phi$的像（即$F$的单扩域）
 
