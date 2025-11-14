@@ -2,7 +2,7 @@
 title: svd
 ---
 
-All matrix is belong to $ \mathbb{R}^{m \times n} $ if not specified.
+All matrix is belong to $\mathbb{R}^{m \times n}$ if not specified.
 
 ## 1. Preliminaries
 

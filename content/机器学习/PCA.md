@@ -1,5 +1,5 @@
 ---
-title: Principal Component Analysis (PCA)
+title: PCA
 ---
 
 ## 目标
