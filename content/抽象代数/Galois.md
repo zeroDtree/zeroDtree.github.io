@@ -7,6 +7,7 @@ title: Galois Theory
 ## 1. 前置
 
 - [[抽象代数/域论(域拓展)]]
+- [[抽象代数/域论(有限域)]]
 
 ## 2. 定义
 
@@ -17,6 +18,10 @@ title: Galois Theory
 - **分裂域**：Let $F$ be a field and $P = \{f_1 (x), f_2 (x), \cdots, f_s (x)\}$ be a finite set of polynomials in $F[x]$. An extension field $K$ of $F$ is a splitting field of $P$ over $F$ if every polynomial $f_k (x) \in P$ factors into linear factors in $K[x]$ and for any intermediate field $E$, $F \leq E < K$, at least one polynomial $f_j (x) \in P$ does not factor into linear factors in $E[x]$. A field $K$ is a splitting field for $F$ if $E$ is a **splitting field** for some finite set of polynomials.
 - Let $\sigma : F \rightarrow F$ be a field isomorphism; then $\sigma_x : F[x] \rightarrow F [x]$, defined by $\sigma_x(a_0 + a_1x + \cdots + a_n x^n ) = \sigma (a_0 ) + \sigma (a_1 )x + \cdots + \sigma (a_n )x^n$, is the **polynomial extension** of $\sigma$.
 - Let $E$ be an extension field of $F$. A polynomial $f(x) \in F[x]$ **splits** in $E$ if it factors into linear factors in $E[x]$.
+- Let $f(x) \in F[x]$, and let $\alpha$ be a zero of $f(x)$ in a splitting field $E$ over $F$. If $\nu$ is the largest positive integer such that $(x - \alpha)^\nu$ is a factor of $f(x)$ in $E[x]$, then $\alpha$ is a zero of $f(x)$ with **multiplicity** $\nu$. 且$\nu$与分裂域的选择无关。
+- An irreducible polynomial $f(x) \in F[x]$ of degree $n$ is **separable** if in the splitting field $K$ of $f(x)$ over $F$, $f(x)$ has $n$ distinct zeros. An element $\alpha$ in an extension field of $F$ is **separable** if $\text{irr}(\alpha, F)$ is a separable polynomial. A field extension $F \leq E$ is **separable** if every $\alpha \in E$ is separable over $F$. If every finite extension of a field $F$ is separable, then $F$ is **perfect**.
+ 
+
 
 ## 3. 性质
 
@@ -35,6 +40,10 @@ title: Galois Theory
 13. Let $E$ be a finite extension of the field $F$. Then $E$ is the splitting field of some finite set of polynomials in $F[x]$ if and only if for every field extension $K$ over $E$ and for every isomorphism $\sigma$ that fixes all the elements of $F$ and maps $E$ onto a subfield of $K$, $\sigma$ is an automorphism of $E$.
 14. If $K$ is a finite splitting field over $F$ and $K$ contains one zero of an irreducible polynomial $f(x) \in F[x]$, then $f(x)$ splits in $K[x]$.
 15. Let $F \leq E \leq K$ be fields with $K$ a finite splitting field over $F$. Then $E$ is a splitting field over $F$ if and only if every isomorphism $\sigma$ that fixes $F$ and maps $E$ to a subfield of $K$ is an automorphism of $E$.
+16. Let $f(x)$ be an irreducible polynomial of degree $n$ with coefficients in a field $F$ of characteristic zero. Then $f(x)$ contains $n$ distinct zeros in the splitting field for $f(x)$ over $F$.
+17. Let $F$ be a finite field of characteristic $p$. Any irreducible polynomial $f(x) \in F[x]$ has $k = \text{deg}(f(x))$ distinct zeros in its splitting field.
+18. Every field of characteristic $0$ is perfect and every finite field is perfect.
+19. Let $K$ be a separable extension of the field $F$ and $E$ an intermediate field. Then both the extensions $K$ over $E$ and $E$ over $F$ are separable.
 
 ## 4. 关系图
 
