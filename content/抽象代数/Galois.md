@@ -18,6 +18,10 @@ title: Galois Theory
 - Let $E$ be an extension field of $F$. A polynomial $f(x) \in F[x]$ **splits** in $E$ if it factors into linear factors in $E[x]$.
 - Let $f(x) \in F[x]$, and let $\alpha$ be a zero of $f(x)$ in a splitting field $E$ over $F$. If $\nu$ is the largest positive integer such that $(x - \alpha)^\nu$ is a factor of $f(x)$ in $E[x]$, then $\alpha$ is a zero of $f(x)$ with **multiplicity** $\nu$. $\nu$与分裂域的选择无关，在分裂域的扩域上也是同样的重数。
 - An irreducible polynomial $f(x) \in F[x]$ of degree $n$ is **separable** if in the splitting field $K$ of $f(x)$ over $F$, $f(x)$ has $n$ distinct zeros. An element $\alpha$ in an extension field of $F$ is **separable** if $\text{irr}(\alpha, F)$ is a separable polynomial. A field extension $F \leq E$ is **separable** if every $\alpha \in E$ is separable over $F$. If every finite extension of a field $F$ is separable, then $F$ is **perfect**. （可分拓展是逐元素地考虑不可约多项式是否在分裂域中无重根）
+- A finite extension $E$ of $F$ is a **normal extension** of $F$ if $E$ is a separable splitting field over $F$. If $E$ is a normal extension of $F$, then $G(E/F)$ is the Galois group of $E$ over $F$. The Galois group is sometimes denoted by $\text{Gal}(E/F)$.
+- Let $K$ be a normal extension of $F$ and let $E$ be an intermediate field of the extension, $F \leq E \leq K$. Then $K$ is a normal extension of $E$ and $|\text{Gal}(K/E)| = [K : E]$.
+- If $F \leq E \leq K$ where $K$ is a normal extension of $F$, then $G(K/E)$ is a subgroup of $G(K/F)$ with index $(\text{Gal}(K/F) : \text{Gal}(K/E)) = [E : F]$.
+ 
 
 ```
 一个域上的多项式的重数只依赖于多项式本身，
@@ -49,6 +53,8 @@ title: Galois Theory
 20. Let $K$ be a splitting field over $F$ and $F \leq E \leq K$. If $K$ is a separable extension over $F$, then the number of isomorphisms that map $E$ onto a subfield of $K$ that fix all the elements of $F$ is $[E : F]$.
 21. Let $E$ be a separable splitting field over $F$. Then $|G(E/F)| = [E : F]$.
 22. Let $E$ be a splitting field over $F$ where $F$ is either a field of characteristic 0 or a finite field. Then $|G(E/F)| = [E : F]$.
+23. **(Primitive Element Theorem)** Let $E$ be a finite separable extension of a field $F$. Then there is an $\alpha \in E$ such that $E = F(\alpha)$. Any such element $\alpha$ is called a primitive element.
+24. If $F$ is either a finite field or a field of characteristic 0, then every finite extension of $F$ is a simple extension.
 
 ## 4. 关系图
 
