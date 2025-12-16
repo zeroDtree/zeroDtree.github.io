@@ -2,7 +2,12 @@
 title: accelerator
 ---
 
-## 梯度累计-代码片段分析
+- [1. 梯度累计-代码片段分析](#1-梯度累计-代码片段分析)
+- [2. 学习率调度-代码片段分析](#2-学习率调度-代码片段分析)
+- [3. 梯度剪切](#3-梯度剪切)
+- [4. 参考资料](#4-参考资料)
+
+## 1. 梯度累计-代码片段分析
 
 只关注梯度累计和分布式部分。
 
@@ -51,7 +56,7 @@ title: accelerator
         return result
 ```
 
-在每个设备（显卡）上，`accelerator`会将反向传播的梯度自动处以`gradient_accumulation_steps`
+在每个设备（显卡）上，`accelerator`会将反向传播的梯度自动除以`gradient_accumulation_steps`
 
 PyTorch adds hooks to the forward and backward method of your PyTorch model when training in a distributed setup.
 
@@ -61,7 +66,7 @@ The most direct example is when update model parameters through optimizer.step()
 
 使用`accelerator.no_sync(model=model)`上下文包裹住梯度累计时的前向传播和反向传播部分，可以避免不必要的通信。
 
-## 学习率调度-代码片段分析
+## 2. 学习率调度-代码片段分析
 
 只关注设置lr_scheduler的总步数。
 
@@ -101,12 +106,20 @@ def get_learing_rate_scheduler(optimizer, accelerator: Accelerator, train_set, c
     return lr_scheduler
 ```
 
-设置`n_training_steps`是的根本原则：`n_training_steps`$=$ 一共会有多少个`per_device_bacth`被处理。
+设置`n_training_steps`时的根本原则：`n_training_steps`$=$ 一共会有多少个`per_device_bacth`被处理。
 
 - 对于按`epochs`训练：一共有`math.ceil(1.0 * len(train_set) * cfg.train.n_epochs / per_device_batch_size)`个。可以这样考虑，既然是按`per_device_batch`,那直接考虑没有分布式会有多少个batch即可。
 - 对于按`steps`训练：一共有`n_training_steps * accelerator.num_processes`个, 有几张卡就乘几倍。
 
-## 参考资料
+## 3. 梯度剪切
+
+如果使用了`accelerate`库，在梯度剪切时使用`accelerator.clip_grad_norm_`取代`torch.nn.utils.clip_grad_norm_`
+
+混合精度训练的时候，反向传播会对损失进行缩放（等价于对梯度缩放），使用`accelerator.clip_grad_norm_`会自动先将梯度缩放回正确大小再剪切。
+
+使用`torch.nn.utils.clip_grad_norm_`的问题在于，假设正确的梯度是$0.1$, 缩放$1000$倍后就是$100$,假设梯度剪切到$1$, 然后再缩放回正确大小，梯度就变成了$0.001$，这显然是不对的。
+
+## 4. 参考资料
 
 ```
 https://huggingface.co/docs/accelerate/concept_guides/gradient_synchronization
