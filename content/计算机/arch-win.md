@@ -62,7 +62,7 @@ pacstrap -K /mnt grub, efibootmgr, os-prober
 iwd networkmanager用于新系统的联网，dhcpcd用于自动分配ip地址
 pacstrap -K /mnt iwd networkmanager dhcpcd
 ```
-
+2025.12.19: dhcpcd和networkmanager安装一个就行。好像。
 ```
 用于编辑文件
 pacstrap -K /mnt vim
