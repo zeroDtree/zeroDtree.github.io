@@ -37,7 +37,7 @@ $B = Q - \frac{1}{N} \sum_{i=1}^{N} q_i$
 最小化目标转化为
 
 $$
-\min_{R} l(R) = \sum_{i=1}^{N} \| p_i' - R q_i' \|^2 \Leftrightarrow \min_{R} \|A - (RB^T)^T\|^2_F
+\min_{R} l(R) = \sum_{i=1}^{N} \| p_i' - R q_i' \|^2 \iff \min_{R} \|A - (RB^T)^T\|^2_F
 $$
 
 为了简化记号，

@@ -47,7 +47,7 @@ title: Forever young
 - $\wedge$ is used to represent conjunction
 - $\vee$ is used to represent disjunction
 - $\to$ is used to represent implication
-- $\leftrightarrow$ is used to represent equivalence
+- $\iff$ is used to represent equivalence
 - $\mathscr{A} \implies \mathscr{B}$ means $(\mathscr{A} \rightarrow \mathscr{B})$ is True
 - $\mathscr{A} \iff \mathscr{B}$ means $((\mathscr{A} \rightarrow \mathscr{B}) \wedge (\mathscr{B} \rightarrow \mathscr{A}))$ is True
 - $\mathscr{L}_0$ is used to represent a zero-order language

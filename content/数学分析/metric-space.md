@@ -5,13 +5,15 @@ title: 度量空间
 ## Prerequisites
 
 - [[数学分析/real-number]]
+- [[点集拓扑/index.md]]
 
 ## 定义
+
+定义图中，若从"集合"出发的两条有向路径到达同一个结点，则表示两种定义方式等价。
 
 ```mermaid
 graph TD
 IEB[内部，外部，边界]
-
 集合 -- 度量公理 --> 度量空间
 度量空间 --> 收敛
 收敛 --> 极限点
@@ -29,7 +31,7 @@ IEB -- 集合等于集合的内部 --> 开集
 ```
 
 - 在集合$X$上定义一个函数$d:X \times X \rightarrow R^+$,满足以下条件，则称$d$为$X$上的**度量**，$(X,d)$为**度量空间**。
-  - 正定性：$d(x,y) \geq 0$, and $d(x,y)=0 \Leftrightarrow x=y$
+  - 正定性：$d(x,y) \geq 0$, and $d(x,y)=0 \iff x=y$
   - 对称性：$d(x,y)=d(y,x)$
   - 三角不等式：$d(x,y) \leq d(x,z)+d(z,y)$
 - $\forall x \in X, \forall r>0$,可定义**开球** $B(x,r)=\{y \in X:d(x,y)<r\}$
@@ -51,7 +53,11 @@ IEB -- 集合等于集合的内部 --> 开集
 - 称$E$为**完美集**，若$E$为不含孤立点的闭集
 - 连续函数$:=$开集的逆像开集
 
-定义图中，若从"集合"出发的两条有向路径到达同一个结点，则表示两种定义方式等价。
+- 称$\delta>0$为$\mathcal{A}$的 Lebesgue 数(Lebesgue number)，度量空间中，$\mathcal{A}$是$A$的开覆盖，若$A$的任何子集$B$的直径 $d(U)<\delta$，存在$U\in \mathcal{A}$，使得$B\subseteq U$
+
+- 称$B$是$A$的$\epsilon$网(epsilon net)，度量空间中，若存在$\epsilon>0$使得$A\subseteq \bigcup_{b\in B} B(b,\epsilon)$
+
+- 称$A$是完全有界的(totally bounded)，度量空间中，若$\forall \epsilon>0$，$A$总有有限$\epsilon$网，有限集的大小可随$\epsilon$变化
 
 ## 性质
 

@@ -18,5 +18,5 @@ title: 可测映射与随机变量
 - 若$f\in \mathcal{F}_1/\mathcal{E}, \mathcal{F}_1 \subseteq {F}_2$, 则$f\in \mathcal{F}_2/\mathcal{E}$
 - 可测映射的复合仍为可测映射
 - 连续映射可测
-- 若$(\Omega, \mathcal{F})$和$(E,\mathcal{E})$为可测空间, 且$\sigma(\mathcal{C})=\mathcal{E}$，则$f\in \mathcal{F}/\mathcal{E} \Leftrightarrow f^{-1}(\mathcal{C}) \subseteq \mathcal{F}$
-- 设$(\Omega, \mathcal{F}),(E,\mathcal{E})$为可测空间，$f:\Omega \to E$, $T$是任意非空指集，若$\forall t \in T, (S_t,\mathcal{S}_t)$是可测空间,且$\phi_t:E \to S_t$是可测映射，且$\mathcal{E}=\sigma(\phi_t, t\in T)$,则$f\in \mathcal{F}/\mathcal{E} \Leftrightarrow \forall t \in T, \phi_t \circ f \in \mathcal{F}/\mathcal{S}_t$
+- 若$(\Omega, \mathcal{F})$和$(E,\mathcal{E})$为可测空间, 且$\sigma(\mathcal{C})=\mathcal{E}$，则$f\in \mathcal{F}/\mathcal{E} \iff f^{-1}(\mathcal{C}) \subseteq \mathcal{F}$
+- 设$(\Omega, \mathcal{F}),(E,\mathcal{E})$为可测空间，$f:\Omega \to E$, $T$是任意非空指集，若$\forall t \in T, (S_t,\mathcal{S}_t)$是可测空间,且$\phi_t:E \to S_t$是可测映射，且$\mathcal{E}=\sigma(\phi_t, t\in T)$,则$f\in \mathcal{F}/\mathcal{E} \iff \forall t \in T, \phi_t \circ f \in \mathcal{F}/\mathcal{S}_t$

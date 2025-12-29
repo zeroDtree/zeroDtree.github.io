@@ -64,7 +64,7 @@ title: 朴素集合论(一)
 - 映射(mapping or function): 若$f\subseteq A\times B \wedge \forall a \in A, \exists ! b \in B, (a, b) \in f$，($\exists !$表示存在且唯一),则称$f$是$A$到$B$的映射
 - 单射(injection): 若$f$是$A$到$B$的映射，且$(\forall a, b \in A, f(a)=f(b) \implies a=b)$，则称$f$是单射，记作$f: A \hookrightarrow B$
 - 满射(surjection): 若$f$是$A$到$B$的映射，且$(\forall b \in B, \exists a \in A, f(a)=b)$，则称$f$是满射，记作$f: A \twoheadrightarrow B$
-- 双射(bijection): 若$f$是$A$到$B$的映射，且$f$是单射和满射，则称$f$是双射，记作$f: A \leftrightarrow B$
+- 双射(bijection): 若$f$是$A$到$B$的映射，且$f$是单射和满射，则称$f$是双射，记作$f: A \iff B$
 - 逆映射(inverse mapping): 若$f$是$A$到$B$的双射，若$B=\{(b,a) \mid (a,b) \in f\}$为$B$到$A$的映射，则称$f$可逆，称$B$为$f$的逆映射，记作$f^{-1}$
 - 映射的像(image): 若$f$是$A$到$B$的映射，$A_1$是$A$的子集，则称$f[A_1] = \{ b \in B \mid \exists a \in A_1, f(a)=b \}$为$A_1$在$f$下的像
 - 逆像(inverse image): 若$f$是$A$到$B$的映射，$B_1$是$B$的子集，则称$f^{-1}[B_1] = \{ a \in A \mid \exists b \in B_1, f(a)=b \}$为$B_1$在$f$下的逆像
