@@ -79,3 +79,6 @@ graph TD
 6. 连续函数将紧集映射到紧集
 7. 连续函数将连通集映射到连通集
 8. 如果存在正常数 $c, C$ 使得：$$c \cdot d_1(x,y) \leq d_2(x,y) \leq C \cdot d_1(x,y) \quad \forall x,y \in X$$ 那么 $d_1$ 和 $d_2$ 诱导相同拓扑。
+9. 度量空间中，任何列紧闭集都存在 Lebesgue 数
+10. 度量空间中$X$，$A\subseteq X$，$A$完全有界 $\iff$ $A$包含基本子序列(Cauchy sequence)
+11. 度量空间中，紧 $\iff$ 列紧闭
