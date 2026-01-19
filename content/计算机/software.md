@@ -18,6 +18,7 @@ title: Useful Software
 - [14. 笔记](#14-笔记)
 - [15. 终端复用](#15-终端复用)
 - [16. 平板和操作电脑](#16-平板和操作电脑)
+- [下载工具](#下载工具)
 
 #### 1. IDE
 
@@ -96,3 +97,12 @@ title: Useful Software
 #### 16. 平板和操作电脑
 
 - weylus
+
+#### 下载工具
+
+- wget
+- curl
+- axel
+- aria2
+- qBittorrent
+- Deluge
