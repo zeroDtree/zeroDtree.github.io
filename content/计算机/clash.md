@@ -46,6 +46,8 @@ chmod 777 clash-linux-amd64-v1.18.0
 
 #### 1.4.1. 设置环境变量
 
+注意端口要与clash配置文件里的端口一致。
+
 - 对于fish
   ```bash
   set -g proxy_port 17890
