@@ -159,3 +159,5 @@ module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
   return content
 }
 ```
+
+详细的过滤规则见[这里](https://en.clash.wiki/configuration/rules.html#types-of-rules)
