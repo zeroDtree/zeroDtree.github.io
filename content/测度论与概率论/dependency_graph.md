@@ -10,9 +10,10 @@ graph TD
 10["点集拓扑/序拓扑"] --> 9["测度论与概率论/Borel-R"]
 0["测度论与概率论/class-of-sets"] --> 11["测度论与概率论/semi-ring"]
 6["测度论与概率论/L-S-measure"] --> 12["测度论与概率论/L-measure"]
-3["测度论与概率论/measurable-func"] --> 13["测度论与概率论/almost-everywhere"]
+14["测度论与概率论/dependency_graph"] --> 13["测度论与概率论/index"]
+3["测度论与概率论/measurable-func"] --> 15["测度论与概率论/almost-everywhere"]
 0["测度论与概率论/class-of-sets"] --> 4["测度论与概率论/measurable-mapping"]
 0["测度论与概率论/class-of-sets"] --> 7["测度论与概率论/measure"]
-3["测度论与概率论/measurable-func"] --> 14["测度论与概率论/Lebesgue-integral"]
-13["测度论与概率论/almost-everywhere"] --> 14["测度论与概率论/Lebesgue-integral"]
+3["测度论与概率论/measurable-func"] --> 16["测度论与概率论/Lebesgue-integral"]
+15["测度论与概率论/almost-everywhere"] --> 16["测度论与概率论/Lebesgue-integral"]
 ```
