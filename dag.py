@@ -1,8 +1,6 @@
-import os
 import re
 from pathlib import Path
-from typing import Dict, Set, List
-from ls_mlkit.util.sniffer import Sniffer
+from typing import Dict, List
 
 
 class DAGMermiad:
@@ -37,9 +35,9 @@ class DAGMermiad:
         return result
 
     def find_all_filepaths(self, dir_path: str) -> List[str]:
-        sniffer = Sniffer()
-        filepath_list = sniffer.sniff_file_by_path_pattern(directory_path=dir_path, pattern=".*\.md")
-        return filepath_list
+        """递归查找目录下所有 .md 文件路径"""
+        base_path = Path(dir_path)
+        return [str(p) for p in base_path.rglob("*.md")]
 
     def filter_filepaths(self, filepath_list: List[str], pattern: str = None) -> List[str]:
         if pattern is None:
