@@ -155,7 +155,18 @@ yang@yang-Z690-AORUS-ELITE ~/w/z/proj>
 
 ```js
 module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
-  content.rules.unshift("PROCESS-NAME,chrome,DIRECT", "PROCESS-NAME,qqmusic,DIRECT")
+  content.rules.unshift(
+    "PROCESS-NAME,chrome,DIRECT",
+    "PROCESS-NAME,qqmusic,DIRECT",
+    "PROCESS-NAME,rustdesk,DIRECT",
+    "PROCESS-NAME,ssh,DIRECT",
+    "PROCESS-NAME,ToDesk,DIRECT",
+    "PROCESS-NAME,ting_en,DIRECT",
+    "PROCESS-NAME,zhihu.com,DIRECT",
+    "PROCESS-NAME,msedge,DIRECT",
+    "DOMAIN-KEYWORD,www.kimi.com,DIRECT",
+    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT"
+  )
   return content
 }
 ```

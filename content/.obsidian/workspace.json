@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "点集拓扑/紧空间.md",
+                "file": "计算机/clash.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "紧空间"
+              "title": "clash"
             }
           }
         ]
@@ -184,5 +184,13 @@
     }
   },
   "active": "4b1e0de05cf83e9c",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "故事/货币.md",
+    "计算机/bitcoin.md",
+    "计算机/blog.md",
+    "故事/dependency_graph.md",
+    "抽象代数/dependency_graph.md",
+    "点集拓扑/dependency_graph.md",
+    "点集拓扑/紧空间.md"
+  ]
 }
