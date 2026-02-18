@@ -4,24 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "d5609e6415534c6d",
+        "id": "78471f3b3fa77d45",
         "type": "tabs",
         "children": [
           {
-            "id": "4b1e0de05cf83e9c",
+            "id": "f59b51cfb8cbbfbc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "计算机/clash.md",
+                "file": "计算机/android-flash.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "clash"
+              "title": "android-flash"
+            }
+          },
+          {
+            "id": "0c4c0db571442a3b",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -74,7 +85,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -183,14 +195,33 @@
       "bases:Create new base": false
     }
   },
-  "active": "4b1e0de05cf83e9c",
+  "active": "0c4c0db571442a3b",
   "lastOpenFiles": [
-    "故事/货币.md",
+    "机器学习/pytorch/shape.md",
+    "计算机/arch-chinese.md",
+    "计算机/arch-win.md",
+    "计算机/automata.md",
+    "计算机/bash.md",
     "计算机/bitcoin.md",
     "计算机/blog.md",
-    "故事/dependency_graph.md",
-    "抽象代数/dependency_graph.md",
-    "点集拓扑/dependency_graph.md",
-    "点集拓扑/紧空间.md"
+    "计算机/clash.md",
+    "计算机/dependency_graph.md",
+    "计算机/docker.md",
+    "计算机/Turing-machine.md",
+    "计算机/vscode-extensions.md",
+    "计算机/快捷键.md",
+    "计算机/website.md",
+    "测度论与概率论/index.md",
+    "测度论与概率论/class-of-sets.md",
+    "测度论与概率论/Borel-R.md",
+    "流形/smooth-manifold.md",
+    "流形/prepare.md",
+    "流形/index.md",
+    "流形/dependency_graph.md",
+    "杂/index.md",
+    "杂/dependency_graph.md",
+    "测度论与概率论/almost-everywhere.md",
+    "机器学习/PCA.md",
+    "机器学习/pocket-metric.md"
   ]
 }
