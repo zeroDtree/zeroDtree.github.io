@@ -10,6 +10,7 @@ title: clash
     - [1.4.1. 设置环境变量](#141-设置环境变量)
     - [1.4.2. 测试并验证](#142-测试并验证)
 - [2. 针对问题：clash\_for\_windows 修改clash配置文件后，如果更新订阅，修改会被覆盖。](#2-针对问题clash_for_windows-修改clash配置文件后如果更新订阅修改会被覆盖)
+- [3. clash verge rev 的 global extend script](#3-clash-verge-rev-的-global-extend-script)
 
 ## 1. linux 上使用clash (无GUI版)
 
@@ -169,6 +170,47 @@ module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
   )
   return content
 }
+
 ```
 
 详细的过滤规则见[这里](https://en.clash.wiki/configuration/rules.html#types-of-rules)
+
+## 3. clash verge rev 的 global extend script
+
+```js
+// Define main function (script entry)
+
+function main(config) {
+  if (!config.rules) {
+    config.rules = [];
+  }
+
+  const directRules = [
+    // mac
+    "PROCESS-NAME,Google Chrome,DIRECT",
+    "PROCESS-NAME,Google Chrome Helper,DIRECT",
+    "PROCESS-NAME,Google Chrome Helper (Renderer),DIRECT",
+    "PROCESS-NAME,QQMusic,DIRECT",
+    "PROCESS-NAME,QQ,DIRECT",
+    "PROCESS-NAME,WeChat,DIRECT",
+    "PROCESS-NAME,ssh,DIRECT",
+    // "PROCESS-NAME,Firefox,DIRECT",
+
+    // linux
+    "PROCESS-NAME,chrome,DIRECT",
+    "PROCESS-NAME,qqmusic,DIRECT",
+    "PROCESS-NAME,rustdesk,DIRECT",
+    "PROCESS-NAME,ssh,DIRECT",
+    "PROCESS-NAME,ToDesk,DIRECT",
+    "PROCESS-NAME,ting_en,DIRECT",
+
+    // domain
+    "DOMAIN-KEYWORD,kimi.com,DIRECT",
+    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT"
+  ];
+
+  config.rules.unshift(...directRules);
+
+  return config;
+}
+```
