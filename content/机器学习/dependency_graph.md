@@ -1,11 +1,10 @@
 ```mermaid
 graph TD
-1["机器学习/dependency_graph"] --> 0["机器学习/index"]
-3["原始数据"] --> 2["机器学习/pytorch/torch.utils.data"]
-4["batch_size"] --> 2["机器学习/pytorch/torch.utils.data"]
-5["drop_last"] --> 2["机器学习/pytorch/torch.utils.data"]
-6["shuffle"] --> 2["机器学习/pytorch/torch.utils.data"]
-7["sampler"] --> 2["机器学习/pytorch/torch.utils.data"]
-8["batch_sampler"] --> 2["机器学习/pytorch/torch.utils.data"]
-9["batched data"] --> 2["机器学习/pytorch/torch.utils.data"]
+2["原始数据"] --> 1["机器学习/pytorch/torch.utils.data"]
+3["batch_size"] --> 1["机器学习/pytorch/torch.utils.data"]
+4["drop_last"] --> 1["机器学习/pytorch/torch.utils.data"]
+5["shuffle"] --> 1["机器学习/pytorch/torch.utils.data"]
+6["sampler"] --> 1["机器学习/pytorch/torch.utils.data"]
+7["batch_sampler"] --> 1["机器学习/pytorch/torch.utils.data"]
+8["batched data"] --> 1["机器学习/pytorch/torch.utils.data"]
 ```

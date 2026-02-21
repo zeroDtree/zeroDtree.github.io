@@ -5,7 +5,7 @@ title: 复数构造
 ## Prerequisites
 
 - [[数学分析/real-number]]
-- [[数学分析/向量空间]]
+- [[抽象代数/向量空间]]
 
 ## 定义
 

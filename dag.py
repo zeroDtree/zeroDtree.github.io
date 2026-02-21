@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 
 class DAGMermiad:
@@ -69,18 +69,24 @@ class DAGMermiad:
                 result_dict.pop(filepath)
         return result_dict
 
-    def unify_format(self, dependencies_dict: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    def unify_format(self, dependencies_dict: Dict[str, List[str]]) -> Dict[str, List[Tuple[str, str]]]:
+        """统一格式，返回 Dict[filepath, List[(ref_path, link_type)]]，link_type 为 'ref'（普通引用）或 'include'（![[...]] 嵌入）。"""
         result = {}
         for filepath, reference_list in dependencies_dict.items():
             filepath = filepath.replace("content/", "").replace(".md", "")
             result[filepath] = []
-            for reference in reference_list:
-                reference = reference.replace("!", "").replace("[", "").replace("]", "")
-                reference = re.sub(pattern="#.*", repl="", string=reference)
-                result[filepath].append(reference)
+            for raw in reference_list:
+                is_include = raw.strip().startswith("!")
+                ref = raw.replace("!", "").replace("[", "").replace("]", "")
+                ref = re.sub(r"#.*", repl="", string=ref).strip()
+                if ref == "dependency_graph" or ref.endswith("/dependency_graph"):
+                    continue
+                link_type = "include" if is_include else "ref"
+                result[filepath].append((ref, link_type))
         return result
 
-    def generate_mermaid_graph(self, dependencies_dict: Dict[str, List[str]]) -> str:
+    def generate_mermaid_graph(self, dependencies_dict: Dict[str, List[Tuple[str, str]]]) -> str:
+        """生成 Mermaid 图：普通引用 [[...]] 用实线 -->，嵌入 ![[...]] 用虚线 -.->。"""
         result_str = "```mermaid\n"
         result_str += "graph TD\n"
         name_to_id = {}
@@ -91,7 +97,7 @@ class DAGMermiad:
                 name_id = count
                 count += 1
                 name_to_id[filepath] = name_id
-            for reference in reference_list:
+            for reference, _ in reference_list:
                 reference_id = name_to_id.get(reference, None)
                 if reference_id is None:
                     reference_id = count
@@ -99,39 +105,34 @@ class DAGMermiad:
                     name_to_id[reference] = reference_id
 
         for filepath, reference_list in dependencies_dict.items():
-            for reference in reference_list:
-                result_str += f'{name_to_id[reference]}["{reference}"] --> {name_to_id[filepath]}["{filepath}"]\n'
+            for reference, link_type in reference_list:
+                edge = "-.->" if link_type == "include" else "-->"
+                result_str += f'{name_to_id[reference]}["{reference}"] {edge} {name_to_id[filepath]}["{filepath}"]\n'
         result_str += "```"
         return result_str
 
-    def generate_subdirectory_dependency_graph(self, all_dependencies_dict: Dict[str, List[str]], subdir_path: str) -> Dict[str, List[str]]:
-        """为子目录生成依赖图，包含该子目录内的文件及其依赖关系"""
-        # 获取子目录下的所有文件（使用完整路径）
+    def generate_subdirectory_dependency_graph(
+        self, all_dependencies_dict: Dict[str, List[str]], subdir_path: str
+    ) -> Dict[str, List[Tuple[str, str]]]:
+        """为子目录生成依赖图，包含该子目录内的文件及其依赖关系（含 ref/include 区分）。"""
         subdir_files = self.filter_files_by_directory(list(all_dependencies_dict.keys()), subdir_path)
-        
-        # 收集子目录内的文件及其依赖
         subdir_dependencies = {}
         for filepath in subdir_files:
             if filepath in all_dependencies_dict:
                 subdir_dependencies[filepath] = all_dependencies_dict[filepath]
-        
-        # 统一格式
+
         unified_subdir_dependencies = self.unify_format(subdir_dependencies)
-        
-        # 收集所有被引用的文件（统一格式后的路径）
+
         referenced_files = set()
         for filepath, reference_list in unified_subdir_dependencies.items():
-            for reference in reference_list:
+            for reference, _ in reference_list:
                 referenced_files.add(reference)
-        
-        # 添加被引用的文件到依赖图中（如果它们不在子目录中）
-        # 需要从 all_dependencies_dict 中找到对应的完整路径，然后统一格式
+
         all_unified_dict = self.unify_format(all_dependencies_dict)
         for filepath_unified, reference_list in all_unified_dict.items():
             if filepath_unified in referenced_files and filepath_unified not in unified_subdir_dependencies:
-                # 这个文件被引用但不在子目录中，需要添加到图中
                 unified_subdir_dependencies[filepath_unified] = []
-        
+
         return unified_subdir_dependencies
 
 

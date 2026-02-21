@@ -11,9 +11,8 @@ graph TD
 0["测度论与概率论/class-of-sets"] --> 10["测度论与概率论/semi-ring"]
 4["测度论与概率论/measurable-func"] --> 5["测度论与概率论/almost-everywhere"]
 4["测度论与概率论/measurable-func"] --> 11["测度论与概率论/random_variable"]
-13["测度论与概率论/dependency_graph"] --> 12["测度论与概率论/index"]
 0["测度论与概率论/class-of-sets"] --> 8["测度论与概率论/measure"]
-7["测度论与概率论/L-S-measure"] --> 14["测度论与概率论/L-measure"]
-0["测度论与概率论/class-of-sets"] --> 15["测度论与概率论/Borel-R"]
-16["点集拓扑/序拓扑"] --> 15["测度论与概率论/Borel-R"]
+7["测度论与概率论/L-S-measure"] --> 13["测度论与概率论/L-measure"]
+0["测度论与概率论/class-of-sets"] --> 14["测度论与概率论/Borel-R"]
+15["点集拓扑/序拓扑"] --> 14["测度论与概率论/Borel-R"]
 ```
