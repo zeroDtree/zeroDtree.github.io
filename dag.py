@@ -141,25 +141,23 @@ def main():
     filepath_list = dag_mermiad.find_all_filepaths(dir_path="content")
     filtered_filepath_list = dag_mermiad.filter_filepaths(filepath_list)
     dependencies_dict = dag_mermiad.find_dependencies(filtered_filepath_list)
-    
+
     # 生成总的依赖图
     unified_dependencies_dict = dag_mermiad.unify_format(dependencies_dict)
     mermaid_graph = dag_mermiad.generate_mermaid_graph(unified_dependencies_dict)
     print("Generating main dependency graph...")
     with open("content/dependency_graph.md", "w") as f:
         f.write(mermaid_graph)
-    
+
     # 为每个子目录生成依赖图
     subdirs = dag_mermiad.find_subdirectories("content")
     for subdir in subdirs:
         subdir_name = Path(subdir).name
         print(f"Generating dependency graph for {subdir_name}...")
-        
+
         # 生成子目录的依赖图
-        subdir_dependencies = dag_mermiad.generate_subdirectory_dependency_graph(
-            dependencies_dict, subdir
-        )
-        
+        subdir_dependencies = dag_mermiad.generate_subdirectory_dependency_graph(dependencies_dict, subdir)
+
         # 如果子目录有依赖关系，生成图表
         if subdir_dependencies:
             subdir_mermaid_graph = dag_mermiad.generate_mermaid_graph(subdir_dependencies)

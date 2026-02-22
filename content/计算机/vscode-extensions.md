@@ -1,5 +1,10 @@
+---
+title: vscode 插件
+---
+
+## 功能性插件
+
 ```
-github theme
 black formatter
 latex workshop
 markdown preview enhance
@@ -12,8 +17,29 @@ Prettier - Code formatter
 Remote - SSH
 Dev Containers
 Markdown TOC & Chapter Number
-Comment Formula
 latex-formatter
 shfmt
 shell-format
+vim
+vscode-pdf
+Tinymist Typst
 ```
+
+## 美化性插件
+
+```
+github theme
+Comment Formula
+Error Lens
+Material Icon Theme
+Better Comments
+Highlight Line
+Log File Highlighter
+Comment Anchors
+```
+
+## 参考
+
+- https://virgiling.wiki/03-tools/VSCode-and-Cursor-Usage
+- https://virgiling.wiki/03-tools/VSCode-enhanced-with-AI
+- https://virgiling.wiki/03-tools/VSCode-enhanced-theme

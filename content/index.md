@@ -28,7 +28,7 @@ title: Forever young
 - $\overline{\mathbb{R}}$ := $\mathbb{R} \cup \{-\infty,+\infty\}$
 - For $X \subseteq \overline{\mathbb{R}}$, $X^+$ := $\{x\in X|x>0\}$
 - For $X \subseteq \overline{\mathbb{R}}$, $X^*$ := $\{x\in X|x\geq 0\}$
-- For $\mathbf{a}, \mathbf{b} \in \overline{\mathbb{R}}^n, \mathbf{a} \lt \mathbf{b}$ := $\forall i, a_i \leq b_i$
+- For $\mathbf{a}, \mathbf{b} \in \overline{\mathbb{R}}^n, \mathbf{a} \leq \mathbf{b}$ := $\forall i, a_i \leq b_i$
 - Class of sets is denoted as calligraphic letter, e.g. $\mathcal{A}$, $\mathcal{B}$, $\mathcal{F}$
 - $\mathcal{P}(X)$ is the power set of $X$
 - $\biguplus$ represents the union of disjoint sets.
