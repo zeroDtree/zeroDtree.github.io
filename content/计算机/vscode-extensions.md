@@ -23,6 +23,9 @@ shell-format
 vim
 vscode-pdf
 Tinymist Typst
+Even Better TOML
+OAI Compatible Provider for Copilot
+JavaScript and TypeScript Nightly
 ```
 
 ## 美化性插件
