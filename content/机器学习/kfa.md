@@ -1,4 +1,5 @@
 # Kronecker-factored Approximate
+
 - [Kronecker-factored Approximate](#kronecker-factored-approximate)
   - [1. 约定](#1-约定)
   - [2. 目标](#2-目标)

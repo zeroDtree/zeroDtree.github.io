@@ -144,6 +144,7 @@ $$\forall B \in \mathcal{E}, \mu^*(B) = \mu^*(B \cap A) + \mu^*(B \cap A^c)$$
 
 零测集：称$A$ 为 零测集，若$A \in \mathcal{F} \wedge \mu(A)=0$
 可略集: 称$A$ 为 可略集，若 $\exists \text{零测集}B \text{ s.t. } A \subseteq B$，所有的可略集构成的集类记为$\mathcal{N}_{\mu}$
+
 - 称$(\Omega, F, \mu)$为完备测度空间，若$\mathcal{N}_{\mu} \subseteq F$
 
 设$(\Omega, \mathcal{F}_1, \mu_1)$和$(\Omega, \mathcal{F}_2, \mu_2)$为两个测度空间，称$(\Omega, \mathcal{F}_2, \mu_2)$是$(\Omega, \mathcal{F}_1, \mu_1)$的**完备化**，若

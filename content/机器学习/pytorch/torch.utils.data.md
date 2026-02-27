@@ -4,7 +4,7 @@ title: dataset and dataloader
 
 - [1. 数据流](#1-数据流)
 - [2. 说明 for Map-style Dataset](#2-说明-for-map-style-dataset)
-  - [2.1. collate\_fn](#21-collate_fn)
+  - [2.1. collate_fn](#21-collate_fn)
   - [2.2. 直接指定](#22-直接指定)
 - [3. 测试程序](#3-测试程序)
 - [4. 参考资料](#4-参考资料)

@@ -3,8 +3,7 @@ title: Gaussian Distribution
 ---
 
 - [1. One-dimensional Gaussian Distribution](#1-one-dimensional-gaussian-distribution)
-- [2. Multi-dimensional Gaussian Distribution](#2-multi-dimensional-gaussian-distribution)
-		- [2.1. 多维高斯分布的概率密度函数(在能写出概率密度的情况下)](#21-多维高斯分布的概率密度函数在能写出概率密度的情况下)
+- [2. Multi-dimensional Gaussian Distribution](#2-multi-dimensional-gaussian-distribution) - [2.1. 多维高斯分布的概率密度函数(在能写出概率密度的情况下)](#21-多维高斯分布的概率密度函数在能写出概率密度的情况下)
 - [3. KL Divergence between two Gaussian Distributions](#3-kl-divergence-between-two-gaussian-distributions)
 - [4. Derivative of Gaussian Distribution](#4-derivative-of-gaussian-distribution)
 

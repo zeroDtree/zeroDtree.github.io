@@ -10,7 +10,7 @@ title: Lebesgue 积分（L积分）
 
 ## 前置
 
-- [[测度论与概率论/measurable-func]]
+-
 - [[测度论与概率论/almost-everywhere]]
 
 ## 非负简单可测函数的$L$积分
@@ -90,20 +90,20 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
 4. 设$f，g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$f,g$中其中一个积存存在，另一个积分也存在，并且$\int f d\mu = \int g d\mu$.
 5. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ ， $A$ 为零测集，则 $\int_{A} f d\mu = 0$.
 6. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分存在，则
-   1. $f$可积 $\implies$ $|f|<+\infty$ a.e.
-   2. $\int |f| d\mu =0 \implies f=0$ a.e.
-   3. $(\forall A \in \mathcal{F}, \int_{A} f d\mu \geq 0) \implies f \geq 0$ a.e.
-7. 设$f,g$为广义实值函数，且$f+g$有定义，则$(f+g)^+\leq f^+ + g^+, (f+g)^- \leq f^- + g^-$
-8. 设$f,g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分都存在，则
-   1. （齐次性 homogeneity）$\int c f d\mu = c \int f d\mu, \forall c \in \mathbb{R}$
-   2. （线性性 linearity）若$\int f d\mu + \int g d\mu$有意义， 则 $f+g$ a.e. 有定义，且$f+g$的积分存在，且$\int (f+g) d\mu = \int f d\mu + \int g d\mu$
-   3. （单调性 monotonicity）若$f \leq g$ a.e.，则$\int f d\mu \leq \int g d\mu$
-9. $\int 1 d\mu = \mu(\Omega)$
-10. 若实值函数$f$能表示成$f=\sum_{i=1}^{\infty} a_i I_{A_i}$的形式，其中$a_i \in \mathbb{R}$，$\{A_i, i\geq 1\} \subsetneq \mathcal{F}$为$\Omega$的一个划分，那么称$f$为初等函数。有以下三个结论
-    1. $f$是可测函数
-    2. 若$f$的积分存在，则$\int f d\mu = \sum_{i=1}^{\infty} a_i \mu(A_i)$
-    3. $f$可积 等价于 $\sum_{i=1}^{\infty} |a_i| \mu(A_i) < +\infty$
-11. 设$f$为a.e. 有限的广义实值可测函数，且$\mu$为有限测度，则以下三条等价
-    1. $f$可积
-    2. $\sum_{i=1}^{\infty} n \mu(n \leq |f| < n+1) < +\infty$
-    3. $\sum_{i=1}^{\infty}  \mu(|f| \geq n) < +\infty$
+7. $f$可积 $\implies$ $|f|<+\infty$ a.e.
+8. $\int |f| d\mu =0 \implies f=0$ a.e.
+9. $(\forall A \in \mathcal{F}, \int_{A} f d\mu \geq 0) \implies f \geq 0$ a.e.
+10. 设$f,g$为广义实值函数，且$f+g$有定义，则$(f+g)^+\leq f^+ + g^+, (f+g)^- \leq f^- + g^-$
+11. 设$f,g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分都存在，则
+12. （齐次性 homogeneity）$\int c f d\mu = c \int f d\mu, \forall c \in \mathbb{R}$
+13. （线性性 linearity）若$\int f d\mu + \int g d\mu$有意义， 则 $f+g$ a.e. 有定义，且$f+g$的积分存在，且$\int (f+g) d\mu = \int f d\mu + \int g d\mu$
+14. （单调性 monotonicity）若$f \leq g$ a.e.，则$\int f d\mu \leq \int g d\mu$
+15. $\int 1 d\mu = \mu(\Omega)$
+16. 若实值函数$f$能表示成$f=\sum_{i=1}^{\infty} a_i I_{A_i}$的形式，其中$a_i \in \mathbb{R}$，$\{A_i, i\geq 1\} \subsetneq \mathcal{F}$为$\Omega$的一个划分，那么称$f$为初等函数。有以下三个结论
+17. $f$是可测函数
+18. 若$f$的积分存在，则$\int f d\mu = \sum_{i=1}^{\infty} a_i \mu(A_i)$
+19. $f$可积 等价于 $\sum_{i=1}^{\infty} |a_i| \mu(A_i) < +\infty$
+20. 设$f$为a.e. 有限的广义实值可测函数，且$\mu$为有限测度，则以下三条等价
+21. $f$可积
+22. $\sum_{i=1}^{\infty} n \mu(n \leq |f| < n+1) < +\infty$
+23. $\sum_{i=1}^{\infty} \mu(|f| \geq n) < +\infty$

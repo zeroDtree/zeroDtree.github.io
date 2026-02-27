@@ -3,14 +3,14 @@ title: SDE Diffusion
 ---
 
 - [Score-based Generative Model through SDE](#score-based-generative-model-through-sde)
-	- [1. Notations](#1-notations)
-	- [2. Score-based Diffusion through SDE (Unconditional)](#2-score-based-diffusion-through-sde-unconditional)
-	- [3. Training (Unconditional)](#3-training-unconditional)
-	- [4. Score-based Diffusion through SDE (Conditional)](#4-score-based-diffusion-through-sde-conditional)
-	- [5. Special Case](#5-special-case)
-	- [6. Denoising Score Matching](#6-denoising-score-matching)
-	- [7. VPSDE（Continuous DDPM） (Unconditional)](#7-vpsdecontinuous-ddpm-unconditional)
-	- [8. VESDE](#8-vesde)
+  - [1. Notations](#1-notations)
+  - [2. Score-based Diffusion through SDE (Unconditional)](#2-score-based-diffusion-through-sde-unconditional)
+  - [3. Training (Unconditional)](#3-training-unconditional)
+  - [4. Score-based Diffusion through SDE (Conditional)](#4-score-based-diffusion-through-sde-conditional)
+  - [5. Special Case](#5-special-case)
+  - [6. Denoising Score Matching](#6-denoising-score-matching)
+  - [7. VPSDE（Continuous DDPM） (Unconditional)](#7-vpsdecontinuous-ddpm-unconditional)
+  - [8. VESDE](#8-vesde)
 
 # Score-based Generative Model through SDE
 

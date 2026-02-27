@@ -9,7 +9,7 @@ title: clash
   - [1.4. 使用梯子](#14-使用梯子)
     - [1.4.1. 设置环境变量](#141-设置环境变量)
     - [1.4.2. 测试并验证](#142-测试并验证)
-- [2. 针对问题：clash\_for\_windows 修改clash配置文件后，如果更新订阅，修改会被覆盖。](#2-针对问题clash_for_windows-修改clash配置文件后如果更新订阅修改会被覆盖)
+- [2. 针对问题：clash_for_windows 修改clash配置文件后，如果更新订阅，修改会被覆盖。](#2-针对问题clash_for_windows-修改clash配置文件后如果更新订阅修改会被覆盖)
 - [3. clash verge rev 的 global extend script](#3-clash-verge-rev-的-global-extend-script)
 
 ## 1. linux 上使用clash (无GUI版)
@@ -31,7 +31,6 @@ chmod 777 clash-linux-amd64-v1.18.0
 ![[计算机/images/clash_config.png]]
 
 可选地，修改clash配置文件的端口`mixed-port`
-
 
 ### 1.3. 启动clash
 
@@ -58,7 +57,7 @@ chmod 777 clash-linux-amd64-v1.18.0
           set -l cmd "set -gx $var http://$proxy_ip:$proxy_port"
           echo $cmd
           eval $cmd
-      end 
+      end
       set -gx no_proxy 127.0.0.1,localhost
       set -gx NO_PROXY 127.0.0.1,localhost
       echo -e "\033[32m[√] Proxy enabled\033[0m"
@@ -68,12 +67,13 @@ chmod 777 clash-linux-amd64-v1.18.0
           set -l cmd "set -e $var"
           echo $cmd
           eval $cmd
-      end 
+      end
       echo -e "\033[31m[×] Proxy disabled\033[0m"
   end
   proxy_on
   ```
 - 对于bash
+
   ```bash
   proxy_ip="127.0.0.1"
   proxy_port="17890"
@@ -95,6 +95,7 @@ chmod 777 clash-linux-amd64-v1.18.0
   }
   proxy_on
   ```
+
 #### 1.4.2. 测试并验证
 
 ```bash
@@ -113,7 +114,7 @@ ERROR: could not open HSTS store at '/home/yang/.wget-hsts'. HSTS will be disabl
 长度： 未指定 [text/html]
 正在保存至: “index.html”
 
-index.html                       [ <=>                                           ] 306.49K  --.-KB/s    用时 0.07s 
+index.html                       [ <=>                                           ] 306.49K  --.-KB/s    用时 0.07s
 
 2026-01-21 23:17:15 (4.09 MB/s) - “index.html” 已保存 [313850]
 
@@ -138,11 +139,11 @@ ERROR: could not open HSTS store at '/home/yang/.wget-hsts'. HSTS will be disabl
 长度： 2381 (2.3K) [text/html]
 正在保存至: “index.html.1”
 
-index.html.1                 100%[==============================================>]   2.33K  --.-KB/s    用时 0s    
+index.html.1                 100%[==============================================>]   2.33K  --.-KB/s    用时 0s
 
 2026-01-21 23:17:48 (20.6 MB/s) - 已保存 “index.html.1” [2381/2381])
 
-yang@yang-Z690-AORUS-ELITE ~/w/z/proj> 
+yang@yang-Z690-AORUS-ELITE ~/w/z/proj>
 
 ```
 
@@ -166,11 +167,10 @@ module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
     "PROCESS-NAME,zhihu.com,DIRECT",
     "PROCESS-NAME,msedge,DIRECT",
     "DOMAIN-KEYWORD,www.kimi.com,DIRECT",
-    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT"
+    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT",
   )
   return content
 }
-
 ```
 
 详细的过滤规则见[这里](https://en.clash.wiki/configuration/rules.html#types-of-rules)
@@ -182,7 +182,7 @@ module.exports.parse = ({ content, name, url }, { yaml, axios, notify }) => {
 
 function main(config) {
   if (!config.rules) {
-    config.rules = [];
+    config.rules = []
   }
 
   const directRules = [
@@ -206,11 +206,11 @@ function main(config) {
 
     // domain
     "DOMAIN-KEYWORD,kimi.com,DIRECT",
-    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT"
-  ];
+    "DOMAIN-KEYWORD,nenu.edu.cn,DIRECT",
+  ]
 
-  config.rules.unshift(...directRules);
+  config.rules.unshift(...directRules)
 
-  return config;
+  return config
 }
 ```

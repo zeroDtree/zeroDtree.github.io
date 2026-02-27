@@ -145,5 +145,3 @@ $$
 $$
 
 In particular, for DDPM, we have $a_t = \sqrt{\alpha_t} = \sqrt{1-\beta_t}$ and $b_t = \sqrt{1-\alpha_t} = \sqrt{\beta_t}$.
-
-

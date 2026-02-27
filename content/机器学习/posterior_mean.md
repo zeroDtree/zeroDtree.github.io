@@ -2,8 +2,6 @@
 title: posterior mean
 ---
 
-
-
 ### Tweedie's formula
 
 ---

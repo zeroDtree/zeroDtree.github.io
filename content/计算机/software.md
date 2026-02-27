@@ -14,12 +14,10 @@ title: Useful Software
 - [10. 平板和操作电脑](#10-平板和操作电脑)
 - [11. 下载工具](#11-下载工具)
 
-
 #### 1. IDE
 
 - cursor
 - vscode
-
 
 #### 2. Shell
 
@@ -37,18 +35,15 @@ title: Useful Software
 - PyMOL : 可用于PDB文件可视化
 - avogadro : 可用于SDF文件可视化
 
-
 #### 5. 远程文件同步
 
 - FreeFileSync
-
 
 #### 6. 内网穿透
 
 - frp
 - zerotier
 - openvpn
-
 
 #### 7. 文献管理
 

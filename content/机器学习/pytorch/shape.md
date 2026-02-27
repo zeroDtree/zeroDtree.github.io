@@ -27,5 +27,3 @@ batch flattening 后 `full_shape`=$(\sum n_i, \dots)$
 `micro_shape`被约定为$(\dots)$，即少了一维，那一维被batch flatten占了。
 
 在batch flattening的情况下，原来的shape为$(b,)$的张量，为了与full_shape的数据一起运算，需要被拓展为$(\sum n_i, )$
-
-

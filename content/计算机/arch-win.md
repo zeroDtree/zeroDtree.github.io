@@ -3,21 +3,21 @@ title: windows + archlinux 双系统安装 大致流程
 ---
 
 - [archlinux+windows 双系统安装“大致过程”与“注意事项”。](#archlinuxwindows-双系统安装大致过程与注意事项)
-	- [1. 获取 arch 的 iso 文件，并将其刻录到 U 盘上(例如可使用 linux 的 dd 或ventoy)](#1-获取-arch-的-iso-文件并将其刻录到-u-盘上例如可使用-linux-的-dd-或ventoy)
-	- [2. 关闭电脑的 bios 的安全启动，将 u 盘启动调整到最前面；把 u 盘插到电脑上；重启](#2-关闭电脑的-bios-的安全启动将-u-盘启动调整到最前面把-u-盘插到电脑上重启)
-	- [3. 联网](#3-联网)
-	- [4. 划分磁盘分区](#4-划分磁盘分区)
-	- [5. 格式化磁盘分区（得到文件系统）](#5-格式化磁盘分区得到文件系统)
-	- [6. 挂载文件系统](#6-挂载文件系统)
-	- [7. 安装基本的内核以及固件，以及需要用到的软件](#7-安装基本的内核以及固件以及需要用到的软件)
-	- [8. 生称文件分区挂载表](#8-生称文件分区挂载表)
-	- [9. 使用 arch-chroot 进入到/mnt 里](#9-使用-arch-chroot-进入到mnt-里)
-	- [10. 开启 os 探测](#10-开启-os-探测)
-	- [11. 把 grub 引导项安装到 EFI 分区(/boot)](#11-把-grub-引导项安装到-efi-分区boot)
-	- [12. 此时已安装好了 arch,但重启后没有 windows 的引导项。](#12-此时已安装好了-arch但重启后没有-windows-的引导项)
-	- [13. 添加 windows 的引导项](#13-添加-windows-的引导项)
-	- [14. 此时 archlinux+windows 双系统已经安装完成。](#14-此时-archlinuxwindows-双系统已经安装完成)
-	- [15. 可选地，给 arch 安装 KDE 桌面](#15-可选地给-arch-安装-kde-桌面)
+  - [1. 获取 arch 的 iso 文件，并将其刻录到 U 盘上(例如可使用 linux 的 dd 或ventoy)](#1-获取-arch-的-iso-文件并将其刻录到-u-盘上例如可使用-linux-的-dd-或ventoy)
+  - [2. 关闭电脑的 bios 的安全启动，将 u 盘启动调整到最前面；把 u 盘插到电脑上；重启](#2-关闭电脑的-bios-的安全启动将-u-盘启动调整到最前面把-u-盘插到电脑上重启)
+  - [3. 联网](#3-联网)
+  - [4. 划分磁盘分区](#4-划分磁盘分区)
+  - [5. 格式化磁盘分区（得到文件系统）](#5-格式化磁盘分区得到文件系统)
+  - [6. 挂载文件系统](#6-挂载文件系统)
+  - [7. 安装基本的内核以及固件，以及需要用到的软件](#7-安装基本的内核以及固件以及需要用到的软件)
+  - [8. 生称文件分区挂载表](#8-生称文件分区挂载表)
+  - [9. 使用 arch-chroot 进入到/mnt 里](#9-使用-arch-chroot-进入到mnt-里)
+  - [10. 开启 os 探测](#10-开启-os-探测)
+  - [11. 把 grub 引导项安装到 EFI 分区(/boot)](#11-把-grub-引导项安装到-efi-分区boot)
+  - [12. 此时已安装好了 arch,但重启后没有 windows 的引导项。](#12-此时已安装好了-arch但重启后没有-windows-的引导项)
+  - [13. 添加 windows 的引导项](#13-添加-windows-的引导项)
+  - [14. 此时 archlinux+windows 双系统已经安装完成。](#14-此时-archlinuxwindows-双系统已经安装完成)
+  - [15. 可选地，给 arch 安装 KDE 桌面](#15-可选地给-arch-安装-kde-桌面)
 
 # archlinux+windows 双系统安装“大致过程”与“注意事项”。
 
@@ -62,7 +62,9 @@ pacstrap -K /mnt grub, efibootmgr, os-prober
 iwd networkmanager用于新系统的联网，dhcpcd用于自动分配ip地址
 pacstrap -K /mnt iwd networkmanager dhcpcd
 ```
+
 2025.12.19: dhcpcd和networkmanager安装一个就行。好像。
+
 ```
 用于编辑文件
 pacstrap -K /mnt vim

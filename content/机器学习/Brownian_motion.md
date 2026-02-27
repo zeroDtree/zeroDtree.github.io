@@ -2,8 +2,6 @@
 title: Brownian Motion
 ---
 
-
-
 The Wiener process $W_t$ is characterized by four facts:
 
 - $W_0 = 0$

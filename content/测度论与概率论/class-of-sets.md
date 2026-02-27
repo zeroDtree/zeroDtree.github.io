@@ -4,7 +4,7 @@ title: 集类
 
 ## Prerequisites
 
-- [[朴素集合论/naive-set-theory-2]]
+-
 - [[点集拓扑/拓扑空间]]
 
 ### 定义
