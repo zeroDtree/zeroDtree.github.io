@@ -2,44 +2,46 @@
 title: vscode 插件
 ---
 
-## 功能性插件
 
-```
-black formatter
-latex workshop
-markdown preview enhance
-jupyter
-Spring Boot Extension Pack
-Vue - Official
-Project Manager
-Markdown All in One
-Prettier - Code formatter
-Remote - SSH
-Dev Containers
-Markdown TOC & Chapter Number
-latex-formatter
-shfmt
-shell-format
-vim
-vscode-pdf
-Tinymist Typst
-Even Better TOML
-OAI Compatible Provider for Copilot
-JavaScript and TypeScript Nightly
-```
+
+## 功能性插件
+| 插件名                              | 功能                                               |
+| ----------------------------------- | -------------------------------------------------- |
+| black formatter                     | python 代码格式化                                  |
+| latex workshop                      | latex 语法支持                                     |
+| latex-formatter                     | latex 代码格式化                                   |
+| Markdown All in One                 | markdown 语法支持                                  |
+| markdown preview enhance            | markdown 预览增强                                  |
+| Markdown TOC & Chapter Number       | markdown 章节编号自动生成                          |
+| jupyter                             |                                                    |
+| Spring Boot Extension Pack          |                                                    |
+| Vue - Official                      |                                                    |
+| Project Manager                     | 多项目快速切换                                     |
+| Prettier - Code formatter           | 配置文件类（json， yaml）代码格式化                |
+| Remote - SSH                        |                                                    |
+| Dev Containers                      |                                                    |
+| shfmt                               |                                                    |
+| shell-format                        |                                                    |
+| vim                                 |                                                    |
+| vscode-pdf                          |                                                    |
+| Tinymist Typst                      | Typst 语法支持                                     |
+| Even Better TOML                    | toml 高亮与格式化                                  |
+| OAI Compatible Provider for Copilot | 使得copilot支持openai兼容的大模型api，例如deepseek |
+| JavaScript and TypeScript Nightly   |                                                    |
+
 
 ## 美化性插件
 
-```
-github theme
-Comment Formula
-Error Lens
-Material Icon Theme
-Better Comments
-Highlight Line
-Log File Highlighter
-Comment Anchors
-```
+| 插件名               | 功能                              |
+| -------------------- | --------------------------------- |
+| github theme         |                                   |
+| Comment Formula      | 使得可以带注释中渲染显示latex公式 |
+| Error Lens           | 错误提示增强                      |
+| Material Icon Theme  | 文件类型图标增强                  |
+| Better Comments      |                                   |
+| Highlight Line       | 鼠标所在行高亮显示                |
+| Log File Highlighter |                                   |
+| Comment Anchors      |                                   |
 
 ## 参考
 
