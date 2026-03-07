@@ -95,15 +95,15 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
 9. $(\forall A \in \mathcal{F}, \int_{A} f d\mu \geq 0) \implies f \geq 0$ a.e.
 10. 设$f,g$为广义实值函数，且$f+g$有定义，则$(f+g)^+\leq f^+ + g^+, (f+g)^- \leq f^- + g^-$
 11. 设$f,g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分都存在，则
-12. （齐次性 homogeneity）$\int c f d\mu = c \int f d\mu, \forall c \in \mathbb{R}$
-13. （线性性 linearity）若$\int f d\mu + \int g d\mu$有意义， 则 $f+g$ a.e. 有定义，且$f+g$的积分存在，且$\int (f+g) d\mu = \int f d\mu + \int g d\mu$
-14. （单调性 monotonicity）若$f \leq g$ a.e.，则$\int f d\mu \leq \int g d\mu$
-15. $\int 1 d\mu = \mu(\Omega)$
-16. 若实值函数$f$能表示成$f=\sum_{i=1}^{\infty} a_i I_{A_i}$的形式，其中$a_i \in \mathbb{R}$，$\{A_i, i\geq 1\} \subsetneq \mathcal{F}$为$\Omega$的一个划分，那么称$f$为初等函数。有以下三个结论
-17. $f$是可测函数
-18. 若$f$的积分存在，则$\int f d\mu = \sum_{i=1}^{\infty} a_i \mu(A_i)$
-19. $f$可积 等价于 $\sum_{i=1}^{\infty} |a_i| \mu(A_i) < +\infty$
-20. 设$f$为a.e. 有限的广义实值可测函数，且$\mu$为有限测度，则以下三条等价
-21. $f$可积
-22. $\sum_{i=1}^{\infty} n \mu(n \leq |f| < n+1) < +\infty$
-23. $\sum_{i=1}^{\infty} \mu(|f| \geq n) < +\infty$
+    - （齐次性 homogeneity）$\int c f d\mu = c \int f d\mu, \forall c \in \mathbb{R}$
+    - （线性性 linearity）若$\int f d\mu + \int g d\mu$有意义， 则 $f+g$ a.e. 有定义，且$f+g$的积分存在，且$\int (f+g) d\mu = \int f d\mu + \int g d\mu$
+    - （单调性 monotonicity）若$f \leq g$ a.e.，则$\int f d\mu \leq \int g d\mu$
+12. $\int 1 d\mu = \mu(\Omega)$
+13. 若实值函数$f$能表示成$f=\sum_{i=1}^{\infty} a_i I_{A_i}$的形式，其中$a_i \in \mathbb{R}$，$\{A_i, i\geq 1\} \subsetneq \mathcal{F}$为$\Omega$的一个划分，那么称$f$为初等函数。有以下三个结论
+    - $f$是可测函数
+    - 若$f$的积分存在，则$\int f d\mu = \sum_{i=1}^{\infty} a_i \mu(A_i)$
+    - $f$可积 等价于 $\sum_{i=1}^{\infty} |a_i| \mu(A_i) < +\infty$
+14. 设$f$为a.e. 有限的广义实值可测函数，且$\mu$为有限测度，则以下三条等价
+    - $f$可积
+    - $\sum_{i=1}^{\infty} n \mu(n \leq |f| < n+1) < +\infty$
+    - $\sum_{i=1}^{\infty} \mu(|f| \geq n) < +\infty$

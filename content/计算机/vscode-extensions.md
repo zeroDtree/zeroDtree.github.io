@@ -2,9 +2,8 @@
 title: vscode 插件
 ---
 
-
-
 ## 功能性插件
+
 | 插件名                                           | 功能                                               |
 | ------------------------------------------------ | -------------------------------------------------- |
 | black formatter                                  | python 代码格式化                                  |
@@ -29,7 +28,6 @@ title: vscode 插件
 | Even Better TOML                                 | toml 高亮与格式化                                  |
 | OAI Compatible Provider for Copilot              | 使得copilot支持openai兼容的大模型api，例如deepseek |
 | JavaScript and TypeScript Nightly                |                                                    |
-
 
 ## 美化性插件
 
