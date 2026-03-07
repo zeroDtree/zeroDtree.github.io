@@ -35,7 +35,7 @@ title: vscode 插件
 | 插件名               | 功能                              |
 | -------------------- | --------------------------------- |
 | github theme         |                                   |
-| Comment Formula      | 使得可以带注释中渲染显示latex公式 |
+| Comment Formula      | 使得可以在注释中渲染显示latex公式 |
 | Error Lens           | 错误提示增强                      |
 | Material Icon Theme  | 文件类型图标增强                  |
 | Better Comments      |                                   |
