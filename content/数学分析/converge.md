@@ -12,7 +12,7 @@ $\overline{\mathbb{R}}=\mathbb{R} \cup \{-\infty, +\infty\}$
 
 $\mathbb{Z}_{\geq m} = \{n \in \mathbb{Z} \mid n \geq m\}$
 
-以下若没有额外说明，则默认$a_n \in \overline{\mathbb{R}}$
+以下若没有额外说明，则默认$a_n, b_n, c_n \in \overline{\mathbb{R}}$
 
 **序列(数列)**：称$(a_n)_{n\geq m}$为数列，其中$a_n$为数列的项，$m\in \mathbb{Z}$
 

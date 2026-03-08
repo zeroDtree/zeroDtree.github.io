@@ -4,11 +4,6 @@ title: sequence, series, function
 
 ## Prerequisites
 
-- [[数学分析/metric-space]]
-- [[点集拓扑/拓扑空间]]
--
-- [[数学分析/series]]
-
 ## Definition
 
 If there is no additional explanation and the sequence is not in a field, it is assumed that the sequence is in the metric space.
