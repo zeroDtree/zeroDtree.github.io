@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "朴素集合论/初等数论.md",
+                "file": "测度论与概率论/三大积分收敛定理.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "初等数论"
+              "title": "三大积分收敛定理"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "朴素集合论/初等数论.md",
+                "file": "测度论与概率论/三大积分收敛定理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 初等数论"
+              "title": "Backlinks for 三大积分收敛定理"
             }
           },
           {
@@ -182,21 +182,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "8be1210d78354341",
+  "active": "1d263398c86b3663",
   "lastOpenFiles": [
+    "测度论与概率论/Lebesgue-integral.md",
+    "抽象代数/Galois.md",
     "测度论与概率论/三大积分收敛定理.md",
+    "朴素集合论/初等数论.md",
     "朴素集合论/zorn_lemma.md",
     "朴素集合论/naive-set-theory-2.md",
     "朴素集合论/naive-set-theory-1.md",
     "朴素集合论/index.md",
     "朴素集合论/dependency_graph.md",
-    "朴素集合论/初等数论.md",
     "数学分析/converge.md",
     "数学分析/index.md",
     "数学分析/funct-limit.md",
     "数学分析/级数.md",
     "数学分析/real-number.md",
-    "测度论与概率论/Lebesgue-integral.md",
     "杂/complex-seq-series.md",
     "数学分析/series.md",
     "数学分析/非负级数.md",
@@ -208,7 +209,6 @@
     "测度论与概率论/measurable-func.md",
     "测度论与概率论/measurable-mapping.md",
     "机器学习/pytorch/accelerator.md",
-    "故事/index.md",
-    "故事/dependency_graph.md"
+    "故事/index.md"
   ]
 }
