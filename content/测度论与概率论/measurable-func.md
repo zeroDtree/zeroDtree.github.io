@@ -51,7 +51,7 @@ title: 可测函数
     - $\mathbf{f}\in \mathcal{F}/\mathcal{B}(\mathbb{R}^d) \iff f_i \in \mathcal{F}/\mathcal{B}(\mathbb{R}),\forall i \in [d]$
 8.  复值可测函数
     - $\mathbf{f}:\Omega \to \mathbb{C}$,$\mathbf{f}=Re\mathbf{f}+iIm\mathbf{f}$, 则$\mathcal{f}\in \mathcal{F}/\mathcal{B}(\mathbb{C}) \iff Re\mathbf{f},Im\mathbf{f}\in \mathcal{F}/\mathcal{B}(\mathbb{R})$
-9.  简单可测函数加减仍未简单可测函数
+9.  简单可测函数加减仍为简单可测函数
     - $f,g\in S(\Omega, \mathcal{F}) \implies f+g\in S(\Omega, \mathcal{F})$
 10. 设$(\Omega, \mathcal{F})$为可测空间，$f:\Omega \to \overline{\mathbb{R}}$,则：
     - 若$f$非负可测，则存在$\{f_n,n\geq 1\} \subseteq S^+(\Omega, \mathcal{F})$，使得$f_n \uparrow f$
