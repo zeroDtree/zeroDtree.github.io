@@ -58,6 +58,28 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
   $$\underline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x) = \overline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x),$$
   则称 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ Riemann-Stieltjes 可积，简称 **R-S 可积**，并称此共同值为 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 的 **R-S 积分**，记为 $(\text{R-S}) \int_\mathbf{a}^\mathbf{b} g(x) \mathrm{d} F(x)$, 其中 $g$ 称为**被积函数** (integrand), $F$ 称为**积分函数** (integrator).
 
+## 反常R-积分
+
+### 7.4.3 反常 R-S 积分
+
+当 $g$ 在 $\mathbb{R}^d$ 上 L 可积时,
+
+$$(\mathrm{L}) \int_{\mathbb{R}^d} g(x) \mathrm{d} x = \lim_{\mathbf{a} \to -\infty, \mathbf{b} \to \infty} (\mathrm{L}) \int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} x,$$
+
+但需要注意的是, 上式成立的根据是控制收敛定理.
+
+与 L 积分不同的是, $\mathbb{R}^d$ 上的 R 积分不能用分割的方法来定义
+
+下面定义**反常 R-S 积分**.
+
+设 $g$ 是定义在 $\mathbb{R}^d$ 上的实值函数, 若对任意的 $(\mathbf{a}, \mathbf{b}] \subset \mathbb{R}^d$, (R-S) $\int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} F(x)$ 都存在, 且
+
+$$\lim_{\mathbf{a} \to -\infty, \mathbf{b} \to \infty} (\text{R-S}) \int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} F(x)$$
+
+存在, 则称此极限为 $g$ 在 $\mathbb{R}^d$ 上关于 $F$ 的 R-S 积分, 记作 (R-S) $\int_{-\infty}^{\infty} g(x) \mathrm{d} F(x)$.
+
+若此积分为一实数, 则进一步称 $g$ 在 $\mathbb{R}^d$ 上关于 $F$ R-S 可积.
+
 ## 3. 性质
 
 1. 设 r.v. $X \sim F(x)$, 则对任意的 Borel 可测函数 $g$, 若 $g(X)$ 可积, 则 $$\mathrm{E}g(X) = (\text{L-S}) \int_{-\infty}^{\infty} g(x) \mathrm{d}F(x).$$
@@ -84,9 +106,11 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
 9. 若 $g$ 在 $(a, b]$ 上单调有界，则 $g$ 在 $(a, b]$ 上 R 可积。
 10. 若 $g$ 在 $(a, b]$ 上有界，且不连续点的个数至多可数，则 $g$ 在 $(a, b]$ 上 R 可积。
 11. 若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 R 可积，则
-   (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 L 可积；
-   (ii) (L) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x = \text{(R)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x$.
+    (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 L 可积；
+    (ii) (L) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x = \text{(R)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x$.
 12. L可积不一定R可积分，考虑狄利克雷函数。
 13. 设 $F$ 是 $\mathbb{R}$ 上的 L-S 函数，若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ R-S 可积，则
-   (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ L-S 可积；
-   (ii) (L-S) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x) = \text{(R-S)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x)$.
+    (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ L-S 可积；
+    (ii) (L-S) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x) = \text{(R-S)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x)$.
+14. 设连续函数 $g$ 在 $\mathbb{R}^d$ 上关于 $F$ L-S 可积，则 $g$ 在 $\mathbb{R}^d$ 上关于 $F$ R-S 可积，且
+    $$(\text{L-S}) \int_{-\infty}^{\infty} g(x) \mathrm{d}F(x) = (\text{R-S}) \int_{-\infty}^{\infty} g(x) \mathrm{d}F(x).$$
