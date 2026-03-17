@@ -2,64 +2,60 @@
 title: agent
 ---
 
-- [1. 概念](#1-概念)
-- [2. 提示词的组织方式](#2-提示词的组织方式)
-- [3. 解释器](#3-解释器)
+- [1. 核心概念](#1-核心概念)
+- [2. 提示词 (Prompt) 组织架构](#2-提示词-prompt-组织架构)
+- [3. 编程语言嵌入 (Template Engine)](#3-编程语言嵌入-template-engine)
 
-## 1. 概念
+## 1. 核心概念
 
-- LLM：Agent 的“大脑”，负责文本生成
-- Function Call / Tool（函数调用/工具调用）：LLM输出某种格式的函数调用文本，agent将文本转化为函数调用，使得LLM能够与外部环境交互。
-- MCP：工具调用规范
-
----
-
-- State：存储LLM的记忆与状态
-- Graph：
-  - Node：
-    - LLM：Node
-    - Tool：Node
-  - Route：
-    - Hard Route: 基于条件的硬编码跳转。
-    - Soft Route: 由 LLM 根据当前状态（State）决定下一个跳转的 Node。
-- Subgraph
+- **LLM (Large Language Model)**：Agent 的“控制中心（Controller）”，负责逻辑推理、意图识别与文本生成。
+- **Function Call / Tool Use**：一种连接机制。LLM 输出结构化指令（如 JSON），由宿主环境转化为具体的函数执行，使 LLM 具备操作外部世界的能力。
+- **MCP (Model Context Protocol)**：由 Anthropic 发起的标准化工具调用与数据交互协议，旨在消除不同工具间的集成壁垒。
 
 ---
 
-- Skill：针对特定业务目标封装的一套逻辑闭环。
-  - Soft Skill(Declarative Skill)
-    - 表现形式：一份详尽的 SOP（标准作业程序） 文档、一段 System Prompt，或者是一个带有丰富元数据的 README。
-  - 核心逻辑：通过文档告诉 LLM：“如果你要完成某件事，你应该第一步做什么，第二步做什么，注意哪些禁忌。”
-    - 运行方式：LLM 阅读这些文档，凭借自身的推理能力（Zero-shot 或 Few-shot）在脑中实时构建执行路径。
-  - Hard Skill(Procedural Skill)
-    - 表现形式：一个封装好的 Subgraph（子图）。它有明确的代码、节点（Node）定义和连线（Route）逻辑。
-  - 核心逻辑：将复杂的“事”拆解为一个个确定的步骤，并用程序逻辑固定下来。
-  - 运行方式：Agent 像调用函数一样进入这个子图，严格按照定义的拓扑结构运行。
+- **State (状态机)**：持久化存储 Agent 的长短期记忆、执行上下文及变量状态。
+- **Graph (拓扑图)**：
+  - **Node (节点)**：执行单元。可以是 **LLM 节点**（决策/生成）或 **Tool 节点**（执行/计算）。
+  - **Edge / Route (路由)**：
+    - **Hard Route (静态路由)**：基于预设条件（如 `if/else` 或状态码）的确定性跳转。
+    - **Soft Route (动态路由)**：由 LLM 充当“路由器”，根据当前 State 语义化决定下一个目标节点。
+- **Subgraph (子图)**：逻辑封装单元。将复杂的局部流程抽象为一个独立节点，实现架构的模块化与复用。
 
 ---
 
-## 2. 提示词的组织方式
-
-- Message
-  - System Message
-  - User Message
-  - AI Message
-- Prompt：Message序列
-- Preset：给LLM的一个常驻prompt。其他类型的提示词最终都会被组织（or注入）到这个prompt里。
-  preset一般Agent 的“核心人格”与“底层逻辑”。包含全局 MCP 规范、回复格式要求（如：必须输出 JSON）以及当前 Agent 的基本背景。
-- Chat: 一个聊天会话，由若干有顺序的Message组成。
-- LoreBook：给LLM的一个临时prompt。触发一定的条件后会被自动注入到preset中
-  常用Soft Skill 的动态加载。
-- Character Card: 解决特定需求的agent的逻辑实体，一个Character可以绑定若干Lorebook。按理来说一个Character也要能绑定Skill。
+- **Skill (技能)**：针对特定业务目标封装的逻辑闭环。
+  - **Soft Skill (Declarative / 声明式技能)**
+    - **表现形式**：详尽的 SOP 文档、System Prompt 或带有元数据的 README。
+    - **核心逻辑**：基于“提示词工程”。通过自然语言告知 LLM 执行步骤、约束条件与目标策略。
+    - **运行方式**：LLM 依靠上下文理解能力（In-context Learning）在运行时动态构建执行路径。
+  - **Hard Skill (Procedural / 过程式技能)**
+    - **表现形式**：封装好的 **Subgraph**。拥有明确的代码逻辑、节点定义与拓扑连线。
+    - **核心逻辑**：基于“工作流工程”。将复杂任务拆解为高可靠性的确定性步骤。
+    - **运行方式**：Agent 以调用子程序的方式进入子图，严格遵循定义的拓扑结构执行。
 
 ---
 
-## 3. 解释器
+## 2. 提示词 (Prompt) 组织架构
 
-为了更灵活地操作prompt
+- **Message (消息)**：最小交互单元，包含 `System` (系统级指令)、`User` (用户输入)、`Assistant` (AI 响应) 及 `Tool` (工具返回)。
+- **Prompt (提示词)**：有序的 Message 序列，构成模型理解任务的基准。
+- **Preset (预置指令)**：Agent 的“元配置”。定义核心人格、全局 MCP 规范、输出约束（如 JSON 强制格式）及底层逻辑。
+- **Chat (会话)**：由时间序排列的 Message 组成的上下文窗口（Context Window）。
+- **LoreBook (知识书/规则书)**：**动态上下文注入机制**。
+  - 触发式加载：当用户输入命中关键词或特定场景时，自动将相关 Prompt 片段注入 Preset 或当前 Context。
+  - 用途：实现 Soft Skill 的按需加载，节省上下文 Token。
+- **Character Card (角色卡)**：Agent 的逻辑实体。一个角色可挂载多个 LoreBook 和 Skill（包括子图形式的 Hard Skill），形成完备的能力画像。
 
-规定一种转义字符，用于切换工作模式，例如由`#`引导进入脚本模式，（类似于typst）
+---
 
-初始状态是文本模式，在遇到`#{}`执行其中的代码，代码的结果被嵌入到文本中。
+## 3. 编程语言嵌入 (Template Engine)
 
-因此需要一个解释器。
+为了实现 Prompt 的高度动态化与逻辑控制，引入插值脚本机制：
+
+- **转义机制**：采用 `#{ }` 作为脚本引导符，实现从“静态文本模式”向“逻辑执行模式”的切换。
+- **嵌入逻辑**：
+  - **初始状态**：文本模式（Raw String）。
+  - **执行状态**：遇到 `#{ script }` 时，解释器执行其中的代码（如条件判断、循环、变量取值）。
+  - **渲染产物**：脚本执行的最终返回值将被序列化并替换回原文本位置。
+- **实现方案**：需配备轻量级解释器/编译器，支持在 Prompt 渲染阶段实时处理业务逻辑。
