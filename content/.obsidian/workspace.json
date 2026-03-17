@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2a3bd3424a02cb8d",
+        "id": "6c29206168610db6",
         "type": "tabs",
         "children": [
           {
-            "id": "ded0cba3e75defb7",
+            "id": "ad3560f0ae756ab3",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "故事/安全.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "安全"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "故事/安全.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 安全"
             }
           },
           {
@@ -177,33 +182,33 @@
       "bases:Create new base": false
     }
   },
-  "active": "8be1210d78354341",
+  "active": "ad3560f0ae756ab3",
   "lastOpenFiles": [
-    "测度论与概率论/dependency_graph.md",
-    "数学分析/dependency_graph.md",
-    "数学分析/complex-number.md",
-    "数学分析/real-number.md",
-    "故事/不妨.md",
-    "故事/dependency_graph.md",
-    "测度论与概率论/almost-everywhere.md",
-    "故事/税.md",
-    "故事/性脚本.md",
-    "故事/神圣叙事.md",
-    "2026-03-17.md",
-    "机器学习/pytorch/shape.md",
-    "测度论与概率论/Stieltjes_integral.md",
-    "数学分析/实数构造/实数.md",
-    "故事/实践理性批判.md",
-    "故事/性爱.md",
     "故事/安全与道德.md",
-    "故事/固执.md",
-    "故事/安全.md",
+    "故事/实践理性批判.md",
     "故事/小孩理发.md",
-    "故事/顺其自然.md",
-    "故事/这样那样.md",
-    "故事/资本.md",
-    "故事/货币.md",
+    "故事/性别与权利.md",
+    "故事/性脚本.md",
+    "故事/房价.md",
+    "故事/拥有.md",
+    "故事/时间.md",
+    "故事/梦.md",
+    "故事/潮汐.md",
+    "故事/爱.md",
+    "故事/爱与幸福.md",
+    "故事/番茄架下春光现.md",
+    "故事/神圣叙事.md",
+    "故事/税.md",
+    "故事/纯粹理性批判.md",
     "故事/经济基础与上层建筑.md",
-    "故事/纯粹理性批判.md"
+    "故事/货币.md",
+    "故事/dependency_graph.md",
+    "故事/安全.md",
+    "故事/固执.md",
+    "故事/判断力批判.md",
+    "故事/你变了.md",
+    "故事/价格.md",
+    "故事/index.md",
+    "故事/不妨.md"
   ]
 }
