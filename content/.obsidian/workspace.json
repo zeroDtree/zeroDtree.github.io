@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "e2b36591a3aa14ed",
+        "id": "2a3bd3424a02cb8d",
         "type": "tabs",
         "children": [
           {
-            "id": "ae47d8a9b8dc5042",
+            "id": "ded0cba3e75defb7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "故事/不妨.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "不妨"
+              "title": "New tab"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "故事/不妨.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 不妨"
+              "title": "Backlinks"
             }
           },
           {
@@ -184,6 +179,11 @@
   },
   "active": "8be1210d78354341",
   "lastOpenFiles": [
+    "测度论与概率论/dependency_graph.md",
+    "数学分析/dependency_graph.md",
+    "数学分析/complex-number.md",
+    "数学分析/real-number.md",
+    "故事/不妨.md",
     "故事/dependency_graph.md",
     "测度论与概率论/almost-everywhere.md",
     "故事/税.md",
@@ -192,10 +192,7 @@
     "2026-03-17.md",
     "机器学习/pytorch/shape.md",
     "测度论与概率论/Stieltjes_integral.md",
-    "数学分析/real-number.md",
-    "数学分析/dependency_graph.md",
     "数学分析/实数构造/实数.md",
-    "数学分析/complex-number.md",
     "故事/实践理性批判.md",
     "故事/性爱.md",
     "故事/安全与道德.md",
@@ -207,8 +204,6 @@
     "故事/资本.md",
     "故事/货币.md",
     "故事/经济基础与上层建筑.md",
-    "故事/纯粹理性批判.md",
-    "故事/番茄架下春光现.md",
-    "故事/男人与女人.md"
+    "故事/纯粹理性批判.md"
   ]
 }

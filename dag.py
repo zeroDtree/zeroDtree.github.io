@@ -97,7 +97,9 @@ class DAGMermiad:
                 name_id = count
                 count += 1
                 name_to_id[filepath] = name_id
-            for reference, _ in reference_list:
+            for reference, link_type in reference_list:
+                if link_type == "include":
+                    continue
                 reference_id = name_to_id.get(reference, None)
                 if reference_id is None:
                     reference_id = count
@@ -106,8 +108,9 @@ class DAGMermiad:
 
         for filepath, reference_list in dependencies_dict.items():
             for reference, link_type in reference_list:
-                edge = "-.->" if link_type == "include" else "-->"
-                result_str += f'{name_to_id[reference]}["{reference}"] {edge} {name_to_id[filepath]}["{filepath}"]\n'
+                if link_type == "include":
+                    continue
+                result_str += f'{name_to_id[reference]}["{reference}"] --> {name_to_id[filepath]}["{filepath}"]\n'
         result_str += "```"
         return result_str
 
@@ -142,6 +145,9 @@ class DAGMermiad:
         for filepath, dep_list in dependencies_dict.items():
             reduced_deps = []
             for ref, link_type in dep_list:
+                if link_type == "include":
+                    reduced_deps.append((ref, link_type))
+                    continue
                 reachable = reachable_excluding(filepath, ref)
                 if ref not in reachable:
                     reduced_deps.append((ref, link_type))
