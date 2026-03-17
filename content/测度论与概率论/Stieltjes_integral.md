@@ -76,3 +76,8 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
 3. (关于积分区间具有可加性) 设$\mathbf{a}, \mathbf{b},\mathbf{c} \in \mathbb{R}^1$，设 $\mathbf{c} \in (\mathbf{a}, \mathbf{b}), g$ 在 $(\mathbf{a}, \mathbf{c}]$ 及 $(\mathbf{c}, \mathbf{b}]$ 上都关于 $F$ R-S 可积, 则 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 也 R-S 可积, 且
 
    $$(\text{R-S}) \int_\mathbf{a}^\mathbf{b} g(x) \mathrm{d} F(x) = (\text{R-S}) \int_\mathbf{a}^\mathbf{c} g(x) \mathrm{d} F(x) + (\text{R-S}) \int_\mathbf{c}^\mathbf{b} g(x) \mathrm{d} F(x) .$$
+
+4. 多维 R-S 积分的可加性: 区域剖分设超矩形 $I = (\mathbf{a}, \mathbf{b}] = \prod_{i=1}^d (a_i, b_i]$ 被一个垂直于第 $k$ 个坐标轴的超平面 $x_k = c_k$（其中 $a_k < c_k < b_k$）划分为两个互不相交的超矩形 $I_1$ 和 $I_2$：$I_1 = (a_1, b_1] \times \dots \times (a_k, c_k] \times \dots \times (a_d, b_d]$,$I_2 = (a_1, b_1] \times \dots \times (c_k, b_k] \times \dots \times (a_d, b_d]$，此时显然有 $I = I_1 \cup I_2$ 且 $I_1 \cap I_2 = \emptyset$。$g$ 是定义在 $I$ 上的有界函数。若 $g$ 在 $I_1$ 和 $I_2$ 上关于 $F$ 均 R-S 可积，则 $g$ 在 $I$ 上也关于 $F$ R-S 可积，且：$$\int_{I} g(\mathbf{x}) \mathrm{d} F(\mathbf{x}) = \int_{I_1} g(\mathbf{x}) \mathrm{d} F(\mathbf{x}) + \int_{I_2} g(\mathbf{x}) \mathrm{d} F(\mathbf{x})$$
+
+5. $g$ 在 $(\mathbf{a},\mathbf{b}]$ 上关于 $F$ R-S 可积当且仅当 $\forall\varepsilon > 0$, 存在 $(\mathbf{a},\mathbf{b}]$ 的一个分割 $\mathbb{P}$, 使得
+  $$u(g, F, \mathbb{P}) - l(g, F, \mathbb{P}) < \varepsilon.$$
