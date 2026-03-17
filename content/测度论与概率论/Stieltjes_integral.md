@@ -2,6 +2,14 @@
 title: Stieltjes积分
 ---
 
+- [1. 前置](#1-前置)
+- [2. 定义](#2-定义)
+  - [2.1. L-S 积分](#21-l-s-积分)
+  - [2.2. R-S 积分](#22-r-s-积分)
+  - [2.3. 反常R-积分](#23-反常r-积分)
+- [3. 性质](#3-性质)
+
+
 ## 1. 前置
 
 - [[测度论与概率论/三大积分收敛定理]]
@@ -58,9 +66,7 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
   $$\underline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x) = \overline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x),$$
   则称 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ Riemann-Stieltjes 可积，简称 **R-S 可积**，并称此共同值为 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 的 **R-S 积分**，记为 $(\text{R-S}) \int_\mathbf{a}^\mathbf{b} g(x) \mathrm{d} F(x)$, 其中 $g$ 称为**被积函数** (integrand), $F$ 称为**积分函数** (integrator).
 
-## 反常R-积分
-
-### 7.4.3 反常 R-S 积分
+### 2.3. 反常R-积分
 
 当 $g$ 在 $\mathbb{R}^d$ 上 L 可积时,
 
