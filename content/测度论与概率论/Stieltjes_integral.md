@@ -83,3 +83,10 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
 8. $g$ 在 $(\mathbf{a},\mathbf{b}]$ 上 R 可积当且仅当 $g$ 关于 L 测度 $\lambda$ 几乎处处连续。(不连续点为零测集)
 9. 若 $g$ 在 $(a, b]$ 上单调有界，则 $g$ 在 $(a, b]$ 上 R 可积。
 10. 若 $g$ 在 $(a, b]$ 上有界，且不连续点的个数至多可数，则 $g$ 在 $(a, b]$ 上 R 可积。
+11. 若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 R 可积，则
+   (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 L 可积；
+   (ii) (L) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x = \text{(R)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x$.
+12. L可积不一定R可积分，考虑狄利克雷函数。
+13. 设 $F$ 是 $\mathbb{R}$ 上的 L-S 函数，若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ R-S 可积，则
+   (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ L-S 可积；
+   (ii) (L-S) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x) = \text{(R-S)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}F(x)$.
