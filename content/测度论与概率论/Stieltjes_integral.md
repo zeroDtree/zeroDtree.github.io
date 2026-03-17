@@ -2,13 +2,13 @@
 title: Stieltjes积分
 ---
 
-## 前置
+## 1. 前置
 
 - [[测度论与概率论/三大积分收敛定理]]
 
-## 定义
+## 2. 定义
 
-### L-S 积分
+### 2.1. L-S 积分
 
 设 $F$ 是 $\mathbb{R}^d$ 上的 L-S 函数，$\mu_F$ 是由 $F$ 诱导的 L-S 测度，$g$ 是 Borel 可测函数，若
 
@@ -25,7 +25,7 @@ $$(\text{L}) \int_{\mathbb{R}^d} g(\boldsymbol{x}) \mathrm{d} \boldsymbol{x} := 
 - 当 $d=1, a, b \in \mathbb{R}, a < b$ 时，通常将 $(\text{L-S}) \displaystyle \int_{(a, b]} g(x) \mathrm{d} \mu_F(x)$ 写成 $\displaystyle \int_a^b g(x) \mathrm{d} F(x)$。
 - 当 $d=1, a, b \in \mathbb{R}, a < b$ 时，通常将 $(\text{L}) \displaystyle \int_{(a, b]} g(x) \mathrm{d} x$ 写成 $\displaystyle \int_a^b g(x) \mathrm{d} x$。因为单点集的 L 测度为 0，所以还可以把 $\displaystyle \int_a^b g(x) \mathrm{d} x$ 理解为 $\displaystyle \int_{[a, b]} g(x) \mathrm{d} x, \int_{[a, b)} g(x) \mathrm{d} x$ 或 $\displaystyle \int_{(a, b)} g(x) \mathrm{d} x$。
 
-### R-S 积分
+### 2.2. R-S 积分
 
 本段恒设 $g:(\mathbf{a}, \mathbf{b}] \to \mathbb{R}$ 为有界函数，$F:(\mathbf{a}, \mathbf{b}] \to \mathbb{R}$为Lebesgue-Stieltjes函数（L-S函数）。
 
@@ -58,7 +58,7 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
   $$\underline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x) = \overline{\int_\mathbf{a}^\mathbf{b}} g(x) \mathrm{d} F(x),$$
   则称 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ Riemann-Stieltjes 可积，简称 **R-S 可积**，并称此共同值为 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 的 **R-S 积分**，记为 $(\text{R-S}) \int_\mathbf{a}^\mathbf{b} g(x) \mathrm{d} F(x)$, 其中 $g$ 称为**被积函数** (integrand), $F$ 称为**积分函数** (integrator).
 
-## 性质
+## 3. 性质
 
 1. 设 r.v. $X \sim F(x)$, 则对任意的 Borel 可测函数 $g$, 若 $g(X)$ 可积, 则 $$\mathrm{E}g(X) = (\text{L-S}) \int_{-\infty}^{\infty} g(x) \mathrm{d}F(x).$$
 2. 设 $g, h : (\mathbf{a}, \mathbf{b}] \to \mathbb{R}$ 都是有界函数，且在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 都 R-S 可积，则
@@ -74,10 +74,12 @@ $$l(g, F, \mathbb{P}_1) \leqslant l(g, F, \mathbb{P}_2), \quad u(g, F, \mathbb{P
    (iii) (单调性) $g \leqslant h \Rightarrow (\text{R-S}) \int_a^b g(x) \mathrm{d} F(x) \leqslant (\text{R-S}) \int_a^b h(x) \mathrm{d} F(x).$
 
 3. (关于积分区间具有可加性) 设$\mathbf{a}, \mathbf{b},\mathbf{c} \in \mathbb{R}^1$，设 $\mathbf{c} \in (\mathbf{a}, \mathbf{b}), g$ 在 $(\mathbf{a}, \mathbf{c}]$ 及 $(\mathbf{c}, \mathbf{b}]$ 上都关于 $F$ R-S 可积, 则 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上关于 $F$ 也 R-S 可积, 且
-
    $$(\text{R-S}) \int_\mathbf{a}^\mathbf{b} g(x) \mathrm{d} F(x) = (\text{R-S}) \int_\mathbf{a}^\mathbf{c} g(x) \mathrm{d} F(x) + (\text{R-S}) \int_\mathbf{c}^\mathbf{b} g(x) \mathrm{d} F(x) .$$
-
 4. 多维 R-S 积分的可加性: 区域剖分设超矩形 $I = (\mathbf{a}, \mathbf{b}] = \prod_{i=1}^d (a_i, b_i]$ 被一个垂直于第 $k$ 个坐标轴的超平面 $x_k = c_k$（其中 $a_k < c_k < b_k$）划分为两个互不相交的超矩形 $I_1$ 和 $I_2$：$I_1 = (a_1, b_1] \times \dots \times (a_k, c_k] \times \dots \times (a_d, b_d]$,$I_2 = (a_1, b_1] \times \dots \times (c_k, b_k] \times \dots \times (a_d, b_d]$，此时显然有 $I = I_1 \cup I_2$ 且 $I_1 \cap I_2 = \emptyset$。$g$ 是定义在 $I$ 上的有界函数。若 $g$ 在 $I_1$ 和 $I_2$ 上关于 $F$ 均 R-S 可积，则 $g$ 在 $I$ 上也关于 $F$ R-S 可积，且：$$\int_{I} g(\mathbf{x}) \mathrm{d} F(\mathbf{x}) = \int_{I_1} g(\mathbf{x}) \mathrm{d} F(\mathbf{x}) + \int_{I_2} g(\mathbf{x}) \mathrm{d} F(\mathbf{x})$$
-
 5. $g$ 在 $(\mathbf{a},\mathbf{b}]$ 上关于 $F$ R-S 可积当且仅当 $\forall\varepsilon > 0$, 存在 $(\mathbf{a},\mathbf{b}]$ 的一个分割 $\mathbb{P}$, 使得
-  $$u(g, F, \mathbb{P}) - l(g, F, \mathbb{P}) < \varepsilon.$$
+   $$u(g, F, \mathbb{P}) - l(g, F, \mathbb{P}) < \varepsilon.$$
+6. 若 $g$ 在 $(a, b]$ 上连续，$F$ 在 $(a, b]$ 上单调不减，则 $g$ 在 $(a, b]$ 关于 $F$ R-S 可积。
+7. 若 $g$ 在 $(a, b]$ 上单调，$F$ 在 $(a, b]$ 上单调不减且连续，则 $g$ 在 $(a, b]$ 关于 $F$ R-S 可积。
+8. $g$ 在 $(\mathbf{a},\mathbf{b}]$ 上 R 可积当且仅当 $g$ 关于 L 测度 $\lambda$ 几乎处处连续。(不连续点为零测集)
+9. 若 $g$ 在 $(a, b]$ 上单调有界，则 $g$ 在 $(a, b]$ 上 R 可积。
+10. 若 $g$ 在 $(a, b]$ 上有界，且不连续点的个数至多可数，则 $g$ 在 $(a, b]$ 上 R 可积。
