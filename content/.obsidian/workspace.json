@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "故事/税.md",
-                "mode": "source",
+                "file": "测度论与概率论/Stieltjes_integral.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "税"
+              "title": "Stieltjes_integral"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "故事/税.md",
+                "file": "测度论与概率论/Stieltjes_integral.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 税"
+              "title": "Backlinks for Stieltjes_integral"
             }
           },
           {
@@ -184,6 +184,10 @@
   },
   "active": "5d0fc77e9c4e24e6",
   "lastOpenFiles": [
+    "杂/complex-seq-series.md",
+    "杂/dependency_graph.md",
+    "故事/小孩理发.md",
+    "故事/税.md",
     "故事/神圣叙事.md",
     "故事/纯粹理性批判.md",
     "故事/你变了.md",
@@ -201,14 +205,10 @@
     "测度论与概率论/Borel-R.md",
     "测度论与概率论/dependency_graph.md",
     "测度论与概率论/Stieltjes_integral.md",
-    "故事/小孩理发.md",
     "故事/性别与权利.md",
     "故事/性脚本.md",
     "故事/房价.md",
     "故事/拥有.md",
-    "故事/时间.md",
-    "故事/梦.md",
-    "故事/潮汐.md",
-    "故事/爱.md"
+    "故事/时间.md"
   ]
 }
