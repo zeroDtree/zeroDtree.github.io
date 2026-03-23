@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Optional
 
 
 class DAGMermiad:
@@ -8,7 +8,7 @@ class DAGMermiad:
         self.pattern = r"(?:!)?\[\[(?![^\]]*\.(?:png|jpg|jpeg|gif|svg|webp))[^\]]*\]\]"
         self.ignore_filepaths = ["content/index.md", "content/dependency_graph.md"]
 
-    def find_subdirectories(self, base_dir: str) -> List[str]:
+    def find_subdirectories(self, base_dir: str) -> list[str]:
         """找到所有包含 .md 文件的子目录"""
         subdirs = []
         base_path = Path(base_dir)
@@ -19,7 +19,7 @@ class DAGMermiad:
                     subdirs.append(str(item))
         return subdirs
 
-    def filter_files_by_directory(self, filepath_list: List[str], dir_path: str) -> List[str]:
+    def filter_files_by_directory(self, filepath_list: list[str], dir_path: str) -> list[str]:
         """过滤出属于指定目录及其子目录的文件"""
         dir_path_obj = Path(dir_path)
         result = []
@@ -34,12 +34,12 @@ class DAGMermiad:
                 pass
         return result
 
-    def find_all_filepaths(self, dir_path: str) -> List[str]:
+    def find_all_filepaths(self, dir_path: str) -> list[str]:
         """递归查找目录下所有 .md 文件路径"""
         base_path = Path(dir_path)
         return [str(p) for p in base_path.rglob("*.md")]
 
-    def filter_filepaths(self, filepath_list: List[str], pattern: str = None) -> List[str]:
+    def filter_filepaths(self, filepath_list: list[str], pattern: Optional[str] = None) -> list[str]:
         if pattern is None:
             pattern = self.pattern
         result_filepath_list = []
@@ -51,7 +51,7 @@ class DAGMermiad:
                     result_filepath_list.append(filepath)
         return result_filepath_list
 
-    def find_dependencies(self, filepath_list: List[str], pattern: str = None) -> Dict[str, List[str]]:
+    def find_dependencies(self, filepath_list: list[str], pattern: Optional[str] = None) -> dict[str, list[str]]:
         if pattern is None:
             pattern = self.pattern
         result_dict = {}
@@ -69,8 +69,8 @@ class DAGMermiad:
                 result_dict.pop(filepath)
         return result_dict
 
-    def unify_format(self, dependencies_dict: Dict[str, List[str]]) -> Dict[str, List[Tuple[str, str]]]:
-        """统一格式，返回 Dict[filepath, List[(ref_path, link_type)]]，link_type 为 'ref'（普通引用）或 'include'（![[...]] 嵌入）。"""
+    def unify_format(self, dependencies_dict: dict[str, list[str]]) -> dict[str, list[tuple[str, str]]]:
+        """统一格式，返回 dict[filepath, list[(ref_path, link_type)]]，link_type 为 'ref'（普通引用）或 'include'（![[...]] 嵌入）。"""
         result = {}
         for filepath, reference_list in dependencies_dict.items():
             filepath = filepath.replace("content/", "").replace(".md", "")
@@ -85,7 +85,7 @@ class DAGMermiad:
                 result[filepath].append((ref, link_type))
         return result
 
-    def generate_mermaid_graph(self, dependencies_dict: Dict[str, List[Tuple[str, str]]]) -> str:
+    def generate_mermaid_graph(self, dependencies_dict: dict[str, list[tuple[str, str]]]) -> str:
         """生成 Mermaid 图：普通引用 [[...]] 用实线 -->，嵌入 ![[...]] 用虚线 -.->。"""
         result_str = "```mermaid\n"
         result_str += "graph TD\n"
@@ -115,8 +115,8 @@ class DAGMermiad:
         return result_str
 
     def transitive_reduction(
-        self, dependencies_dict: Dict[str, List[Tuple[str, str]]]
-    ) -> Tuple[Dict[str, List[Tuple[str, str]]], List[Tuple[str, str, str]]]:
+        self, dependencies_dict: dict[str, list[tuple[str, str]]]
+    ) -> tuple[dict[str, list[tuple[str, str]]], list[tuple[str, str, str]]]:
         """移除冗余依赖：若A可经由其他路径到达C，则移除A对C的直接依赖。
         例如A依赖B和C，B依赖C，则A对C的直接依赖是冗余的，只保留A→B。
         返回 (精简后的依赖字典, 冗余列表[(filepath_unified, ref_unified, link_type)])。
@@ -125,11 +125,7 @@ class DAGMermiad:
         def reachable_excluding(node: str, exclude_dep: str) -> dict:
             """从node的所有直接依赖（排除exclude_dep）出发DFS，返回 {可达节点: 到达路径}。"""
             visited: dict[str, list] = {}
-            stack = [
-                (dep, [node, dep])
-                for dep, _ in dependencies_dict.get(node, [])
-                if dep != exclude_dep
-            ]
+            stack = [(dep, [node, dep]) for dep, _ in dependencies_dict.get(node, []) if dep != exclude_dep]
             while stack:
                 curr, path = stack.pop()
                 if curr in visited:
@@ -141,7 +137,7 @@ class DAGMermiad:
             return visited
 
         result = {}
-        redundant: List[Tuple[str, str, str]] = []
+        redundant: list[tuple[str, str, str]] = []
         for filepath, dep_list in dependencies_dict.items():
             reduced_deps = []
             for ref, link_type in dep_list:
@@ -158,7 +154,7 @@ class DAGMermiad:
             result[filepath] = reduced_deps
         return result, redundant
 
-    def remove_redundant_from_files(self, redundant_list: List[Tuple[str, str, str]]) -> None:
+    def remove_redundant_from_files(self, redundant_list: list[tuple[str, str, str]]) -> None:
         """从原始 .md 文件中删除冗余的 wikilink 引用。"""
         from collections import defaultdict
 
@@ -174,33 +170,33 @@ class DAGMermiad:
             for ref, link_type in refs_to_remove:
                 escaped = re.escape(ref)
                 if link_type == "include":
-                    pat = r'!\[\[' + escaped + r'(?:#[^\]]*)?]]'
+                    pat = r"!\[\[" + escaped + r"(?:#[^\]]*)?]]"
                 else:
                     # 匹配 [[ref]] 或 [[ref#section]]，但不匹配 ![[ref]]
-                    pat = r'(?<!!)\[\[' + escaped + r'(?:#[^\]]*)?]]'
-                content = re.sub(pat, '', content)
+                    pat = r"(?<!!)\[\[" + escaped + r"(?:#[^\]]*)?]]"
+                content = re.sub(pat, "", content)
 
             # 清理：合并行内多余空格，移除仅含空白的行（保留空行的段落结构）
             lines = content.splitlines()
-            cleaned = [re.sub(r' {2,}', ' ', line).rstrip() for line in lines]
-            content = '\n'.join(cleaned)
-            if not content.endswith('\n'):
-                content += '\n'
+            cleaned = [re.sub(r" {2,}", " ", line).rstrip() for line in lines]
+            content = "\n".join(cleaned)
+            if not content.endswith("\n"):
+                content += "\n"
 
             with open(original_path, "w", encoding="utf-8") as f:
                 f.write(content)
             print(f"[已修改] {original_path}")
 
     def generate_subdirectory_dependency_graph(
-        self, all_unified_reduced: Dict[str, List[Tuple[str, str]]], subdir_path: str
-    ) -> Dict[str, List[Tuple[str, str]]]:
+        self, all_unified_reduced: dict[str, list[tuple[str, str]]], subdir_path: str
+    ) -> dict[str, list[tuple[str, str]]]:
         """从已经 unify_format 且 transitive_reduction 的全局依赖字典中，为子目录生成依赖图。
         对子目录节点做完整的传递依赖展开，使得朴素集合论等根节点能出现在图的顶层。
         """
         subdir_prefix = subdir_path.replace("content/", "") + "/"
 
-        result: Dict[str, List[Tuple[str, str]]] = {}
-        to_visit: List[str] = []
+        result: dict[str, list[tuple[str, str]]] = {}
+        to_visit: list[str] = []
 
         # 先把子目录内的所有节点加入，带上完整 dep list
         for filepath, dep_list in all_unified_reduced.items():
