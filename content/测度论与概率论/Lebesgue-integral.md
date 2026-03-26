@@ -10,12 +10,11 @@ title: Lebesgue 积分（L积分）
 
 ## 前置
 
--
 - [[测度论与概率论/almost-everywhere]]
 
 ## 非负简单可测函数的$L$积分
 
-设$f=\sum_{i=1}^{n} a_i I_{A_i} \in S^+(\Omega, \mathcal{F})$, 称广义实数$\sum_{i=1}^{n} a_i \mu(A_i)$为$f$的**$L$积分**，记作$\int f d\mu$或$\mu(f)$。
+设$f=\sum_{i=1}^{n} a_i I_{A_i} \in S^+(\Omega, \mathcal{F})$, 称广义实数$\sum_{i=1}^{n} a_i \mu(A_i)$为$f$的**L积分**，记作$\int f d\mu$或$\mu(f)$。
 
 $\int f d\mu$与$f$的表示形式无关。
 
@@ -107,3 +106,5 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
     - $f$可积
     - $\sum_{i=1}^{\infty} n \mu(n \leq |f| < n+1) < +\infty$
     - $\sum_{i=1}^{\infty} \mu(|f| \geq n) < +\infty$
+15. 若设$f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分存在，且恒非负（或恒非正），$c \in \overline{\mathbb{R}}$,则$cf$积分存在，且$\int cf=c\int f$
+16. $A \in \mathcal{F}, \int I_A=\mu(A)$

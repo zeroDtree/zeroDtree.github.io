@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "计算机/clash.md",
+                "file": "数学分析/级数.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "clash"
+              "title": "级数"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "计算机/clash.md",
+                "file": "数学分析/级数.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for clash"
+              "title": "Backlinks for 级数"
             }
           },
           {
@@ -184,6 +184,15 @@
   },
   "active": "f1f064fa641803df",
   "lastOpenFiles": [
+    "数学分析/real-number.md",
+    "数学分析/index.md",
+    "数学分析/derivate.md",
+    "数学分析/funct-limit.md",
+    "测度论与概率论/Lebesgue-integral.md",
+    "测度论与概率论/index.md",
+    "测度论与概率论/dependency_graph.md",
+    "测度论与概率论/almost-everywhere.md",
+    "计算机/clash.md",
     "计算机/blog.md",
     "计算机/bash.md",
     "计算机/automata.md",
@@ -200,15 +209,6 @@
     "故事/神圣叙事.md",
     "故事/纯粹理性批判.md",
     "故事/你变了.md",
-    "故事/判断力批判.md",
-    "故事/固执.md",
-    "故事/安全.md",
-    "故事/安全与道德.md",
-    "故事/实践理性批判.md",
-    "测度论与概率论/三大积分收敛定理.md",
-    "测度论与概率论/Lebesgue-integral.md",
-    "测度论与概率论/L-S-measure.md",
-    "测度论与概率论/measurable-func.md",
-    "测度论与概率论/measurable-mapping.md"
+    "故事/判断力批判.md"
   ]
 }
