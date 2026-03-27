@@ -53,7 +53,7 @@ $\mathbb{Z}_{\geq m} = \{n \in \mathbb{Z} \mid n \geq m\}$
 - 若$L^->x$,则存在$N \in \mathbb{Z}_{\geq m}$，使得对于任意$n \geq N$,都有$a_n>x$
 - 若$y<L^+$,则存在$n \in \mathbb{Z}_{\geq m}$，使得$y<a_n$
 - 若$y>L^-$,则存在$n \in \mathbb{Z}_{\geq m}$，使得$a_n<y$
-- $inf(a_n) \leq L^- \leq L^+ \leq sup(a_n)$
+- $\inf(a_n) \leq L^- \leq L^+ \leq \sup(a_n)$
 - $L^+$和$L^-$是数列的极限点
 - if c is a limit point of a sequence, then $L^- \leq c \leq L^+$
 - $L^+=L^-=c \iff \lim\limits_{n \to \infty} a_n = c$

@@ -12,8 +12,12 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
+    // analytics: {
+    //   provider: "plausible",
+    // },
     analytics: {
-      provider: "plausible",
+      provider: "clarity",
+      projectId: "w25k6ihksp"
     },
     locale: "zh-CN",
     baseUrl: "zeroDtree.github.io",
