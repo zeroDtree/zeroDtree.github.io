@@ -184,6 +184,8 @@
   },
   "active": "f1f064fa641803df",
   "lastOpenFiles": [
+    "故事/货币与行政.md",
+    "故事/政治机构图.md",
     "数学分析/级数.md",
     "数学分析/正负分解.md",
     "数学分析/real-number.md",
@@ -207,8 +209,6 @@
     "计算机/vscode-extensions.md",
     "测度论与概率论/Stieltjes_integral.md",
     "杂/complex-seq-series.md",
-    "杂/dependency_graph.md",
-    "故事/小孩理发.md",
-    "故事/税.md"
+    "杂/dependency_graph.md"
   ]
 }

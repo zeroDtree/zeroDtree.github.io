@@ -3,12 +3,12 @@ title: 有用的hook
 ---
 
 - [Hook](#hook)
-- [enable\_grad / no\_grad 测试](#enable_grad--no_grad-测试)
-	- [register\_post\_accumulate\_grad\_hook \&\& saved\_tensors\_hooks](#register_post_accumulate_grad_hook--saved_tensors_hooks)
-	- [register\_forward\_pre\_hook](#register_forward_pre_hook)
-	- [register\_full\_backward\_pre\_hook](#register_full_backward_pre_hook)
-	- [register\_full\_backward\_hook](#register_full_backward_hook)
-	- [register\_forward\_hook](#register_forward_hook)
+- [enable_grad / no_grad 测试](#enable_grad--no_grad-测试)
+  - [register_post_accumulate_grad_hook \&\& saved_tensors_hooks](#register_post_accumulate_grad_hook--saved_tensors_hooks)
+  - [register_forward_pre_hook](#register_forward_pre_hook)
+  - [register_full_backward_pre_hook](#register_full_backward_pre_hook)
+  - [register_full_backward_hook](#register_full_backward_hook)
+  - [register_forward_hook](#register_forward_hook)
 
 ## Hook
 
@@ -32,10 +32,10 @@ title: 有用的hook
   - [torch.nn.Module.register_full_backward_hook](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook)
     hook内默认禁用梯度
 
-
 ## enable_grad / no_grad 测试
 
 ### register_post_accumulate_grad_hook && saved_tensors_hooks
+
 ```python
 import torch
 
@@ -80,7 +80,9 @@ with torch.autograd.graph.saved_tensors_hooks(pack_hook, unpack_hook):
 
 c.sum().backward()  # 这里会触发 unpack_hook
 ```
+
 输出：
+
 ```
 Inside post_accumulate_grad_hook, grad enabled: False
 param.grad: tensor([1., 1., 1.])
@@ -128,7 +130,9 @@ with torch.no_grad():
 # Remove hook
 handle.remove()
 ```
+
 输出
+
 ```
 === With grad ===
 Inside hook, grad enabled: True
@@ -169,7 +173,9 @@ loss.backward()
 
 handle.remove()
 ```
+
 输出
+
 ```
 === Backward ===
 Inside backward_pre_hook:
@@ -192,12 +198,12 @@ model = MyModel()
 def backward_hook(module, grad_input, grad_output):
     print("Inside backward_hook:")
     print("  grad enabled:", torch.is_grad_enabled())
-    
+
     # 检查 grad_input / grad_output 是否带 grad
     for i, g in enumerate(grad_input):
         if g is not None:
             print(f"  grad_input[{i}].requires_grad:", g.requires_grad)
-    
+
     for i, g in enumerate(grad_output):
         if g is not None:
             print(f"  grad_output[{i}].requires_grad:", g.requires_grad)
