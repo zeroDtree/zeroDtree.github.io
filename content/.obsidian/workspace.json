@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "455c4005181cc08a",
+        "id": "564cd1884c48055a",
         "type": "tabs",
         "children": [
           {
-            "id": "369c04df35b73064",
+            "id": "93d1d7cc0e5b49a6",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -177,8 +177,9 @@
       "bases:Create new base": false
     }
   },
-  "active": "369c04df35b73064",
+  "active": "93d1d7cc0e5b49a6",
   "lastOpenFiles": [
+    "计算机/agent.md",
     "故事/政治机构图.md",
     "故事/货币与行政.md",
     "故事/货币.md",
@@ -202,7 +203,6 @@
     "计算机/arch-win.md",
     "计算机/arch-chinese.md",
     "计算机/android-flash.md",
-    "计算机/agent.md",
     "计算机/vscode-extensions.md",
     "测度论与概率论/Stieltjes_integral.md"
   ]
