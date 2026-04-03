@@ -109,7 +109,7 @@ $$\lim_{\mathbf{a} \to -\infty, \mathbf{b} \to \infty} (\text{R-S}) \int_{(\math
 7. 若 $g$ 在 $(a, b]$ 上单调，$F$ 在 $(a, b]$ 上单调不减且连续，则 $g$ 在 $(a, b]$ 关于 $F$ R-S 可积。
 8. $g$ 在 $(\mathbf{a},\mathbf{b}]$ 上 R 可积当且仅当 $g$ 关于 L 测度 $\lambda$ 几乎处处连续。(不连续点为零测集)
 9. 若 $g$ 在 $(a, b]$ 上单调有界，则 $g$ 在 $(a, b]$ 上 R 可积。
-10. 若 $g$ 在 $(a, b]$ 上有界，且不连续点的个数至多可数，则 $g$ 在 $(a, b]$ 上 R 可积。
+10. 若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上有界，且不连续点的个数至多可数，则 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 R 可积。
 11. 若 $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 R 可积，则
     (i) $g$ 在 $(\mathbf{a}, \mathbf{b}]$ 上 L 可积；
     (ii) (L) $\int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x = \text{(R)} \int_{\mathbf{a}}^{\mathbf{b}} g(x) \text{d}x$.
