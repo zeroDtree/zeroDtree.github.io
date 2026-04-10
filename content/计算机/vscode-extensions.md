@@ -17,11 +17,11 @@ title: vscode 插件
 
 ### 前端 / 全栈
 
-| 插件名                            | 功能                   |
-| --------------------------------- | ---------------------- |
-| Vue - Official                    | Vue 语法支持           |
-| JavaScript and TypeScript Nightly | JS / TS 夜间版语言服务 |
-| Spring Boot Extension Pack        | Spring Boot 开发套件   |
+| 插件名                            | 功能                 |
+| --------------------------------- | -------------------- |
+| Vue - Official                    | Vue 语法支持         |
+| JavaScript and TypeScript Nightly | JS / TS              |
+| Spring Boot Extension Pack        | Spring Boot 开发套件 |
 
 ### 标记语言 / 文档
 
@@ -33,6 +33,7 @@ title: vscode 插件
 | LaTeX Workshop                | LaTeX 语法支持、编译、预览      |
 | LaTeX Formatter               | LaTeX 代码格式化                |
 | Tinymist Typst                | Typst 语法支持                  |
+| Paste Image                   | 在markdown里粘贴图片            |
 
 ### 格式化 / 配置文件
 
