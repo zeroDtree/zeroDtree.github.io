@@ -89,7 +89,6 @@ $$
 
 
 
-
 即$D\mathbf{v} = -\lambda^2 \mathbf{v}$
 
 表明$-\lambda^2$是$D$的特征值，$\mathbf{v}$是$D$的特征向量。
