@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "e583a9da69949ee9",
+        "id": "3dc54abea29c833d",
         "type": "tabs",
         "children": [
           {
-            "id": "51c3fe97007048a8",
+            "id": "372d74d140371e49",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -177,9 +177,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "51c3fe97007048a8",
+  "active": "372d74d140371e49",
   "lastOpenFiles": [
     "抽象代数/环论(幂运算).md",
+    "抽象代数/群论(循环群).md",
     "抽象代数/群论(幂运算).md",
     "抽象代数/环论(有序环).md",
     "数学分析/real-number.md",
@@ -203,7 +204,6 @@
     "计算机/clash.md",
     "计算机/blog.md",
     "计算机/bash.md",
-    "计算机/automata.md",
-    "计算机/arch-win.md"
+    "计算机/automata.md"
   ]
 }
