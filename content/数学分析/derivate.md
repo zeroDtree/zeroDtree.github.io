@@ -33,7 +33,6 @@ real vector space can define inner product, which can induce norm, which can ind
 > $\frac{||(L_1(v) - L_2(v))||}{||v||} = \frac{||t(L_1(v) - L_2(v))||}{||tv||} = \frac{||R_2(t) - R_1(t)||}{||tv||} \leq \frac{||R_2(t)||}{||tv||} + \frac{||R_1(t)||}{||tv||}$.
 > so $L_1(v) - L_2(v) = 0$, contradiction.
 
-
 - 梯度：设 $X \subseteq \mathbb{R}^n$，$f: X \rightarrow \mathbb{R}$ 是一个定义在 $X$ 上的实值函数（标量场）。若 $f$ 在内点 $x_0 \in X$ 处可微，存在唯一的线性变换 $L: \mathbb{R}^n \rightarrow \mathbb{R}$（即 $f'(x_0)$）。由于 $L$ 是从 $\mathbb{R}^n$ 到 $\mathbb{R}$ 的线性映射，根据里斯表示定理 (Riesz Representation Theorem)，在给定内积 $\langle \cdot, \cdot \rangle$ 的欧几里得空间中，必然存在唯一的向量 $v \in \mathbb{R}^n$，使得对于任意 $h \in \mathbb{R}^n$，都有：$$L(h) = \langle v, h \rangle$$这个唯一的向量 $v$ 就称为 $f$ 在 $x_0$ 处的梯度，记作 $\nabla f(x_0)$ 或 $\text{grad } f(x_0)$。
 
 - 方向导数：设 $u$ 为单位向量（$\|u\|=1$），$f$ 在 $x_0$ 处沿方向 $u$ 的方向导数定义为：$$D_u f(x_0) = \lim_{t \to 0} \frac{f(x_0 + tu) - f(x_0)}{t}$$将全微分公式代入上式（令 $h = tu$）：$$D_u f(x_0) = \lim_{t \to 0} \frac{f(x_0) + L(tu) + o(\|tu\|) - f(x_0)}{t}$$由于 $L$ 是线性变换，$L(tu) = t L(u)$，且 $\|tu\| = |t|\|u\| = |t|$：$$D_u f(x_0) = \lim_{t \to 0} \frac{t L(u) + o(t)}{t} = L(u)$$
