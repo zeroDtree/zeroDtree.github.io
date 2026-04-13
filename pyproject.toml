@@ -1,0 +1,6 @@
+[project]
+name = "my-blog"
+version = "0.1.0"
+dependencies = [
+    "graphifyy>=0.4.11",
+]
