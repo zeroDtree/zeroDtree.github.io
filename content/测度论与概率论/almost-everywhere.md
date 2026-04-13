@@ -11,7 +11,7 @@ title: 几乎处处收敛和依测度收敛
 
 ## 1. 前置
 
-[[测度论与概率论/measurable-func]]
+- [[测度论与概率论/measurable-func]]
 
 ## 2. 关系图
 
