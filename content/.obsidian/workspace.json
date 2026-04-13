@@ -184,9 +184,16 @@
   },
   "active": "372d74d140371e49",
   "lastOpenFiles": [
+    "点集拓扑/紧空间.md",
     "数学分析/无穷小.md",
-    "数学分析/derivate.md",
+    "点集拓扑/拓扑空间.md",
+    "点集拓扑/度量空间.md",
+    "测度论与概率论/Stieltjes_integral.md",
+    "测度论与概率论/measurable-func.md",
+    "数学分析/converge.md",
+    "测度论与概率论/class-of-sets.md",
     "测度论与概率论/三大积分收敛定理.md",
+    "数学分析/derivate.md",
     "数学分析/实数构造/实数.md",
     "机器学习/pytorch/torch.utils.data.md",
     "机器学习/pytorch/高级索引.md",
@@ -202,13 +209,6 @@
     "故事/税.md",
     "计算机/agent.md",
     "故事/政治机构图.md",
-    "故事/货币与行政.md",
-    "故事/货币.md",
-    "数学分析/非负级数.md",
-    "数学分析/级数.md",
-    "数学分析/正负分解.md",
-    "数学分析/funct-limit.md",
-    "数学分析/dependency_graph.md",
-    "数学分析/converge.md"
+    "故事/货币与行政.md"
   ]
 }
