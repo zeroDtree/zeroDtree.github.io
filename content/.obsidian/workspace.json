@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "6b7544148849703d",
+        "id": "8e3bb349c949c05b",
         "type": "tabs",
         "children": [
           {
-            "id": "61378ef4f9e09c64",
+            "id": "2925300a8b50fdc5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "数学分析/无穷小.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "无穷小"
+              "title": "New tab"
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "数学分析/无穷小.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 无穷小"
+              "title": "Backlinks"
             }
           },
           {
@@ -182,8 +177,26 @@
       "bases:Create new base": false
     }
   },
-  "active": "61378ef4f9e09c64",
+  "active": "2925300a8b50fdc5",
   "lastOpenFiles": [
+    "故事/顺其自然.md",
+    "故事/这样那样.md",
+    "故事/资本.md",
+    "故事/货币.md",
+    "故事/货币与行政.md",
+    "故事/纯粹理性批判.md",
+    "故事/税.md",
+    "故事/经济基础与上层建筑.md",
+    "故事/神圣叙事.md",
+    "故事/狡猾的小说家.md",
+    "故事/爱与幸福.md",
+    "故事/爱.md",
+    "故事/潮汐.md",
+    "故事/梦.md",
+    "故事/时间.md",
+    "故事/政治机构图.md",
+    "故事/改变.md",
+    "数学分析/无穷小.md",
     "数学分析/converge.md",
     "数学分析/dependency_graph.md",
     "数学分析/derivate.md",
@@ -191,24 +204,6 @@
     "数学分析/funct-limit.md",
     "数学分析/index.md",
     "数学分析/real-number.md",
-    "数学分析/无穷小.md",
-    "数学分析/正负分解.md",
-    "测度论与概率论/三大积分收敛定理.md",
-    "点集拓扑/紧空间.md",
-    "点集拓扑/拓扑空间.md",
-    "点集拓扑/度量空间.md",
-    "测度论与概率论/Stieltjes_integral.md",
-    "测度论与概率论/measurable-func.md",
-    "测度论与概率论/class-of-sets.md",
-    "数学分析/实数构造/实数.md",
-    "机器学习/pytorch/torch.utils.data.md",
-    "机器学习/pytorch/高级索引.md",
-    "机器学习/pytorch/数据存储.md",
-    "机器学习/dependency_graph.md",
-    "数学分析/实数构造/广义实数.md",
-    "数学分析/实数构造/整数.md",
-    "抽象代数/环论(幂运算).md",
-    "抽象代数/群论(循环群).md",
-    "抽象代数/群论(幂运算).md"
+    "数学分析/正负分解.md"
   ]
 }
