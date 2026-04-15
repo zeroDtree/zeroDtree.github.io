@@ -212,7 +212,7 @@ services:
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
       # Let's Encrypt ACME
-      - "--certificatesresolvers.letsencrypt.acme.email=3186428803@qq.com"
+      - "--certificatesresolvers.letsencrypt.acme.email=xxxxxxxxxx@qq.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
         #- "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
