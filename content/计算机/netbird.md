@@ -51,6 +51,13 @@ root@VM-0-8-debian ~/p/netbird# ls
 config.yaml  dashboard.env  docker-compose.yml
 ```
 
+如果勾选了NetBird Proxy，会有两个额外的文件
+
+```bash
+root@VM-0-8-debian ~/p/netbird# ls
+config.yaml  dashboard.env  docker-compose.yml proxy.env  traefik-dynamic.yaml
+```
+
 ### 因无法拉取地理位置数据库而长时间卡住
 
 安装脚本跑完最后一步时，终端可能出现类似下面的输出。
@@ -212,14 +219,15 @@ services:
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
       # Let's Encrypt ACME
-      - "--certificatesresolvers.letsencrypt.acme.email=xxxxxxxxxx@qq.com"
+      - "--certificatesresolvers.letsencrypt.acme.email=3186428803@qq.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+        #- "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+        #- "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
         #- "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=tencentcloud"
-        #- "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=119.29.29.29:53"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=119.29.29.29:53,8.8.8.8:53"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=120"
+      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=119.29.29.29:53"
+      # - "--certificatesresolvers.letsencrypt.acme.dnschallenge.propagation.delayBeforeChecks=300"
       # gRPC transport settings
       - "--serverstransport.forwardingtimeouts.responseheadertimeout=0s"
       - "--serverstransport.forwardingtimeouts.idleconntimeout=0s"
@@ -260,3 +268,46 @@ bear.dnspod.net
 ![[计算机/images/godday-nameserver.png]]
 
 解析生效后，在 DNSPod 中为 netbird 所用主机名及需要的顶级记录添加 A 记录（按你实际规划填写即可）。
+
+### Netbird Proxy 服务器一直处于重启状态
+
+如果你启用了 Netbird Proxy，可能会出现 `netbird-proxy` 容器反复重启的情况，例如：
+
+```bash
+root@VM-0-8-debian ~/p/netbird# docker container ls
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS                        PORTS                                                                          NAMES
+37ea678d75e8   netbirdio/reverse-proxy:latest    "/go/bin/netbird-pro…"   10 seconds ago   Restarting (1) 1 second ago                                                                                  netbird-proxy
+1b5783d7d442   traefik:v3.6                      "/entrypoint.sh --lo…"   10 seconds ago   Up 10 seconds                 0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp   netbird-traefik
+cfcb132c5706   netbirdio/dashboard:latest        "/usr/bin/supervisor…"   10 seconds ago   Up 10 seconds                 80/tcp, 443/tcp                                                                netbird-dashboard
+5aa890e9d88a   netbirdio/netbird-server:latest   "/go/bin/netbird-ser…"   10 seconds ago   Up 10 seconds                 0.0.0.0:3478->3478/udp, [::]:3478->3478/udp                                    netbird-server
+root@VM-0-8-debian ~/p/netbird#
+```
+
+进一步查看日志，可以确认原因是代理域名为空（`NB_PROXY_DOMAIN` 未正确配置）：
+
+```bash
+root@VM-0-8-debian ~/p/netbird# docker logs -f netbird-proxy
+2026-04-16T11:47:39.437Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:39.859Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:40.225Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:40.847Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:41.842Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:43.617Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+2026-04-16T11:47:46.989Z INFO proxy/cmd/proxy/cmd/root.go:142: configured log level: info
+Error: invalid domain value "": invalid domain format:
+```
+
+解决方式：在 `proxy.env` 中补充对应配置（示例如下）：
+
+```bash
+# Placeholder - will be updated with token after netbird-server starts
+NB_PROXY_TOKEN=placeholder
+NB_PROXY_DOMAIN=netbird.xxxxxx.com
+NB_PROXY_ACME_CERTIFICATES=true
+```
