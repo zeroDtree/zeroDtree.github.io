@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "计算机/netbird.md",
+                "file": "数学分析/实数构造/实数.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "netbird"
+              "title": "实数"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "计算机/netbird.md",
+                "file": "数学分析/实数构造/实数.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for netbird"
+              "title": "Backlinks for 实数"
             }
           },
           {
@@ -184,9 +184,12 @@
   },
   "active": "2925300a8b50fdc5",
   "lastOpenFiles": [
-    "数学分析/实数构造/实数.md",
+    "数学分析/real-number.md",
+    "数学分析/converge.md",
     "数学分析/一些标准极限.md",
     "数学分析/实数域上的实数幂.md",
+    "计算机/netbird.md",
+    "数学分析/实数构造/实数.md",
     "数学分析/一些标准的极限.md",
     "数学分析/实数构造/广义实数.md",
     "抽象代数/环论(幂运算).md",
@@ -195,7 +198,6 @@
     "抽象代数/环论(有序环).md",
     "数学分析/实数构造/整数.md",
     "抽象代数/群论(幂运算).md",
-    "计算机/netbird.md",
     "机器学习/pytorch/shape.md",
     "机器学习/强化学习.md",
     "故事/顺其自然.md",
@@ -207,8 +209,6 @@
     "故事/税.md",
     "故事/经济基础与上层建筑.md",
     "故事/神圣叙事.md",
-    "故事/狡猾的小说家.md",
-    "故事/爱与幸福.md",
-    "故事/爱.md"
+    "故事/狡猾的小说家.md"
   ]
 }
