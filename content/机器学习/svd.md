@@ -21,16 +21,20 @@ $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geomet
 > proof
 >
 > $$
+> \begin{gathered}
 > B v = A^T A v= \lambda v \Longrightarrow\\
 > C Av = A A^T A v = \lambda A v
+> \end{gathered}
 > $$
 >
 > if $\lambda$ is an eigenvalue of $B$, then it is also an eigenvalue of $C$.
 > similarly,
 >
 > $$
+> \begin{gathered}
 > C v = A A^T v = \lambda v \Longrightarrow\\
 > B A^T v = A^T A A^T v = \lambda A^T v
+> \end{gathered}
 > $$
 >
 > if $\lambda$ is an eigenvalue of $C$, then it is also an eigenvalue of $B$.
@@ -48,8 +52,10 @@ $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geomet
 > consider the linear map:
 >
 > $$
+> \begin{gathered}
 > f: Ker(A^T A - \lambda I) \to Ker(A A^T - \lambda I)\\
 > f(v) = Av
+> \end{gathered}
 > $$
 >
 > if $f(v)=Av=\lambda v=0$, because $\lambda \neq 0$, so $v=0$.

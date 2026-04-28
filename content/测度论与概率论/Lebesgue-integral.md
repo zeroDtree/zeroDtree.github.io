@@ -77,7 +77,7 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
 
 <!-- 若$p>0$,$|P|^p$关于$P$可积，则称$E|X|^p=\int_{\Omega} |X|^p dP$为$X$的**p阶矩**。特别地，当$p=2$时，称$EX^2<+\infty$时，称$Var(X)=E(X-EX)^2$为$X$的**方差**。 -->
 
-（因为设$f，g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$.）当仅涉及积分问题时， a.e. 相等的函数可以不加区别，从而被积函数可以是 a.e. 可测的广义实值函数.
+（因为设$f, g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$.）当仅涉及积分问题时， a.e. 相等的函数可以不加区别，从而被积函数可以是 a.e. 可测的广义实值函数.
 
 设 $f$ 是 a.e. 可测的广义实值函数， $A \in \mathcal{F}$， 若 $\int fI_A d\mu$ 的积分存在(相应地，可积)，则称 $f$ 在 $A$ 上的积分存在(相应地，可积)，且规定 $f$ 在 $A$ 上的积分为$\int_{A} f d\mu$。
 
@@ -85,8 +85,8 @@ $\mathbf{f}$可积 $\iff$ $Re\mathbf{f},Im\mathbf{f}$都可积$\iff |\mathbf{f}|
 
 1. 非负可测函数的L积分存在
 2. 设$f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，则$|f|$的积分存在，并且$|\int f d\mu| \leq \int |f| d\mu$
-3. 设$f，g \in \overline{\mathcal{L}}^+(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$
-4. 设$f，g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$f,g$中其中一个积存存在，另一个积分也存在，并且$\int f d\mu = \int g d\mu$.
+3. 设$f, g \in \overline{\mathcal{L}}^+(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$\int f d\mu = \int g d\mu$
+4. 设$f, g \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$，且$f=g$ a.e., 则$f,g$中其中一个积存存在，另一个积分也存在，并且$\int f d\mu = \int g d\mu$.
 5. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ ， $A$ 为零测集，则 $\int_{A} f d\mu = 0$.
 6. 设 $f \in \overline{\mathcal{L}}(\Omega, \mathcal{F})$ 的积分存在，则
 7. $f$可积 $\implies$ $|f|<+\infty$ a.e.

@@ -21,8 +21,10 @@ A random vector is said to be k-variate normally distributed if every linear com
 #### 2.1. 多维高斯分布的概率密度函数(在能写出概率密度的情况下)
 
 $$
+\begin{gathered}
 p(\mathbf{x}) = \mathcal{N}(\mathbf{x};\mu, \mathbf{\Sigma}) = \frac{1}{(2\pi)^{d/2}|\mathbf{\Sigma}|^{1/2}}\exp\left(-\frac{1}{2}(\mathbf{x}-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{x}-\mu)\right)\\
 \mathbf{x}\in \mathbb{R}^d, \mu\in \mathbb{R}^d, \mathbf{\Sigma}\in \mathbb{R}^{d \times d}
+\end{gathered}
 $$
 
 特殊情况 $\Sigma=\sigma^2 I$时，

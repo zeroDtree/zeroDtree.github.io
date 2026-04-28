@@ -27,7 +27,7 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   left: [
     Component.RecentNotes({ limit: 2, showTags: false }),
-    Component.PageTitle(),
+    // Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex(
       {

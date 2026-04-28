@@ -101,8 +101,10 @@ A = Q \Lambda Q^T
 $$
 
 $$
+\begin{gathered}
 \Lambda = \text{diag}(\lambda_1, \lambda_2, \cdots, \lambda_n), \lambda_i \leq \lambda_{i+1}\\
 Q=(\mathbf{q}_1, \mathbf{q}_2, \cdots, \mathbf{q}_n) \in \mathbf{O}_n(\mathbb{R}), \text{where } \mathbf{O}_n(\mathbb{R}) = \{\mathbf{M} \in \mathbb{R}^{n \times n} \mid \mathbf{M}^T\mathbf{M} = \mathbf{I}\}
+\end{gathered}
 $$
 
 where $\lambda_i$ are the eigenvalues of $A$ and $Q$ is the eigenvector matrix.

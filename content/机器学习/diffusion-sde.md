@@ -45,8 +45,10 @@ where $ \phi^i(\mathbf{x}) $ is the $ i $th row of $ \phi $.
 SDE of forward process(noise):
 
 $$
+\begin{gathered}
 d \mathbf{x} = f(\mathbf{x}, t) dt + g(\mathbf{x}, t) dw\\
 f: \mathbb{R}^d \times [0, T] \to \mathbb{R}^d, g: \mathbb{R}^d \times [0, T] \to \mathbb{R}^{d \times d}
+\end{gathered}
 $$
 
 SDE of reverse process(denoise):
@@ -66,7 +68,7 @@ $$
 - Sliced Score Matching:
 
 $$
-\theta^* = \arg \min_\theta \mathbb{E}_t \left\{ \lambda(t) \mathbb{E}_{\mathbf{x}(0)} \mathbb{E}_{\mathbf{x}(t)} \mathbb{E}_{\mathbf{v} \sim p_{\mathbf{v}}} \left[ \mathbf{v}^\top \mathbf{s}_\theta(\mathbf{x}(t), t) \mathbf{v} +  \frac{1}{2} (\mathbf{v}^T \mathbf{s}_\theta(\mathbf{x}(t), t) )^2 \right] \right\}\\
+\theta^* = \arg \min_\theta \mathbb{E}_t \left\{ \lambda(t) \mathbb{E}_{\mathbf{x}(0)} \mathbb{E}_{\mathbf{x}(t)} \mathbb{E}_{\mathbf{v} \sim p_{\mathbf{v}}} \left[ \mathbf{v}^\top \mathbf{s}_\theta(\mathbf{x}(t), t) \mathbf{v} +  \frac{1}{2} (\mathbf{v}^T \mathbf{s}_\theta(\mathbf{x}(t), t) )^2 \right] \right\}
 $$
 
 - Denoising Score Matching:
