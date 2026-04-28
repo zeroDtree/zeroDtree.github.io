@@ -12,9 +12,6 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    // analytics: {
-    //   provider: "plausible",
-    // },
     analytics: {
       provider: "clarity",
       projectId: "w25k6ihksp"
@@ -76,7 +73,7 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      Plugin.HardLineBreaks()
+      Plugin.HardLineBreaks(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
