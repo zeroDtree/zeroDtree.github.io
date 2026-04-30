@@ -41,6 +41,9 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.TagList(),
+    Component.OutOfDate(
+      { checkPaths: ["/计算机/","/机器学习/pytorch/"], staleThreshold: 45 }
+    ),
   ],
   left: [
     // Component.PageTitle(),
