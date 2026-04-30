@@ -18,9 +18,7 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
-      component: Component.Breadcrumbs({
-        rootName: "主页",
-      }),
+      component: Component.Breadcrumbs(),
       condition: (page) => page.fileData.slug !== "index",
     }),
     Component.ArticleTitle(),
