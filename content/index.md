@@ -13,7 +13,7 @@ title: Forever young
 
 ## 1. Math Symbols
 
-- Vector is denoted as bold letter, e.g. $\mathbf{a}$, Matrix is denoted as capital letter, e.g. $A$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $A$
+- Vector is denoted as bold lowercase letter, e.g. $\mathbf{a}$, Matrix is denoted as bold capital letter, e.g. $\mathbf{A}$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $\mathbf{A}$
 - All vectors are column vectors
 - $\mathbb{Z}$ is the set of integers.
 - $\mathbb{Q}$ is the set of rational numbers.
