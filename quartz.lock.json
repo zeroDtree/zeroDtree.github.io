@@ -190,8 +190,8 @@
     "quartz-v5-plugin-out-of-date": {
       "source": "github:zeroDtree/quartz-v5-plugin-out-of-date",
       "resolved": "https://github.com/zeroDtree/quartz-v5-plugin-out-of-date.git",
-      "commit": "bdfff0651f4fa6e644a93f3acc2a56d25bf02ead",
-      "installedAt": "2026-06-06T08:41:15.444Z"
+      "commit": "5fbd00dcc0dcdcef994a14b43df6e76be4ed0194",
+      "installedAt": "2026-06-06T09:28:54.501Z"
     },
     "reader-mode": {
       "source": "github:quartz-community/reader-mode",
