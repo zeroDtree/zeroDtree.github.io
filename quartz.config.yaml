@@ -50,6 +50,18 @@ plugins:
         - git
         - filesystem
     order: 10
+  - source: github:zeroDtree/quartz-v5-plugin-out-of-date
+    enabled: true
+    options:
+      checkPaths:
+        - /计算机/
+        - /机器学习/
+      staleThreshold: 45
+      # forceShow: true
+    order: 15
+    layout:
+      position: beforeBody
+      priority: 21
   - source: github:quartz-community/syntax-highlighting
     enabled: true
     options:
@@ -205,7 +217,7 @@ plugins:
     enabled: true
     options:
       provider: giscus
-      options: 
+      options:
         repo: zeroDtree/zeroDtree.github.io
         repoId: R_kgDOOiR8Mw
         category: Announcements
