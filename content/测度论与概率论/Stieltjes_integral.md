@@ -77,7 +77,7 @@ $$(\mathrm{L}) \int_{\mathbb{R}^d} g(x) \mathrm{d} x = \lim_{\mathbf{a} \to -\in
 
 下面定义**反常 R-S 积分**.
 
-设 $g$ 是定义在 $\mathbb{R}^d$ 上的实值函数, 若对任意的 $(\mathbf{a}, \mathbf{b}] \subset \mathbb{R}^d$, (R-S) $\int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} F(x)$ 都存在, 且
+设 $g$ 是定义在 $\mathbb{R}^d$ 上的实值函数, 若对任意的 $(\mathbf{a}, \mathbf{b}] \subseteq \mathbb{R}^d$, (R-S) $\int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} F(x)$ 都存在, 且
 
 $$\lim_{\mathbf{a} \to -\infty, \mathbf{b} \to \infty} (\text{R-S}) \int_{(\mathbf{a}, \mathbf{b}]} g(x) \mathrm{d} F(x)$$
 

@@ -72,7 +72,7 @@ $\forall v \in T_xM$,存在一个$M$上的光滑曲线$c:(-1,1) \to M,c(0)=x$ s.
 因为$\forall y \in M \cap U,h(y)=0$，所以$h(c(t))=0$，对$t$求导，得到
 $\frac{d}{dt}|_{t=0} h(c(t))=Dh(c(0))(c'(0))=0$, 所以$c'(0)=v \in Ker(Dh(x))$
 
-因此$T_xM \subset Ker(Dh(x))$。
+因此$T_xM \subseteq Ker(Dh(x))$。
 
 所以tangent space $T_xM$是$Ker(Dh(x))$的一个子集。注意这个子集现在还不一定是一个线性空间，只有在证明了$T_xM=Ker(Dh(x))$之后，$T_xM$才能说是一个线性空间。下面就去证明$T_xM=Ker(Dh(x))$
 

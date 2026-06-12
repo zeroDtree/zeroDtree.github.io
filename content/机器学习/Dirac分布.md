@@ -5,6 +5,7 @@ title: Dirac分布
 ## 前置
 
 - [[抽象代数/对偶空间]]
+- [[抽象代数/函数空间]]
 
 ## 定义
 
@@ -24,11 +25,24 @@ $$
 
 称 $\mathcal{D}(\mathbb{R})$ 为实轴上的**测试函数空间**（Test Function Space）。
 
+#### 向量空间结构
+
+设 $V_1, V_2$ 为向量空间 $V$ 的线性子空间，则 $V_1 \cap V_2$ 也是 $V$ 的线性子空间。
+
+在广义全函数空间 $\mathcal{F}(\mathbb{R}, \mathbb{F})$ 上，$C^\infty(\mathbb{R})$ 对逐点加法和数乘封闭（可微函数之和、数乘仍可微），$C_c(\mathbb{R}, \mathbb{F})$ 对逐点运算封闭，二者均为线性子空间。无限可微函数连续，故 $C^\infty(\mathbb{R}) \subseteq C(\mathbb{R}, \mathbb{F})$，从而
+
+$$
+\mathcal{D}(\mathbb{R})
+= C^\infty(\mathbb{R}) \cap C_c(\mathbb{R}, \mathbb{F}).
+$$
+
+因此 $\mathcal{D}(\mathbb{R})$ 是 $\mathbb{F}$ 上的向量空间。 $\blacksquare$
+
 ### 测试函数空间的拓扑
 
 为讨论连续线性泛函，需赋予 $\mathcal{D}(\mathbb{R})$ 一个拓扑。称序列 $\phi_n$ **在 $\mathcal{D}$ 中收敛**于 $\phi$，记作 $\phi_n \xrightarrow{\mathcal{D}} \phi$，当且仅当：
 
-1. 存在固定紧集 $K \subset \mathbb{R}$，使得 $\operatorname{supp}(\phi_n) \subset K$ 且 $\operatorname{supp}(\phi) \subset K$；
+1. 存在固定紧集 $K \subseteq \mathbb{R}$，使得 $\operatorname{supp}(\phi_n) \subseteq K$ 且 $\operatorname{supp}(\phi) \subseteq K$；
 2. 对任意整数 $m \geq 0$，
 
 $$
@@ -58,6 +72,16 @@ $$
 $$
 
 称为分布与测试函数之间的**对偶配对**。
+
+### 局部可积函数
+
+设 $f: \mathbb{R} \to \mathbb{F}$ 是一个勒贝格可测函数。若对于 $\mathbb{R}$ 中的任意紧集（即有界闭区间 $[a, b]$），均满足：
+
+$$
+\int_{a}^{b} |f(x)|\, dx < \infty
+$$
+
+则称 $f$ 为 局部可积函数，所有这类函数的集合记为 $L^1_{\mathrm{loc}}(\mathbb{R})$。
 
 ### 常规分布
 
@@ -104,13 +128,3 @@ $$
 $$
 
 若 $0 \notin K$，则对充分大的 $n$ 有 $\phi_n(0) = \phi(0) = 0$，结论仍成立。故 $\delta$ 连续，从而 $\delta \in \mathcal{D}'(\mathbb{R})$。
-
-### Dirac 分布不是普通函数
-
-不存在 $f \in L^1_{\mathrm{loc}}(\mathbb{R})$，使得对所有 $\phi \in \mathcal{D}(\mathbb{R})$ 有
-
-$$
-\langle \delta, \phi \rangle = \int_{-\infty}^{\infty} f(x)\phi(x)\, dx.
-$$
-
-因此 $\delta$ 不是由任何普通函数诱导的分布，称为**奇异分布**（Singular Distribution）。

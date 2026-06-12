@@ -50,8 +50,8 @@ $$Y^{-1}(A) = Y^{-1}\left(\pi_{t_0}^{-1}(B_{t_0})\right) = (\pi_{t_0} \circ Y)^{
 
 $$Y^{-1}(A) = (\pi_{t_0} \circ Y)^{-1}(B_{t_0}) \in \mathcal{F}$$
 
-由于 $Y^{-1}(\mathcal{C}) \subset \mathcal{F}$，由 $\sigma$-代数原像的性质，其生成的 $\sigma$-代数同样满足包含关系：
+由于 $Y^{-1}(\mathcal{C}) \subseteq \mathcal{F}$，由 $\sigma$-代数原像的性质，其生成的 $\sigma$-代数同样满足包含关系：
 
-$$Y^{-1}\left(\bigotimes_{t \in T} \mathcal{E}_t\right) = Y^{-1}(\sigma(\mathcal{C})) = \sigma(Y^{-1}(\mathcal{C})) \subset \mathcal{F}$$
+$$Y^{-1}\left(\bigotimes_{t \in T} \mathcal{E}_t\right) = Y^{-1}(\sigma(\mathcal{C})) = \sigma(Y^{-1}(\mathcal{C})) \subseteq \mathcal{F}$$
 
 即 $Y$ 是 $\mathcal{F} \big/ \big(\bigotimes_{t \in T} \mathcal{E}_t \big)$-可测的。 $\blacksquare$

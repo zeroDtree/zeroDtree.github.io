@@ -4,7 +4,7 @@ title: holomorphic function
 
 ## 1. Complex Differentiable Function
 
-Let $E$ be an subset in $\mathbb{C}$ and $f$ a complex-valued function on $X \subset \mathbb{C}$. The function $f$ is **complex differentiable** at the point $z_0$, where $z_0$ is a limit point of $E$, iff
+Let $E$ be an subset in $\mathbb{C}$ and $f$ a complex-valued function on $X \subseteq \mathbb{C}$. The function $f$ is **complex differentiable** at the point $z_0$, where $z_0$ is a limit point of $E$, iff
 
 $$
 \lim_{z \to z_0, z \in E \setminus \{z_0\}} \frac{f(z) - f(z_0)}{z - z_0}  = L \in \mathbb{C}

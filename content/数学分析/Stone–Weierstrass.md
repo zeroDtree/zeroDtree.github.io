@@ -12,7 +12,7 @@ title: Stone–Weierstrass定理
 
 设 $K$ 是一个紧 Hausdorff 空间。考虑$F$值连续函数空间 $\mathscr{C}(K, F)$，其范数为 $\|f\| = \sup_{x \in K} |f(x)|$。
 
-- **（代数，Algebra）** 一个子集 $\mathcal{A} \subset \mathscr{C}(K, F)$ 被称为一个 **代数**，如果它对加法、标量乘法（$F$中的数）和乘法封闭：
+- **（代数，Algebra）** 一个子集 $\mathcal{A} \subseteq \mathscr{C}(K, F)$ 被称为一个 **代数**，如果它对加法、标量乘法（$F$中的数）和乘法封闭：
   - 若 $f, g \in \mathcal{A}$，则 $f + g \in \mathcal{A}$。
   - 若 $f \in \mathcal{A}, c \in \mathbb{C}$，则 $c f \in \mathcal{A}$。
   - 若 $f, g \in \mathcal{A}$，则 $fg \in \mathcal{A}$。
@@ -216,7 +216,7 @@ Q.E.D.
 ## 复值 Stone–Weierstrass 定理
 
 **定理 (Stone–Weierstrass, 复值版本)**：
-设 $K$ 是一个紧致 Hausdorff 空间，且 $\mathcal{A} \subset \mathscr{C}(K, \mathbb{C})$ 是一个代数。
+设 $K$ 是一个紧致 Hausdorff 空间，且 $\mathcal{A} \subseteq \mathscr{C}(K, \mathbb{C})$ 是一个代数。
 如果 $\mathcal{A}$ 满足以下条件：
 
 1.  **分离点**：对于任意 $x \neq y \in K$，存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
@@ -269,7 +269,7 @@ $$g(x) = u(x) + i v(x)$$
 2. 同理，存在 $v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}}$ 使得 $\|v - v_{\mathcal{A}}\| < \frac{\epsilon}{2}$。
 
 构造函数 $g_{\mathcal{A}} = u_{\mathcal{A}} + i v_{\mathcal{A}}$。
-由于 $u_{\mathcal{A}}, v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}} \subset \mathcal{A}$，且 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，故 **$g_{\mathcal{A}} \in \mathcal{A}$**。
+由于 $u_{\mathcal{A}}, v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}} \subseteq \mathcal{A}$，且 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，故 **$g_{\mathcal{A}} \in \mathcal{A}$**。
 
 计算误差：
 

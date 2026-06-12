@@ -246,7 +246,7 @@ $$
 $$
 
 where we chose $t=4 \epsilon / \sum_{i=1}^m c_i^2$ to minimize the upper bound. This proves the first statement of the theorem, and the second statement is shown in a similar way.
-($if\ F1\subset F2,\ then\ E[E[Y|F1]|F2] = E[E[Y|F2]|F1] = E[Y|F1]$)
+($if\ F1\subseteq F2,\ then\ E[E[Y|F1]|F2] = E[E[Y|F2]|F1] = E[Y|F1]$)
 
 ## proof
 

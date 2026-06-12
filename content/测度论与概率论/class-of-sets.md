@@ -44,8 +44,8 @@ title: 集类
 7. 对任意非空集类$\mathcal{E}$，存在一个最小的包含$\mathcal{E}$的$\sigma$代数$\sigma(\mathcal{E})$，称$\sigma(\mathcal{E})$为由$\mathcal{E}$生成的$\sigma$代数，$\Omega$为$\sigma(\mathcal{E})$的生成元
 8. 单调类定理：若$\mathcal{E}$为代数，则$\mathcal{M}(\mathcal{E})=\sigma(\mathcal{E})$，即由代数生成的单调类与$\sigma$代数相等
 9. $\pi-\lambda$定理：若$\mathcal{E}$为$\pi$类，则$\lambda(\mathcal{E})=\sigma(\mathcal{E})$，即由$\pi$类生成的$\lambda$类与$\sigma$代数相等
-10. 单调类方法论：设$\mathcal{E},\mathcal{A}$为两个集类，且$\mathcal{E}\subset \mathcal{A}$，若$\mathcal{E}$为代数，$\mathcal{A}$为单调类，则$\sigma(\mathcal{E})\subset \mathcal{A}$
-11. $\pi-\lambda$方法论：设$\mathcal{E}$为$\pi$类，$\mathcal{A}$为$\lambda$类，且$\mathcal{E}\subset \mathcal{A}$，则$\sigma(\mathcal{E})\subset \mathcal{A}$
+10. 单调类方法论：设$\mathcal{E},\mathcal{A}$为两个集类，且$\mathcal{E}\subseteq \mathcal{A}$，若$\mathcal{E}$为代数，$\mathcal{A}$为单调类，则$\sigma(\mathcal{E})\subseteq \mathcal{A}$
+11. $\pi-\lambda$方法论：设$\mathcal{E}$为$\pi$类，$\mathcal{A}$为$\lambda$类，且$\mathcal{E}\subseteq \mathcal{A}$，则$\sigma(\mathcal{E})\subseteq \mathcal{A}$
 12. 设$f:\Omega \to E$,$\mathcal{E}$为$E$上的非空集类，记$f^{-1}(\mathcal{E})=\{f^{-1}(A):A\in \mathcal{E}\}$，若$\mathcal{E}$为$\sigma$代数，则$f^{-1}(\mathcal{E})$为$\sigma$代数。
 13. $f^{-1}(\sigma(\mathcal{E}))=\sigma(f^{-1}(\mathcal{E}))$
 14. 第二可数空间中$(X,\tau)$，$\mathcal{B}$为$\tau$的基,$\mathcal{S}$为$\tau$的子基，则$\sigma(\tau)=\sigma(\mathcal{S})=\sigma(\mathcal{B})$
