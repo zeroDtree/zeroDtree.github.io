@@ -30,7 +30,7 @@ title: Forever young
     - [复分析](复分析/index.md)
     - [微分方程](微分方程/index.md)
     - [流形](流形/index.md)
-    - [范畴论](范畴/index.md)
+    - [范畴论](范畴论/index.md)
     - [概率论](概率论/index.md)
 
 # Notation

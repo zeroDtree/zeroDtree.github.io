@@ -26,7 +26,7 @@ title: SE(3)
 
 > $SO(3) < SE(3)$
 
-## 4. SE(3)-Equivariance（(Simplified Form)）
+## 4. SE(3)-Equivariance(Simplified Form)
 
 当输入空间 $X$ 和输出空间 $Y$ 均为 $3\text{D}$ 坐标空间 $\mathbb{R}^3$，且群作用 $\rho$ 均为标准的坐标变换时：设 $T \in SE(3)$ 是一个变换算子，定义为 $T(\mathbf{x}) = R\mathbf{x} + \mathbf{t}$。
 
