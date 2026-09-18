@@ -82,10 +82,9 @@ $\sigma$ 有限（$\sigma$-有限，sigma有限）：$\forall A\in \mathcal{E}, 
 ## 外测度
 
 - 称$\mu^*:\mathcal{P}(\Omega)\to \overline{\mathbb{R}}$为外测度，若$\mu^*$满足：
-
-- $\mu^*(\emptyset)=0$
-- 单调性：$A\subseteq B \Longrightarrow \mu^*(A)\leq \mu^*(B)$
-- 可列次可加性：$A_1,A_2,\cdots \in \mathcal{P}(\Omega) \Longrightarrow \mu^*(\bigcup_{i=1}^{\infty}A_i) \leq \sum_{i=1}^{\infty}\mu^*(A_i)$
+  - $\mu^*(\emptyset)=0$
+  - 单调性：$A\subseteq B \Longrightarrow \mu^*(A)\leq \mu^*(B)$
+  - 可列次可加性：$A_1,A_2,\cdots \in \mathcal{P}(\Omega) \Longrightarrow \mu^*(\bigcup_{i=1}^{\infty}A_i) \leq \sum_{i=1}^{\infty}\mu^*(A_i)$
 
 设$\mu^*$为$\Omega$上的外测度，称$A \in \mathcal{P}(\Omega)$为$\mu^*$-可测，若
 $$\forall B \in \mathcal{P}(\Omega), \mu^*(B) = \mu^*(B \cap A) + \mu^*(B \cap A^c)$$
