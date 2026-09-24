@@ -3,25 +3,11 @@ graph TD
 1["机器学习/diffusion-inpainting(1)"] --> 0["机器学习/repaint"]
 3["抽象代数/群论(群作用)"] --> 2["机器学习/SE(3)"]
 5["机器学习/Dirac分布"] --> 4["机器学习/fourier"]
-8["机器学习/diffusion/扩散分类"] --> 7["机器学习/diffusion/离散分布的离散时间扩散"]
-8["机器学习/diffusion/扩散分类"] --> 7["机器学习/diffusion/离散分布的离散时间扩散"]
-9["测度论/积空间sigma代数"] --> 7["机器学习/diffusion/离散分布的离散时间扩散"]
-8["机器学习/diffusion/扩散分类"] --> 7["机器学习/diffusion/离散分布的离散时间扩散"]
-10[""] --> 8["机器学习/diffusion/扩散分类"]
-10[""] --> 8["机器学习/diffusion/扩散分类"]
-10[""] --> 8["机器学习/diffusion/扩散分类"]
-10[""] --> 8["机器学习/diffusion/扩散分类"]
-12["原始数据"] --> 11["机器学习/pytorch/torch.utils.data"]
-13["batch_size"] --> 11["机器学习/pytorch/torch.utils.data"]
-14["drop_last"] --> 11["机器学习/pytorch/torch.utils.data"]
-15["shuffle"] --> 11["机器学习/pytorch/torch.utils.data"]
-16["sampler"] --> 11["机器学习/pytorch/torch.utils.data"]
-17["batch_sampler"] --> 11["机器学习/pytorch/torch.utils.data"]
-18["batched data"] --> 11["机器学习/pytorch/torch.utils.data"]
+7["机器学习/diffusion/扩散分类"] --> 6["机器学习/diffusion/离散分布的离散时间扩散"]
 classDef leaf fill:#fde68a,stroke:#b45309
-class 0,2,4,7,11 leaf
+class 0,2,4,6 leaf
 classDef root fill:#bfdbfe,stroke:#1d4ed8
-class 1,5,6 root
-classDef externalRoot fill:#fecaca,stroke:#b91c1c
-class 3,9,10,12,13,14,15,16,17,18 externalRoot
+class 1,5,7 root
+classDef foundationRoot fill:#bbf7d0,stroke:#15803d
+class 3 foundationRoot
 ```

@@ -12,18 +12,16 @@ graph TD
 12["测度论/measure"] --> 11["测度论/L-S-measure"]
 0["测度论/class-of-sets"] --> 13["测度论/semi-ring"]
 15["测度论/L-integral"] --> 14["测度论/三大积分收敛定理"]
-2["测度论/符号测度"] --> 17["测度论/绝对连续与Radon-Nikodým定理"]
+2["测度论/符号测度"] --> 16["测度论/绝对连续与Radon-Nikodým定理"]
 0["测度论/class-of-sets"] --> 12["测度论/measure"]
-10["测度论/random-variable"] --> 18["测度论/几乎处处收敛和依测度收敛"]
-11["测度论/L-S-measure"] --> 19["测度论/L-measure"]
+10["测度论/random-variable"] --> 17["测度论/几乎处处收敛和依测度收敛"]
+11["测度论/L-S-measure"] --> 18["测度论/L-measure"]
 14["测度论/三大积分收敛定理"] --> 3["测度论/S-integral"]
-17["测度论/绝对连续与Radon-Nikodým定理"] --> 20["测度论/相互奇异与Lebesgue分解定理"]
-18["测度论/几乎处处收敛和依测度收敛"] --> 15["测度论/L-integral"]
-20["测度论/相互奇异与Lebesgue分解定理"] --> 21["测度论/分布函数的类型及分解"]
+16["测度论/绝对连续与Radon-Nikodým定理"] --> 19["测度论/相互奇异与Lebesgue分解定理"]
+17["测度论/几乎处处收敛和依测度收敛"] --> 15["测度论/L-integral"]
+19["测度论/相互奇异与Lebesgue分解定理"] --> 20["测度论/分布函数的类型及分解"]
 classDef leaf fill:#fde68a,stroke:#b45309
-class 4,6,13,19,21 leaf
-classDef root fill:#bfdbfe,stroke:#1d4ed8
-class 16 root
-classDef externalRoot fill:#fecaca,stroke:#b91c1c
-class 1,7,9 externalRoot
+class 4,6,13,18,20 leaf
+classDef foundationRoot fill:#bbf7d0,stroke:#15803d
+class 1,7,9 foundationRoot
 ```

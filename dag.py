@@ -4,8 +4,10 @@ from typing import Optional
 
 
 class DAGMermiad:
+    foundation = "朴素集合论/naive-set-theory-1"
+
     def __init__(self):
-        self.pattern = r"(?:!)?\[\[(?![^\]]*\.(?:png|jpg|jpeg|gif|svg|webp))[^\]]*\]\]"
+        self.pattern = r"(?m)^- (\[\[[^\]]+\]\])[ \t]*$"
         self.ignore_filepaths = ["content/index.md", "content/dependency_graph.md"]
 
     def find_subdirectories(self, base_dir: str) -> list[str]:
@@ -85,11 +87,37 @@ class DAGMermiad:
                 result[filepath].append((ref, link_type))
         return result
 
+    def nodes_tracing_to_foundation(self, dependencies_dict: dict[str, list[tuple[str, str]]]) -> set[str]:
+        """沿普通引用回溯，返回能到达 foundation 的节点（含 foundation 自身）。"""
+        memo: dict[str, bool] = {}
+
+        def reaches(node: str) -> bool:
+            if node == self.foundation:
+                return True
+            if node in memo:
+                return memo[node]
+            memo[node] = False
+            for ref, link_type in dependencies_dict.get(node, []):
+                if link_type == "include":
+                    continue
+                if reaches(ref):
+                    memo[node] = True
+                    return True
+            return False
+
+        tracing = {node for node in dependencies_dict if reaches(node)}
+        tracing.add(self.foundation)
+        return tracing
+
     def generate_mermaid_graph(
-        self, dependencies_dict: dict[str, list[tuple[str, str]]], subdir_prefix: Optional[str] = None
+        self,
+        dependencies_dict: dict[str, list[tuple[str, str]]],
+        subdir_prefix: Optional[str] = None,
+        trace_dependencies: Optional[dict[str, list[tuple[str, str]]]] = None,
     ) -> str:
         """生成 Mermaid 图：普通引用 [[...]] 用实线 -->，嵌入 ![[...]] 用虚线 -.->。
-        传入 subdir_prefix 时为子图着色：叶子、本目录根、跨子图根。总图不传则不着色。
+        传入 subdir_prefix 时为子图着色：叶子、本目录根、跨子图根。
+        子图根若在 trace_dependencies 上能回溯到 foundation，则改为绿色。总图不传则不着色。
         """
         result_str = "```mermaid\n"
         result_str += "graph TD\n"
@@ -125,10 +153,14 @@ class DAGMermiad:
                 result_str += f'{name_to_id[reference]}["{reference}"] --> {name_to_id[filepath]}["{filepath}"]\n'
 
         if subdir_prefix is not None:
-            class_ids: dict[str, list[int]] = {"leaf": [], "root": [], "externalRoot": []}
+            trace_source = dependencies_dict if trace_dependencies is None else trace_dependencies
+            tracing = self.nodes_tracing_to_foundation(trace_source)
+            class_ids: dict[str, list[int]] = {"leaf": [], "root": [], "externalRoot": [], "foundationRoot": []}
             for name, node_id in name_to_id.items():
                 if indeg.get(name, 0) == 0:
-                    if name.startswith(subdir_prefix):
+                    if name in tracing:
+                        class_ids["foundationRoot"].append(node_id)
+                    elif name.startswith(subdir_prefix):
                         class_ids["root"].append(node_id)
                     else:
                         class_ids["externalRoot"].append(node_id)
@@ -138,6 +170,7 @@ class DAGMermiad:
                 "leaf": "fill:#fde68a,stroke:#b45309",
                 "root": "fill:#bfdbfe,stroke:#1d4ed8",
                 "externalRoot": "fill:#fecaca,stroke:#b91c1c",
+                "foundationRoot": "fill:#bbf7d0,stroke:#15803d",
             }
             for class_name, node_ids in class_ids.items():
                 if not node_ids:
@@ -281,7 +314,9 @@ def main():
         subdir_graph_path = Path(subdir) / "dependency_graph.md"
         if subdir_dependencies:
             subdir_prefix = subdir.replace("content/", "") + "/"
-            subdir_mermaid_graph = dag_mermiad.generate_mermaid_graph(subdir_dependencies, subdir_prefix)
+            subdir_mermaid_graph = dag_mermiad.generate_mermaid_graph(
+                subdir_dependencies, subdir_prefix, reduced_dependencies_dict
+            )
             with open(subdir_graph_path, "w") as f:
                 f.write(subdir_mermaid_graph)
         else:
