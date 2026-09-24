@@ -191,7 +191,7 @@ class DAGMermiad:
         self, all_unified_reduced: dict[str, list[tuple[str, str]]], subdir_path: str
     ) -> dict[str, list[tuple[str, str]]]:
         """从已经 unify_format 且 transitive_reduction 的全局依赖字典中，为子目录生成依赖图。
-        对子目录节点做完整的传递依赖展开，使得朴素集合论等根节点能出现在图的顶层。
+        目录内节点保留完整依赖并继续展开；跨目录引用只保留直接依赖节点，不再回溯其上游。
         """
         subdir_prefix = subdir_path.replace("content/", "") + "/"
 
@@ -204,14 +204,18 @@ class DAGMermiad:
                 result[filepath] = dep_list
                 to_visit.append(filepath)
 
-        # BFS 展开所有传递依赖，保留各节点在完整图中的真实 dep list
+        # 目录内继续展开；目录外节点只作为叶子，依赖列表置空
         while to_visit:
             node = to_visit.pop()
             for ref, _ in result.get(node, []):
-                if ref not in result:
+                if ref in result:
+                    continue
+                if ref.startswith(subdir_prefix):
                     dep_list = all_unified_reduced.get(ref, [])
                     result[ref] = dep_list
                     to_visit.append(ref)
+                else:
+                    result[ref] = []
 
         return result
 
