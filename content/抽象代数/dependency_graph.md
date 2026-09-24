@@ -53,4 +53,10 @@ graph TD
 22["朴素集合论/初等数论"] --> 24["抽象代数/群论(置换群)"]
 4["抽象代数/向量空间"] --> 40["抽象代数/函数空间"]
 17["抽象代数/拓扑向量空间"] --> 40["抽象代数/函数空间"]
+classDef leaf fill:#fde68a,stroke:#b45309
+class 0,3,14,16,23,25,26,28,29,34,37,39,40 leaf
+classDef root fill:#bfdbfe,stroke:#1d4ed8
+class 33,36 root
+classDef externalRoot fill:#fecaca,stroke:#b91c1c
+class 13,22,31,35,38 externalRoot
 ```

@@ -15,4 +15,10 @@ graph TD
 3["点集拓扑/连续映射"] --> 11["点集拓扑/连通空间"]
 0["点集拓扑/拓扑空间"] --> 12["点集拓扑/乘积空间"]
 0["点集拓扑/拓扑空间"] --> 13["点集拓扑/序拓扑"]
+classDef leaf fill:#fde68a,stroke:#b45309
+class 10 leaf
+classDef root fill:#bfdbfe,stroke:#1d4ed8
+class 5 root
+classDef externalRoot fill:#fecaca,stroke:#b91c1c
+class 1,2,7 externalRoot
 ```

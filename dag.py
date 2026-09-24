@@ -85,18 +85,26 @@ class DAGMermiad:
                 result[filepath].append((ref, link_type))
         return result
 
-    def generate_mermaid_graph(self, dependencies_dict: dict[str, list[tuple[str, str]]]) -> str:
-        """生成 Mermaid 图：普通引用 [[...]] 用实线 -->，嵌入 ![[...]] 用虚线 -.->。"""
+    def generate_mermaid_graph(
+        self, dependencies_dict: dict[str, list[tuple[str, str]]], subdir_prefix: Optional[str] = None
+    ) -> str:
+        """生成 Mermaid 图：普通引用 [[...]] 用实线 -->，嵌入 ![[...]] 用虚线 -.->。
+        传入 subdir_prefix 时为子图着色：叶子、本目录根、跨子图根。总图不传则不着色。
+        """
         result_str = "```mermaid\n"
         result_str += "graph TD\n"
         name_to_id = {}
         count = 0
+        indeg: dict[str, int] = {}
+        outdeg: dict[str, int] = {}
         for filepath, reference_list in dependencies_dict.items():
             name_id = name_to_id.get(filepath, None)
             if name_id is None:
                 name_id = count
                 count += 1
                 name_to_id[filepath] = name_id
+            indeg.setdefault(filepath, 0)
+            outdeg.setdefault(filepath, 0)
             for reference, link_type in reference_list:
                 if link_type == "include":
                     continue
@@ -105,12 +113,38 @@ class DAGMermiad:
                     reference_id = count
                     count += 1
                     name_to_id[reference] = reference_id
+                indeg.setdefault(reference, 0)
+                outdeg.setdefault(reference, 0)
+                outdeg[reference] += 1
+                indeg[filepath] += 1
 
         for filepath, reference_list in dependencies_dict.items():
             for reference, link_type in reference_list:
                 if link_type == "include":
                     continue
                 result_str += f'{name_to_id[reference]}["{reference}"] --> {name_to_id[filepath]}["{filepath}"]\n'
+
+        if subdir_prefix is not None:
+            class_ids: dict[str, list[int]] = {"leaf": [], "root": [], "externalRoot": []}
+            for name, node_id in name_to_id.items():
+                if indeg.get(name, 0) == 0:
+                    if name.startswith(subdir_prefix):
+                        class_ids["root"].append(node_id)
+                    else:
+                        class_ids["externalRoot"].append(node_id)
+                elif outdeg.get(name, 0) == 0:
+                    class_ids["leaf"].append(node_id)
+            styles = {
+                "leaf": "fill:#fde68a,stroke:#b45309",
+                "root": "fill:#bfdbfe,stroke:#1d4ed8",
+                "externalRoot": "fill:#fecaca,stroke:#b91c1c",
+            }
+            for class_name, node_ids in class_ids.items():
+                if not node_ids:
+                    continue
+                result_str += f"classDef {class_name} {styles[class_name]}\n"
+                result_str += f"class {','.join(str(node_id) for node_id in node_ids)} {class_name}\n"
+
         result_str += "```"
         return result_str
 
@@ -246,7 +280,8 @@ def main():
 
         subdir_graph_path = Path(subdir) / "dependency_graph.md"
         if subdir_dependencies:
-            subdir_mermaid_graph = dag_mermiad.generate_mermaid_graph(subdir_dependencies)
+            subdir_prefix = subdir.replace("content/", "") + "/"
+            subdir_mermaid_graph = dag_mermiad.generate_mermaid_graph(subdir_dependencies, subdir_prefix)
             with open(subdir_graph_path, "w") as f:
                 f.write(subdir_mermaid_graph)
         else:

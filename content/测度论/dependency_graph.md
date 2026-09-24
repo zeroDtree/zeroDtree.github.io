@@ -20,4 +20,10 @@ graph TD
 17["测度论/绝对连续与Radon-Nikodým定理"] --> 20["测度论/相互奇异与Lebesgue分解定理"]
 18["测度论/几乎处处收敛和依测度收敛"] --> 15["测度论/L-integral"]
 20["测度论/相互奇异与Lebesgue分解定理"] --> 21["测度论/分布函数的类型及分解"]
+classDef leaf fill:#fde68a,stroke:#b45309
+class 4,6,13,19,21 leaf
+classDef root fill:#bfdbfe,stroke:#1d4ed8
+class 16 root
+classDef externalRoot fill:#fecaca,stroke:#b91c1c
+class 1,7,9 externalRoot
 ```

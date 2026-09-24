@@ -18,4 +18,10 @@ graph TD
 16["sampler"] --> 11["机器学习/pytorch/torch.utils.data"]
 17["batch_sampler"] --> 11["机器学习/pytorch/torch.utils.data"]
 18["batched data"] --> 11["机器学习/pytorch/torch.utils.data"]
+classDef leaf fill:#fde68a,stroke:#b45309
+class 0,2,4,7,11 leaf
+classDef root fill:#bfdbfe,stroke:#1d4ed8
+class 1,5,6 root
+classDef externalRoot fill:#fecaca,stroke:#b91c1c
+class 3,9,10,12,13,14,15,16,17,18 externalRoot
 ```

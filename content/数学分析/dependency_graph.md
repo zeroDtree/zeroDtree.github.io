@@ -41,4 +41,10 @@ graph TD
 37["朴素集合论/naive-set-theory-1"] --> 36["数学分析/实数构造/自然数"]
 38["抽象代数/环论(二)"] --> 34["数学分析/实数构造/整数"]
 39["抽象代数/环论(有序环)"] --> 34["数学分析/实数构造/整数"]
+classDef leaf fill:#fde68a,stroke:#b45309
+class 3,8,13,17,20,21,25,29,30,36 leaf
+classDef root fill:#bfdbfe,stroke:#1d4ed8
+class 11,12,24 root
+classDef externalRoot fill:#fecaca,stroke:#b91c1c
+class 1,2,4,5,22,28,33,35,37,38,39 externalRoot
 ```
