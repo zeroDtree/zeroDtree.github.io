@@ -6,6 +6,7 @@ title: 可测函数
 
 - [[测度论/measurable-mapping]]
 - [[数学分析/converge]]
+- [[测度论/与R相关的Borel集]]
 
 ## 定义
 

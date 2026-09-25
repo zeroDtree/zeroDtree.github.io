@@ -5,6 +5,7 @@ title: 随机变量-像测度与概率分布
 ## 前置
 
 - [[测度论/measurable-function]]
+- [[测度论/measure]]
 
 ## 定义
 

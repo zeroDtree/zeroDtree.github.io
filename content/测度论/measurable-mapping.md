@@ -1,5 +1,5 @@
 ---
-title: 可测映射与随机变量
+title: 可测映射
 ---
 
 ## Prerequisites

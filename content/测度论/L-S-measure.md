@@ -7,6 +7,7 @@ title: Lebesgue-Stieltjes测度
 ## Prerequisites
 
 - [[测度论/measure]]
+- [[测度论/semi-ring]]
 
 ## 定义
 
