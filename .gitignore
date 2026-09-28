@@ -13,3 +13,5 @@ replit.nix
 quartz/cli/tui/dist/
 /my-plugins/
 .turbo/
+content/**/*.typ
+content/**/*.pdf

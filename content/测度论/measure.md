@@ -175,3 +175,248 @@ $\mathcal{F}^* := \{ A \in \Omega \mid \exists A_1,A_2 \in \mathcal{F}, s.t. A_1
 7. 设$\Omega,\mathcal{F},\mu$为$\sigma$-有限测度空间，则:
    1. $\mathcal{U}_{\mu^*}=\overline{\mathcal{F}}$
    2. $\mu^*|_{\mathcal{U}_{\mu^*}}=\overline{\mu}$
+
+## Examples
+
+### 计数测度
+
+设 $\Omega$ 为任意集合。在 $(\Omega,\mathcal{P}(\Omega))$ 上定义
+
+$$
+\#(A)=
+\begin{cases}
+|A|, & A\text{ 为有限集},\\
++\infty, & A\text{ 为无限集},
+\end{cases}
+\qquad A\subseteq\Omega.
+$$
+
+称 $\#$ 为 $\Omega$ 上的**计数测度**（counting measure）。若
+$\{A_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$ 两两不交，则对每个
+$N\geqslant1$，
+
+$$
+\#\left(\biguplus_{n=1}^N A_n\right)
+=\sum_{n=1}^N\#(A_n).
+$$
+
+事实上，若其中某个 $A_n$ 无限，则等式两端均为 $+\infty$；否则这就是
+有限个两两不交的有限集的基数公式。
+
+下面验证测度公理：
+
+1. **非负性与空集**：显然 $\#(A)\in[0,+\infty]$，且
+   $\#(\emptyset)=0$。
+2. **可列可加性**：记 $A=\biguplus_{n=1}^{\infty}A_n$。
+   - 若某个 $A_k$ 为无限集，则 $A$ 也是无限集，等式两端均为
+     $+\infty$。
+   - 若每个 $A_n$ 都是有限集，则
+
+     $$
+     \#(A)
+     =\lim_{N\to\infty}
+       \#\left(\biguplus_{n=1}^N A_n\right)
+     =\lim_{N\to\infty}\sum_{n=1}^N\#(A_n)
+     =\sum_{n=1}^{\infty}\#(A_n).
+     $$
+
+     第一处等号可直接由基数验证：若 $A$ 有限，则只有有限多个
+     $A_n$ 非空，有限并最终稳定；若 $A$ 无限，则有限并的基数趋于
+     $+\infty$。
+
+因此
+
+$$
+\#\left(\biguplus_{n=1}^{\infty}A_n\right)
+=\sum_{n=1}^{\infty}\#(A_n),
+$$
+
+即 $\#$ 是 $(\Omega,\mathcal{P}(\Omega))$ 上的测度。它具有以下性质：
+
+- $\#(\{\omega\})=1$，$\omega\in\Omega$；
+- $\#$ 是有限测度当且仅当 $\Omega$ 有限；
+- $\#$ 是 $\sigma$-有限测度当且仅当 $\Omega$ 至多可数。
+
+  **证明** 若 $\Omega$ 至多可数，则可将它写成至多可数个单点集之并，而每个
+  单点集的计数测度均为 $1$，故 $\#$ 是 $\sigma$-有限测度。
+
+  反之，若 $\#$ 是 $\sigma$-有限测度，则存在
+  $\{E_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$，使得
+
+  $$
+  \Omega=\bigcup_{n=1}^{\infty}E_n,
+  \qquad \#(E_n)<\infty.
+  $$
+
+  因此每个 $E_n$ 都是有限集，而有限集的可列并至多可数，所以 $\Omega$
+  至多可数。$\square$
+
+若 $\Omega$ 是非空有限集，则归一化后的计数测度
+
+$$
+P(A)=\frac{\#(A)}{\#(\Omega)}
+$$
+
+是 $\Omega$ 上的均匀概率测度。
+
+### 集中在子集上的计数测度
+
+设 $(\Omega,\mathcal{F})$ 为可测空间，$E\in\mathcal{F}$。对任意
+$A\in\mathcal{F}$，定义
+
+$$
+\nu_E(A):=\#(A\cap E).
+$$
+
+称 $\nu_E$ 为**集中在 $E$ 上的计数测度**。它确实是测度：首先
+$\nu_E(A)\geqslant0$ 且 $\nu_E(\emptyset)=0$；其次，若
+$\{A_n\}_{n\geqslant1}\subseteq\mathcal{F}$ 两两不交，则
+$\{A_n\cap E\}_{n\geqslant1}$ 也两两不交，所以
+
+$$
+\begin{aligned}
+\nu_E\left(\biguplus_{n=1}^{\infty}A_n\right)
+&=\#\left(
+  \left(\biguplus_{n=1}^{\infty}A_n\right)\cap E
+  \right)\\
+&=\#\left(\biguplus_{n=1}^{\infty}(A_n\cap E)\right)\\
+&=\sum_{n=1}^{\infty}\#(A_n\cap E)\\
+&=\sum_{n=1}^{\infty}\nu_E(A_n).
+\end{aligned}
+$$
+
+此外，
+
+$$
+\nu_E(\Omega\setminus E)=0,
+$$
+
+即 $\nu_E$ 的全部质量都集中在 $E$ 上。它还具有以下性质：
+
+1. $\nu_E(\Omega)=\#(E)$，故 $\nu_E$ 是有限测度当且仅当 $E$ 是
+   有限集；它是概率测度当且仅当 $E$ 是单点集。
+2. 若 $\mathcal{F}$ 包含 $\Omega$ 的所有单点集，则
+   $\nu_E$ 是 $\sigma$-有限测度当且仅当 $E$ 至多可数。
+
+   事实上，若 $E=\{\omega_n:n\in I\}$ 至多可数，则
+
+   $$
+   \Omega=(\Omega\setminus E)\cup\bigcup_{n\in I}\{\omega_n\},
+   $$
+
+   且等号右侧各集合的 $\nu_E$-测度均有限。反之，若
+   $\Omega=\bigcup_{n=1}^{\infty}B_n$ 且 $\nu_E(B_n)<\infty$，则
+   每个 $B_n\cap E$ 都是有限集，而
+
+   $$
+   E=\bigcup_{n=1}^{\infty}(B_n\cap E)
+   $$
+
+   至多可数。
+
+3. 若 $E=\{\omega_n:n\in I\}$ 至多可数且各点两两不同，则
+
+   $$
+   \nu_E=\sum_{n\in I}\delta_{\omega_n}.
+   $$
+
+集中计数测度可视为计数测度在 $E$ 上的限制，再将其扩充为
+$\Omega$ 上、在 $\Omega\setminus E$ 处取零的测度。
+
+### Dirac 测度
+
+设 $(\Omega,\mathcal{F})$ 为可测空间，固定 $\omega_0\in\Omega$。定义
+
+$$
+\delta_{\omega_0}(A)
+=I_A(\omega_0)
+=
+\begin{cases}
+1, & \omega_0\in A,\\
+0, & \omega_0\notin A,
+\end{cases}
+\qquad A\in\mathcal{F}.
+$$
+
+称 $\delta_{\omega_0}$ 为集中在 $\omega_0$ 处的 **Dirac 测度**。对于任意两两不交的
+$\{A_n\}_{n\geqslant1}\subseteq\mathcal{F}$，有
+
+$$
+\omega_0\in\biguplus_{n=1}^{\infty}A_n
+\quad\Longleftrightarrow\quad
+\text{存在唯一的 }k\geqslant1\text{ 使 }\omega_0\in A_k.
+$$
+
+若不存在这样的 $k$，则下式两端均为 $0$；若存在，则两端均为
+$1$。因此
+
+$$
+\delta_{\omega_0}\left(\biguplus_{n=1}^{\infty}A_n\right)
+=\sum_{n=1}^{\infty}\delta_{\omega_0}(A_n).
+$$
+
+此外，$\delta_{\omega_0}(A)\geqslant0$、
+$\delta_{\omega_0}(\emptyset)=0$，并且
+$\delta_{\omega_0}(\Omega)=1$。所以 $\delta_{\omega_0}$ 不仅是测度，
+还是概率测度。
+
+Dirac 测度也可看作集中在单点集上的计数测度：
+
+$$
+\delta_{\omega_0}(A)=\#(A\cap\{\omega_0\}).
+$$
+
+更一般地，若 $\{\omega_n:n\in I\}$ 至多可数、各点两两不同，且对每个
+$n\in I$ 都有 $\{\omega_n\}\in\mathcal{F}$，并且
+$p_n\geqslant0$、$\sum_{n\in I}p_n=1$，则
+
+$$
+P=\sum_{n\in I}p_n\delta_{\omega_n}
+$$
+
+是离散概率测度。事实上，对任意 $A\in\mathcal{F}$，
+
+$$
+P(A)
+=\sum_{n\in I}p_n\delta_{\omega_n}(A)
+=\sum_{\{n\in I:\,\omega_n\in A\}}p_n.
+$$
+
+因此 $P(A)\geqslant0$、$P(\emptyset)=0$，并且
+
+$$
+P(\Omega)=\sum_{n\in I}p_n=1.
+$$
+
+再设 $\{A_k\}_{k\geqslant1}\subseteq\mathcal{F}$ 两两不交。对每个
+$n\in I$，至多有一个 $A_k$ 包含 $\omega_n$，故
+
+$$
+\delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)
+=\sum_{k=1}^{\infty}\delta_{\omega_n}(A_k).
+$$
+
+由于所有项均非负，可以交换两个求和的次序，从而
+
+$$
+\begin{aligned}
+P\left(\biguplus_{k=1}^{\infty}A_k\right)
+&=\sum_{n\in I}p_n
+  \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)\\
+&=\sum_{n\in I}\sum_{k=1}^{\infty}
+  p_n\delta_{\omega_n}(A_k)\\
+&=\sum_{k=1}^{\infty}\sum_{n\in I}
+  p_n\delta_{\omega_n}(A_k)\\
+&=\sum_{k=1}^{\infty}P(A_k).
+\end{aligned}
+$$
+
+所以 $P$ 具有可列可加性；结合 $P(\Omega)=1$，可知 $P$ 是概率测度。
+最后，由各 $\omega_n$ 两两不同，
+
+$$
+P(\{\omega_n\})
+=\sum_{m\in I}p_m\delta_{\omega_m}(\{\omega_n\})
+=p_n.
+\qquad\square
+$$
