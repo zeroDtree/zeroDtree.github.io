@@ -1,5 +1,7 @@
 ---
 title: openvpn
+tags:
+  - 网络
 ---
 
 - [1. openvpn 工作原理图](#1-openvpn-工作原理图)

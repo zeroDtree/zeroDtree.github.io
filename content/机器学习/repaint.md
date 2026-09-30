@@ -1,5 +1,7 @@
 ---
 title: RePaint
+tags:
+  - 扩散模型
 ---
 
 ## 前置

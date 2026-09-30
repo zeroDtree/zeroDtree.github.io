@@ -1,5 +1,7 @@
 ---
 title: 有用的hook
+tags:
+  - PyTorch
 ---
 
 - [Hook](#hook)

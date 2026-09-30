@@ -1,5 +1,8 @@
 ---
 title: sequence, series, function
+tags:
+  - 极限
+  - 级数
 ---
 
 ## Prerequisites

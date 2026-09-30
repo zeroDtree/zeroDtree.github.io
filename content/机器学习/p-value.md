@@ -1,5 +1,7 @@
 ---
 title: p-value
+tags:
+  - 统计
 ---
 
 In statistics, every conjecture concerning the unknown probability distribution of a collection of random variables representing the observed data X in some study is called a statistical hypothesis. If we state one hypothesis only and the aim of the statistical test is to see whether this hypothesis is tenable, but not to investigate other specific hypotheses, then such a test is called a **null hypothesis test**.

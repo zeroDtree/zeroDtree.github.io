@@ -1,5 +1,7 @@
 ---
 title: svd
+tags:
+  - 线性代数
 ---
 
 All matrix is belong to $\mathbb{R}^{m \times n}$ if not specified.

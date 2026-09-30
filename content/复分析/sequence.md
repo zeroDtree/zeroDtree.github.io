@@ -1,5 +1,8 @@
 ---
 title: sequence of complex numbers
+tags:
+  - 极限
+  - 复数
 ---
 
 ## Definition

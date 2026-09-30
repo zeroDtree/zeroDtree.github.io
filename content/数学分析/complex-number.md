@@ -1,5 +1,7 @@
 ---
 title: 复数构造
+tags:
+  - 数学分析
 ---
 
 ## Prerequisites

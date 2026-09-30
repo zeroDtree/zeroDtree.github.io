@@ -1,5 +1,7 @@
 ---
 title: Lebesgue 积分（L积分）
+tags:
+  - 测度论
 ---
 
 本节恒设$(\Omega, \mathcal{F}, \mu)$为给定的测度空间，所有函数都是定义在$\Omega$上，广义实值函数。

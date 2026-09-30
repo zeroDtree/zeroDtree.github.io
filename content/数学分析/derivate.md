@@ -1,5 +1,7 @@
 ---
 title: derivative
+tags:
+  - 数学分析
 ---
 
 ## 1. Prerequisites

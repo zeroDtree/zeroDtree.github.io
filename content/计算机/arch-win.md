@@ -1,5 +1,7 @@
 ---
 title: windows + archlinux 双系统安装 大致流程
+tags:
+  - Linux
 ---
 
 - [archlinux+windows 双系统安装“大致过程”与“注意事项”。](#archlinuxwindows-双系统安装大致过程与注意事项)

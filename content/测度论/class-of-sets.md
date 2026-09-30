@@ -1,5 +1,7 @@
 ---
 title: 集类
+tags:
+  - 测度论
 ---
 
 ## Prerequisites

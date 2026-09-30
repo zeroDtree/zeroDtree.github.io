@@ -1,5 +1,7 @@
 ---
 title: dataset and dataloader
+tags:
+  - PyTorch
 ---
 
 - [1. 数据流](#1-数据流)

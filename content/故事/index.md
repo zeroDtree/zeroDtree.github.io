@@ -1,5 +1,8 @@
 ---
 title: 故事
+tags:
+  - 索引
+  - 康德
 ---
 
 ![[故事/dependency_graph]]

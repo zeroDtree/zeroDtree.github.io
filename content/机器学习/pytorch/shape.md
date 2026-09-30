@@ -1,5 +1,7 @@
 ---
 title: shape
+tags:
+  - PyTorch
 ---
 
 ## 正常batch

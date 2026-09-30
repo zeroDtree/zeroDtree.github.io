@@ -1,5 +1,8 @@
 ---
 title: PCA(Principal Component Analysis)
+tags:
+  - 线性代数
+  - 统计
 ---
 
 ## 目标

@@ -1,5 +1,7 @@
 ---
 title: Tangent space of smooth manifold(光滑流形的切空间)
+tags:
+  - 流形
 ---
 
 文中chart都是指从某一个极大图册(maximal atlas)中取。

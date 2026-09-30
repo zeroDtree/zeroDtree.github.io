@@ -1,5 +1,7 @@
 ---
 title: Diffusion Inpainting(1)
+tags:
+  - 扩散模型
 ---
 
 ## 任务描述

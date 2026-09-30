@@ -156,6 +156,18 @@ plugins:
     enabled: true
   - source: github:quartz-community/tag-page
     enabled: true
+  - source: ./my-plugins/quartz-v5-plugin-top-card
+    enabled: true
+    layout:
+      position: header
+      priority: 5
+  - source: ./my-plugins/quartz-v5-plugin-friends
+    enabled: true
+    order: 35
+    options:
+      slug: 友链
+      pageSize: 12
+      sortBy: order
   - source: github:quartz-community/explorer
     enabled: true
     layout:
@@ -265,6 +277,7 @@ plugins:
         - description
         - tags
         - aliases
+        - friends
       excludedProperties: []
       hidePropertiesView: false
       delimiters: ---
@@ -293,6 +306,11 @@ layout:
       positions:
         right: []
     tag:
+      exclude:
+        - reader-mode
+      positions:
+        right: []
+    friends:
       exclude:
         - reader-mode
       positions:

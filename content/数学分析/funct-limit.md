@@ -1,5 +1,7 @@
 ---
 title: limit of functions
+tags:
+  - 数学分析
 ---
 
 ## Prerequisites

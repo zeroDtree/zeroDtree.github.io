@@ -1,5 +1,8 @@
 ---
 title: cursor
+tags:
+  - 编辑器
+  - 网络
 ---
 
 ## cursor无法使用 Claude 模型

@@ -1,5 +1,7 @@
 ---
 title: samba 网络磁盘
+tags:
+  - 网络
 ---
 
 在 Arch Linux 上搭建 SMB 共享，供 macOS 通过 NetBird 虚拟网络挂载为网络磁盘。

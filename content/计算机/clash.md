@@ -1,5 +1,7 @@
 ---
 title: clash
+tags:
+  - 网络
 ---
 
 - [1. linux 上使用clash (无GUI版)](#1-linux-上使用clash-无gui版)

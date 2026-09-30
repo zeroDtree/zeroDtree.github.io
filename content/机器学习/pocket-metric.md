@@ -1,5 +1,7 @@
 ---
 title: 蛋白质口袋评估指标
+tags:
+  - 蛋白质
 ---
 
 - [亲和力（Affinity）](#亲和力affinity)

@@ -1,5 +1,7 @@
 ---
 title: Homogeneous linear differential equation of order n with constant coefficients
+tags:
+  - 微分方程
 ---
 
 ## Homogeneous linear differential equation of order n with constant coefficients

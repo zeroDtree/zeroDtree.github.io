@@ -1,5 +1,7 @@
 ---
 title: semi-ring (in measure theory)
+tags:
+  - 测度论
 ---
 
 ## Prerequisites

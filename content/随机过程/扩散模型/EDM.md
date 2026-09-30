@@ -3,6 +3,8 @@ title: EDM
 aliases:
   - /随机过程/diffusion/EDM
   - /机器学习/diffusion/EDM
+tags:
+  - 扩散模型
 ---
 
 ## 前置

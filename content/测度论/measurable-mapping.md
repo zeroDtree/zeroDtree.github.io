@@ -1,5 +1,7 @@
 ---
 title: 可测映射
+tags:
+  - 测度论
 ---
 
 ## Prerequisites

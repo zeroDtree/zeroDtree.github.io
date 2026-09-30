@@ -5,6 +5,9 @@ aliases:
   - /机器学习/diffusion/扩散分类
   - /随机过程/diffusion/离散分布的连续时间扩散
   - /机器学习/diffusion/离散分布的连续时间扩散
+tags:
+  - 索引
+  - 扩散模型
 ---
 
 ## 前置

@@ -1,5 +1,7 @@
 ---
 title: Diagonalization
+tags:
+  - 线性代数
 ---
 
 ## Prerequisites

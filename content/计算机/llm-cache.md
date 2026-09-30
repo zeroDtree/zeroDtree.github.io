@@ -1,5 +1,7 @@
 ---
 title: KV Cache & Prompt Cache
+tags:
+  - 大模型
 ---
 
 - [1. 重复计算问题](#1-重复计算问题)

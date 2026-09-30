@@ -1,5 +1,7 @@
 ---
 title: 乘积度量空间与积拓扑
+tags:
+  - 点集拓扑
 ---
 
 ## Prerequisites

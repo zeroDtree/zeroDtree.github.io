@@ -1,5 +1,9 @@
 ---
 title: quantization
+tags:
+  - 量化
+  - 大模型
+  - PyTorch
 ---
 
 - [model compression](#model-compression)

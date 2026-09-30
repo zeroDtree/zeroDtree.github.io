@@ -1,5 +1,8 @@
 ---
 title: Coherence
+tags:
+  - 统计
+  - 大模型
 ---
 
 Definition, Property and Theorem about Coherence in 《ON THE GENERALIZATION MYSTERY IN DEEP LEARNING》

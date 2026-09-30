@@ -1,5 +1,7 @@
 ---
 title: Dirac分布
+tags:
+  - 概率
 ---
 
 ## 前置

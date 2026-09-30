@@ -1,5 +1,7 @@
 ---
 title: lvm记录
+tags:
+  - Linux
 ---
 
 # Ubuntu 20.04 物理硬盘制作 LVM 逻辑卷记录

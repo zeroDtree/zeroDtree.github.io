@@ -1,5 +1,7 @@
 ---
 title: Zorn's Lemma (佐恩引理)
+tags:
+  - 朴素集合论
 ---
 
 ## 前置

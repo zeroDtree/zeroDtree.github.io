@@ -1,5 +1,7 @@
 ---
 title: 测度
+tags:
+  - 测度论
 ---
 
 ## Prerequisites

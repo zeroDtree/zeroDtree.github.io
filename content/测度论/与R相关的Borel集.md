@@ -1,3 +1,8 @@
+---
+tags:
+  - 测度论
+---
+
 ## Prerequisites
 
 - [[测度论/class-of-sets]]

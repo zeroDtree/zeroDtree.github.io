@@ -1,5 +1,7 @@
 ---
 title: 有限自动机(FA)
+tags:
+  - 计算理论
 ---
 
 《Introduction to the Theory of Computation》里的自动机部分的定义和定理。

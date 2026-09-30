@@ -1,5 +1,8 @@
 ---
 title: Smooth functions on Euclidean space
+tags:
+  - 导数
+  - 流形
 ---
 
 ## Definition

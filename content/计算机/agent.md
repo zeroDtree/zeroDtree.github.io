@@ -1,5 +1,8 @@
 ---
 title: agent
+tags:
+  - Agent
+  - 大模型
 ---
 
 ## 1. 核心概念

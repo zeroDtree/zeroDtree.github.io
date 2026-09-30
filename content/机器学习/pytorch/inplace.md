@@ -1,5 +1,7 @@
 ---
 title: inplace
+tags:
+  - PyTorch
 ---
 
 ## to

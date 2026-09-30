@@ -1,5 +1,8 @@
 ---
 title: posterior mean
+tags:
+  - 概率
+  - 扩散模型
 ---
 
 ### Tweedie's formula

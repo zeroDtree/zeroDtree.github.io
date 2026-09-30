@@ -1,5 +1,7 @@
 ---
 title: Kabsch-algorithm
+tags:
+  - 几何
 ---
 
 # Kabsch-algorithm

@@ -1,5 +1,7 @@
 ---
 title: smooth manifold（光滑流形）
+tags:
+  - 流形
 ---
 
 ## 前置

@@ -1,5 +1,7 @@
 ---
 title: 点集拓扑
+tags:
+  - 点集拓扑
 ---
 
 ![[点集拓扑/dependency_graph]]

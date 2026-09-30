@@ -1,5 +1,7 @@
 ---
 title: archlinux-kde 中文与中文输入 大致流程
+tags:
+  - Linux
 ---
 
 - [1. archlinux-kde 中文与中文输入](#1-archlinux-kde-中文与中文输入)

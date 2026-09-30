@@ -1,5 +1,7 @@
 ---
 title: netbird reverse proxy
+tags:
+  - 网络
 ---
 
 ## 前置

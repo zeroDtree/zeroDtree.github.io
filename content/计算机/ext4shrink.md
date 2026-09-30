@@ -1,5 +1,7 @@
 ---
 title: ext4 缩容记录(测试)
+tags:
+  - Linux
 ---
 
 # gpt+ext4 缩容测试

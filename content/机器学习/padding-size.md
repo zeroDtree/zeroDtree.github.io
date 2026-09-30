@@ -1,5 +1,7 @@
 ---
 title: padding_side
+tags:
+  - 大模型
 ---
 
 # 语言模型的padding问题。

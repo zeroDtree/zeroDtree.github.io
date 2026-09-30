@@ -1,5 +1,7 @@
 ---
 title: holant problem
+tags:
+  - 计算理论
 ---
 
 - [1. 定义](#1-定义)

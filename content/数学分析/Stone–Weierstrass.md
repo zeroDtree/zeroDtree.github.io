@@ -1,5 +1,7 @@
 ---
 title: Stone–Weierstrass定理
+tags:
+  - 数学分析
 ---
 
 ## 前置

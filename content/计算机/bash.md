@@ -1,5 +1,7 @@
 ---
 title: bash
+tags:
+  - Shell
 ---
 
 ## 参数拓展

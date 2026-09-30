@@ -1,5 +1,7 @@
 ---
 title: 安卓root 大致流程与注意事项
+tags:
+  - Linux
 ---
 
 - [1. 解锁bootloader](#1-解锁bootloader)

@@ -1,5 +1,7 @@
 ---
 title: Galois Theory
+tags:
+  - 抽象代数
 ---
 
 ## 1. 前置

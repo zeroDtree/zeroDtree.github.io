@@ -1,3 +1,9 @@
+---
+tags:
+  - 极限
+  - 复数
+---
+
 ## Definition of convergence of functions at a point
 
 **Convergence of functions at a point**: Let $X$ be a subset of $\mathbb{C}^n$, let $f: X \rightarrow \mathbb{C}^m$ be a function, let $E$ be a subset of $X$, $x_0$ be an adherent point of $E$, and let $L \in \mathbb{C}^m$. We say that $f$ $\textit{converges to}$ $L$ $\textit{at}$ $x_0$ $\textit{in}$ $E$ and write

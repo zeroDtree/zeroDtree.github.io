@@ -1,5 +1,7 @@
 ---
 title: accelerator
+tags:
+  - PyTorch
 ---
 
 - [1. 梯度累计-代码片段分析](#1-梯度累计-代码片段分析)

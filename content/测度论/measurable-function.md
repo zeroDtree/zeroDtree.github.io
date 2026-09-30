@@ -1,5 +1,7 @@
 ---
 title: 可测函数
+tags:
+  - 测度论
 ---
 
 ## Prerequisites

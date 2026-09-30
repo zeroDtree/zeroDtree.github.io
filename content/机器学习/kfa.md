@@ -1,3 +1,9 @@
+---
+tags:
+  - 线性代数
+  - 统计
+---
+
 # Kronecker-factored Approximate
 
 - [Kronecker-factored Approximate](#kronecker-factored-approximate)
