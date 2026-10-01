@@ -156,16 +156,16 @@ plugins:
     enabled: true
   - source: github:quartz-community/tag-page
     enabled: true
-  - source: ./my-plugins/quartz-v5-plugin-top-card
+  - source: github:zeroDtree/quartz-v5-plugin-top-card
     enabled: true
     layout:
       position: header
       priority: 5
-  - source: ./my-plugins/quartz-v5-plugin-friends
+  - source: github:zeroDtree/quartz-v5-plugin-friends
     enabled: true
     order: 35
     options:
-      slug: 友链
+      slug: friends
       pageSize: 12
       sortBy: order
   - source: github:quartz-community/explorer
@@ -180,12 +180,11 @@ plugins:
       priority: 10
   - source: github:quartz-community/search
     enabled: true
+    # `body` is not a layout slot. The plugin stays enabled for its script and
+    # styles; the button is rendered inside Top Card instead of the sidebar.
     layout:
-      position: left
-      priority: 20
-      group: toolbar
-      groupOptions:
-        grow: true
+      position: body
+      priority: 0
   - source: github:quartz-community/backlinks
     enabled: true
     layout:
@@ -207,22 +206,17 @@ plugins:
       position: beforeBody
       priority: 30
   - source: github:quartz-community/page-title
-    enabled: true
-    layout:
-      position: left
-      priority: 10
+    enabled: false
   - source: github:quartz-community/darkmode
     enabled: true
     layout:
-      position: left
-      priority: 30
-      group: toolbar
+      position: body
+      priority: 0
   - source: github:quartz-community/reader-mode
     enabled: true
     layout:
-      position: left
-      priority: 35
-      group: toolbar
+      position: body
+      priority: 0
   - source: github:quartz-community/breadcrumbs
     enabled: true
     layout:
@@ -248,15 +242,19 @@ plugins:
       links:
         GitHub: https://github.com/jackyzha0/quartz
         Discord Community: https://discord.gg/cRFFHYye7t
-  - source: github:quartz-community/recent-notes
+  - source: github:zeroDtree/quartz-v5-plugin-recent-notes
     enabled: true
     options:
       limit: 2
       showTags: false
+      hideTagPages: true
+      hideFolderPages: true
+      linkToMore: updates
     layout:
       position: right
       priority: 12
       display: desktop-only
+      condition: not-updates-page
   - source: github:quartz-community/spacer
     enabled: true
     options: {}
@@ -288,11 +286,6 @@ plugins:
       priority: 15
       display: all
 layout:
-  groups:
-    toolbar:
-      priority: 35
-      direction: row
-      gap: 0.5rem
   byPageType:
     "404":
       positions:
@@ -313,6 +306,14 @@ layout:
     friends:
       exclude:
         - reader-mode
+      positions:
+        right: []
+    updates:
+      exclude:
+        - article-title
+        - note-properties
+        - breadcrumbs
+        - comments
       positions:
         right: []
     canvas: {}

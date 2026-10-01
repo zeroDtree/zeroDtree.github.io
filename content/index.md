@@ -7,7 +7,6 @@ tags:
 
 - [Overview](#overview)
 - [Notation](#notation)
-- [友链](#友链)
 
 ## Overview
 
@@ -49,7 +48,3 @@ tags:
 ## Notation
 
 - [[notation]]
-
-## 友链
-
-- [[友链]]
