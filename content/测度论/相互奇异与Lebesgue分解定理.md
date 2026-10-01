@@ -17,10 +17,10 @@ $$\vert{}\nu\vert{}(N) = 0, \quad \vert{}\varphi\vert{}(N^c) = 0.$$
 
 1. 绝对连续 $\pm$ 绝对连续 $=$ 绝对连续
    设 $\nu_1, \nu_2, \mu,\nu_1 \pm \nu_2$ 为符号测度
-   $$\text{若 } \nu_1 \ll \mu \text{ 且 } \nu_2 \ll \mu，\text{则 } (\nu_1 \pm \nu_2) \ll \mu$$
+   $$\text{若 } \nu_1 \ll \mu \text{ 且 } \nu_2 \ll \mu \text{，则 } (\nu_1 \pm \nu_2) \ll \mu$$
 1. 奇异 $\pm$ 奇异 $=$ 奇异
    设 $\nu_1, \nu_2, \mu, \nu_1 \pm \nu_2$ 为符号测度。
-   $$\text{若 } \nu_1 \perp \mu \text{ 且 } \nu_2 \perp \mu，\text{则 } (\nu_1 \pm \nu_2) \perp \mu$$
+   $$\text{若 } \nu_1 \perp \mu \text{ 且 } \nu_2 \perp \mu \text{，则 } (\nu_1 \pm \nu_2) \perp \mu$$
 1. 绝对连续性的局部遗传性 (Local Heredity of Absolute Continuity)：设 $\mu$ 为测度，$\nu$ 为符号测度。若 $\nu \ll \mu$，则对于任意可测子集 $E \in \mathcal{F}$，限制测度依然满足绝对连续性，即：
    $$\nu\vert{}_E \ll \mu\vert{}_E$$
 1. 相互奇异性的局部遗传性 (Local Heredity of Mutual Singularity)：设 $\nu, \varphi$ 为符号测度。若 $\nu \perp \varphi$，则对于任意可测子集 $E \in \mathcal{F}$，限制测度依然保持相互奇异，即：

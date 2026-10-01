@@ -13,7 +13,7 @@ tags:
 
 **Definition.** Let $\mathcal{E}=\mathbb{R}^d$. A non-empty subset $\mathcal{M}$ of $\mathcal{E}$ is a (smooth) embedded submanifold of $\mathcal{E}$ of dimension $n$ if either
 
-1. $n = d$ and $\mathcal{M}$ is open in $\mathcal{E}$—we also call this an open submanifold; or
+1. $n = d$ and $\mathcal{M}$ is open in $\mathcal{E}$; we also call this an open submanifold; or
 2. $n = d - k$ for some $k \geq 1$ and, for each $x \in \mathcal{M}$, there exists a neighborhood
    $U$ of $x$ in $\mathcal{E}$ and a smooth function $h: U \to \mathbb{R}^k$ such that
    (a) If $y$ is in $U$, then $h(y) = 0$ if and only if $y \in \mathcal{M}$; and
