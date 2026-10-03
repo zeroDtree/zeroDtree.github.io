@@ -6,7 +6,35 @@ tags:
 
 All matrix is belong to $\mathbb{R}^{m \times n}$ if not specified.
 
-## 1. Preliminaries
+## 1. SVD
+
+For any matrix $A \in \mathbb{R}^{m \times n}$, there exist orthogonal matrices $U \in \mathbb{R}^{m \times m}$ and $V \in \mathbb{R}^{n \times n}$ such that
+
+$$
+A = U \Sigma V^T,
+$$
+
+where $\Sigma \in \mathbb{R}^{m \times n}$ is a rectangular diagonal matrix whose diagonal entries are the singular values of $A$:
+
+$$
+\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r > 0,
+$$
+
+and $r = rank(A)$. Equivalently, the compact form of the SVD is
+
+$$
+A = \sum_{i=1}^r \sigma_i u_i v_i^T.
+$$
+
+Here, $\sigma_i = \sqrt{\lambda_i}$, where $\lambda_i$ is a non-zero eigenvalue of both $A^T A$ and $A A^T$; $v_i$ is a corresponding eigenvector of $A^T A$, and
+
+$$
+u_i = \frac{1}{\sigma_i} A v_i
+$$
+
+is a corresponding eigenvector of $A A^T$.
+
+## 2. Preliminaries
 
 $B = A^TA \in \mathbb{R}^{n \times n}$ is a symmetric matrix, so it is diagonalizable, and the eigenvalues are non-negative.
 
@@ -16,7 +44,7 @@ $B = V \Lambda_B V^T, V \in \mathbb{R}^{n \times n}$
 
 $C = U \Lambda_C U^T, U \in \mathbb{R}^{m \times m}$
 
-#### 1.1. proposition
+#### 2.1. proposition
 
 $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geometric multiplicity).
 
@@ -67,7 +95,7 @@ $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geomet
 > so $f$ is an isomorphism.
 > Therefore, $B$ and $C$ have the same non-zero eigenvalues with the same geometric multiplicity.
 
-#### 1.2. proposition
+#### 2.2. proposition
 
 $$
 Ker(A) = Ker(A^T A)
@@ -85,7 +113,7 @@ $$
 >
 > Therefore, $Ker(A) = Ker(A^T A)$.
 
-## 2. SVD
+## 3. Construction and proof
 
 $$
 A = U \Sigma V^T
