@@ -27,7 +27,7 @@ tags:
   - [机器学习](机器学习/index.md)
 - 数学
   - 可回溯的：对于下面这些目录里的内容，从任意一个节点出发，沿着“前置”依赖路径可回溯到“朴素集合论”。
-    - [linear-algebra](linear-algebra/index.md)
+    - [线性代数](线性代数/index.md)
     - [数学分析](数学分析/index.md)
     - [抽象代数](抽象代数/index.md)
     - [数理逻辑](数理逻辑/index.md)

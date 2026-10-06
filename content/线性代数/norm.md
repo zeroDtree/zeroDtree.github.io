@@ -6,7 +6,7 @@ tags:
 
 ## Prerequisites
 
-- [[linear-algebra/matrix]]
+- [[线性代数/matrix]]
 
 All matrix is belong to $\mathbb{C}^{m \times n}$ if not specified.
 

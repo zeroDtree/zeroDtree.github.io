@@ -6,7 +6,7 @@ tags:
 
 ## Prerequisites
 
-- [[linear-algebra/matrix]]
+- [[线性代数/matrix]]
 
 ## 1. Diagonalization
 

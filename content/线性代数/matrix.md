@@ -154,9 +154,9 @@ $$
 
 $\langle F^{n \times n}, +, \cdot \rangle$ is a ring with identity.
 
-because all the units in a ring form a group under multiplication(this group is called the group of units of the ring), the group of units of $\langle F^{n \times n}, +, \cdot \rangle$ is denoted by $\langle GL(n,F), \cdot \rangle$ or $GL(n,F)$ or $GL_n(F)$.
+because all the units in a ring form a group under multiplication(this group is called the group of units of the ring), the group of units of $\langle F^{n \times n}, +, \cdot \rangle$ is denoted by $\langle \mathrm{GL}(n,F), \cdot \rangle$ or $\mathrm{GL}(n,F)$ or $\mathrm{GL}_n(F)$.
 
-$GL(n,F)$ is called the general linear group of degree $n$ over $F$.
+$\mathrm{GL}(n,F)$ is called the general linear group of degree $n$ over $F$.
 
 ## 5. Transpose
 
@@ -232,28 +232,28 @@ where $C_{ik} = \sum_{j=1}^s A_{ij}B_{jk}$, and $C_{ik}$ is a $m_i \times p_k$ m
 
 ## 9. Trace
 
-Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The trace of $A$ is the sum of the diagonal elements of $A$, denoted by $tr(A)$.
+Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The trace of $A$ is the sum of the diagonal elements of $A$, denoted by $\operatorname{tr}(A)$.
 
 $$
-tr(A) = \sum_{i=1}^n a_{ii}
+\operatorname{tr}(A) = \sum_{i=1}^n a_{ii}
 $$
 
 **Properties of Trace**
 
-- $tr(A + B) = tr(A) + tr(B)$
-- $tr(cA) = ctr(A)$
-- $tr(AB) = tr(BA)$
-- $\overline{tr(A)} = tr(\overline{A})$
-- $tr(A^T) = tr(A)$
+- $\operatorname{tr}(A + B) = \operatorname{tr}(A) + \operatorname{tr}(B)$
+- $\operatorname{tr}(cA) = c\operatorname{tr}(A)$
+- $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
+- $\overline{\operatorname{tr}(A)} = \operatorname{tr}(\overline{A})$
+- $\operatorname{tr}(A^T) = \operatorname{tr}(A)$
 
-> proof : $tr(AB) = tr(BA)$
+> proof : $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
 >
 > $$
 > \begin{aligned}
-> tr(AB) &= \sum_{i=1}^n (AB)_{ii} \\
+> \operatorname{tr}(AB) &= \sum_{i=1}^n (AB)_{ii} \\
 > &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} b_{ji} \\
 > &= \sum_{j=1}^n \sum_{i=1}^n b_{ji} a_{ij} \\
-> &= tr(BA)
+> &= \operatorname{tr}(BA)
 > \end{aligned}
 > $$
 
@@ -264,7 +264,7 @@ Recall that $\langle F^{m \times n}, +, \cdot \rangle$ is a vector space over $F
 **If $F$ is a subfield of** $\mathbb{C}$, we can define an inner product on $F^{m \times n}$ as follows:
 
 $$
-\langle A, B \rangle = tr(A^H B)
+\langle A, B \rangle = \operatorname{tr}(A^H B)
 $$
 
 It is easy to verify that $\langle A, B \rangle$ satisfies the following properties:
@@ -277,10 +277,10 @@ It is easy to verify that $\langle A, B \rangle$ satisfies the following propert
 >
 > $$
 > \begin{aligned}
-> \langle A, B \rangle &= tr(A^H B) \\
-> &= \overline{\overline{tr(A^H B)}} \\
-> &= \overline{tr(A^T \overline{B})} \\
-> &= \overline{tr(B^H A)} \\
+> \langle A, B \rangle &= \operatorname{tr}(A^H B) \\
+> &= \overline{\overline{\operatorname{tr}(A^H B)}} \\
+> &= \overline{\operatorname{tr}(A^T \overline{B})} \\
+> &= \overline{\operatorname{tr}(B^H A)} \\
 > &= \overline{\langle B, A \rangle}
 > \end{aligned}
 > $$
@@ -289,9 +289,9 @@ It is easy to verify that $\langle A, B \rangle$ satisfies the following propert
 >
 > $$
 > \begin{aligned}
-> \langle A, bB + cC \rangle &= tr(A^H (bB + cC)) \\
-> &= tr(bB^H A + cC^H A) \\
-> &= btr(B^H A) + ctr(C^H A) \\
+> \langle A, bB + cC \rangle &= \operatorname{tr}(A^H (bB + cC)) \\
+> &= \operatorname{tr}(bB^H A + cC^H A) \\
+> &= b\operatorname{tr}(B^H A) + c\operatorname{tr}(C^H A) \\
 > &= b\langle A, B \rangle + c\langle A, C \rangle
 > \end{aligned}
 > $$
@@ -300,7 +300,7 @@ It is easy to verify that $\langle A, B \rangle$ satisfies the following propert
 >
 > $$
 > \begin{aligned}
-> \langle A, A \rangle &= tr(A^H A) \\
+> \langle A, A \rangle &= \operatorname{tr}(A^H A) \\
 > &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} \overline{a_{ij}} \\
 > &= \sum_{i=1}^n |a_{ii}|^2 \\
 > &\geq 0
@@ -318,10 +318,10 @@ let $\langle F, V \rangle$ be a vector space over $F$. A map $f: V^n \to F$ is c
 - multilinear: $f$ is linear in each variable
 - alternating: $f(v_1, \cdots, v_i, \cdots, v_j, \cdots, v_n) = -f(v_1, \cdots, v_j, \cdots, v_i, \cdots, v_n)$ for any $v_i, v_j \in V$
 
-Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The determinant of $A$ is the scalar $\det(A)$ defined by:
+Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The determinant of $A$ is the scalar $\operatorname{det}(A)$ defined by:
 
 $$
-|A| := \det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n a_{i, \sigma(i)}
+|A| := \operatorname{det}(A) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) \prod_{i=1}^n a_{i, \sigma(i)}
 $$
 
 or equivalently,
@@ -330,10 +330,10 @@ $$
 |A| = \sum_{j_1,j_2,\cdots,j_n \in [n]} \tau(j_1,j_2,\cdots,j_n) \prod_{i=1}^n a_{i,j_i}
 $$
 
-where $S_n$ is the symmetric group of degree $n$, $\text{sgn}(\sigma)$ is the sign of the permutation $\sigma$, and $a_{i, \sigma(i)}$ is the element of $A$ at the $i$-th row and $\sigma(i)$-th column.
+where $S_n$ is the symmetric group of degree $n$, $\operatorname{sgn}(\sigma)$ is the sign of the permutation $\sigma$, and $a_{i, \sigma(i)}$ is the element of $A$ at the $i$-th row and $\sigma(i)$-th column.
 
 $$
-\text{sgn}(\sigma) = \begin{cases}
+\operatorname{sgn}(\sigma) = \begin{cases}
 1_{F} & \text{if } \sigma \text{ is an even permutation} \\
 -1_{F} & \text{if } \sigma \text{ is an odd permutation}
 \end{cases}
@@ -344,14 +344,14 @@ $\tau(j_1,j_2,\cdots,j_n)$ is the number of inverse pairs of the sequence $(j_1,
 It is not difficult to see that:
 
 $$
-\text{sgn}(\sigma) = (-1)^{\tau(j_1,j_2,\cdots,j_n)}
+\operatorname{sgn}(\sigma) = (-1)^{\tau(j_1,j_2,\cdots,j_n)}
 $$
 
 - Determinant is a multilinear map for each row of $A$
-- Determinant does not change under transposition, i.e. $\det(A) = \det(A^T)$
+- Determinant does not change under transposition, i.e. $\operatorname{det}(A) = \operatorname{det}(A^T)$
 - Determinant is a multilinear map for each column of $A$
 - Determinant is an alternating multilinear map for both each row of $A$ and each column of $A$
-- $\det(A) = \sum_{j_1,j_2,\cdots,j_n \in [n]} (-1)^{\tau(i_1,i_2,\cdots,i_n) + \tau(j_1,j_2,\cdots,j_n) } \prod_{k=1}^n a_{i_k,j_k}$
+- $\operatorname{det}(A) = \sum_{j_1,j_2,\cdots,j_n \in [n]} (-1)^{\tau(i_1,i_2,\cdots,i_n) + \tau(j_1,j_2,\cdots,j_n) } \prod_{k=1}^n a_{i_k,j_k}$
 
 ### 11.2. Laplace expansion
 
@@ -366,30 +366,30 @@ $\sum(X):= \sum_{x \in X} x$
 $A_{I,J}$ is the submatrix of $A$ obtained by deleting the $i$-th $\in I'$ row and $j$-th $\in J'$ column.
 
 $$
-\det(A) = \sum_{J \subseteq [n] \wedge |J| = k} (-1)^{\sum(I) + \sum(J)} \det(A_{I,J}) \det(A_{I',J'})
+\operatorname{det}(A) = \sum_{J \subseteq [n] \wedge |J| = k} (-1)^{\sum(I) + \sum(J)} \operatorname{det}(A_{I,J}) \operatorname{det}(A_{I',J'})
 $$
 
-- $\det(AB) = \det(A) \det(B)$
+- $\operatorname{det}(AB) = \operatorname{det}(A) \operatorname{det}(B)$
 
 ## 12. Adjugate matrix
 
 $A_{ij}$ is the submatrix of $A$ obtained by deleting the $i$-th row and $j$-th column.
 
-Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The adjugate of $A$ is the matrix $A^{\#}:=adj(A) = [a^{\#}_{ij}]\in F^{n \times n}$ defined by $a^{\#}_{ij} = (-1)^{i+j} \det(A_{ji})$.
+Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The adjugate of $A$ is the matrix $A^{\text{\#}}:=\operatorname{adj}(A) = [a^{\text{\#}}_{ij}]\in F^{n \times n}$ defined by $a^{\text{\#}}_{ij} = (-1)^{i+j} \operatorname{det}(A_{ji})$.
 
 $$
-A A^{\#} = A^{\#} A = \det(A) I
+A A^{\text{\#}} = A^{\text{\#}} A = \operatorname{det}(A) I
 $$
 
 > proof
 >
 > $$
 > \begin{aligned}
-> (A A^{\#})_{ij} &= \sum_{k=1}^n a_{ik} a^{\#}_{kj} \\
-> &= \sum_{k=1}^n a_{ik} (-1)^{k+j} \det(A_{jk}) \\
-> &= \det(A) \delta_{ij}
+> (A A^{\text{\#}})_{ij} &= \sum_{k=1}^n a_{ik} a^{\text{\#}}_{kj} \\
+> &= \sum_{k=1}^n a_{ik} (-1)^{k+j} \operatorname{det}(A_{jk}) \\
+> &= \operatorname{det}(A) \delta_{ij}
 > \end{aligned}
 > $$
 
-- $A$ is invertible if and only if $\det(A) \not= 0$
-- if $A$ is invertible, then $A^{-1} = \frac{1_F}{\det(A)} A^{\#}$
+- $A$ is invertible if and only if $\operatorname{det}(A) \not= 0$
+- if $A$ is invertible, then $A^{-1} = \frac{1_F}{\operatorname{det}(A)} A^{\text{\#}}$
