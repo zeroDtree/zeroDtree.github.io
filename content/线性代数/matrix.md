@@ -4,29 +4,30 @@ tags:
   - 线性代数
 ---
 
-- [Prerequisites](#prerequisites)
-- [1. Matrix](#1-matrix)
-- [2. Matrix Addition](#2-matrix-addition)
-- [3. Scalar Multiplication](#3-scalar-multiplication)
-- [4. Matrix Multiplication](#4-matrix-multiplication)
-  - [4.1. Properties of Matrix Multiplication](#41-properties-of-matrix-multiplication)
-    - [4.1.1. Associativity](#411-associativity)
-    - [4.1.2. Distributivity](#412-distributivity)
-    - [4.1.3. Square Matrix](#413-square-matrix)
-- [5. Transpose](#5-transpose)
-- [6. Conjugate](#6-conjugate)
-- [7. Hermitian](#7-hermitian)
-- [8. Block Matrix Multiplication](#8-block-matrix-multiplication)
-- [9. Trace](#9-trace)
-- [10. Inner Product](#10-inner-product)
-- [11. Determinant](#11-determinant)
-  - [11.1. Alternating multilinear map](#111-alternating-multilinear-map)
-  - [11.2. Laplace expansion](#112-laplace-expansion)
-- [12. Adjugate matrix](#12-adjugate-matrix)
+- [1. Prerequisites](#1-prerequisites)
+- [2. Matrix](#2-matrix)
+- [3. Matrix Addition](#3-matrix-addition)
+- [4. Scalar Multiplication](#4-scalar-multiplication)
+- [5. Matrix Multiplication](#5-matrix-multiplication)
+  - [5.1. Properties of Matrix Multiplication](#51-properties-of-matrix-multiplication)
+    - [5.1.1. Associativity](#511-associativity)
+    - [5.1.2. Distributivity](#512-distributivity)
+    - [5.1.3. Square Matrix](#513-square-matrix)
+- [6. Block Matrix Multiplication](#6-block-matrix-multiplication)
+- [7. Transpose](#7-transpose)
+- [8. Conjugate](#8-conjugate)
+- [9. Hermitian](#9-hermitian)
+- [10. Trace](#10-trace)
+- [11. Inner Product](#11-inner-product)
+- [12. Determinant](#12-determinant)
+  - [12.1. Alternating multilinear map](#121-alternating-multilinear-map)
+  - [12.2. Laplace expansion](#122-laplace-expansion)
+- [13. Adjugate matrix](#13-adjugate-matrix)
 
-## Prerequisites
+## 1. Prerequisites
 
-- [[抽象代数/环论(一)]]
+- [[抽象代数/向量空间]]
+- [[抽象代数/群论(置换群)]]
 
 Let $F$ be a field(e.g. $F=\mathbb{Q},F=\mathbb{R}$ or $F=\mathbb{C}$)
 
@@ -36,7 +37,7 @@ $1_{F}$ is the multiply unit element of $F$.
 
 We will use $0$ and $1$ to denote $0_{F}$ and $1_{F}$ respectively if there is no confusion about the field $F$.
 
-## 1. Matrix
+## 2. Matrix
 
 A matrix is a rectangular array of elements from a field $F$.
 
@@ -53,25 +54,25 @@ The element $a_{ij}$ is called the $(i,j)$-th entry of $A$.
 
 $F^{m \times n}$ is the set of all $m \times n$ matrices with entries in $F$.
 
-## 2. Matrix Addition
+## 3. Matrix Addition
 
 Let $A = [a_{ij}]$ and $B = [b_{ij}]$ be two matrices of the same size. The sum of $A$ and $B$ is the matrix $C = [c_{ij}]$ defined by $c_{ij} = a_{ij} + b_{ij}$.
 
 It is easy to see that $\langle F^{m \times n}, + \rangle$ is an commutative group.
 
-## 3. Scalar Multiplication
+## 4. Scalar Multiplication
 
 Let $A = [a_{ij}]$ be a matrix and $c\in F$ be a scalar. The product of $A$ and $c$ is the matrix $C = [c_{ij}]$ defined by $c_{ij} = c a_{ij}$.
 
 It is easy to see that $\langle F^{m \times n}, +, \cdot \rangle$ is a vector space over $F$.
 
-## 4. Matrix Multiplication
+## 5. Matrix Multiplication
 
 Let $A = [a_{ij}]\in F^{m \times n}$ and $B = [b_{ij}]\in F^{n \times p}$ be two matrices. The product of $A$ and $B$ is the matrix $C = [c_{ij}]\in F^{m \times p}$ defined by $c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$.
 
-### 4.1. Properties of Matrix Multiplication
+### 5.1. Properties of Matrix Multiplication
 
-#### 4.1.1. Associativity
+#### 5.1.1. Associativity
 
 Let $A = [a_{ij}]\in F^{m \times n}$, $B = [b_{ij}]\in F^{n \times p}$, $C = [c_{ij}]\in F^{p \times q}$ be three matrices.
 
@@ -99,7 +100,7 @@ $$
 > \end{aligned}
 > $$
 
-#### 4.1.2. Distributivity
+#### 5.1.2. Distributivity
 
 $$
 A(B + C) = AB + AC
@@ -117,7 +118,7 @@ $$
 > \end{aligned}
 > $$
 
-#### 4.1.3. Square Matrix
+#### 5.1.3. Square Matrix
 
 A matrix $A$ is called a square matrix if $m = n$.
 
@@ -158,41 +159,7 @@ because all the units in a ring form a group under multiplication(this group is 
 
 $\mathrm{GL}(n,F)$ is called the general linear group of degree $n$ over $F$.
 
-## 5. Transpose
-
-Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The transpose of $A$ is the matrix $A^T = [a_{ji}]\in F^{n \times m}$ defined by $a_{ji} = a_{ij}$.
-
-$A \in F^{m \times n}, B \in F^{n \times p}$, we have:
-$(AB)^T = B^T A^T$
-
-> proof
->
-> $$
-> \begin{aligned}
-> (AB)^T_{ij} &= (AB)_{ji} \\
-> &= \sum_{k=1}^n a_{jk} b_{ki} \\
-> &= \sum_{k=1}^n (A^T)_{kj} (B^T)_{ik} \\
-> &= (B^T A^T)_{ij}
-> \end{aligned}
-> $$
-
-## 6. Conjugate
-
-**If $F$ is a subfield of** $\mathbb{C}$, the conjugate of $a\in F$ is $\overline{a}\in F$.
-
-Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The conjugate of $A$ is the matrix $\overline{A} = [\overline{a_{ij}}]\in F^{m \times n}$
-
-- $A,B \in F^{m \times n}$, $\overline{A + B} = \overline{A} + \overline{B}$
-
-- $A \in F^{m \times n}, B \in F^{n \times p}$, $\overline{A \cdot B} = \overline{A} \cdot \overline{B}$
-
-## 7. Hermitian
-
-**If $F$ is a subfield of** $\mathbb{C}$
-
-Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The Hermitian of $A$ is the matrix $A^H = [\overline{a_{ji}}]\in F^{n \times m}$ defined by $a_{ji} = \overline{a_{ij}}$.
-
-## 8. Block Matrix Multiplication
+## 6. Block Matrix Multiplication
 
 let $A$ be a $m \times n$ matrix, $B$ be a $n \times p$ matrix, divide $A$ and $B$ into blocks:
 
@@ -230,7 +197,42 @@ $$
 
 where $C_{ik} = \sum_{j=1}^s A_{ij}B_{jk}$, and $C_{ik}$ is a $m_i \times p_k$ matrix.
 
-## 9. Trace
+## 7. Transpose
+
+Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The transpose of $A$ is the matrix $A^T = [a_{ji}]\in F^{n \times m}$ defined by $a_{ji} = a_{ij}$.
+
+$A \in F^{m \times n}, B \in F^{n \times p}$, we have:
+$(AB)^T = B^T A^T$
+
+> proof
+>
+> $$
+> \begin{aligned}
+> (AB)^T_{ij} &= (AB)_{ji} \\
+> &= \sum_{k=1}^n a_{jk} b_{ki} \\
+> &= \sum_{k=1}^n (A^T)_{kj} (B^T)_{ik} \\
+> &= (B^T A^T)_{ij}
+> \end{aligned}
+> $$
+
+## 8. Conjugate
+
+**If $F$ is a subfield of** $\mathbb{C}$, the conjugate of $a\in F$ is $\overline{a}\in F$.
+
+Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The conjugate of $A$ is the matrix $\overline{A} = [\overline{a_{ij}}]\in F^{m \times n}$
+
+- $A,B \in F^{m \times n}$, $\overline{A + B} = \overline{A} + \overline{B}$
+
+- $A \in F^{m \times n}, B \in F^{n \times p}$, $\overline{A \cdot B} = \overline{A} \cdot \overline{B}$
+
+## 9. Hermitian
+
+**If $F$ is a subfield of** $\mathbb{C}$
+
+Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The Hermitian of $A$ is the matrix $A^H = [\overline{a_{ji}}]\in F^{n \times m}$ defined by $a_{ji} = \overline{a_{ij}}$.
+
+
+## 10. Trace
 
 Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The trace of $A$ is the sum of the diagonal elements of $A$, denoted by $\operatorname{tr}(A)$.
 
@@ -257,7 +259,7 @@ $$
 > \end{aligned}
 > $$
 
-## 10. Inner Product
+## 11. Inner Product
 
 Recall that $\langle F^{m \times n}, +, \cdot \rangle$ is a vector space over $F$.
 
@@ -309,9 +311,9 @@ It is easy to verify that $\langle A, B \rangle$ satisfies the following propert
 >
 > It is easy to see that $\langle A, A \rangle = 0$ if and only if $A = 0$.
 
-## 11. Determinant
+## 12. Determinant
 
-### 11.1. Alternating multilinear map
+### 12.1. Alternating multilinear map
 
 let $\langle F, V \rangle$ be a vector space over $F$. A map $f: V^n \to F$ is called an alternating multilinear map if:
 
@@ -353,7 +355,7 @@ $$
 - Determinant is an alternating multilinear map for both each row of $A$ and each column of $A$
 - $\operatorname{det}(A) = \sum_{j_1,j_2,\cdots,j_n \in [n]} (-1)^{\tau(i_1,i_2,\cdots,i_n) + \tau(j_1,j_2,\cdots,j_n) } \prod_{k=1}^n a_{i_k,j_k}$
 
-### 11.2. Laplace expansion
+### 12.2. Laplace expansion
 
 $I = {i_1, i_2, \cdots, i_k}$
 $I' = [n] \setminus I$
@@ -371,7 +373,7 @@ $$
 
 - $\operatorname{det}(AB) = \operatorname{det}(A) \operatorname{det}(B)$
 
-## 12. Adjugate matrix
+## 13. Adjugate matrix
 
 $A_{ij}$ is the submatrix of $A$ obtained by deleting the $i$-th row and $j$-th column.
 
