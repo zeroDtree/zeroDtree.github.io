@@ -7,7 +7,6 @@ tags:
 ## Prerequisites
 
 -
-- [[线性代数/diagonalization]]
 - [[线性代数/norm]]
 
 设
