@@ -14,15 +14,19 @@ tags:
     - [5.1.2. Distributivity](#512-distributivity)
     - [5.1.3. Square Matrix](#513-square-matrix)
 - [6. Block Matrix Multiplication](#6-block-matrix-multiplication)
-- [7. Transpose](#7-transpose)
-- [8. Conjugate](#8-conjugate)
-- [9. Hermitian](#9-hermitian)
-- [10. Trace](#10-trace)
-- [11. Inner Product](#11-inner-product)
-- [12. Determinant](#12-determinant)
-  - [12.1. Alternating multilinear map](#121-alternating-multilinear-map)
-  - [12.2. Laplace expansion](#122-laplace-expansion)
-- [13. Adjugate matrix](#13-adjugate-matrix)
+- [7. Matrix as a Linear Map](#7-matrix-as-a-linear-map)
+- [8. Transpose](#8-transpose)
+- [9. Orthogonal matrix](#9-orthogonal-matrix)
+- [10. Conjugate](#10-conjugate)
+- [11. Hermitian](#11-hermitian)
+- [12. Trace](#12-trace)
+- [13. Inner Product](#13-inner-product)
+  - [13.1. 向量的标准内积](#131-向量的标准内积)
+  - [13.2. 矩阵的 Frobenius 内积](#132-矩阵的-frobenius-内积)
+- [14. Determinant](#14-determinant)
+  - [14.1. Alternating multilinear map](#141-alternating-multilinear-map)
+  - [14.2. Laplace expansion](#142-laplace-expansion)
+- [15. Adjugate matrix](#15-adjugate-matrix)
 
 ## 1. Prerequisites
 
@@ -197,7 +201,37 @@ $$
 
 where $C_{ik} = \sum_{j=1}^s A_{ij}B_{jk}$, and $C_{ik}$ is a $m_i \times p_k$ matrix.
 
-## 7. Transpose
+## 7. Matrix as a Linear Map
+
+设
+
+$$
+A=[v_1\ \cdots\ v_n]\in F^{m\times n},
+\qquad
+v_i\in F^m.
+$$
+
+对任意 $x=(x_1,\ldots,x_n)^T\in F^n$，矩阵乘法可以写成
+
+$$
+Ax=\sum_{i=1}^n x_iv_i.
+$$
+
+对任意 $x,y\in F^n$ 和 $a,b\in F$，矩阵乘法的分配律与数乘结合律给出
+
+$$
+A(ax+by)=aAx+bAy.
+$$
+
+因此矩阵 $A$ 定义了线性映射
+
+$$
+T_A:F^n\to F^m,
+\qquad
+T_A(x)=Ax.
+$$
+
+## 8. Transpose
 
 Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The transpose of $A$ is the matrix $A^T = [a_{ji}]\in F^{n \times m}$ defined by $a_{ji} = a_{ij}$.
 
@@ -215,7 +249,11 @@ $(AB)^T = B^T A^T$
 > \end{aligned}
 > $$
 
-## 8. Conjugate
+## 9. Orthogonal matrix
+
+Let $A \in F^{n \times n}$. $A$ is called an orthogonal matrix if $A^T A = I$. Equivalently, $A \in \mathrm{GL}(n,F)$ and $A^{-1} = A^T$.
+
+## 10. Conjugate
 
 **If $F$ is a subfield of** $\mathbb{C}$, the conjugate of $a\in F$ is $\overline{a}\in F$.
 
@@ -225,14 +263,40 @@ Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The conjugate of $A$ is the ma
 
 - $A \in F^{m \times n}, B \in F^{n \times p}$, $\overline{A \cdot B} = \overline{A} \cdot \overline{B}$
 
-## 9. Hermitian
+## 11. Hermitian
 
-**If $F$ is a subfield of** $\mathbb{C}$
+设 $A=[a_{ij}]\in\mathbb C^{m\times n}$。$A$ 的**共轭转置**（conjugate transpose）为
 
-Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The Hermitian of $A$ is the matrix $A^H = [\overline{a_{ji}}]\in F^{n \times m}$ defined by $a_{ji} = \overline{a_{ij}}$.
+$$
+A^H:=\overline A^{\,T}=[\overline{a_{ji}}]\in\mathbb C^{n\times m}.
+$$
 
+将 $A$ 视为线性映射 $A:\mathbb C^n\to\mathbb C^m$。相对于两边的标准内积，$A^H$ 表示 $A$ 的**伴随映射**，即
 
-## 10. Trace
+$$
+\langle Ax,y\rangle=\langle x,A^Hy\rangle,
+\qquad
+\forall x\in\mathbb C^n,\ y\in\mathbb C^m.
+$$
+
+> 这是因为标准内积满足 $\langle u,v\rangle=v^Hu$，所以
+>
+> $$
+> \langle Ax,y\rangle
+> =y^HAx
+> =(A^Hy)^Hx
+> =\langle x,A^Hy\rangle.
+> $$
+
+特别地，若 $A\in\mathbb C^{n\times n}$ 满足
+
+$$
+A^H=A,
+$$
+
+则称 $A$ 为 **Hermitian 矩阵**（厄米矩阵）。此时 $A$ 表示 $\mathbb C^n$ 上的自伴算子；反之，$\mathbb C^n$ 上的线性算子在标准正交基下是自伴的，当且仅当其矩阵是 Hermitian 矩阵。
+
+## 12. Trace
 
 Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The trace of $A$ is the sum of the diagonal elements of $A$, denoted by $\operatorname{tr}(A)$.
 
@@ -247,6 +311,7 @@ $$
 - $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
 - $\overline{\operatorname{tr}(A)} = \operatorname{tr}(\overline{A})$
 - $\operatorname{tr}(A^T) = \operatorname{tr}(A)$
+- 若 $A=[a_{ij}],B=[b_{ij}]\in\mathbb C^{m\times n}$，则 $\operatorname{tr}(A^HB)=\displaystyle\sum_{i=1}^m\sum_{j=1}^n\overline{a_{ij}}b_{ij}$
 
 > proof : $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
 >
@@ -259,61 +324,172 @@ $$
 > \end{aligned}
 > $$
 
-## 11. Inner Product
+## 13. Inner Product
 
-Recall that $\langle F^{m \times n}, +, \cdot \rangle$ is a vector space over $F$.
+本节统一采用“**第一变量线性、第二变量共轭线性**”的约定。
 
-**If $F$ is a subfield of** $\mathbb{C}$, we can define an inner product on $F^{m \times n}$ as follows:
+### 13.1. 向量的标准内积
+
+对任意
 
 $$
-\langle A, B \rangle = \operatorname{tr}(A^H B)
+x=
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix},
+\qquad
+y=
+\begin{pmatrix}
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{pmatrix}
+\in\mathbb C^n,
 $$
 
-It is easy to verify that $\langle A, B \rangle$ satisfies the following properties:
+定义 $\mathbb C^n$ 上的**标准内积**为
 
-- conjugate symmetry: $\langle A, B \rangle = \overline{\langle B, A \rangle}$
-- right linearity: $\langle A, bB + cC \rangle = b\langle A, B \rangle + c\langle A, C \rangle$
-- positive-definiteness: $\langle A, A \rangle \geq 0$, $\langle A, A \rangle = 0$ if and only if $A = 0$
+$$
+\boxed{
+\langle x,y\rangle
+=\sum_{i=1}^n x_i\overline{y_i}
+=x^T\overline y
+=y^Hx.
+}
+$$
 
-> proof: $\langle A, B \rangle = \overline{\langle B, A \rangle}$
->
-> $$
-> \begin{aligned}
-> \langle A, B \rangle &= \operatorname{tr}(A^H B) \\
-> &= \overline{\overline{\operatorname{tr}(A^H B)}} \\
-> &= \overline{\operatorname{tr}(A^T \overline{B})} \\
-> &= \overline{\operatorname{tr}(B^H A)} \\
-> &= \overline{\langle B, A \rangle}
-> \end{aligned}
-> $$
+其中 $y^H=\overline y^{\,T}$ 是 $y$ 的共轭转置。该定义满足内积的三条公理。
 
-> proof: $\langle A, bB + cC \rangle = b\langle A, B \rangle + c\langle A, C \rangle$
->
-> $$
-> \begin{aligned}
-> \langle A, bB + cC \rangle &= \operatorname{tr}(A^H (bB + cC)) \\
-> &= \operatorname{tr}(bB^H A + cC^H A) \\
-> &= b\operatorname{tr}(B^H A) + c\operatorname{tr}(C^H A) \\
-> &= b\langle A, B \rangle + c\langle A, C \rangle
-> \end{aligned}
-> $$
+**共轭对称性：**
 
-> proof: $\langle A, A \rangle \geq 0$
->
-> $$
-> \begin{aligned}
-> \langle A, A \rangle &= \operatorname{tr}(A^H A) \\
-> &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} \overline{a_{ij}} \\
-> &= \sum_{i=1}^n |a_{ii}|^2 \\
-> &\geq 0
-> \end{aligned}
-> $$
->
-> It is easy to see that $\langle A, A \rangle = 0$ if and only if $A = 0$.
+$$
+\begin{aligned}
+\overline{\langle y,x\rangle}
+&=\overline{\sum_{i=1}^n y_i\overline{x_i}}\\
+&=\sum_{i=1}^n\overline{y_i}x_i\\
+&=\langle x,y\rangle.
+\end{aligned}
+$$
 
-## 12. Determinant
+因此
 
-### 12.1. Alternating multilinear map
+$$
+\langle x,y\rangle=\overline{\langle y,x\rangle}.
+$$
+
+**正定性：**
+
+$$
+\langle x,x\rangle
+=\sum_{i=1}^n x_i\overline{x_i}
+=\sum_{i=1}^n|x_i|^2
+\ge0,
+$$
+
+并且
+
+$$
+\langle x,x\rangle=0
+\iff x_1=\cdots=x_n=0
+\iff x=0.
+$$
+
+**第一变量线性：** 对任意 $a,b\in\mathbb C$ 及 $x,w,z\in\mathbb C^n$，
+
+$$
+\begin{aligned}
+\langle ax+bw,z\rangle
+&=\sum_{i=1}^n(ax_i+bw_i)\overline{z_i}\\
+&=a\langle x,z\rangle+b\langle w,z\rangle.
+\end{aligned}
+$$
+
+结合共轭对称性，第二变量相应地满足共轭线性：
+
+$$
+\langle x,ay+bz\rangle
+=\overline a\langle x,y\rangle
++\overline b\langle x,z\rangle.
+$$
+
+在 $\mathbb R^n$ 中，共轭不起作用，标准内积退化为通常的点积
+
+$$
+\langle x,y\rangle=x^Ty.
+$$
+
+### 13.2. 矩阵的 Frobenius 内积
+
+矩阵空间 $\mathbb C^{m\times n}$ 也是复向量空间。对 $A=[a_{ij}]$、$B=[b_{ij}]\in\mathbb C^{m\times n}$，定义
+
+$$
+\boxed{
+\langle A,B\rangle_F
+:=\operatorname{tr}(B^HA)
+=\operatorname{tr}(AB^H)
+=\sum_{i=1}^m\sum_{j=1}^n a_{ij}\overline{b_{ij}}.
+}
+$$
+
+这一定义与向量标准内积采用相同的变量约定。
+
+**共轭对称性：**
+
+$$
+\begin{aligned}
+\overline{\langle B,A\rangle_F}
+&=\overline{\operatorname{tr}(A^HB)}\\
+&=\operatorname{tr}\big((A^HB)^H\big)\\
+&=\operatorname{tr}(B^HA)\\
+&=\langle A,B\rangle_F.
+\end{aligned}
+$$
+
+**第一变量线性：**
+
+$$
+\begin{aligned}
+\langle aA+bB,C\rangle_F
+&=\operatorname{tr}\big(C^H(aA+bB)\big)\\
+&=a\langle A,C\rangle_F+b\langle B,C\rangle_F.
+\end{aligned}
+$$
+
+**第二变量共轭线性：**
+
+$$
+\begin{aligned}
+\langle A,aB+bC\rangle_F
+&=\operatorname{tr}\big((aB+bC)^HA\big)\\
+&=\overline a\langle A,B\rangle_F
++\overline b\langle A,C\rangle_F.
+\end{aligned}
+$$
+
+**正定性：**
+
+$$
+\begin{aligned}
+\langle A,A\rangle_F
+&=\operatorname{tr}(A^HA)\\
+&=\sum_{i=1}^m\sum_{j=1}^n|a_{ij}|^2\\
+&\ge0,
+\end{aligned}
+$$
+
+且等号成立当且仅当 $A=0$。该内积诱导 Frobenius 范数：
+
+$$
+\|A\|_F=\sqrt{\langle A,A\rangle_F}.
+$$
+
+## 14. Determinant
+
+### 14.1. Alternating multilinear map
 
 let $\langle F, V \rangle$ be a vector space over $F$. A map $f: V^n \to F$ is called an alternating multilinear map if:
 
@@ -355,7 +531,7 @@ $$
 - Determinant is an alternating multilinear map for both each row of $A$ and each column of $A$
 - $\operatorname{det}(A) = \sum_{j_1,j_2,\cdots,j_n \in [n]} (-1)^{\tau(i_1,i_2,\cdots,i_n) + \tau(j_1,j_2,\cdots,j_n) } \prod_{k=1}^n a_{i_k,j_k}$
 
-### 12.2. Laplace expansion
+### 14.2. Laplace expansion
 
 $I = {i_1, i_2, \cdots, i_k}$
 $I' = [n] \setminus I$
@@ -373,7 +549,7 @@ $$
 
 - $\operatorname{det}(AB) = \operatorname{det}(A) \operatorname{det}(B)$
 
-## 13. Adjugate matrix
+## 15. Adjugate matrix
 
 $A_{ij}$ is the submatrix of $A$ obtained by deleting the $i$-th row and $j$-th column.
 

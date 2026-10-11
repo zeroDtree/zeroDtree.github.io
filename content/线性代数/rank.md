@@ -101,3 +101,15 @@ $$
 $$
 
 The common value equals the number of pivots in the reduced row echelon form of $A$.
+
+## 可逆
+
+Let $A = [v_1\ \cdots\ v_n] \in F^{n \times n}$, where $v_i \in F^n$ is column $i$ of $A$.
+
+$A$ is invertible if and only if $v_1,\ldots,v_n$ is a basis of $F^n$.
+
+> proof
+>
+> If $v_1,\ldots,v_n$ is a basis, [[抽象代数/向量空间]] 性质 13 writes each column $e_j$ of $I$ as $e_j = Ab_j$. The matrix $B = [b_1\ \cdots\ b_n]$ satisfies $AB = I$, so $\operatorname{det}(A)\operatorname{det}(B) = \operatorname{det}(I) \not= 0$. Hence $\operatorname{det}(A) \not= 0$, and $A$ is invertible.
+>
+> Conversely, if $A$ is invertible and $Ax = 0$, the same formula gives $A^{-1}0 = 0$, so $x = A^{-1}(Ax) = 0$. The columns are linearly independent. 性质 12 gives $\dim(F^n) = n$. 性质 7 extends the columns to a basis, and 性质 8 says every basis has $n$ vectors, so the columns are already a basis.
