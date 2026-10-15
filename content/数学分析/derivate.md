@@ -6,34 +6,36 @@ tags:
 
 ## 1. Prerequisites
 
--
 - [[数学分析/无穷小]]
 
 ## 2. Definitions
 
 - real vector space: $<\mathbb{R}, \mathbb{R}^n>$
-
-real vector space can define inner product, which can induce norm, which can induce metric, which can induce topology.
-
 - Multivariate real-valued function $f: \mathbb{R}^n \rightarrow \mathbb{R}$
-
 - Multivariate real vector-valued function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$
-
 - **Differentiability at a point** Let $X$ be a subset of $\mathbb{R}^n$, and let $x_0 \in X$ be an element of $X$ which is also a limit point of $X$. Let $f: X \rightarrow \mathbb{R}^m$ be a function. Let $L$ be a linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$. We say that $f$ is **differentiable at** $x_0$ on $X$ with **derivative** $L$ and write $f'(x_0) := L$ if
-
-$$
-\lim_{x \to x_0, x \in X \setminus \{x_0\}} \frac{d(f(x), f(x_0) + L(x - x_0))}{d(x, x_0)} = 0
-$$
-
-**Uniqueness of derivatives** Let $E$ be a subset of $\mathbb{R}^n$, $f: E \rightarrow \mathbb{R}^m$ be a function, $x_0 \in E$ be an interior point of $E$, and let $L_1: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $L_2: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be linear transformations. Suppose that $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
-
-> proof:
-> because $L_1 \not= L_2$, so there exists $v \in \mathbb{R}^n \wedge v \not= 0$, s.t. $L_1(v) \not= L_2(v)$.
-> $R_1(t) := f(x_0 + tv) - f(x_0) - L_1(tv)$.
-> $R_2(t) := f(x_0 + tv) - f(x_0) - L_2(tv)$.
-> $t(L_1(v) + L_2(v)) = L_1(tv) - L_2(tv) = R_2(t) - R_1(t)$.
-> $\frac{||(L_1(v) - L_2(v))||}{||v||} = \frac{||t(L_1(v) - L_2(v))||}{||tv||} = \frac{||R_2(t) - R_1(t)||}{||tv||} \leq \frac{||R_2(t)||}{||tv||} + \frac{||R_1(t)||}{||tv||}$.
-> so $L_1(v) - L_2(v) = 0$, contradiction.
+  $$
+  \lim_{x \to x_0, x \in X \setminus \{x_0\}} \frac{d(f(x), f(x_0) + L(x - x_0))}{d(x, x_0)} = 0
+  $$
+  > Equivalently, in the little-o of [[数学分析/无穷小]],
+  >
+  > $$
+  > d\big(f(x), f(x_0) + L(x - x_0)\big) = o\big(d(x, x_0)\big) \quad (x \to x_0,\ x \in X \setminus \{x_0\}),
+  > $$
+  >
+  > that is,
+  >
+  > $$
+  > \forall \varepsilon > 0,\ \exists \delta > 0,\ \text{s.t.}\ \forall x \in X,\ 0 < d(x, x_0) < \delta \implies d\big(f(x), f(x_0) + L(x - x_0)\big) \le \varepsilon\, d(x, x_0).
+  > $$
+  **Uniqueness of derivatives** Let $E$ be a subset of $\mathbb{R}^n$, $f: E \rightarrow \mathbb{R}^m$ be a function, $x_0 \in E$ be an interior point of $E$, and let $L_1: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $L_2: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be linear transformations. Suppose that $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
+    > proof:
+    > because $L_1 \not= L_2$, so there exists $v \in \mathbb{R}^n \wedge v \not= 0$, s.t. $L_1(v) \not= L_2(v)$.
+    > $R_1(t) := f(x_0 + tv) - f(x_0) - L_1(tv)$.
+    > $R_2(t) := f(x_0 + tv) - f(x_0) - L_2(tv)$.
+    > $t(L_1(v) + L_2(v)) = L_1(tv) - L_2(tv) = R_2(t) - R_1(t)$.
+    > $\frac{||(L_1(v) - L_2(v))||}{||v||} = \frac{||t(L_1(v) - L_2(v))||}{||tv||} = \frac{||R_2(t) - R_1(t)||}{||tv||} \leq \frac{||R_2(t)||}{||tv||} + \frac{||R_1(t)||}{||tv||}$.
+    > so $L_1(v) - L_2(v) = 0$, contradiction.
 
 - 梯度：设 $X \subseteq \mathbb{R}^n$，$f: X \rightarrow \mathbb{R}$ 是一个定义在 $X$ 上的实值函数（标量场）。若 $f$ 在内点 $x_0 \in X$ 处可微，存在唯一的线性变换 $L: \mathbb{R}^n \rightarrow \mathbb{R}$（即 $f'(x_0)$）。由于 $L$ 是从 $\mathbb{R}^n$ 到 $\mathbb{R}$ 的线性映射，根据里斯表示定理 (Riesz Representation Theorem)，在给定内积 $\langle \cdot, \cdot \rangle$ 的欧几里得空间中，必然存在唯一的向量 $v \in \mathbb{R}^n$，使得对于任意 $h \in \mathbb{R}^n$，都有：$$L(h) = \langle v, h \rangle$$这个唯一的向量 $v$ 就称为 $f$ 在 $x_0$ 处的梯度，记作 $\nabla f(x_0)$ 或 $\text{grad } f(x_0)$。
 
@@ -42,25 +44,487 @@ $$
 ## 3. Properties
 
 1. Let $F$ be a field, $\langle F, F^n \rangle=:F^n$, $f: F^n \rightarrow F^m$ be a linear mapping. Then $\exists L \in F^{m \times n}$, s.t. $f(x) = Lx$. Furthermore, $L$ is unique. <span id="1"></span>
-2. Suppose $f$ and $g$ are defined on $[a, b]$ and are differentiable at a point $x \in [a, b]$. Then $f+g$, $f \cdot g$, and $\frac{f}{g}$ are differentiable at $x$, and
-3. $(f+g)'(x) = f'(x) + g'(x)$
-4. $(fg)'(x) = f'(x)g(x) + f(x)g'(x)$
-5. $\left(\frac{f}{g}\right)'(x) = \frac{g(x)f'(x) - g'(x)f(x)}{g^2(x)}$
-6. Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$. <span id="3"></span>
-7. 梯度方向是方向导数最大的方向。
+2. 设 $f,g:[a,b]\to\mathbb{R}$ 在 $x\in[a,b]$ 可微。则 $f+g$ 与 $fg$ 在 $x$ 可微。若 $g(x)\neq 0$，则 $f/g$ 在 $x$ 可微。并且
+   1. $(f+g)'(x) = f'(x) + g'(x)$
+   2. $(fg)'(x) = f'(x)g(x) + f(x)g'(x)$
+   3. $\left(\frac{f}{g}\right)'(x) = \frac{g(x)f'(x) - g'(x)f(x)}{g(x)^2}$
+3. Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$. <span id="3"></span>
+4. 梯度方向是方向导数最大的方向。
 
-## 4. Proofs
+## 实例
 
-### 4.1. [1.](#1)
+第 2 节的定义取 $n=m=1$，$f:X\to\mathbb{R}$，$X\subseteq\mathbb{R}$。实数上的距离是绝对值，$\mathbb{R}\to\mathbb{R}$ 的线性映射都形如 $L(h)=ch$，$c\in\mathbb{R}$。定义写成
 
-- Let $F$ be a field, $\langle F, F^n \rangle=:F^n$, $f: F^n \rightarrow F^m$ be a linear mapping. Then $\exists L \in F^{m \times n}$, s.t. $f(x) = Lx$. Furthermore, $L$ is unique.
+$$
+\lim_{\substack{x\to x_0\\ x\in X\setminus\{x_0\}}}\frac{|f(x)-f(x_0)-c(x-x_0)|}{|x-x_0|}=0.
+$$
 
-Let $(e_i)_{i=1}^n$ be the standard basis of $F^n$, then $f(e_i) = L_i$, $L_i \in F^m$. $L:=(L_1, L_2, \cdots, L_n)^T$.
+这就是
 
-$x$ can be written as $x = \sum_{i=1}^n x_i e_i$, then $f(x) = \sum_{i=1}^n x_i f(e_i) = \sum_{i=1}^n x_i L_i = Lx$
+$$
+\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=c.
+$$
 
-uniqueness is obvious.
+这个极限仍记作 $f'(x_0)$，对应的线性映射是 $L(h)=f'(x_0)\,h$。于是 $x$ 接近 $x_0$ 时，
 
-### 4.2. [3.](#3)
+$$
+f(x)=f(x_0)+f'(x_0)(x-x_0)+o(|x-x_0|).
+$$
 
-- Let $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be a function, and $f$ is differentiable at $x_0$ on $X$. $g: \mathbb{R}^m \rightarrow \mathbb{R}^k$ be a function, and $g$ is differentiable at $f(x_0)$ on $f(X)$. Then $g \circ f$ is differentiable at $x_0$ on $X$, and $(g \circ f)'(x_0) = g'(f(x_0)) \circ f'(x_0)$.
+以下求导公式都按数 $f'(x_0)$ 书写。一般情形里 $f'(x_0)$ 仍是线性映射；实值函数时，它由梯度表示，$L(h)=\langle\nabla f(x_0),h\rangle$。
+
+**命题.** 设 $X\subseteq\mathbb{R}$，$x_0\in X$ 是 $X$ 的极限点，$f:X\to\mathbb{R}$ 在 $x_0$ 可微。则 $f$ 在 $x_0$ 连续。
+
+> proof
+>
+> $f(x)-f(x_0)=(x-x_0)\cdot\dfrac{f(x)-f(x_0)}{x-x_0}$。差商在 $x_0$ 附近有界，故 $x\to x_0$ 时右端趋于 $0$。
+
+**费马引理.** 设 $x_0$ 是 $X$ 的内点，$f$ 在 $x_0$ 可微，并且 $x_0$ 是局部极值点。则 $f'(x_0)=0$。
+
+> proof
+>
+> 先设 $x_0$ 是局部极大值点。则存在 $\delta>0$，使得 $0<|h|<\delta$ 时 $x_0+h\in X$ 且 $f(x_0+h)\le f(x_0)$。
+>
+> $h\in(-\delta,0)$ 时分子非正、分母为负，故
+>
+> $$
+> \frac{f(x_0+h)-f(x_0)}{h}\ge 0.
+> $$
+>
+> $h\in(0,\delta)$ 时分子非正、分母为正，差商 $\le 0$。两侧极限都是 $f'(x_0)$，所以 $f'(x_0)\ge 0$ 且 $f'(x_0)\le 0$，即 $f'(x_0)=0$。局部极小值点处差商符号对调，同样得到 $f'(x_0)=0$。内点用来保证左右两侧都有趋于 $0$ 的 $h$。
+
+设 $f:X\to\mathbb{R}$，$X\subseteq\mathbb{R}^n$，$x_0$ 是内点，$f$ 在 $x_0$ 可微，并且 $x_0$ 是局部极值点。任取 $v\in\mathbb{R}^n$，令 $g(t)=f(x_0+tv)$。
+
+映射 $\gamma(t) : t\mapsto x_0+tv$ 的导数是 $L : s\mapsto sv$。
+> 记 $\gamma(t)=x_0+tv$，$L(s)=sv$。对任意 $t_0$ 与 $t\neq t_0$，
+> $\gamma(t_0)+L(t-t_0)=x_0+t_0 v+(t-t_0)v=\gamma(t)$，
+> 故 $\dfrac{d(\gamma(t),\gamma(t_0)+L(t-t_0))}{d(t,t_0)}=0$。
+
+链式法则给出 $g'(0)=f'(x_0)(v)$。
+> $g=f\circ\gamma$，$\gamma(0)=x_0$。 $\gamma'(0)$ 是线性映射 $L:\mathbb{R}\to\mathbb{R}^n$，$L(s)=sv$，故 $\gamma'(0)(s)=sv$。第 3 节的链式法则给出
+> $g'(0)=f'(x_0)\circ\gamma'(0)$，故 $g'(0)(s)=f'(x_0)(\gamma'(0)(s))=f'(x_0)(sv)=s\,f'(x_0)(v)$。
+> 按上面的一元约定，这个线性映射对应的数是 $f'(x_0)(v)$。
+
+$t=0$ 是 $g$ 的内点，也是局部极值点，故 $g'(0)=0$。$v$ 任意，所以线性映射 $f'(x_0)=0$。实值函数因此还有 $\nabla f(x_0)=0$。
+
+第 3 节的和、积、商法则写在闭区间上。下面在开集上使用它们时，对所考虑的点取含该点为内点的闭子区间。链式法则在一元情形下就是数的乘法：$(g\circ f)'(x_0)=g'(f(x_0))\,f'(x_0)$。
+
+### 1. 常数
+
+设 $c\in\mathbb{R}$。则在 $\mathbb{R}$ 上 $(c)'=0$。
+
+> proof
+>
+> 对任意 $x_0\in\mathbb{R}$ 与 $x\neq x_0$，差商 $(c-c)/(x-x_0)=0$，故极限为 $0$。
+
+### 2. 幂函数
+
+1. 设 $\alpha\in\mathbb{R}$。则在 $(0,+\infty)$ 上 $(x^\alpha)'=\alpha x^{\alpha-1}$。证明见下文「实数次幂的导数」。
+2. 设 $n\in\mathbb{Z}$ 且 $n\geq 1$。则在 $\mathbb{R}$ 上 $(x^n)'=n x^{n-1}$。
+3. 设 $n\in\mathbb{Z}$ 且 $n\leq -1$。则在 $\mathbb{R}\setminus\{0\}$ 上 $(x^n)'=n x^{n-1}$。$n=0$ 时 $x^0$ 在 $\mathbb{R}\setminus\{0\}$ 上为常数 $1$，导数为 $0$。
+
+> proof（正整数次幂）
+>
+> $n=1$ 时，$(x-x_0)/(x-x_0)=1$，故 $(x)'=1$。在 $\mathbb{R}$ 上把 $x^0$ 记为常数 $1$，这就是 $1\cdot x^{0}$。
+>
+> 设 $n\geq 1$，并且已经得到 $(x^n)'=nx^{n-1}$。在任意闭区间上对 $x\cdot x^n$ 使用积法则：
+>
+> $$
+> (x^{n+1})'=x^n+x\,(x^n)'=x^n+n\,x\cdot x^{n-1}=x^n+nx^n=(n+1)x^n.
+> $$
+
+---
+
+checkpoint
+
+---
+
+
+> proof（$n=0$ 与负整数次幂）
+>
+> $n=0$ 时，$x^0=1$ 是 $\mathbb{R}\setminus\{0\}$ 上的常数，导数为 $0$。
+>
+> 设 $m\geq 1$，$n=-m$。在 $\mathbb{R}\setminus\{0\}$ 的任意闭子区间上 $x^m\neq 0$，商法则给出
+>
+> $$
+> (x^{-m})'=\left(\frac{1}{x^m}\right)'=\frac{-mx^{m-1}}{x^{2m}}=-mx^{-m-1}=nx^{n-1}.
+> $$
+
+### 3. 指数与对数
+
+设 $a>0$。
+
+1. 在 $\mathbb{R}$ 上 $(e^x)'=e^x$，$(a^x)'=a^x\ln a$。
+2. 在 $(0,+\infty)$ 上 $(\ln x)'=\frac{1}{x}$。若还有 $a\neq 1$，则 $(\log_a x)'=\frac{1}{x\ln a}$。
+
+这里 $e^z$ 是 [[数学分析/banach代数上的级数|指数级数]] 定义的函数。$a^x$、$\ln$ 与 $\log_a$ 的含义在证明里说明：它们与 [[数学分析/实数次幂]] 的实数幂一致。
+
+**引理（加法公式）.** 对任意 $z,w\in\mathbb{C}$，$e^{z+w}=e^ze^w$。
+
+> proof
+>
+> [[数学分析/complex-number]] 说明 $\mathbb{C}$ 是域，因而交换。二项式定理因此给出
+>
+> $$
+> (z+w)^n=\sum_{k=0}^{n}\binom{n}{k}z^kw^{n-k}.
+> $$
+>
+> [[数学分析/Stone–Weierstrass]] 在实数情形使用同一展开。记 $s_N(\zeta)=\sum_{n=0}^{N}\zeta^n/n!$。则
+>
+> $$
+> s_N(z+w)=\sum_{k+m\leq N}\frac{z^k}{k!}\frac{w^m}{m!},
+> \qquad
+> s_N(z)s_N(w)=\sum_{k\leq N,\,m\leq N}\frac{z^k}{k!}\frac{w^m}{m!}.
+> $$
+>
+> 二者之差只含 $k\leq N$、$m\leq N$ 且 $k+m>N$ 的项。取 $N=2M$。这些项或者 $k\geq M+1$，或者 $m\geq M+1$。前一类的绝对值之和不超过 $\left(\sum_{k\geq M+1}|z|^k/k!\right)e^{|w|}$，后一类不超过 $\left(\sum_{m\geq M+1}|w|^m/m!\right)e^{|z|}$。因此绝对值之和不超过
+>
+> $$
+> \left(\sum_{k\geq M+1}\frac{|z|^k}{k!}\right)e^{|w|}
+> +
+> \left(\sum_{m\geq M+1}\frac{|w|^m}{m!}\right)e^{|z|}.
+> $$
+>
+> 实指数级数收敛，见 [[数学分析/一些标准的级数|指数级数]]，故 $M\to\infty$ 时上式趋于 $0$，从而 $s_N(z)s_N(w)-s_N(z+w)\to 0$。由定义 $s_N(z+w)\to e^{z+w}$。由 [[数学分析/banach代数上的级数|乘法连续性]]，$s_N(z)s_N(w)\to e^ze^w$。因此 $e^{z+w}=e^ze^w$。
+
+**引理（差商）.** $\lim_{h\to 0}(e^h-1)/h=1$。并且 $\lim_{h\to 0}(e^{ih}-1)/h=i$。
+
+> proof
+>
+> 由级数，$e^h=1+h+\sum_{n\geq 2}h^n/n!$，故
+>
+> $$
+> \frac{e^h-1}{h}-1=\sum_{n\geq 2}\frac{h^{n-1}}{n!}.
+> $$
+>
+> 其绝对值不超过 $\sum_{n\geq 2}|h|^{n-1}/n!$。令 $j=n-2$，并用 $(j+2)!\geq j!$，得到
+>
+> $$
+> \sum_{n\geq 2}\frac{|h|^{n-1}}{n!}\leq |h|\sum_{j\geq 0}\frac{|h|^j}{j!}=|h|e^{|h|}.
+> $$
+>
+> $h\to 0$ 时右端趋于 $0$。复差商同样展开：
+>
+> $$
+> \frac{e^{ih}-1}{h}-i=\sum_{n\geq 2}\frac{i^n h^{n-1}}{n!},
+> $$
+>
+> 绝对值仍不超过 $|h|e^{|h|}$，故趋于 $0$。
+
+> proof（$(e^x)'=e^x$）
+>
+> 加法公式给出，对 $h\neq 0$，
+>
+> $$
+> \frac{e^{x+h}-e^x}{h}=e^x\cdot\frac{e^h-1}{h}.
+> $$
+>
+> 令 $h\to 0$，右端趋于 $e^x$。
+>
+> $e^x$ 可微，由上文命题，$e^x$ 连续。再由级数，$x\geq 0$ 时 $e^x\geq 1+x\geq 1$。$x<0$ 时 $e^xe^{-x}=e^0=1$，而 $e^0=1$ 是级数的常数项，故 $e^x=1/e^{-x}>0$。若 $h>0$，则 $e^h=1+h+\sum_{n\geq 2}h^n/n!>1$，于是
+>
+> $$
+> e^{x+h}-e^x=e^x(e^h-1)>0.
+> $$
+>
+> 所以 $\exp:\mathbb{R}\to(0,+\infty)$ 严格递增。又 $x\to+\infty$ 时 $e^x\geq 1+x\to+\infty$，$x\to-\infty$ 时 $e^x=1/e^{-x}\to 0$。
+>
+> $\mathbb{R}$ 是区间，因而是连通集，见 [[点集拓扑/度量空间]]。连续像连通，见 [[点集拓扑/连通空间]]。$\mathbb{R}$ 的连通子集是区间，故 $e^{\mathbb{R}}$ 是区间。它含于 $(0,+\infty)$，下确界为 $0$ 且不取到 $0$，上确界为 $+\infty$，所以值域是 $(0,+\infty)$。
+>
+> 记 $\ln:(0,+\infty)\to\mathbb{R}$ 为 $\exp$ 的反函数。于是 $e^{\ln y}=y$，$\ln(e^x)=x$，并且 $\ln 1=0$。
+
+**引理（反函数的导数）.** 设 $f$ 在 $x_0$ 的某个开邻域上有定义，在 $x_0$ 可微，且 $f'(x_0)\neq 0$。设 $y_0=f(x_0)$，$g$ 在含 $y_0$ 的某个开区间上满足 $g(y_0)=x_0$ 与 $f(g(y))=y$，并且 $g$ 在 $y_0$ 连续。则 $g'(y_0)=1/f'(x_0)$。
+
+> proof
+>
+> 令 $k\neq 0$ 足够小，$h=g(y_0+k)-x_0$。若 $h=0$，则 $k=f(x_0)-f(x_0)=0$，与 $k\neq 0$ 矛盾，故 $h\neq 0$。并且 $f(x_0+h)-f(x_0)=k$，所以
+>
+> $$
+> \frac{g(y_0+k)-g(y_0)}{k}=\frac{1}{(f(x_0+h)-f(x_0))/h}.
+> $$
+>
+> $g$ 在 $y_0$ 连续，故 $k\to 0$ 时 $h\to 0$。分母趋于 $f'(x_0)\neq 0$，因此足够小的 $h$ 使分母不为 $0$。极限为 $1/f'(x_0)$。
+
+> proof（$(\ln x)'=1/x$）
+>
+> 先证明 $\ln$ 连续。设 $y>0$，$x=\ln y$，$\epsilon>0$，并令
+>
+> $$
+> \delta=\min\bigl(y,\,e^x\min(e^{\epsilon}-1,\,1-e^{-\epsilon})\bigr)>0.
+> $$
+>
+> $|k|<\delta$ 时 $y+k>0$，故 $h=\ln(y+k)-x$ 有定义，并且 $k=e^x(e^h-1)$。当 $h\geq\epsilon$ 时，$k\geq e^x(e^{\epsilon}-1)\geq\delta$。当 $h\leq-\epsilon$ 时，$k\leq e^x(e^{-\epsilon}-1)$，因而 $|k|\geq\delta$。所以 $|k|<\delta$ 蕴含 $|h|<\epsilon$。
+>
+> $\exp$ 在 $x=\ln y$ 处的导数是 $e^x=y\neq 0$。反函数导数引理给出
+>
+> $$
+> (\ln)'(y)=\frac{1}{e^{\ln y}}=\frac{1}{y}.
+> $$
+
+> proof（$a^x$ 与 $\log_a$）
+>
+> 定义 $a^x:=e^{x\ln a}$。常数函数的导数为 $0$，积法则给出 $(x\ln a)'=\ln a$。链式法则给出
+>
+> $$
+> (a^x)'=e^{x\ln a}\cdot\ln a=a^x\ln a.
+> $$
+>
+> $a=1$ 时 $\ln 1=0$，两端都是 $0$。
+>
+> 若 $a\neq 1$，则 $\ln a\neq 0$，因为 $\exp$ 严格递增且 $e^0=1$。定义 $\log_a x:=\ln x/\ln a$。于是
+>
+> $$
+> a^{\log_a x}=e^{(\ln x/\ln a)\ln a}=e^{\ln x}=x,
+> $$
+>
+> 并且
+>
+> $$
+> (\log_a x)'=\frac{1}{\ln a}\cdot\frac{1}{x}=\frac{1}{x\ln a}.
+> $$
+
+#### 实数次幂的导数
+
+设 $x>0$，$\alpha\in\mathbb{R}$。[[数学分析/实数次幂]] 用有理数逼近定义 $x^\alpha$，并证明了指数的连续性、$x^{q+r}=x^qx^r$、$(x^q)^r=x^{qr}$ 以及 $x^{-q}=1/x^q$。
+
+> proof
+>
+> 先说明 $x^\alpha=e^{\alpha\ln x}$。
+>
+> 对正整数 $n$，加法公式归纳得 $e^{n\ln x}=(e^{\ln x})^n=x^n$。这与实数次幂在有理数幂阶段的整数次幂相同。$e^{0\ln x}=1$，而 $x^0=1$。负整数次幂由 $e^{-n\ln x}=1/x^n$ 与 $x^{-n}=1/x^n$ 对齐。
+>
+> 设 $n\geq 1$，$y=e^{(\ln x)/n}>0$。则 $y^n=e^{\ln x}=x$。[[数学分析/实数构造/实数]] 说明非负 $n$ 次根唯一，且满足 $z^n=x$、$z\geq 0$ 时 $z=x^{1/n}$。这个根就是有理数幂 $x^{1/n}$，故 $e^{(\ln x)/n}=x^{1/n}$。对任意整数 $p$，$(x^q)^r=x^{qr}$ 给出 $(x^{1/n})^p=x^{p/n}$。因此有理数次幂也等于 $e^{(p/n)\ln x}$。
+>
+> 对一般实数 $\alpha$，取有理数列 $q_n\to\alpha$。指数的连续性给出 $x^{q_n}\to x^\alpha$。另一方面 $e^{q_n\ln x}\to e^{\alpha\ln x}$，因为 $e^x$ 可微，由上文命题连续。二者的通项相等，故 $x^\alpha=e^{\alpha\ln x}$。
+>
+> 常数的导数为 $0$，积法则给出 $(\alpha\ln x)'=\alpha/x$。链式法则给出
+>
+> $$
+> (x^\alpha)'=e^{\alpha\ln x}\cdot\frac{\alpha}{x}=\alpha\frac{x^\alpha}{x}.
+> $$
+>
+> 由 $x^{\alpha-1}=x^\alpha x^{-1}$，右端就是 $\alpha x^{\alpha-1}$。特别地，[[数学分析/实数次幂]] 中以 $a$ 为底的 $a^x$ 就是上面定义的 $e^{x\ln a}$。
+
+### 4. 三角函数
+
+$\sin$ 与 $\cos$ 按 [[数学分析/一些标准的级数|正弦级数与余弦级数]] 定义。并令
+
+$$
+\tan x:=\frac{\sin x}{\cos x},\quad
+\sec x:=\frac{1}{\cos x},\quad
+\cot x:=\frac{\cos x}{\sin x},\quad
+\csc x:=\frac{1}{\sin x},
+$$
+
+定义域分别是分母不为零的点。
+
+1. 在 $\mathbb{R}$ 上 $(\sin x)'=\cos x$，$(\cos x)'=-\sin x$。
+2. 在 $\{x\in\mathbb{R}:\cos x\neq 0\}$ 上 $(\tan x)'=\sec^2 x=\dfrac{1}{\cos^2 x}$，$(\sec x)'=\sec x\tan x$。
+3. 在 $\{x\in\mathbb{R}:\sin x\neq 0\}$ 上 $(\cot x)'=-\csc^2 x=-\dfrac{1}{\sin^2 x}$，$(\csc x)'=-\csc x\cot x$。
+
+> proof（正弦与余弦）
+>
+> 级数里 $\cos$ 只含偶次幂，$\sin$ 只含奇次幂，所以 $\cos$ 是偶函数，$\sin$ 是奇函数。[[数学分析/banach代数上的级数|Euler 公式]] 给出 $e^{it}=\cos t+i\sin t$。于是 $e^{-it}=\cos t-i\sin t$。加法公式给出 $e^{it}e^{-it}=e^0=1$，展开得
+>
+> $$
+> \cos^2 t+\sin^2 t=1.
+> $$
+>
+> 再对 $t\mapsto e^{it}$ 求差商。加法公式给出
+>
+> $$
+> \frac{e^{i(t+h)}-e^{it}}{h}=e^{it}\cdot\frac{e^{ih}-1}{h}.
+> $$
+>
+> $h\to 0$ 时右端趋于 $ie^{it}=i\cos t-\sin t$。$\mathbb{C}$ 中的收敛按实部、虚部分别收敛，因为 $|u|\leq |u+iv|$。而
+>
+> $$
+> \frac{e^{i(t+h)}-e^{it}}{h}
+> =
+> \frac{\cos(t+h)-\cos t}{h}
+> +i\frac{\sin(t+h)-\sin t}{h},
+> $$
+>
+> 比较实部与虚部即得 $(\cos t)'=-\sin t$、$(\sin t)'=\cos t$。由上文命题，$\sin$ 与 $\cos$ 连续。
+>
+> 把 Euler 公式代入 $e^{i(x+y)}=e^{ix}e^{iy}$，比较实部与虚部得到
+>
+> $$
+> \begin{aligned}
+> \cos(x+y)&=\cos x\cos y-\sin x\sin y,\\
+> \sin(x+y)&=\sin x\cos y+\cos x\sin y.
+> \end{aligned}
+> $$
+
+**引理（和差化积）.** 对任意实数 $x,y$，令 $A=(x+y)/2$，$B=(x-y)/2$。则
+
+$$
+\sin x-\sin y=2\cos A\sin B,
+\qquad
+\cos x-\cos y=-2\sin A\sin B.
+$$
+
+> proof
+>
+> 由上面的加法公式与奇偶性，
+>
+> $$
+> \sin(A-B)=\sin A\cos B-\cos A\sin B,
+> \qquad
+> \cos(A-B)=\cos A\cos B+\sin A\sin B.
+> $$
+>
+> 于是
+>
+> $$
+> \sin x-\sin y=\sin(A+B)-\sin(A-B)=2\cos A\sin B,
+> $$
+>
+> $$
+> \cos x-\cos y=\cos(A+B)-\cos(A-B)=-2\sin A\sin B.
+> $$
+
+> proof（正切、余切、正割、余割）
+>
+> 在 $\cos x\neq 0$ 的点的闭邻域上使用商法则：
+>
+> $$
+> (\tan x)'=\frac{\cos x\cos x-\sin x(-\sin x)}{\cos^2 x}=\frac{\cos^2 x+\sin^2 x}{\cos^2 x}=\frac{1}{\cos^2 x}=\sec^2 x.
+> $$
+>
+> $$
+> (\sec x)'=\frac{\sin x}{\cos^2 x}=\sec x\tan x.
+> $$
+>
+> 在 $\sin x\neq 0$ 处，
+>
+> $$
+> (\cot x)'=\frac{(-\sin x)\sin x-\cos x\cos x}{\sin^2 x}=-\frac{1}{\sin^2 x}=-\csc^2 x,
+> $$
+>
+> $$
+> (\csc x)'=-\frac{\cos x}{\sin^2 x}=-\csc x\cot x.
+> $$
+>
+> 把 $\sin^2+\cos^2=1$ 分别除以 $\cos^2$ 与 $\sin^2$，得到 $1+\tan^2=\sec^2$ 与 $1+\cot^2=\csc^2$。
+
+### 5. 反三角函数
+
+1. 在 $(-1,1)$ 上 $(\arcsin x)'=\dfrac{1}{\sqrt{1-x^2}}$，$(\arccos x)'=-\dfrac{1}{\sqrt{1-x^2}}$。
+2. 在 $\mathbb{R}$ 上 $(\arctan x)'=\dfrac{1}{1+x^2}$，$(\arccot x)'=-\dfrac{1}{1+x^2}$。
+
+**引理（单调连续函数的反函数连续）.** 设 $I$ 是开区间，$f:I\to\mathbb{R}$ 连续且严格递增，并且 $J=f(I)$ 是开区间。则 $f^{-1}:J\to I$ 连续。严格递减时同样成立。
+
+> proof
+>
+> 设 $y_0=f(x_0)$，$\epsilon>0$ 使 $[x_0-\epsilon,x_0+\epsilon]\subset I$。严格递增给出 $f(x_0-\epsilon)<y_0<f(x_0+\epsilon)$。取
+>
+> $$
+> \delta=\min\bigl(y_0-f(x_0-\epsilon),\,f(x_0+\epsilon)-y_0\bigr)>0.
+> $$
+>
+> 若 $y\in J$ 且 $|y-y_0|<\delta$，则 $f(x_0-\epsilon)<y<f(x_0+\epsilon)$。$f^{-1}$ 严格递增，故 $x_0-\epsilon<f^{-1}(y)<x_0+\epsilon$。
+>
+> 若 $f$ 严格递减，则 $f(x_0+\epsilon)<y_0<f(x_0-\epsilon)$。取 $\delta=\min(y_0-f(x_0+\epsilon),\,f(x_0-\epsilon)-y_0)$。$|y-y_0|<\delta$ 时 $f(x_0+\epsilon)<y<f(x_0-\epsilon)$。$f^{-1}$ 严格递减，故 $x_0-\epsilon<f^{-1}(y)<x_0+\epsilon$。
+
+**引理.** $\cos$ 在 $(0,\pi/2)$ 上为正，$\cos(\pi/2)=0$，$\sin(\pi/2)=1$，$\sin$ 在 $(0,\pi)$ 上为正，并且 $\cos\pi=-1$。
+
+> proof
+>
+> 先确定余弦的第一个正零点。
+>
+> $$
+> \cos 2=\sum_{n=0}^{\infty}(-1)^n\frac{2^{2n}}{(2n)!}.
+> $$
+>
+> 记 $a_n=(-1)^n 2^{2n}/(2n)!$，并令 $s_3=a_0+a_1+a_2+a_3$。则
+>
+> $$
+> s_3=1-2+\frac{2}{3}-\frac{4}{45}=-\frac{19}{45}.
+> $$
+>
+> $n\geq 2$ 时 $|a_{n+1}/a_n|=4/((2n+1)(2n+2))\leq 4/30<1$，所以从 $a_2$ 起绝对值递减。余弦级数收敛，余项 $R=\sum_{n\geq 4}a_n$ 的配对部分和是其余项部分和的子列。$k\geq 2$ 时 $a_{2k}+a_{2k+1}\geq 0$，故 $R\geq 0$；而 $a_5+a_6$、$a_7+a_8$、……都 $\leq 0$，故 $R-a_4\leq 0$。于是 $0\leq R\leq a_4$。而 $a_4=2^8/8!=2/315$，故
+>
+> $$
+> \cos 2=s_3+R\leq -\frac{19}{45}+\frac{2}{315}=-\frac{131}{315}<0.
+> $$
+>
+> $\cos 0=1$。$\cos$ 可微，由上文命题连续。$[0,2]$ 连通，连续像连通，所以 $\cos([0,2])$ 是区间，并且同时含有 $1$ 与负数，因而含有 $0$。于是存在 $t\in(0,2]$ 使 $\cos t=0$。
+>
+> 令 $\alpha=\inf\{t>0:\cos t=0\}$。该集合非空且有下界 $0$，又含有 $(0,2]$ 中的点，故 $\alpha\in[0,2]$。$\cos 0=1$，连续性给出某个 $\eta>0$，使得 $t\in[0,\eta]$ 时 $\cos t>1/2$。这段区间上没有零点，所以 $\alpha\geq\eta>0$。由下确界的定义，存在该集合中的点列趋于 $\alpha$，连续性给出 $\cos\alpha=0$。$\cos$ 在 $[0,\alpha)$ 上没有零点。若某个 $t_0\in(0,\alpha)$ 使 $\cos t_0<0$，则 $\cos([0,t_0])$ 是连通集，因而是区间，并且同时含有 $\cos 0=1$ 与负数，因而含有 $0$，这与 $[0,\alpha)$ 上没有零点矛盾。故 $\cos>0$ 于 $[0,\alpha)$。记 $\pi:=2\alpha$。于是 $\cos$ 在 $(0,\pi/2)$ 上为正，且 $\cos(\pi/2)=0$。
+>
+> 再看正弦在 $(0,\alpha]$ 上的符号。对 $0<v\leq 1$，
+>
+> $$
+> \sin v=v-\frac{v^3}{6}+\rho(v),
+> $$
+>
+> 其中 $\rho(v)=\sum_{n\geq 2}(-1)^n v^{2n+1}/(2n+1)!$。从 $v^5/120$ 这项起，相邻项的绝对值之比不超过 $v^2/((2n+2)(2n+3))\leq 1/42$。正弦级数收敛，把 $\rho(v)$ 从第一项起两两配对，部分和是其余项部分和的子列，每一对都 $\geq 0$，故 $\rho(v)\geq 0$。因此 $\sin v\geq v(1-v^2/6)>0$。
+>
+> 对 $u\in(0,\alpha]$，取 $n$ 使 $u/2^n\leq 1$。加法公式给出 $\sin u=2\sin(u/2)\cos(u/2)$。每次折半都落在 $(0,\alpha)$ 内，余弦为正，而最内层的正弦为正，故 $\sin u>0$。于是 $\sin\alpha\geq 0$。又 $\sin^2\alpha=1$，所以 $\sin\alpha=1$，即 $\sin(\pi/2)=1$。
+>
+> $e^{i\pi}=(e^{i\alpha})^2=(i\sin\alpha)^2=-1$，故 $\cos\pi=-1$，$\sin\pi=0$。加法公式与奇偶性给出
+>
+> $$
+> \sin(\pi-t)=\sin\pi\cos t-\cos\pi\sin t=\sin t.
+> $$
+>
+> $(0,\alpha]$ 上正弦为正；若 $t\in(\alpha,\pi)$，则 $\pi-t\in(0,\alpha)$，$\sin t=\sin(\pi-t)>0$。故 $\sin>0$ 于 $(0,\pi)$。
+
+> proof（$\arcsin$）
+>
+> $\cos$ 是偶函数，且 $\cos>0$ 于 $[0,\pi/2)$，故 $\cos>0$ 于 $(-\pi/2,\pi/2)$。
+>
+> $-\pi/2\leq y<x\leq\pi/2$ 时，$(x+y)/2\in(-\pi/2,\pi/2)$，$\cos((x+y)/2)>0$，并且 $(x-y)/2\in(0,\pi/2]$，$\sin((x-y)/2)>0$。和差化积给出 $\sin x>\sin y$。$\sin$ 在 $[-\pi/2,\pi/2]$ 上严格递增。$\sin$ 是奇函数，故 $\sin(-\pi/2)=-1$，而 $\sin(\pi/2)=1$。
+>
+> 限制在 $(-\pi/2,\pi/2)$ 上，连续像连通，因而是区间；上下确界为 $\pm 1$，而 $\pm 1$ 只在端点取到，故值域是 $(-1,1)$。
+>
+> 因此 $\sin:(-\pi/2,\pi/2)\to(-1,1)$ 是连续严格递增的双射。记其反函数为 $\arcsin$。反函数连续，且 $(\sin)'=\cos\neq 0$。反函数导数引理给出
+>
+> $$
+> (\arcsin x)'=\frac{1}{\cos(\arcsin x)}.
+> $$
+>
+> $\cos(\arcsin x)>0$，并且 $\cos^2(\arcsin x)=1-x^2$，所以 $\cos(\arcsin x)=\sqrt{1-x^2}$。这就得到 $(\arcsin x)'=1/\sqrt{1-x^2}$。
+
+> proof（$\arccos$）
+>
+> 设 $0\leq y<x\leq\pi$。则 $(x-y)/2\in(0,\pi/2]\subset(0,\pi)$，$(x+y)/2\in(0,\pi)$，两处正弦都为正。和差化积给出 $\cos x<\cos y$。$\cos$ 在 $[0,\pi]$ 上严格递减，从 $1$ 到 $-1$。限制在 $(0,\pi)$ 上，连续像是区间 $(-1,1)$。记 $\arccos:(-1,1)\to(0,\pi)$ 为其反函数。反函数连续，且 $(\cos)'=-\sin<0$，故
+>
+> $$
+> (\arccos x)'=\frac{1}{-\sin(\arccos x)}=-\frac{1}{\sqrt{1-x^2}},
+> $$
+>
+> 其中开平方取正值，因为 $\sin>0$ 于 $(0,\pi)$。
+
+> proof（$\arctan$）
+>
+> 在 $(-\pi/2,\pi/2)$ 上 $\tan'=\sec^2=1/\cos^2>0$。差化积的商形式是
+>
+> $$
+> \tan x-\tan y=\frac{\sin(x-y)}{\cos x\cos y}.
+> $$
+>
+> $-\pi/2<y<x<\pi/2$ 时，$x-y\in(0,\pi)$，$\sin(x-y)>0$，分母为正，所以 $\tan$ 严格递增。$\cos$ 在 $[0,\pi/2)$ 上为正，$\cos(\pi/2)=0$，$\sin(\pi/2)=1$。对任意 $M>0$，由连续性可取 $t\in(0,\pi/2)$，使 $\sin t>1/2$ 且 $0<\cos t<1/(2M)$，于是 $\tan t>M$。$\tan$ 严格递增，故 $s\in(t,\pi/2)$ 时 $\tan s>\tan t>M$。因此 $t\to(\pi/2)^-$ 时 $\tan t\to+\infty$。
+>
+> $\sin$ 为奇函数，$\cos$ 为偶函数，故 $\tan(-t)=-\tan t$。对同一个 $t$，$\tan(-t)<-M$。若 $s\in(-\pi/2,-t)$，则 $\tan s<\tan(-t)<-M$。因此 $t\to(-\pi/2)^+$ 时 $\tan t\to-\infty$。连续像是区间，因而值域为 $\mathbb{R}$。记 $\arctan:\mathbb{R}\to(-\pi/2,\pi/2)$ 为其反函数。反函数连续，故
+>
+> $$
+> (\arctan x)'=\frac{1}{\sec^2(\arctan x)}=\frac{1}{1+\tan^2(\arctan x)}=\frac{1}{1+x^2}.
+> $$
+
+> proof（$\arccot$）
+>
+> 在 $(0,\pi)$ 上 $\cot'=-\csc^2<0$，并且
+>
+> $$
+> \cot x-\cot y=\frac{\sin(y-x)}{\sin x\sin y}.
+> $$
+>
+> $0<y<x<\pi$ 时右端为负，所以 $\cot$ 严格递减。$\sin$ 是奇函数，故 $\sin 0=0$。$\sin$ 连续，且 $\sin>0$ 于 $(0,\pi)$，所以 $t\to 0^+$ 时 $\sin t\to 0^+$。$\cos 0=1$。对任意 $M>0$，由连续性可取 $t\in(0,\pi)$，使 $0<\sin t<1/(2M)$ 且 $\cos t>1/2$，于是 $\cot t>M$。$\cot$ 严格递减，故 $s\in(0,t)$ 时 $\cot s>\cot t>M$。因此 $t\to 0^+$ 时 $\cot t\to+\infty$。
+>
+> 对任意 $M>0$，取 $u\in(0,\pi)$ 使 $0<\sin u<1/(2M)$ 且 $\cos u>1/2$，并令 $t=\pi-u$。则 $\sin t=\sin u$，$\cos t=-\cos u<-1/2$，故 $\cot t<-M$。$s\in(t,\pi)$ 时 $\cot s<\cot t<-M$，所以 $t\to\pi^-$ 时 $\cot t\to-\infty$。连续像是区间，值域为 $\mathbb{R}$。记 $\arccot:\mathbb{R}\to(0,\pi)$ 为其反函数。反函数连续，故
+>
+> $$
+> (\arccot x)'=\frac{1}{-\csc^2(\arccot x)}=-\frac{1}{1+\cot^2(\arccot x)}=-\frac{1}{1+x^2}.
+> $$

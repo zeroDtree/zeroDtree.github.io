@@ -3,7 +3,6 @@ tags:
   - 记号
 ---
 
-
 ## Math Symbols
 
 - Vector is denoted as bold lowercase letter, e.g. $\mathbf{a}$, Matrix is denoted as bold capital letter, e.g. $\mathbf{A}$, $a_i$ means the $i$th element of $\mathbf{a}$, $a_{ij}$ means the $(i,j)$th element of $\mathbf{A}$
@@ -25,7 +24,9 @@ tags:
 - Class of sets is denoted as calligraphic letter, e.g. $\mathcal{A}$, $\mathcal{B}$, $\mathcal{F}$
 - $\mathcal{P}(X)$ is the power set of $X$
 - $\biguplus$ represents the union of disjoint sets.
-- $A^{\text{\#}}$ is the adjoint matrix of $A$
+- $A^H:=\overline A^{\,T}$ is the conjugate transpose (Hermitian transpose) of $A$
+- A square matrix $A\in\mathbb C^{n\times n}$ is Hermitian if and only if $A^H=A$
+- $A^{\text{\#}}:=\operatorname{adj}(A)$ is the adjugate matrix of $A$
 - $(X, \tau)$ is a topological space, briefly written as $X$
 - $\mathcal{B}(X):= \sigma(\mathcal{\tau})$, where $(X, \tau)$ is a topological space
 - $\wedge$ represents the **and** for logic, **min** for function

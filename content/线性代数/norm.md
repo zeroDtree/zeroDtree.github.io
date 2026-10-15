@@ -1,8 +1,11 @@
 ---
 title: 向量范数与矩阵范数
 tags:
- - 线性代数
+  - 线性代数
 ---
+
+> [!warning]
+> 此内容由AI生成，尚未审查完。
 
 ## Prerequisites
 
@@ -15,7 +18,7 @@ $$
 A=(a_{ij})\in\mathbb C^{m\times n}.
 $$
 
-记 $A^*$ 为 $A$ 的共轭转置；在实数情形下，$A^*=A^T$，酉矩阵相应退化为正交矩阵。
+记 $A^H$ 为 $A$ 的共轭转置；在实数情形下，$A^H=A^T$，酉矩阵相应退化为正交矩阵。
 
 ## 1. 向量范数
 
@@ -31,23 +34,23 @@ $$
 
 1. **正定性**
 
- $$
- \|x\|\ge 0,
- \qquad
- \|x\|=0\Longleftrightarrow x=0;
- $$
+$$
+\|x\|\ge 0,
+\qquad
+\|x\|=0\Longleftrightarrow x=0;
+$$
 
 2. **绝对齐次性**
 
- $$
- \|\alpha x\|=|\alpha|\,\|x\|;
- $$
+$$
+\|\alpha x\|=|\alpha|\,\|x\|;
+$$
 
 3. **三角不等式**
 
- $$
- \|x+y\|\le \|x\|+\|y\|.
- $$
+$$
+\|x+y\|\le \|x\|+\|y\|.
+$$
 
 ### 1.2. 向量 $p$-范数
 
@@ -74,7 +77,7 @@ $$
 $$
 \|x\|_1=\sum_{i=1}^n|x_i|,
 \qquad
-\|x\|_2=\sqrt{x^*x},
+\|x\|_2=\sqrt{x^Hx},
 \qquad
 \|x\|_\infty=\max_i|x_i|.
 $$
@@ -285,27 +288,27 @@ $$
 }
 $$
 
-由于 $A^*A$ 是 Hermitian 半正定矩阵，
+由于 $A^HA$ 是 Hermitian 半正定矩阵，
 
 $$
-\|Ax\|_2^2=x^*A^*Ax.
+\|Ax\|_2^2=x^HA^HAx.
 $$
 
-对 $A^*A$ 使用谱定理和 Rayleigh 商可得
+对 $A^HA$ 使用谱定理和 Rayleigh 商可得
 
 $$
 \boxed{
 \|A\|_2
 =
-\sqrt{\lambda_{\max}(A^*A)}.
+\sqrt{\lambda_{\max}(A^HA)}.
 }
 $$
 
-其中 $\lambda_{\max}(A^*A)$ 是 $A^*A$ 的最大特征值。特别地，
+其中 $\lambda_{\max}(A^HA)$ 是 $A^HA$ 的最大特征值。特别地，
 
 $$
 \boxed{
-\|A^*\|_2=\|A\|_2.
+\|A^H\|_2=\|A\|_2.
 }
 $$
 
@@ -314,7 +317,7 @@ $$
 $$
 \|z\|_2
 =
-\max_{\|y\|_2=1}|y^*z|
+\max_{\|y\|_2=1}|y^Hz|
 $$
 
 得到最后一个等式。
@@ -376,9 +379,9 @@ $$
 \boxed{
 \|A\|_F^2
 =
-\operatorname{tr}(A^*A)
+\operatorname{tr}(A^HA)
 =
-\operatorname{tr}(AA^*).
+\operatorname{tr}(AA^H).
 }
 $$
 
@@ -387,7 +390,7 @@ $$
 $$
 \langle A,B\rangle_F
 :=
-\operatorname{tr}(B^*A)
+\operatorname{tr}(B^HA)
 =
 \sum_{i=1}^m\sum_{j=1}^n
 a_{ij}\overline{b_{ij}},
@@ -411,21 +414,21 @@ $$
 
 ### 4.2. Frobenius 范数的酉不变性
 
-仍设 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 为酉矩阵。利用 $Q^*Q=I_m$、$WW^*=I_n$ 以及迹的循环不变性，
+仍设 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 为酉矩阵。利用 $Q^HQ=I_m$、$WW^H=I_n$ 以及迹的循环不变性，
 
 $$
 \begin{aligned}
 \|QAW\|_F^2
 &=
-\operatorname{tr}\bigl((QAW)^*(QAW)\bigr)\\
+\operatorname{tr}\bigl((QAW)^H(QAW)\bigr)\\
 &=
-\operatorname{tr}(W^*A^*Q^*QAW)\\
+\operatorname{tr}(W^HA^HQ^HQAW)\\
 &=
-\operatorname{tr}(W^*A^*AW)\\
+\operatorname{tr}(W^HA^HAW)\\
 &=
-\operatorname{tr}(A^*AWW^*)\\
+\operatorname{tr}(A^HAWW^H)\\
 &=
-\operatorname{tr}(A^*A).
+\operatorname{tr}(A^HA).
 \end{aligned}
 $$
 
@@ -509,12 +512,12 @@ $$
 n\|A\|_2^2.
 $$
 
-对 $A^*$ 使用同样的结论，并利用
+对 $A^H$ 使用同样的结论，并利用
 
 $$
-\|A^*\|_F=\|A\|_F,
+\|A^H\|_F=\|A\|_F,
 \qquad
-\|A^*\|_2=\|A\|_2,
+\|A^H\|_2=\|A\|_2,
 $$
 
 还可得到 $\|A\|_F\le\sqrt m\,\|A\|_2$。综上，
@@ -625,7 +628,7 @@ $$
 又因为
 
 $$
-A^*A
+A^HA
 =
 \begin{pmatrix}
 10&10\\
@@ -679,6 +682,6 @@ $$
 
 - $\|x\|_p$ 衡量向量的大小；$\|A\|_p$ 表示由同一个向量 $p$-范数诱导的算子范数。
 - $\|A\|_1$ 是最大绝对列和，$\|A\|_\infty$ 是最大绝对行和。
-- $\|A\|_2=\sqrt{\lambda_{\max}(A^*A)}$，它也称为谱范数。
-- $\|A\|_F^2=\operatorname{tr}(A^*A)$；Frobenius 范数不是诱导 $2$-范数。
+- $\|A\|_2=\sqrt{\lambda_{\max}(A^HA)}$，它也称为谱范数。
+- $\|A\|_F^2=\operatorname{tr}(A^HA)$；Frobenius 范数不是诱导 $2$-范数。
 - 诱导范数和 Frobenius 范数都具有次乘性；谱范数与 Frobenius 范数都具有酉不变性。
