@@ -10,7 +10,7 @@ tags:
 
 ## 2. Definitions
 
-- real vector space: $<\mathbb{R}, \mathbb{R}^n>$
+- Real vector space: $<\mathbb{R}, \mathbb{R}^n>$
 - Multivariate real-valued function $f: \mathbb{R}^n \rightarrow \mathbb{R}$
 - Multivariate real vector-valued function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$
 - **Differentiability at a point** Let $X$ be a subset of $\mathbb{R}^n$, and let $x_0 \in X$ be an element of $X$ which is also a limit point of $X$. Let $f: X \rightarrow \mathbb{R}^m$ be a function. Let $L$ be a linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$. We say that $f$ is **differentiable at** $x_0$ on $X$ with **derivative** $L$ and write $f'(x_0) := L$ if
@@ -117,11 +117,11 @@ $t=0$ 是 $g$ 的内点，也是局部极值点，故 $g'(0)=0$。$v$ 任意，�
 >
 > 对任意 $x_0\in\mathbb{R}$ 与 $x\neq x_0$，差商 $(c-c)/(x-x_0)=0$，故极限为 $0$。
 
-### 2. 幂函数
+### 2. 整数次幂函数
 
-1. 设 $\alpha\in\mathbb{R}$。则在 $(0,+\infty)$ 上 $(x^\alpha)'=\alpha x^{\alpha-1}$。证明见下文「实数次幂的导数」。
-2. 设 $n\in\mathbb{Z}$ 且 $n\geq 1$。则在 $\mathbb{R}$ 上 $(x^n)'=n x^{n-1}$。
-3. 设 $n\in\mathbb{Z}$ 且 $n\leq -1$。则在 $\mathbb{R}\setminus\{0\}$ 上 $(x^n)'=n x^{n-1}$。$n=0$ 时 $x^0$ 在 $\mathbb{R}\setminus\{0\}$ 上为常数 $1$，导数为 $0$。
+1. 设 $n\in\mathbb{Z}$ 且 $n\geq 1$。则在 $\mathbb{R}$ 上 $(x^n)'=n x^{n-1}$。
+2. 设 $n\in\mathbb{Z}$ 且 $n\leq -1$。则在 $\mathbb{R}\setminus\{0\}$ 上 $(x^n)'=n x^{n-1}$。
+3. $n=0$ 时 $x^0$ 在 $\mathbb{R}\setminus\{0\}$ 上为常数 $1$，导数为 $0$。
 
 > proof（正整数次幂）
 >
@@ -132,12 +132,6 @@ $t=0$ 是 $g$ 的内点，也是局部极值点，故 $g'(0)=0$。$v$ 任意，�
 > $$
 > (x^{n+1})'=x^n+x\,(x^n)'=x^n+n\,x\cdot x^{n-1}=x^n+nx^n=(n+1)x^n.
 > $$
-
----
-
-checkpoint
-
----
 
 
 > proof（$n=0$ 与负整数次幂）
