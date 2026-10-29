@@ -1,8 +1,134 @@
 ---
-title: DPS 近似误差上界
+title: Diffusion Posterior Sampling (DPS)
 tags:
   - 机器学习
+date: 2026-10-29
 ---
+
+## 前置
+
+- [[机器学习/posterior_mean|posterior mean]]
+
+## 1. 设定
+
+考虑一般的线性高斯前向扩散过程。记 $a_t,b_t>0$ 为时间 $t$ 的确定性系数，
+
+$$
+\mathbf{x}_t=a_t\mathbf{x}_0+b_t\boldsymbol{\epsilon},
+\qquad
+\boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I}).
+\tag{1}
+$$
+
+无条件 score 模型给出 $\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)$。由 [[机器学习/posterior_mean|posterior mean]] 的 (5)，后验均值是
+
+$$
+\hat{\mathbf{x}}_0
+:=\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t]
+=\frac{b_t^2}{a_t}\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
++\frac1{a_t}\mathbf{x}_t.
+\tag{2}
+$$
+
+测量模型与文末定理 1 相同：
+
+$$
+\mathbf{y}=\mathcal{A}(\mathbf{x}_0)+\mathbf{n},
+\qquad
+\mathbf{n}\sim\mathcal{N}(\mathbf{0},\sigma^2\mathbf{I}),
+\tag{3}
+$$
+
+其中 $\mathcal{A}$ 已知。目标是从后验 $p(\mathbf{x}_0\mid\mathbf{y})$ 采样。
+
+扩散核 $p(\mathbf{x}_t\mid\mathbf{x}_0)$ 与测量似然 $p(\mathbf{y}\mid\mathbf{x}_0)$ 都已知。$p(\mathbf{x}_0\mid\mathbf{x}_t)$ 的完整分布未知，因此 $p(\mathbf{y}\mid\mathbf{x}_t)$ 没有闭式。
+
+## 2. 后验 score
+
+Bayes 公式把条件 score 拆成先验 score 与似然 score：
+
+$$
+\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t\mid\mathbf{y})
+=\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
++\nabla_{\mathbf{x}_t}\log p(\mathbf{y}\mid\mathbf{x}_t).
+\tag{4}
+$$
+
+先验 score 由无条件扩散模型提供。反向过程在每个时刻需要似然 score $\nabla_{\mathbf{x}_t}\log p(\mathbf{y}\mid\mathbf{x}_t)$。测量模型 (3) 直接给出的是干净数据上的 $p(\mathbf{y}\mid\mathbf{x}_0)$。
+
+## 3. 积分与插件近似
+
+在 $\mathbf{y}\perp\mathbf{x}_t\mid\mathbf{x}_0$ 下，
+
+$$
+p(\mathbf{y}\mid\mathbf{x}_t)
+=\int p(\mathbf{y}\mid\mathbf{x}_0)\,p(\mathbf{x}_0\mid\mathbf{x}_t)\,d\mathbf{x}_0
+=\mathbb{E}\bigl[p(\mathbf{y}\mid\mathbf{x}_0)\mid\mathbf{x}_t\bigr].
+\tag{5}
+$$
+
+积分需要完整的 $p(\mathbf{x}_0\mid\mathbf{x}_t)$。扩散模型通常只给 score，并由 (2) 给出条件均值 $\hat{\mathbf{x}}_0$。DPS 用这个均值做插件近似 [@chung2022diffusion]：
+
+$$
+p(\mathbf{y}\mid\mathbf{x}_t)
+\approx
+p(\mathbf{y}\mid\hat{\mathbf{x}}_0),
+\qquad
+\hat{\mathbf{x}}_0=\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t].
+\tag{6}
+$$
+
+记 $f(\mathbf{x}_0)=p(\mathbf{y}\mid\mathbf{x}_0)$，则 (5) 是 $\mathbb{E}[f(\mathbf{x}_0)\mid\mathbf{x}_t]$，(6) 是 $f(\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t])$。二者一般不相等。文末定理 1 在 Lipschitz 条件下给出这个间隙的上界。
+
+## 4. 似然 score 与采样
+
+对高斯测量 (3)，
+
+$$
+\log p(\mathbf{y}\mid\mathbf{x}_0)
+=-\frac{\|\mathbf{y}-\mathcal{A}(\mathbf{x}_0)\|^2}{2\sigma^2}+C.
+$$
+
+把 $\mathbf{x}_0$ 换成 $\hat{\mathbf{x}}_0(\mathbf{x}_t)$ 后对 $\mathbf{x}_t$ 求导。梯度经过 $\hat{\mathbf{x}}_0$，而 $\hat{\mathbf{x}}_0$ 通过 (2) 依赖 $\mathbf{x}_t$ 与 score：
+
+$$
+\nabla_{\mathbf{x}_t}\log p(\mathbf{y}\mid\hat{\mathbf{x}}_0)
+=-\frac1{2\sigma^2}
+\nabla_{\mathbf{x}_t}\|\mathbf{y}-\mathcal{A}(\hat{\mathbf{x}}_0)\|^2.
+\tag{7}
+$$
+
+条件反向过程把 (4) 中的似然 score 换成 (7)，并把其中的系数收进步长 $\zeta$。先按无条件反向过程从 $\mathbf{x}_t$ 得到候选 $\mathbf{x}_{t-1}'$，再减去残差范数对当前 $\mathbf{x}_t$ 的梯度 [@chung2022diffusion]：
+
+$$
+\mathbf{x}_{t-1}
+=\mathbf{x}_{t-1}'
+-\zeta\,
+\nabla_{\mathbf{x}_t}\|\mathbf{y}-\mathcal{A}(\hat{\mathbf{x}}_0)\|_2.
+\tag{8}
+$$
+
+## 5. 特例
+
+公式 (2) 在两种常见前向过程中收回熟悉的后验均值，代入方式与 [[机器学习/posterior_mean|posterior mean]] 的 2.3 相同。
+
+**DDPM / VP-SDE**：取 $a_t=\sqrt{\bar{\alpha}_t}$、$b_t=\sqrt{1-\bar{\alpha}_t}$，其中 $\bar{\alpha}_t=\prod_{s=1}^{t}\alpha_s$。代入 (2) 得
+
+$$
+\hat{\mathbf{x}}_0
+=\frac1{\sqrt{\bar{\alpha}_t}}
+\Bigl(\mathbf{x}_t+(1-\bar{\alpha}_t)\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)\Bigr).
+\tag{9}
+$$
+
+**VE-SDE**：取 $a_t=1$、$b_t=\sigma_t$，则
+
+$$
+\hat{\mathbf{x}}_0
+=\mathbf{x}_t+\sigma_t^2\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t).
+\tag{10}
+$$
+
 
 ## 命题 2（Jensen 间隙上界）
 
