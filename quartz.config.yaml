@@ -301,13 +301,9 @@ layout:
     tag:
       exclude:
         - reader-mode
-      positions:
-        right: []
     friends:
       exclude:
         - reader-mode
-      positions:
-        right: []
     updates:
       exclude:
         - article-title
