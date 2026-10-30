@@ -1,12 +1,13 @@
 ---
 title: Stone–Weierstrass定理
 tags:
-  - 数学分析
+ - 数学分析
 ---
 
 ## 前置
 
 - [[数学分析/函数序列]]
+-
 
 ## 定义
 
@@ -15,21 +16,21 @@ tags:
 设 $K$ 是一个紧 Hausdorff 空间。考虑$F$值连续函数空间 $\mathscr{C}(K, F)$，其范数为 $\|f\| = \sup_{x \in K} |f(x)|$。
 
 - **（代数，Algebra）** 一个子集 $\mathcal{A} \subseteq \mathscr{C}(K, F)$ 被称为一个 **代数**，如果它对加法、标量乘法（$F$中的数）和乘法封闭：
-  - 若 $f, g \in \mathcal{A}$，则 $f + g \in \mathcal{A}$。
-  - 若 $f \in \mathcal{A}, c \in \mathbb{C}$，则 $c f \in \mathcal{A}$。
-  - 若 $f, g \in \mathcal{A}$，则 $fg \in \mathcal{A}$。
+ - 若 $f, g \in \mathcal{A}$，则 $f + g \in \mathcal{A}$。
+ - 若 $f \in \mathcal{A}, c \in \mathbb{C}$，则 $c f \in \mathcal{A}$。
+ - 若 $f, g \in \mathcal{A}$，则 $fg \in \mathcal{A}$。
 
 - **（分离点，Separates points）** 我们说代数 $\mathcal{A}$ **分离点**，如果对于任意两个不同的点 $x, y \in K$，存在一个函数 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
 
-  > 如果 $K$ 不是 Hausdorff 的，那么存在两个不同的点 $x \neq y$，但它们不可能被开集分开（即它们“黏在一起”）。此时，**任何连续函数 $f$ 都必须满足 $f(x) = f(y)$**（因为连续函数不能分离非 Hausdorff 点）。
+ > 如果 $K$ 不是 Hausdorff 的，那么存在两个不同的点 $x \neq y$，但它们不可能被开集分开（即它们“黏在一起”）。此时，**任何连续函数 $f$ 都必须满足 $f(x) = f(y)$**（因为连续函数不能分离非 Hausdorff 点）。
 
 - **（包含常数函数，Contains constants）** 我们说 $\mathcal{A}$ 包含常数函数，如果对于每个$F$中的常数 $c \in F$，函数 $c$（即对所有 $x \in K$ 有 $f(x) = c$）属于 $\mathcal{A}$。
 
-  > 在 Stone–Weierstrass 的标准陈述中，只要 $\mathcal{A}$ 包含非零常数函数（通常是 $f(x)=1$）即可，结合代数的标量乘法性质，所有的常数函数自然都在其中。
+ > 在 Stone–Weierstrass 的标准陈述中，只要 $\mathcal{A}$ 包含非零常数函数（通常是 $f(x)=1$）即可，结合代数的标量乘法性质，所有的常数函数自然都在其中。
 
 - **（复共轭封闭，Closed under complex conjugation）** 我们说 $\mathcal{A}$ 对$F$共轭封闭，如果对于每个 $f \in \mathcal{A}$，其$F$共轭函数 $\overline{f}$（定义为 $\overline{f}(x) = \overline{f(x)}$）也属于 $\mathcal{A}$。
 
-  > 这是复值情况下强加的一个重要条件。对于实值情况（$\mathscr{C}(K, \mathbb{R})$），这个条件自动满足（因为 $\overline{f} = f$）。
+ > 这是复值情况下强加的一个重要条件。对于实值情况（$\mathscr{C}(K, \mathbb{R})$），这个条件自动满足（因为 $\overline{f} = f$）。
 
 - **（一致闭包，Uniform closure）** 一个代数 $\mathcal{A}$ 的 **一致闭包** $\overline{\mathcal{A}}$ 是包含 $\mathcal{A}$ 的最小一致闭集（即度量空间 $\mathscr{C}(K, F)$ 下的闭包）。
 
@@ -221,9 +222,9 @@ Q.E.D.
 设 $K$ 是一个紧致 Hausdorff 空间，且 $\mathcal{A} \subseteq \mathscr{C}(K, \mathbb{C})$ 是一个代数。
 如果 $\mathcal{A}$ 满足以下条件：
 
-1.  **分离点**：对于任意 $x \neq y \in K$，存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
-2.  **包含常数函数**：$1 \in \mathcal{A}$（即常函数1属于 $\mathcal{A}$）。
-3.  **复共轭封闭**：若 $f \in \mathcal{A}$，则 $\overline{f} \in \mathcal{A}$。
+1. **分离点**：对于任意 $x \neq y \in K$，存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
+2. **包含常数函数**：$1 \in \mathcal{A}$（即常函数1属于 $\mathcal{A}$）。
+3. **复共轭封闭**：若 $f \in \mathcal{A}$，则 $\overline{f} \in \mathcal{A}$。
 
 那么 $\mathcal{A}$ 在 $\mathscr{C}(K, \mathbb{C})$ 中 **一致稠密**，即 $\overline{\mathcal{A}} = \mathscr{C}(K, \mathbb{C})$。
 
@@ -236,12 +237,12 @@ $$\mathcal{A}_{\mathbb{R}} = \{ f \in \mathcal{A} \mid f(x) \in \mathbb{R}, \for
 我们需要证明 $\mathcal{A}_{\mathbb{R}}$ 满足实值 Stone–Weierstrass 定理的所有条件：
 
 - **是一个代数**：
-  由于 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，且两个实值函数的加法、实标量乘法、乘法结果仍为实值函数，故 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathbb{R}$ 上的代数。
+ 由于 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，且两个实值函数的加法、实标量乘法、乘法结果仍为实值函数，故 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathbb{R}$ 上的代数。
 - **包含常数函数**：
-  已知 $1 \in \mathcal{A}$。由于 $1$ 是实值的，故 $1 \in \mathcal{A}_{\mathbb{R}}$。
+ 已知 $1 \in \mathcal{A}$。由于 $1$ 是实值的，故 $1 \in \mathcal{A}_{\mathbb{R}}$。
 - **分离点**：
-  这是最关键的一步。对于任意 $x, y \in K$ 且 $x \neq y$，由已知条件存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
-  令 $f = u + iv$，其中 $u, v$ 分别是 $f$ 的实部和虚部：
+ 这是最关键的一步。对于任意 $x, y \in K$ 且 $x \neq y$，由已知条件存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
+ 令 $f = u + iv$，其中 $u, v$ 分别是 $f$ 的实部和虚部：
 
 $$u = \frac{f + \overline{f}}{2}, \quad v = \frac{f - \overline{f}}{2i}$$
 

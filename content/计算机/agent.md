@@ -68,14 +68,14 @@ tags:
 
 这些策略各自持久保存。后一道只处理已经放行的调用，授予的能力保持在 Work mode 之内。
 
-| 用户可见名 | 取值 |
-|---|---|
-| Work mode | `chat`、`ro`、`sw`、`aw`、`pl` |
-| Network access policy | `on`、`off` |
-| User rule | `deny`、`ask`、`allow` 三条列表 |
-| Tool approval policy | `manual`、`whitelist_accept`、`blacklist_reject`、`universal_accept`、`universal_reject` |
-| Approval response policy | `ask`、`never` |
-| Sandbox mode | `workspace-read`、`read-only`、`workspace-write`、`danger-full-access` |
+| 用户可见名               | 取值                                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| Work mode                | `chat`、`ro`、`sw`、`aw`、`pl`                                                           |
+| Network access policy    | `on`、`off`                                                                              |
+| User rule                | `deny`、`ask`、`allow` 三条列表                                                          |
+| Tool approval policy     | `manual`、`whitelist_accept`、`blacklist_reject`、`universal_accept`、`universal_reject` |
+| Approval response policy | `ask`、`never`                                                                           |
+| Sandbox mode             | `workspace-read`、`read-only`、`workspace-write`、`danger-full-access`                   |
 
 ---
 
@@ -177,13 +177,13 @@ flowchart TD
 
 Work mode 划定本次会话的能力集合。工具在注册时声明自己的 capability，mode 只授予其中一部分；未授予的能力既不进模型请求，也不能执行。
 
-| mode | `ro` | `rw` | `rw_plan` | `shell_ro` | `shell_test` | `shell_rw` |
-|---|---|---|---|---|---|---|
-| `chat` | – | – | – | – | – | – |
-| `ro` | ✓ | – | – | ✓ | – | – |
-| `sw` | ✓ | ✓ | – | ✓ | ✓ | – |
-| `aw` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `pl` | ✓ | – | ✓ | ✓ | – | – |
+| mode   | `ro` | `rw` | `rw_plan` | `shell_ro` | `shell_test` | `shell_rw` |
+| ------ | ---- | ---- | --------- | ---------- | ------------ | ---------- |
+| `chat` | –    | –    | –         | –          | –            | –          |
+| `ro`   | ✓    | –    | –         | ✓          | –            | –          |
+| `sw`   | ✓    | ✓    | –         | ✓          | ✓            | –          |
+| `aw`   | ✓    | ✓    | ✓         | ✓          | ✓            | ✓          |
+| `pl`   | ✓    | –    | ✓         | ✓          | –            | –          |
 
 - `chat`（chat only）不暴露任何能力工具。
 - `ro`（read-only）只读文件与只读 shell。
@@ -212,13 +212,13 @@ Work mode 划定本次会话的能力集合。工具在注册时声明自己的 
 
 Tool approval policy 处理一次已经被 mode 放行的调用，决定它直接执行、先询问还是拒绝。
 
-| 策略 | 直接执行 | 先询问 | 拒绝 |
-|---|---|---|---|
-| `manual` | – | 全部调用 | – |
-| `whitelist_accept` | 白名单能力，默认 `ro`、`shell_ro`、`rw_plan` | 其余调用 | – |
-| `blacklist_reject` | 黑名单之外的能力 | 仅危险命令形态 | 黑名单能力，默认 `rw`、`shell_test`、`shell_rw`、`rw_plan` |
-| `universal_accept` | 全部调用 | 仅危险命令形态 | – |
-| `universal_reject` | – | – | 全部调用 |
+| 策略               | 直接执行                                     | 先询问         | 拒绝                                                       |
+| ------------------ | -------------------------------------------- | -------------- | ---------------------------------------------------------- |
+| `manual`           | –                                            | 全部调用       | –                                                          |
+| `whitelist_accept` | 白名单能力，默认 `ro`、`shell_ro`、`rw_plan` | 其余调用       | –                                                          |
+| `blacklist_reject` | 黑名单之外的能力                             | 仅危险命令形态 | 黑名单能力，默认 `rw`、`shell_test`、`shell_rw`、`rw_plan` |
+| `universal_accept` | 全部调用                                     | 仅危险命令形态 | –                                                          |
+| `universal_reject` | –                                            | –              | 全部调用                                                   |
 
 ### Approval response policy
 
@@ -278,24 +278,24 @@ Subagent 沿用现有六层运行时策略。管线顺序不变，策略来源�
 
 子级的每一项策略都落在父级有效范围之内。委派时附带的过滤、网络开关和沙箱限制只用于进一步收紧。
 
-| 策略 | 子级得到的策略 |
-|---|---|
-| Work mode | 父级有效能力集合再经本次过滤。以能力集合为准，而不是继承 mode 的枚举值 |
-| Network | 父级网络开关，且本次委派可以把它关掉 |
-| User rule | 全部祖先规则，父级只能在其上再增加限制。优先级为 `deny` > `ask` > `allow` |
-| Tool approval policy | 本次委派单独指定的审批策略，与父级当前策略分开。默认 `whitelist_accept`，也可改用其他策略 |
-| Approval response policy | 固定为 `never`：审批请求直接拒绝 |
-| Sandbox mode | 父级有效沙箱再经本次收紧 |
-| 持久化 | 子会话保存完整的委派策略快照 |
+| 策略                     | 子级得到的策略                                                                            |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| Work mode                | 父级有效能力集合再经本次过滤。以能力集合为准，而不是继承 mode 的枚举值                    |
+| Network                  | 父级网络开关，且本次委派可以把它关掉                                                      |
+| User rule                | 全部祖先规则，父级只能在其上再增加限制。优先级为 `deny` > `ask` > `allow`                 |
+| Tool approval policy     | 本次委派单独指定的审批策略，与父级当前策略分开。默认 `whitelist_accept`，也可改用其他策略 |
+| Approval response policy | 固定为 `never`：审批请求直接拒绝                                                          |
+| Sandbox mode             | 父级有效沙箱再经本次收紧                                                                  |
+| 持久化                   | 子会话保存完整的委派策略快照                                                              |
 
 创建时先取父级的有效策略，再与本次委派求交，得到子级有效策略。能力取交集，网络在父级允许且本次委派未关闭时才打开，用户规则合并全部祖先，工具审批采用本次单独指定的策略，审批应答固定为直接拒绝，沙箱取父级与本次收紧的交集。随后初始化工具范围、审批应答和沙箱，写入快照，再启动子 Agent。
 
 ### Spawn 与 Fork
 
-| 创建方式 | 上下文 | 策略 |
-|---|---|---|
-| Spawn | 全新会话 | 同一套继承 |
-| Fork | 带上已完成的对话历史 | 同一套继承 |
+| 创建方式 | 上下文               | 策略       |
+| -------- | -------------------- | ---------- |
+| Spawn    | 全新会话             | 同一套继承 |
+| Fork     | 带上已完成的对话历史 | 同一套继承 |
 
 ### 持久化与收紧
 
@@ -318,3 +318,23 @@ Subagent 沿用现有六层运行时策略。管线顺序不变，策略来源�
 - 父级在运行中收紧时，子级同步收紧；父级恢复原权限时，子级保持收紧后的范围。
 - 冷恢复读回原快照。
 - Fork 与 Spawn 的权限行为相同。
+
+
+## 内置子 agent
+
+| Subagent           | 专业方向                       |
+| ------------------ | ------------------------------ |
+| `general-purpose`  | 通用任务                       |
+| `researcher`       | 资料检索、网络研究             |
+| `math-researcher`  | 数学计算、草稿验证             |
+| `explorer`         | 代码与目录探索                 |
+| `planner`          | 计划编写                       |
+| `coder`            | 代码实现                       |
+| `tester`           | 测试                           |
+| `reviewer`         | 代码审阅                       |
+| `debugger`         | 复杂 Bug、运行时故障、性能问题 |
+| `security-auditor` | 漏洞、权限、安全架构           |
+| `data-analyst`     | 数据处理、统计分析、可视化     |
+| `scientist`        | 物理、化学、生物、实验设计     |
+| `technical-writer` | 技术文档、论文、规范           |
+| `architect`        | 系统架构、技术选型、演进方案   |
