@@ -2,11 +2,11 @@
 
 ## 设计目标
 
-明确 Graph、Policy 和 Executor 的职责边界，实现流程编排与策略决策解耦。
+把流程编排与策略决策拆开，明确 Graph、Policy、Executor 的职责边界。
 
-- **Graph**：负责流程编排与状态转换。
-- **Policy**：负责工具调用的准入决策。
-- **Executor**：负责授权验证与工具执行。
+- **Graph**：编排流程，驱动状态转换。
+- **Policy**：对工具调用做出准入决策。
+- **Executor**：核验授权，并执行工具。
 
 ## Graph 结构
 
@@ -35,21 +35,25 @@ flowchart TD
     REJECT --> LLM
 ```
 
+没有工具调用时，流程从 `LLM` 进入 `End`。有工具调用时，`Tool Call` 先整理本批调用，再交给 `GATE`。
+
+`GATE` 调用 Policy，并按准入结果分流：`allow` 进入 `Tools`，`confirm` 进入 `Approval`，`reject` 进入 `Reject`。用户审批结束后，`Approval` 回到 `GATE` 重新决策。`Tools` 与 `Reject` 都回到 `LLM`。
+
 | 节点 | 职责 |
 |---|---|
-| `llm` | 模型生成文本和工具调用 |
-| `tool-call` | 整理工具调用批次 |
-| `gate` | 调用 Policy，决定准入结果 |
-| `tools` | 验证授权并执行工具 |
-| `approval` | 用户审批、挂起与恢复 |
-| `reject` | 处理拒绝结果 |
+| `LLM` | 生成文本和工具调用 |
+| `Tool Call` | 整理本批工具调用 |
+| `GATE` | 调用 Policy，并把准入结果映射为路由 |
+| `Tools` | 核验授权并执行工具 |
+| `Approval` | 挂起流程，等待用户审批后恢复 |
+| `Reject` | 整理拒绝结果，交回模型 |
 | `End` | 结束流程 |
+
+`Tools` 由 Executor 承担。
 
 ## Policy 契约
 
-Policy 是独立模块，不感知 Graph、Node 或 Route。
-
-决策结果采用封闭的业务类型：
+Policy 是独立模块，不感知 Graph、Node 或 Route，只返回业务决策。准入结果是封闭枚举：
 
 ```ts
 export type PolicyOutcome =
@@ -57,6 +61,8 @@ export type PolicyOutcome =
   | 'confirm'
   | 'reject';
 ```
+
+一次评估同时给出每条调用的决策，以及本批的 `outcome`：
 
 ```ts
 export interface PolicyResult {
@@ -69,6 +75,4 @@ export interface PolicyResult {
 }
 ```
 
-Policy 只返回业务决策
-
-`gate` 是 Graph 与 Policy 之间的适配层，也是唯一能够签发 Tool Authorization 的组件。
+`GATE` 是 Graph 与 Policy 之间的适配层，也是唯一能够签发 Tool Authorization 的组件。Executor 只核验这份授权，再执行工具。
