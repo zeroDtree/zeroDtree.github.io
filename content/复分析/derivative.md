@@ -7,7 +7,7 @@ tags:
 
 ## Prerequisites
 
-- [[抽象代数/向量空间]]
+- [[抽象代数/向量空间(内积空间)]]
 
 ## Multivariate complex vector-valued functions
 
