@@ -4,10 +4,9 @@ tags:
   - 数学分析
 ---
 
-## Prerequisites
+## 前置
 
-- [[数学分析/real-number]]
-- [[抽象代数/向量空间]]
+- [[数学分析/实数构造/实数]]
 
 ## 定义
 
@@ -39,16 +38,6 @@ $(a,b) \times (c,d) = (ac-bd,ad+bc)$
 
 将复数$(a,b)$记作$a+bi$
 
-## 内积
-
-$\mathbb{C}$可被看作向量空间$\langle \mathbb{C}, \mathbb{C} \rangle$
-
-定义$f(a, b) = a \overline{b}$, 易知$f$是$\mathbb{C}$上的内积
-
-内积诱导范数，范数诱导度量。
-
-且内积$f$诱导的度量空间与$R^2$上的度量空间同胚。
-
 ## 共轭
 
 定义复数$z=a+bi$的共轭为$\overline{z}=a-bi$
@@ -58,4 +47,4 @@ $\mathbb{C}$可被看作向量空间$\langle \mathbb{C}, \mathbb{C} \rangle$
 - $\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}$
 - $\overline{z_1z_2}=\overline{z_1}\overline{z_2}$
 - $\overline{\overline{z}}=z$
-- $z\overline{z}=|z|^2$
+- $z\overline{z}=a^2+b^2$，记 $|z|^2=a^2+b^2$
