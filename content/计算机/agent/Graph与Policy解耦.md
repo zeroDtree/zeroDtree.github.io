@@ -1,3 +1,9 @@
+## 前置
+
+- [[计算机/agent/policy]]
+
+---
+
 # Graph 与 Policy 解耦设计
 
 ## 设计目标
