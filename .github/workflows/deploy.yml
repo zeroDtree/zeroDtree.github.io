@@ -41,7 +41,24 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Install Quartz plugins
-        run: npx quartz plugin install
+        run: |
+          python3 - <<'PY'
+          import json, os, shutil, subprocess
+          root = ".quartz/plugins"
+          lock = json.load(open("quartz.lock.json"))["plugins"]
+          for name, entry in lock.items():
+              plugin = os.path.join(root, name)
+              if entry.get("commit") == "local" or not os.path.isdir(os.path.join(plugin, ".git")):
+                  continue
+              url = subprocess.check_output(
+                  ["git", "remote", "get-url", "origin"], cwd=plugin, text=True
+              ).strip()
+              resolved = entry["resolved"].rstrip("/")
+              if url.rstrip("/") != resolved:
+                  print(f"removing {name}: cached origin {url} != {resolved}")
+                  shutil.rmtree(plugin)
+          PY
+          npx quartz plugin install
       - name: Build Quartz
         run: npx quartz build
       - name: Upload artifact
