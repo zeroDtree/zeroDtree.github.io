@@ -70,9 +70,37 @@ class DAGMermiad:
                 result_dict.pop(filepath)
         return result_dict
 
-    def unify_format(self, dependencies_dict: dict[str, list[str]]) -> dict[str, list[tuple[str, str]]]:
-        """统一格式，返回 dict[filepath, list[(ref_path, link_type)]]，link_type 为 'ref'（普通引用）或 'include'（![[...]] 嵌入）。"""
+    def build_note_index(self, filepath_list: list[str]) -> set[str]:
+        """收集全部笔记的统一路径（排除 dependency_graph.md）。"""
+        notes: set[str] = set()
+        for filepath in filepath_list:
+            if filepath.endswith("dependency_graph.md") or filepath in self.ignore_filepaths:
+                continue
+            notes.add(filepath.replace("content/", "").replace(".md", ""))
+        return notes
+
+    def resolve_note(self, ref: str, all_notes: set[str], source: str = "") -> str:
+        """按最短路径规则将引用解析到真实笔记路径。"""
+        if ref in all_notes:
+            return ref
+        suffix = "/" + ref
+        matches = sorted(n for n in all_notes if n.endswith(suffix))
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1:
+            loc = f" (in {source})" if source else ""
+            print(f"[歧义引用] {ref}{loc} 匹配多个笔记: {matches}")
+        return ref
+
+    def unify_format(
+        self, dependencies_dict: dict[str, list[str]], all_notes: Optional[set[str]] = None
+    ) -> tuple[dict[str, list[tuple[str, str]]], dict[tuple[str, str, str], list[str]]]:
+        """统一格式，返回 (dict[filepath, list[(ref_path, link_type)]], raw_ref_map)。
+        link_type 为 'ref'（普通引用）或 'include'（![[...]] 嵌入）。
+        raw_ref_map 记录 (filepath, resolved_ref, link_type) -> 原始写法列表，供删除冗余引用时精确匹配。
+        """
         result = {}
+        raw_ref_map: dict[tuple[str, str, str], list[str]] = {}
         for filepath, reference_list in dependencies_dict.items():
             filepath = filepath.replace("content/", "").replace(".md", "")
             result[filepath] = []
@@ -85,8 +113,10 @@ class DAGMermiad:
                 if ref == "dependency_graph" or ref.endswith("/dependency_graph"):
                     continue
                 link_type = "include" if is_include else "ref"
-                result[filepath].append((ref, link_type))
-        return result
+                resolved = self.resolve_note(ref, all_notes, filepath) if all_notes is not None else ref
+                result[filepath].append((resolved, link_type))
+                raw_ref_map.setdefault((filepath, resolved, link_type), []).append(ref)
+        return result, raw_ref_map
 
     def nodes_tracing_to_foundation(self, dependencies_dict: dict[str, list[tuple[str, str]]]) -> set[str]:
         """沿普通引用回溯，返回能到达 foundation 的节点（含 foundation 自身）。"""
@@ -234,14 +264,24 @@ class DAGMermiad:
             result[filepath] = reduced_deps
         return result, redundant
 
-    def remove_redundant_from_files(self, redundant_list: list[tuple[str, str, str]]) -> None:
+    def remove_redundant_from_files(
+        self,
+        redundant_list: list[tuple[str, str, str]],
+        raw_ref_map: Optional[dict[tuple[str, str, str], list[str]]] = None,
+    ) -> None:
         """从原始 .md 文件中删除冗余的 wikilink 引用。"""
         from collections import defaultdict
 
         file_to_refs: dict = defaultdict(list)
         for filepath_unified, ref_unified, link_type in redundant_list:
             original_path = "content/" + filepath_unified + ".md"
-            file_to_refs[original_path].append((ref_unified, link_type))
+            raw_candidates = (
+                raw_ref_map.get((filepath_unified, ref_unified, link_type), [ref_unified])
+                if raw_ref_map is not None
+                else [ref_unified]
+            )
+            for raw_ref in raw_candidates:
+                file_to_refs[original_path].append((raw_ref, link_type))
 
         for original_path, refs_to_remove in file_to_refs.items():
             with open(original_path, "r", encoding="utf-8") as f:
@@ -303,12 +343,15 @@ class DAGMermiad:
 def main():
     dag_mermiad = DAGMermiad()
     filepath_list = dag_mermiad.find_all_filepaths(dir_path="content")
+    all_notes = dag_mermiad.build_note_index(filepath_list)
+    dag_mermiad.foundation = dag_mermiad.resolve_note(dag_mermiad.foundation, all_notes)
+
     filtered_filepath_list = dag_mermiad.filter_filepaths(filepath_list)
     dependencies_dict = dag_mermiad.find_dependencies(filtered_filepath_list)
 
-    unified_dependencies_dict = dag_mermiad.unify_format(dependencies_dict)
+    unified_dependencies_dict, raw_ref_map = dag_mermiad.unify_format(dependencies_dict, all_notes)
     reduced_dependencies_dict, redundant_list = dag_mermiad.transitive_reduction(unified_dependencies_dict)
-    dag_mermiad.remove_redundant_from_files(redundant_list)
+    dag_mermiad.remove_redundant_from_files(redundant_list, raw_ref_map)
 
     # 生成总的依赖图
     print("Generating main dependency graph...")
