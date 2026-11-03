@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["数学/测度论/绝对连续与Radon-Nikodým定理"] --> 0["杂/随机过程/生成模型/生成模型导论"]
 3["数学/测度论/L-integral"] --> 2["杂/随机过程/生成模型/常用数学工具"]

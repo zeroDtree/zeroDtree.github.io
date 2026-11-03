@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["数学/点集拓扑/连续映射"] --> 0["杂/流形/prepare"]
 3["数学/点集拓扑/子空间"] --> 2["杂/流形/smooth-manifold"]

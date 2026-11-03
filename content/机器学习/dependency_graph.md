@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["机器学习/VAE"] --> 0["机器学习/VQ-VAE"]
 2["机器学习/Straight-Through-Estimator"] --> 0["机器学习/VQ-VAE"]

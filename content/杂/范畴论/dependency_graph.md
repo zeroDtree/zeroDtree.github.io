@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["杂/范畴论/范畴"] --> 0["杂/范畴论/直和与直积"]
 classDef leaf fill:#fde68a,stroke:#b45309

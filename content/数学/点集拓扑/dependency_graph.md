@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["数学/朴素集合论/朴素集合论(代理)"] --> 0["数学/点集拓扑/拓扑空间"]
 2["数学/朴素集合论/zorn_lemma"] --> 0["数学/点集拓扑/拓扑空间"]

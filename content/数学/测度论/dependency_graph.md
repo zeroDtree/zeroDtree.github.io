@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["数学/测度论/分布函数的类型及分解"] --> 0["数学/测度论/一维离散分布的例子"]
 3["数学/点集拓扑/拓扑空间"] --> 2["数学/测度论/class-of-sets"]

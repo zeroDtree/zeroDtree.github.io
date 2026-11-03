@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["计算机/agent/policy"] --> 0["计算机/agent/tool-audit"]
 1["计算机/agent/policy"] --> 2["计算机/agent/Graph与Policy解耦"]

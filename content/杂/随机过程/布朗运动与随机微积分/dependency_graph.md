@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["杂/随机过程/鞅/鞅"] --> 0["杂/随机过程/布朗运动与随机微积分/布朗运动"]
 classDef leaf fill:#fde68a,stroke:#b45309

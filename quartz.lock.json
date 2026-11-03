@@ -164,10 +164,10 @@
       "installedAt": "2026-06-06T07:39:48.072Z"
     },
     "obsidian-flavored-markdown": {
-      "source": "github:quartz-community/obsidian-flavored-markdown",
-      "resolved": "https://github.com/quartz-community/obsidian-flavored-markdown.git",
-      "commit": "07eaca7b31a537c7c4a0fd2848b1f00014c940af",
-      "installedAt": "2026-06-06T07:39:31.412Z"
+      "source": "github:zeroDtree/obsidian-flavored-markdown",
+      "resolved": "https://github.com/zeroDtree/obsidian-flavored-markdown.git",
+      "commit": "6eb55432197fa0c101f0f8a34922a4e0cf4fcfb3",
+      "installedAt": "2026-11-03T08:55:18.039Z"
     },
     "og-image": {
       "source": "github:quartz-community/og-image",
@@ -199,6 +199,12 @@
       "commit": "5fbd00dcc0dcdcef994a14b43df6e76be4ed0194",
       "installedAt": "2026-06-06T09:28:54.501Z"
     },
+    "quartz-v5-plugin-recent-notes": {
+      "source": "github:zeroDtree/quartz-v5-plugin-recent-notes",
+      "resolved": "https://github.com/zeroDtree/quartz-v5-plugin-recent-notes.git",
+      "commit": "3df820b8f3acf128bd4b609afa0797c22443c14f",
+      "installedAt": "2026-11-03T08:55:07.262Z"
+    },
     "quartz-v5-plugin-top-card": {
       "source": "./my-plugins/quartz-v5-plugin-top-card",
       "resolved": "/Users/zengls/repo/quartz/my-plugins/quartz-v5-plugin-top-card",
@@ -210,12 +216,6 @@
       "resolved": "https://github.com/quartz-community/reader-mode.git",
       "commit": "73c8bce66df8835510ffac47e53b1ca0f7efd51e",
       "installedAt": "2026-06-06T07:39:44.343Z"
-    },
-    "recent-notes": {
-      "source": "github:quartz-community/recent-notes",
-      "resolved": "https://github.com/quartz-community/recent-notes.git",
-      "commit": "3c3d104335e2fc5ff62371ead157667adb79b046",
-      "installedAt": "2026-06-06T07:39:45.845Z"
     },
     "remove-draft": {
       "source": "github:quartz-community/remove-draft",

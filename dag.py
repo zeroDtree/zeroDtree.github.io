@@ -159,6 +159,7 @@ class DAGMermiad:
         子图根若在 trace_dependencies 上能回溯到 foundation，则改为绿色。总图不传则不着色。
         """
         result_str = "```mermaid\n"
+        result_str += "%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%\n"
         result_str += "graph TD\n"
         name_to_id = {}
         count = 0
@@ -423,7 +424,7 @@ def main():
                 f.write(subdir_mermaid_graph)
         else:
             with open(subdir_graph_path, "w") as f:
-                f.write("```mermaid\ngraph TD\n```")
+                f.write("```mermaid\n%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%\ngraph TD\n```")
 
         dag_mermiad.ensure_index_with_graph(subdir)
 

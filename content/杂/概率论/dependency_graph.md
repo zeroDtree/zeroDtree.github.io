@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["杂/概率论/高斯分布"] --> 0["杂/概率论/联合高斯"]
 3["数学/抽象代数/对偶空间"] --> 2["杂/概率论/Dirac分布"]

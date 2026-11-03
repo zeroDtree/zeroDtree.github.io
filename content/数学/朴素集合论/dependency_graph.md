@@ -1,4 +1,5 @@
 ```mermaid
+%%{init: {'flowchart': {'curve': 'stepAfter'}}}%%
 graph TD
 1["数学/朴素集合论/naive-set-theory-1"] --> 0["数学/朴素集合论/zorn_lemma"]
 3["数学/数学分析/实数构造/整数"] --> 2["数学/朴素集合论/初等数论"]
