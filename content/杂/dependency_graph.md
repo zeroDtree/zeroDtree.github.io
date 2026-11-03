@@ -9,4 +9,9 @@ classDef externalRoot fill:#fecaca,stroke:#b91c1c
 class 1 externalRoot
 classDef foundationRoot fill:#bbf7d0,stroke:#15803d
 class 3,4 foundationRoot
+click 0 "/杂/概率论/联合高斯" "杂/概率论/联合高斯"
+click 1 "/概率论/高斯分布" "概率论/高斯分布"
+click 2 "/杂/概率论/dirac分布" "杂/概率论/Dirac分布"
+click 3 "/抽象代数/对偶空间" "抽象代数/对偶空间"
+click 4 "/抽象代数/函数空间" "抽象代数/函数空间"
 ```

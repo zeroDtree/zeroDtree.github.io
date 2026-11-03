@@ -11,13 +11,12 @@ class DAGMermiad:
         self.ignore_filepaths = ["content/index.md", "content/dependency_graph.md"]
 
     def find_subdirectories(self, base_dir: str) -> list[str]:
-        """找到所有包含 .md 文件的子目录"""
+        """递归找到 base_dir 下所有包含笔记（非 dependency_graph.md）的子目录"""
         subdirs = []
         base_path = Path(base_dir)
-        for item in base_path.iterdir():
+        for item in sorted(base_path.rglob("*")):
             if item.is_dir():
-                # 检查目录下是否有 .md 文件（递归检查）
-                if any(item.rglob("*.md")):
+                if any(p.name != "dependency_graph.md" for p in item.rglob("*.md")):
                     subdirs.append(str(item))
         return subdirs
 
@@ -80,6 +79,8 @@ class DAGMermiad:
             for raw in reference_list:
                 is_include = raw.strip().startswith("!")
                 ref = raw.replace("!", "").replace("[", "").replace("]", "")
+                # [[路径#标题|显示名]] 中，| 之后只是显示文字，不参与路径
+                ref = re.sub(r"\|.*", repl="", string=ref)
                 ref = re.sub(r"#.*", repl="", string=ref).strip()
                 if ref == "dependency_graph" or ref.endswith("/dependency_graph"):
                     continue
@@ -108,6 +109,14 @@ class DAGMermiad:
         tracing = {node for node in dependencies_dict if reaches(node)}
         tracing.add(self.foundation)
         return tracing
+
+    def _note_url(self, filepath: str) -> str:
+        """将统一格式的笔记路径转为 Quartz 站点路径。"""
+        segments = [
+            re.sub(r"\s", "-", seg).replace("&", "-and-").replace("%", "-percent").replace("?", "").replace("#", "").lower()
+            for seg in filepath.split("/")
+        ]
+        return "/" + "/".join(segments).rstrip("/")
 
     def generate_mermaid_graph(
         self,
@@ -178,6 +187,10 @@ class DAGMermiad:
                 result_str += f"classDef {class_name} {styles[class_name]}\n"
                 result_str += f"class {','.join(str(node_id) for node_id in node_ids)} {class_name}\n"
 
+        for name, node_id in name_to_id.items():
+            url = self._note_url(name)
+            result_str += f'click {node_id} "{url}" "{name}"\n'
+
         result_str += "```"
         return result_str
 
@@ -237,10 +250,10 @@ class DAGMermiad:
             for ref, link_type in refs_to_remove:
                 escaped = re.escape(ref)
                 if link_type == "include":
-                    pat = r"!\[\[" + escaped + r"(?:#[^\]]*)?]]"
+                    pat = r"!\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
                 else:
-                    # 匹配 [[ref]] 或 [[ref#section]]，但不匹配 ![[ref]]
-                    pat = r"(?<!!)\[\[" + escaped + r"(?:#[^\]]*)?]]"
+                    # 匹配 [[ref]]、[[ref#section]]、[[ref|alias]]，但不匹配 ![[ref]]
+                    pat = r"(?<!!)\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
                 content = re.sub(pat, "", content)
 
             # 清理：合并行内多余空格，移除仅含空白的行（保留空行的段落结构）
@@ -306,8 +319,8 @@ def main():
     # 为每个子目录生成依赖图
     subdirs = dag_mermiad.find_subdirectories("content")
     for subdir in subdirs:
-        subdir_name = Path(subdir).name
-        print(f"Generating dependency graph for {subdir_name}...")
+        subdir_rel = subdir.replace("content/", "")
+        print(f"Generating dependency graph for {subdir_rel}...")
 
         subdir_dependencies = dag_mermiad.generate_subdirectory_dependency_graph(reduced_dependencies_dict, subdir)
 

@@ -8,4 +8,9 @@ classDef leaf fill:#fde68a,stroke:#b45309
 class 0 leaf
 classDef foundationRoot fill:#bbf7d0,stroke:#15803d
 class 4 foundationRoot
+click 0 "/数理逻辑/一阶逻辑演算" "数理逻辑/一阶逻辑演算"
+click 1 "/数理逻辑/一阶逻辑" "数理逻辑/一阶逻辑"
+click 2 "/数理逻辑/命题逻辑演算" "数理逻辑/命题逻辑演算"
+click 3 "/数理逻辑/命题逻辑" "数理逻辑/命题逻辑"
+click 4 "/朴素集合论/朴素集合论(代理)" "朴素集合论/朴素集合论(代理)"
 ```
