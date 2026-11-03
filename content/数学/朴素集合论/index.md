@@ -4,4 +4,4 @@ tags:
   - 朴素集合论
 ---
 
-![[朴素集合论/dependency_graph]]
+![[数学/朴素集合论/dependency_graph]]

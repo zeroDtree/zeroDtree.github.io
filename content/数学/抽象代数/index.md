@@ -4,7 +4,7 @@ tags:
   - 抽象代数
 ---
 
-![[抽象代数/dependency_graph]]
+![[数学/抽象代数/dependency_graph]]
 
 主要参考资料
 

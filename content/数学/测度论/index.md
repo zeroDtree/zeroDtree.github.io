@@ -4,7 +4,7 @@ tags:
   - 测度论
 ---
 
-![[测度论/dependency_graph]]
+![[数学/测度论/dependency_graph]]
 
 主要参考资料：
 

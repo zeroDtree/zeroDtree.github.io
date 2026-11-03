@@ -11,12 +11,12 @@ class DAGMermiad:
         self.ignore_filepaths = ["content/index.md", "content/dependency_graph.md"]
 
     def find_subdirectories(self, base_dir: str) -> list[str]:
-        """递归找到 base_dir 下所有包含笔记（非 dependency_graph.md）的子目录"""
+        """递归找到 base_dir 下所有包含笔记（非 dependency_graph.md / index.md）的子目录"""
         subdirs = []
         base_path = Path(base_dir)
         for item in sorted(base_path.rglob("*")):
             if item.is_dir():
-                if any(p.name != "dependency_graph.md" for p in item.rglob("*.md")):
+                if any(p.name not in ("dependency_graph.md", "index.md") for p in item.rglob("*.md")):
                     subdirs.append(str(item))
         return subdirs
 
@@ -340,6 +340,52 @@ class DAGMermiad:
         return result
 
 
+    def ensure_index_with_graph(self, subdir_path: str) -> None:
+        """若子目录下不存在 index.md 则自动创建；若 index.md 中尚未嵌入 dependency_graph，则在正文开头插入。"""
+        subdir_obj = Path(subdir_path)
+        subdir_rel = subdir_path.replace("content/", "")
+        dir_title = subdir_obj.name
+        embed_line = f"![[{subdir_rel}/dependency_graph]]"
+        index_path = subdir_obj / "index.md"
+
+        if not index_path.exists():
+            content = (
+                "---\n"
+                f"title: {dir_title}\n"
+                "tags:\n"
+                "  - 索引\n"
+                f"  - {dir_title}\n"
+                "---\n\n"
+                f"{embed_line}\n"
+            )
+            index_path.write_text(content, encoding="utf-8")
+            print(f"[新建索引] {index_path}")
+            return
+
+        content = index_path.read_text(encoding="utf-8")
+        # 已有任意 dependency_graph 嵌入则更新为当前目录的准确相对路径，避免移动目录后歧义
+        embed_pattern = re.compile(r"!\[\[[^\]]*dependency_graph\]\]")
+        if embed_pattern.search(content):
+            new_content = embed_pattern.sub(embed_line, content, count=1)
+            if new_content != content:
+                index_path.write_text(new_content, encoding="utf-8")
+                print(f"[更新索引] {index_path}")
+            return
+
+        # 尚无依赖图嵌入：在 YAML frontmatter 之后（或文件开头）插入
+        fm_match = re.match(r"\A(---\r?\n.*?\r?\n---\r?\n*)", content, flags=re.DOTALL)
+        if fm_match:
+            header = fm_match.group(1).rstrip("\r\n") + "\n\n"
+            body = content[fm_match.end() :].lstrip("\r\n")
+            new_content = f"{header}{embed_line}\n\n{body}" if body else f"{header}{embed_line}\n"
+        else:
+            body = content.lstrip("\r\n")
+            new_content = f"{embed_line}\n\n{body}" if body else f"{embed_line}\n"
+
+        index_path.write_text(new_content, encoding="utf-8")
+        print(f"[插入依赖图] {index_path}")
+
+
 def main():
     dag_mermiad = DAGMermiad()
     filepath_list = dag_mermiad.find_all_filepaths(dir_path="content")
@@ -378,6 +424,8 @@ def main():
         else:
             with open(subdir_graph_path, "w") as f:
                 f.write("```mermaid\ngraph TD\n```")
+
+        dag_mermiad.ensure_index_with_graph(subdir)
 
 
 if __name__ == "__main__":

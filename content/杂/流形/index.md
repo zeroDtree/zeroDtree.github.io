@@ -5,4 +5,4 @@ tags:
   - 流形
 ---
 
-![[流形/dependency_graph]]
+![[杂/流形/dependency_graph]]

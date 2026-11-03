@@ -5,4 +5,4 @@ tags:
   - 范畴论
 ---
 
-![[范畴/dependency_graph]]
+![[杂/范畴论/dependency_graph]]

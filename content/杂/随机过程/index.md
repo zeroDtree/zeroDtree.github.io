@@ -12,7 +12,7 @@ tags:
 
 无。
 
-![[随机过程/dependency_graph]]
+![[杂/随机过程/dependency_graph]]
 
 ## 内容
 

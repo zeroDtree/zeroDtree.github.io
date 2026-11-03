@@ -5,4 +5,4 @@ tags:
   - 复数
 ---
 
-![[复分析/dependency_graph]]
+![[杂/复分析/dependency_graph]]
