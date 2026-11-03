@@ -166,8 +166,8 @@
     "obsidian-flavored-markdown": {
       "source": "github:zeroDtree/obsidian-flavored-markdown",
       "resolved": "https://github.com/zeroDtree/obsidian-flavored-markdown.git",
-      "commit": "6eb55432197fa0c101f0f8a34922a4e0cf4fcfb3",
-      "installedAt": "2026-11-03T08:55:18.039Z"
+      "commit": "b7dde9e6c8b41b081e8adc8660fe4e7ad339622e",
+      "installedAt": "2026-11-03T16:25:26.388Z"
     },
     "og-image": {
       "source": "github:quartz-community/og-image",
