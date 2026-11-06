@@ -377,49 +377,52 @@ $$
 P=\sum_{n\in I}p_n\delta_{\omega_n}
 $$
 
-是离散概率测度。事实上，对任意 $A\in\mathcal{F}$，
+是离散概率测度。
 
-$$
-P(A)
-=\sum_{n\in I}p_n\delta_{\omega_n}(A)
-=\sum_{\{n\in I:\,\omega_n\in A\}}p_n.
-$$
-
-因此 $P(A)\geqslant0$、$P(\emptyset)=0$，并且
-
-$$
-P(\Omega)=\sum_{n\in I}p_n=1.
-$$
-
-再设 $\{A_k\}_{k\geqslant1}\subseteq\mathcal{F}$ 两两不交。对每个
-$n\in I$，至多有一个 $A_k$ 包含 $\omega_n$，故
-
-$$
-\delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)
-=\sum_{k=1}^{\infty}\delta_{\omega_n}(A_k).
-$$
-
-由于所有项均非负，可以交换两个求和的次序，从而
-
-$$
-\begin{aligned}
-P\left(\biguplus_{k=1}^{\infty}A_k\right)
-&=\sum_{n\in I}p_n
-  \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)\\
-&=\sum_{n\in I}\sum_{k=1}^{\infty}
-  p_n\delta_{\omega_n}(A_k)\\
-&=\sum_{k=1}^{\infty}\sum_{n\in I}
-  p_n\delta_{\omega_n}(A_k)\\
-&=\sum_{k=1}^{\infty}P(A_k).
-\end{aligned}
-$$
-
-所以 $P$ 具有可列可加性；结合 $P(\Omega)=1$，可知 $P$ 是概率测度。
-最后，由各 $\omega_n$ 两两不同，
-
-$$
-P(\{\omega_n\})
-=\sum_{m\in I}p_m\delta_{\omega_m}(\{\omega_n\})
-=p_n.
-\qquad\square
+> [!note]- 证明
+> 事实上，对任意 $A\in\mathcal{F}$，
+>
+> $$
+> P(A)
+> =\sum_{n\in I}p_n\delta_{\omega_n}(A)
+> =\sum_{\{n\in I:\,\omega_n\in A\}}p_n.
+> $$
+>
+> 因此 $P(A)\geqslant0$、$P(\emptyset)=0$，并且
+>
+> $$
+> P(\Omega)=\sum_{n\in I}p_n=1.
+> $$
+>
+> 再设 $\{A_k\}_{k\geqslant1}\subseteq\mathcal{F}$ 两两不交。对每个
+> $n\in I$，至多有一个 $A_k$ 包含 $\omega_n$，故
+>
+> $$
+> \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)
+> =\sum_{k=1}^{\infty}\delta_{\omega_n}(A_k).
+> $$
+>
+> 由于所有项均非负，可以交换两个求和的次序，从而
+>
+> $$
+> \begin{aligned}
+> P\left(\biguplus_{k=1}^{\infty}A_k\right)
+> &=\sum_{n\in I}p_n
+>   \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)\\
+> &=\sum_{n\in I}\sum_{k=1}^{\infty}
+>   p_n\delta_{\omega_n}(A_k)\\
+> &=\sum_{k=1}^{\infty}\sum_{n\in I}
+>   p_n\delta_{\omega_n}(A_k)\\
+> &=\sum_{k=1}^{\infty}P(A_k).
+> \end{aligned}
+> $$
+>
+> 所以 $P$ 具有可列可加性；结合 $P(\Omega)=1$，可知 $P$ 是概率测度。
+> 最后，由各 $\omega_n$ 两两不同，
+>
+> $$
+> P(\{\omega_n\})
+> =\sum_{m\in I}p_m\delta_{\omega_m}(\{\omega_n\})
+> =p_n.
+> \qquad\square
 $$

@@ -152,66 +152,68 @@ $$\text{误差}_B \le \frac{2M}{\delta^2} \cdot \frac{1}{4n} = \frac{M}{2n\delta
 
 ### 完成证明
 
-现在合并两部分误差：
-
-$$|f(x) - B_n(f; x)| < \frac{\epsilon}{2} + \frac{M}{2n\delta^2}$$
-
-只要我们选取足够大的 $n$（使得 $n > \frac{M}{\epsilon\delta^2}$），第二项也会小于 $\frac{\epsilon}{2}$。
-从而对于所有的 $x \in [0, 1]$：
-
-$$|f(x) - B_n(f; x)| < \epsilon$$
-
-这意味着 Bernstein 多项式序列 $B_n(f; x)$ 一致收敛于 $f(x)$。
-
-### 关于区间 $[a, b]$ 的说明
-
-如果函数定义在一般的闭区间 $[a, b]$ 上，只需通过线性变换 $t = \frac{x-a}{b-a}$ 将其映射到 $[0, 1]$ 即可。这一变换不改变函数的连续性和多项式的性质。
-
-**证毕。**
+> [!note]- 证明
+> 现在合并两部分误差：
+>
+> $$|f(x) - B_n(f; x)| < \frac{\epsilon}{2} + \frac{M}{2n\delta^2}$$
+>
+> 只要我们选取足够大的 $n$（使得 $n > \frac{M}{\epsilon\delta^2}$），第二项也会小于 $\frac{\epsilon}{2}$。
+> 从而对于所有的 $x \in [0, 1]$：
+>
+> $$|f(x) - B_n(f; x)| < \epsilon$$
+>
+> 这意味着 Bernstein 多项式序列 $B_n(f; x)$ 一致收敛于 $f(x)$。
+>
+> ### 关于区间 $[a, b]$ 的说明
+>
+> 如果函数定义在一般的闭区间 $[a, b]$ 上，只需通过线性变换 $t = \frac{x-a}{b-a}$ 将其映射到 $[0, 1]$ 即可。这一变换不改变函数的连续性和多项式的性质。
+>
+> **证毕。**
 
 ## 实值 Stone–Weierstrass 定理
 
-### 利用 Weierstrass 逼近定理处理绝对值
-
-我们需要证明：如果 $f \in \overline{\mathcal{A}_{\mathbb{R}}}$，那么 $|f| \in \overline{\mathcal{A}_{\mathbb{R}}}$。
-
-1. 设 $f \in \overline{\mathcal{A}_{\mathbb{R}}}$，令 $M = \|f\|$。
-2. 考虑实函数 $\phi(t) = |t|$，它在区间 $[-M, M]$ 上连续。
-3. **调用 Weierstrass 逼近定理**：对于任意 $\epsilon > 0$，存在一个多项式 $P(t) = \sum_{k=0}^n c_k t^k$ 使得在 $[-M, M]$ 上 $|P(t) - |t|| < \epsilon$。
-4. 由于 $\overline{\mathcal{A}_{\mathbb{R}}}$ 是一个代数且包含常数，因此 $P(f) = \sum c_k f^k$ 仍然属于 $\overline{\mathcal{A}_{\mathbb{R}}}$。
-5. 这意味着我们可以用 $\overline{\mathcal{A}_{\mathbb{R}}}$ 中的元素一致逼近 $|f|$。由于 $\overline{\mathcal{A}_{\mathbb{R}}}$ 是闭的，故 $|f| \in \overline{\mathcal{A}_{\mathbb{R}}}$。
-
-### 格（Lattice）性质与局部线性逼近
-
-有了绝对值，我们就可以构造“最大值”和“最小值”函数：
-
-$$\max(f, g) = \frac{f+g+|f-g|}{2}, \quad \min(f, g) = \frac{f+g-|f-g|}{2}$$
-
-这说明 $\overline{\mathcal{A}_{\mathbb{R}}}$ 对 $\max$ 和 $\min$ 运算封闭。
-
-#### 局部两点插值
-
-对于任意 $x_1, x_2 \in K$ 及任意实数 $a, b$，由于 $\mathcal{A}_{\mathbb{R}}$ 分离点且含常数，我们可以构造 $h \in \mathcal{A}_{\mathbb{R}}$ 使得 $h(x_1) = a$ 且 $h(x_2) = b$。
-
-> **构造法**：取 $g \in \mathcal{A}_{\mathbb{R}}$ 使得 $g(x_1) \neq g(x_2)$，令 $h(x) = a \frac{g(x)-g(x_2)}{g(x_1)-g(x_2)} + b \frac{g(x)-g(x_1)}{g(x_2)-g(x_1)}$。
-
-#### 从点到全局的逼近
-
-设 $f \in \mathscr{C}(K, \mathbb{R})$ 及 $\epsilon > 0$：
-
-- **固定 $x$，逼近 $y$**：对于每个 $x \in K$，对每一个 $y \in K$，存在 $h_{x,y} \in \mathcal{A}_{\mathbb{R}}$ 使得 $h_{x,y}(x) = f(x)$ 且 $h_{x,y}(y) = f(y)$。
-- 由于连续性，存在 $y$ 的邻域 $U_y$ 使得在 $U_y$ 内 $h_{x,y}(z) > f(z) - \epsilon$。
-- 利用 $K$ 的**紧致性**，有限个这样的 $h_{x,y}$ 的 $\max$（记作 $H_x$）满足：$H_x(x) = f(x)$ 且对所有 $z \in K$ 有 $H_x(z) > f(z) - \epsilon$。
-- 同理，对 $H_x$ 在 $x$ 附近取 $\min$。存在 $x$ 的邻域 $V_x$ 使得在 $V_x$ 内 $H_x(z) < f(z) + \epsilon$。
-- 再次利用紧致性，有限个 $H_x$ 的 $\min$（记作 $H$）将满足：对所有 $z \in K$，
-
-$$f(z) - \epsilon < H(z) < f(z) + \epsilon$$
-
-### 总结
-
-由于 $H$ 是通过有限次 $\max$ 和 $\min$ 运算得到的，且每次运算的对象都在 $\overline{\mathcal{A}_{\mathbb{R}}}$ 中，因此 $H \in \overline{\mathcal{A}_{\mathbb{R}}}$。
-
-Q.E.D.
+> [!note]- 证明
+> ### 利用 Weierstrass 逼近定理处理绝对值
+>
+> 我们需要证明：如果 $f \in \overline{\mathcal{A}_{\mathbb{R}}}$，那么 $|f| \in \overline{\mathcal{A}_{\mathbb{R}}}$。
+>
+> 1. 设 $f \in \overline{\mathcal{A}_{\mathbb{R}}}$，令 $M = \|f\|$。
+> 2. 考虑实函数 $\phi(t) = |t|$，它在区间 $[-M, M]$ 上连续。
+> 3. **调用 Weierstrass 逼近定理**：对于任意 $\epsilon > 0$，存在一个多项式 $P(t) = \sum_{k=0}^n c_k t^k$ 使得在 $[-M, M]$ 上 $|P(t) - |t|| < \epsilon$。
+> 4. 由于 $\overline{\mathcal{A}_{\mathbb{R}}}$ 是一个代数且包含常数，因此 $P(f) = \sum c_k f^k$ 仍然属于 $\overline{\mathcal{A}_{\mathbb{R}}}$。
+> 5. 这意味着我们可以用 $\overline{\mathcal{A}_{\mathbb{R}}}$ 中的元素一致逼近 $|f|$。由于 $\overline{\mathcal{A}_{\mathbb{R}}}$ 是闭的，故 $|f| \in \overline{\mathcal{A}_{\mathbb{R}}}$。
+>
+> ### 格（Lattice）性质与局部线性逼近
+>
+> 有了绝对值，我们就可以构造“最大值”和“最小值”函数：
+>
+> $$\max(f, g) = \frac{f+g+|f-g|}{2}, \quad \min(f, g) = \frac{f+g-|f-g|}{2}$$
+>
+> 这说明 $\overline{\mathcal{A}_{\mathbb{R}}}$ 对 $\max$ 和 $\min$ 运算封闭。
+>
+> #### 局部两点插值
+>
+> 对于任意 $x_1, x_2 \in K$ 及任意实数 $a, b$，由于 $\mathcal{A}_{\mathbb{R}}$ 分离点且含常数，我们可以构造 $h \in \mathcal{A}_{\mathbb{R}}$ 使得 $h(x_1) = a$ 且 $h(x_2) = b$。
+>
+> > **构造法**：取 $g \in \mathcal{A}_{\mathbb{R}}$ 使得 $g(x_1) \neq g(x_2)$，令 $h(x) = a \frac{g(x)-g(x_2)}{g(x_1)-g(x_2)} + b \frac{g(x)-g(x_1)}{g(x_2)-g(x_1)}$。
+>
+> #### 从点到全局的逼近
+>
+> 设 $f \in \mathscr{C}(K, \mathbb{R})$ 及 $\epsilon > 0$：
+>
+> - **固定 $x$，逼近 $y$**：对于每个 $x \in K$，对每一个 $y \in K$，存在 $h_{x,y} \in \mathcal{A}_{\mathbb{R}}$ 使得 $h_{x,y}(x) = f(x)$ 且 $h_{x,y}(y) = f(y)$。
+> - 由于连续性，存在 $y$ 的邻域 $U_y$ 使得在 $U_y$ 内 $h_{x,y}(z) > f(z) - \epsilon$。
+> - 利用 $K$ 的**紧致性**，有限个这样的 $h_{x,y}$ 的 $\max$（记作 $H_x$）满足：$H_x(x) = f(x)$ 且对所有 $z \in K$ 有 $H_x(z) > f(z) - \epsilon$。
+> - 同理，对 $H_x$ 在 $x$ 附近取 $\min$。存在 $x$ 的邻域 $V_x$ 使得在 $V_x$ 内 $H_x(z) < f(z) + \epsilon$。
+> - 再次利用紧致性，有限个 $H_x$ 的 $\min$（记作 $H$）将满足：对所有 $z \in K$，
+>
+> $$f(z) - \epsilon < H(z) < f(z) + \epsilon$$
+>
+> ### 总结
+>
+> 由于 $H$ 是通过有限次 $\max$ 和 $\min$ 运算得到的，且每次运算的对象都在 $\overline{\mathcal{A}_{\mathbb{R}}}$ 中，因此 $H \in \overline{\mathcal{A}_{\mathbb{R}}}$。
+>
+> Q.E.D.
 
 ## 复值 Stone–Weierstrass 定理
 
@@ -225,56 +227,57 @@ Q.E.D.
 
 那么 $\mathcal{A}$ 在 $\mathscr{C}(K, \mathbb{C})$ 中 **一致稠密**，即 $\overline{\mathcal{A}} = \mathscr{C}(K, \mathbb{C})$。
 
-### 构造实代数部分
-
-设 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathcal{A}$ 中所有**实值函数**构成的集合：
-
-$$\mathcal{A}_{\mathbb{R}} = \{ f \in \mathcal{A} \mid f(x) \in \mathbb{R}, \forall x \in K \}$$
-
-我们需要证明 $\mathcal{A}_{\mathbb{R}}$ 满足实值 Stone–Weierstrass 定理的所有条件：
-
-- **是一个代数**：
- 由于 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，且两个实值函数的加法、实标量乘法、乘法结果仍为实值函数，故 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathbb{R}$ 上的代数。
-- **包含常数函数**：
- 已知 $1 \in \mathcal{A}$。由于 $1$ 是实值的，故 $1 \in \mathcal{A}_{\mathbb{R}}$。
-- **分离点**：
- 这是最关键的一步。对于任意 $x, y \in K$ 且 $x \neq y$，由已知条件存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
- 令 $f = u + iv$，其中 $u, v$ 分别是 $f$ 的实部和虚部：
-
-$$u = \frac{f + \overline{f}}{2}, \quad v = \frac{f - \overline{f}}{2i}$$
-
-由于 $\mathcal{A}$ 对**复共轭封闭**（$\overline{f} \in \mathcal{A}$）且对标量乘法封闭，所以 $u \in \mathcal{A}$ 且 $v \in \mathcal{A}$。又因为 $u, v$ 显然是实值的，故 **$u, v \in \mathcal{A}_{\mathbb{R}}$**。
-因为 $f(x) \neq f(y)$，则必须有 $u(x) \neq u(y)$ 或 $v(x) \neq v(y)$。
-这说明实代数 $\mathcal{A}_{\mathbb{R}}$ 同样能够分离点。
-
-### 应用实值定理
-
-根据**实值 Stone–Weierstrass 定理**，$\mathcal{A}_{\mathbb{R}}$ 在实连续函数空间 $\mathscr{C}(K, \mathbb{R})$ 中是一致稠密的。
-即：
-
-$$\overline{\mathcal{A}_{\mathbb{R}}} = \mathscr{C}(K, \mathbb{R})$$
-
-### 完成复值逼近
-
-现在考虑任意复值连续函数 $g \in \mathscr{C}(K, \mathbb{C})$。
-我们可以将其分解为实部和虚部：
-
-$$g(x) = u(x) + i v(x)$$
-
-其中 $u, v \in \mathscr{C}(K, \mathbb{R})$。
-
-对于任意 $\epsilon > 0$：
-
-1. 由于 $\overline{\mathcal{A}_{\mathbb{R}}} = \mathscr{C}(K, \mathbb{R})$，存在 $u_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}}$ 使得 $\|u - u_{\mathcal{A}}\| < \frac{\epsilon}{2}$。
-2. 同理，存在 $v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}}$ 使得 $\|v - v_{\mathcal{A}}\| < \frac{\epsilon}{2}$。
-
-构造函数 $g_{\mathcal{A}} = u_{\mathcal{A}} + i v_{\mathcal{A}}$。
-由于 $u_{\mathcal{A}}, v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}} \subseteq \mathcal{A}$，且 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，故 **$g_{\mathcal{A}} \in \mathcal{A}$**。
-
-计算误差：
-
-$$\|g - g_{\mathcal{A}}\| = \|(u - u_{\mathcal{A}}) + i(v - v_{\mathcal{A}})\| \le \|u - u_{\mathcal{A}}\| + \|v - v_{\mathcal{A}}\| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
-
-这证明了 $\mathcal{A}$ 在 $\mathscr{C}(K, \mathbb{C})$ 中一致稠密。
-
-Q.E.D.
+> [!note]- 证明
+> ### 构造实代数部分
+>
+> 设 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathcal{A}$ 中所有**实值函数**构成的集合：
+>
+> $$\mathcal{A}_{\mathbb{R}} = \{ f \in \mathcal{A} \mid f(x) \in \mathbb{R}, \forall x \in K \}$$
+>
+> 我们需要证明 $\mathcal{A}_{\mathbb{R}}$ 满足实值 Stone–Weierstrass 定理的所有条件：
+>
+> - **是一个代数**：
+>  由于 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，且两个实值函数的加法、实标量乘法、乘法结果仍为实值函数，故 $\mathcal{A}_{\mathbb{R}}$ 是 $\mathbb{R}$ 上的代数。
+> - **包含常数函数**：
+>  已知 $1 \in \mathcal{A}$。由于 $1$ 是实值的，故 $1 \in \mathcal{A}_{\mathbb{R}}$。
+> - **分离点**：
+>  这是最关键的一步。对于任意 $x, y \in K$ 且 $x \neq y$，由已知条件存在 $f \in \mathcal{A}$ 使得 $f(x) \neq f(y)$。
+>  令 $f = u + iv$，其中 $u, v$ 分别是 $f$ 的实部和虚部：
+>
+> $$u = \frac{f + \overline{f}}{2}, \quad v = \frac{f - \overline{f}}{2i}$$
+>
+> 由于 $\mathcal{A}$ 对**复共轭封闭**（$\overline{f} \in \mathcal{A}$）且对标量乘法封闭，所以 $u \in \mathcal{A}$ 且 $v \in \mathcal{A}$。又因为 $u, v$ 显然是实值的，故 **$u, v \in \mathcal{A}_{\mathbb{R}}$**。
+> 因为 $f(x) \neq f(y)$，则必须有 $u(x) \neq u(y)$ 或 $v(x) \neq v(y)$。
+> 这说明实代数 $\mathcal{A}_{\mathbb{R}}$ 同样能够分离点。
+>
+> ### 应用实值定理
+>
+> 根据**实值 Stone–Weierstrass 定理**，$\mathcal{A}_{\mathbb{R}}$ 在实连续函数空间 $\mathscr{C}(K, \mathbb{R})$ 中是一致稠密的。
+> 即：
+>
+> $$\overline{\mathcal{A}_{\mathbb{R}}} = \mathscr{C}(K, \mathbb{R})$$
+>
+> ### 完成复值逼近
+>
+> 现在考虑任意复值连续函数 $g \in \mathscr{C}(K, \mathbb{C})$。
+> 我们可以将其分解为实部和虚部：
+>
+> $$g(x) = u(x) + i v(x)$$
+>
+> 其中 $u, v \in \mathscr{C}(K, \mathbb{R})$。
+>
+> 对于任意 $\epsilon > 0$：
+>
+> 1. 由于 $\overline{\mathcal{A}_{\mathbb{R}}} = \mathscr{C}(K, \mathbb{R})$，存在 $u_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}}$ 使得 $\|u - u_{\mathcal{A}}\| < \frac{\epsilon}{2}$。
+> 2. 同理，存在 $v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}}$ 使得 $\|v - v_{\mathcal{A}}\| < \frac{\epsilon}{2}$。
+>
+> 构造函数 $g_{\mathcal{A}} = u_{\mathcal{A}} + i v_{\mathcal{A}}$。
+> 由于 $u_{\mathcal{A}}, v_{\mathcal{A}} \in \mathcal{A}_{\mathbb{R}} \subseteq \mathcal{A}$，且 $\mathcal{A}$ 是 $\mathbb{C}$ 上的代数，故 **$g_{\mathcal{A}} \in \mathcal{A}$**。
+>
+> 计算误差：
+>
+> $$\|g - g_{\mathcal{A}}\| = \|(u - u_{\mathcal{A}}) + i(v - v_{\mathcal{A}})\| \le \|u - u_{\mathcal{A}}\| + \|v - v_{\mathcal{A}}\| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
+>
+> 这证明了 $\mathcal{A}$ 在 $\mathscr{C}(K, \mathbb{C})$ 中一致稠密。
+>
+> Q.E.D.
