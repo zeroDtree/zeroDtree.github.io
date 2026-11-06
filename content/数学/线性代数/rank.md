@@ -47,8 +47,7 @@ $$
 \operatorname{col}(AQ)=\operatorname{col}(A),\qquad \dim\operatorname{row}(AQ)=\dim\operatorname{row}(A).
 $$
 
-> proof
->
+> [!note]- 证明
 > The $i$-th row of $PA$ is $\sum_{k=1}^m P_{ik} w_k^T$, so $\operatorname{row}(PA)\subseteq\operatorname{row}(A)$. The same reading of $A=P^{-1}(PA)$ gives $\operatorname{row}(A)\subseteq\operatorname{row}(PA)$.
 >
 > The columns of $PA$ are $Pv_1,\cdots,Pv_n$, so $\operatorname{col}(PA)=\{Px:x\in\operatorname{col}(A)\}$. By [[抽象代数/向量空间]] 性质 6, $\operatorname{col}(A)$ has a finite basis $u_1,\cdots,u_d$. Every vector of $\operatorname{col}(A)$ is $\sum_i a_i u_i$, and $P$ sends it to $\sum_i a_i Pu_i$, so $Pu_1,\cdots,Pu_d$ spans $\operatorname{col}(PA)$. If $\sum_i a_i Pu_i=0$, then $P(\sum_i a_i u_i)=0$, hence $\sum_i a_i u_i=0$, and every $a_i=0$. 性质 8 gives $\dim\operatorname{col}(PA)=d=\dim\operatorname{col}(A)$.
@@ -108,8 +107,7 @@ Let $A = [v_1\ \cdots\ v_n] \in F^{n \times n}$, where $v_i \in F^n$ is column $
 
 $A$ is invertible if and only if $v_1,\ldots,v_n$ is a basis of $F^n$.
 
-> proof
->
+> [!note]- 证明
 > If $v_1,\ldots,v_n$ is a basis, [[抽象代数/向量空间]] 性质 13 writes each column $e_j$ of $I$ as $e_j = Ab_j$. The matrix $B = [b_1\ \cdots\ b_n]$ satisfies $AB = I$, so $\operatorname{det}(A)\operatorname{det}(B) = \operatorname{det}(I) \not= 0$. Hence $\operatorname{det}(A) \not= 0$, and $A$ is invertible.
 >
 > Conversely, if $A$ is invertible and $Ax = 0$, the same formula gives $A^{-1}0 = 0$, so $x = A^{-1}(Ax) = 0$. The columns are linearly independent. 性质 12 gives $\dim(F^n) = n$. 性质 7 extends the columns to a basis, and 性质 8 says every basis has $n$ vectors, so the columns are already a basis.

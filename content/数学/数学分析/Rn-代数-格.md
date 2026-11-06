@@ -41,54 +41,52 @@ $$(c(x \cdot y))_i = x_i (c y_i) = (x \cdot (cy))_i$$
 下面证明$\ell^p$范数与$\ell^\infty$范数满足次可乘性
 
 #### 2.2.1. 一般 $\ell^p$ 范数的证明
-
-对于任意 $p \ge 1$，定义 $\ell^p$ 范数为 $\|x\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$。考察乘积的范数的 $p$ 次方：
-
-$$\|x \cdot y\|_p^p = \sum_{i=1}^n |x_i y_i|^p = \sum_{i=1}^n |x_i|^p |y_i|^p$$
-
-对于每一个分量 $|y_i|^p$，它显然不可能超过全体分量的 $p$ 次方和。也就是说：
-
-$$
-\text{对任意 } i, \quad |y_i|^p \le \sum_{j=1}^n |y_j|^p = \|y\|_p^p
-$$
-
-将这个放大关系代入到求和式中：
-
-$$
-\sum_{i=1}^n |x_i|^p |y_i|^p \le \sum_{i=1}^n |x_i|^p \cdot \|y\|_p^p
-$$
-
-因为 $\|y\|_p^p$ 是一个与求和指标 $i$ 无关的常数，可以把它提到求和号外面：
-
-$$\sum_{i=1}^n |x_i|^p \cdot \|y\|_p^p = \|y\|_p^p \left( \sum_{i=1}^n |x_i|^p \right) = \|y\|_p^p \cdot \|x\|_p^p$$
-
-两边同时开 $p$ 次方根（因为 $p \ge 1$ 且所有项非负，开方保持不等号方向）：
-
-$$\|x \cdot y\|_p \le \|x\|_p \|y\|_p$$
-
-Q.E.D.
-
+> [!note]- 证明
+> 对于任意 $p \ge 1$，定义 $\ell^p$ 范数为 $\|x\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$。考察乘积的范数的 $p$ 次方：
+>
+> $$\|x \cdot y\|_p^p = \sum_{i=1}^n |x_i y_i|^p = \sum_{i=1}^n |x_i|^p |y_i|^p$$
+>
+> 对于每一个分量 $|y_i|^p$，它显然不可能超过全体分量的 $p$ 次方和。也就是说：
+>
+> $$
+> \text{对任意 } i, \quad |y_i|^p \le \sum_{j=1}^n |y_j|^p = \|y\|_p^p
+> $$
+>
+> 将这个放大关系代入到求和式中：
+>
+> $$
+> \sum_{i=1}^n |x_i|^p |y_i|^p \le \sum_{i=1}^n |x_i|^p \cdot \|y\|_p^p
+> $$
+>
+> 因为 $\|y\|_p^p$ 是一个与求和指标 $i$ 无关的常数，可以把它提到求和号外面：
+>
+> $$\sum_{i=1}^n |x_i|^p \cdot \|y\|_p^p = \|y\|_p^p \left( \sum_{i=1}^n |x_i|^p \right) = \|y\|_p^p \cdot \|x\|_p^p$$
+>
+> 两边同时开 $p$ 次方根（因为 $p \ge 1$ 且所有项非负，开方保持不等号方向）：
+>
+> $$\|x \cdot y\|_p \le \|x\|_p \|y\|_p$$
+>
+> Q.E.D.
 #### 2.2.2. $\ell^\infty$ 范数（上确界范数）的证明
-
-$\|x\|_\infty = \max_{1 \le i \le n} |x_i|$。
-
-$$\|x \cdot y\|_\infty = \max_{1 \le i \le n} |x_i y_i| = \max_{1 \le i \le n} (|x_i| \cdot |y_i|)$$
-
-由于对任意 $i$，都有 $|x_i| \le \max_j |x_j| = \|x\|_\infty$ 且 $|y_i| \le \max_j |y_j| = \|y\|_\infty$，因此：
-
-$$|x_i| \cdot |y_i| \le \|x\|_\infty \cdot \|y\|_\infty$$
-
-取最大值后，次可乘性依然成立：
-
-$$\|x \cdot y\|_\infty \le \|x\|_\infty \|y\|_\infty$$
-因此，$(\mathbb{R}^n, \|\cdot\|_\infty)$ 是一个赋范代数。
-
-Q.E.D.
-
-因此，$(\mathbb{R}^n, \|\cdot\|_p)$ 和 $(\mathbb{R}^n, \|\cdot\|_\infty)$ 都是赋范代数。
-
----
-
+> [!note]- 证明
+> $\|x\|_\infty = \max_{1 \le i \le n} |x_i|$。
+>
+> $$\|x \cdot y\|_\infty = \max_{1 \le i \le n} |x_i y_i| = \max_{1 \le i \le n} (|x_i| \cdot |y_i|)$$
+>
+> 由于对任意 $i$，都有 $|x_i| \le \max_j |x_j| = \|x\|_\infty$ 且 $|y_i| \le \max_j |y_j| = \|y\|_\infty$，因此：
+>
+> $$|x_i| \cdot |y_i| \le \|x\|_\infty \cdot \|y\|_\infty$$
+>
+> 取最大值后，次可乘性依然成立：
+>
+> $$\|x \cdot y\|_\infty \le \|x\|_\infty \|y\|_\infty$$
+> 因此，$(\mathbb{R}^n, \|\cdot\|_\infty)$ 是一个赋范代数。
+>
+> Q.E.D.
+>
+> 因此，$(\mathbb{R}^n, \|\cdot\|_p)$ 和 $(\mathbb{R}^n, \|\cdot\|_\infty)$ 都是赋范代数。
+>
+> ---
 ### 2.3. 范数所诱导的度量的完备性验证
 
 有限维赋范线性空间必然是完备的（即一定是 Banach 空间）。

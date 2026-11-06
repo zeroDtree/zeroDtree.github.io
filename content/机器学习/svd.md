@@ -48,8 +48,7 @@ $C = U \Lambda_C U^T, U \in \mathbb{R}^{m \times m}$
 
 $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geometric multiplicity).
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{gathered}
 > B v = A^T A v= \lambda v \Longrightarrow\\
@@ -101,8 +100,7 @@ $$
 Ker(A) = Ker(A^T A)
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > x \in Ker(A) \Longleftrightarrow A x = 0 \implies A^T A x = 0 \Longleftrightarrow x \in Ker(A^T A)
 > $$

@@ -88,33 +88,31 @@ $$
 
 $$
 
-proof:
-
-$$
-\begin{aligned}
-f'(z_0) &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{f(x_0+iy) - f(x_0+iy_0)}{i(y-y_0)}\\
-&= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) + iv(x_0,y) - u(x_0,y_0) - iv(x_0,y_0)}{i(y-y_0)}\\
-&= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) - u(x_0,y_0)}{i(y-y_0)} + i \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{v(x_0,y) - v(x_0,y_0)}{i(y-y_0)}\\
-&= \frac{1}{i}\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\\
-&= -i \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}
-\end{aligned}
-$$
-
-similarly,
-
-$$
-\begin{aligned}
-f'(z_0) &= \lim_{\substack{x \to x_0\\ x \ne x_0}} \frac{f(x+iy_0) - f(x_0+iy_0)}{x-x_0}\\
-&= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
-\end{aligned}
-$$
-
-Because the two limits above are both equal to $f'(z_0)$, we have
-
-$$
-\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
-$$
-
+> [!note]- 证明
+> $$
+> \begin{aligned}
+> f'(z_0) &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{f(x_0+iy) - f(x_0+iy_0)}{i(y-y_0)}\\
+> &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) + iv(x_0,y) - u(x_0,y_0) - iv(x_0,y_0)}{i(y-y_0)}\\
+> &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) - u(x_0,y_0)}{i(y-y_0)} + i \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{v(x_0,y) - v(x_0,y_0)}{i(y-y_0)}\\
+> &= \frac{1}{i}\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\\
+> &= -i \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}
+> \end{aligned}
+> $$
+>
+> similarly,
+>
+> $$
+> \begin{aligned}
+> f'(z_0) &= \lim_{\substack{x \to x_0\\ x \ne x_0}} \frac{f(x+iy_0) - f(x_0+iy_0)}{x-x_0}\\
+> &= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
+> \end{aligned}
+> $$
+>
+> Because the two limits above are both equal to $f'(z_0)$, we have
+>
+> $$
+> \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+> $$
 ### 3.2. Derivative and Jacobian Properties of Holomorphic Functions
 
 $$

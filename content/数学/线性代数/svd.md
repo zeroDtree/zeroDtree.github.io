@@ -126,8 +126,7 @@ $$
 
 $A^HA\in\mathbb C^{n\times n}$ 与 $AA^H\in\mathbb C^{m\times m}$ 都是 Hermitian 半正定矩阵。
 
-> proof
->
+> [!note]- 证明
 > 首先，
 >
 > $$
@@ -158,8 +157,7 @@ $$
 \boxed{\mathcal N(AA^H)=\mathcal N(A^H).}
 $$
 
-> proof
->
+> [!note]- 证明
 > 以第一个等式为例，若 $Ax=0$，则显然 $A^HAx=0$；反过来，若 $A^HAx=0$，则
 >
 > $$
@@ -185,16 +183,14 @@ $$
 \boxed{\mathcal R(A^H)^\perp=\mathcal N(A).}
 $$
 
-> proof
->
+> [!note]- 证明
 > 例如，$y\in\mathcal R(A)^\perp$ 当且仅当 $y^HAx=0$ 对所有 $x\in\mathbb C^n$ 成立，也就是 $A^Hy=0$。另一个等式同理。
 
 ### 2.3. 非零特征值
 
 $A^HA$ 与 $AA^H$ 具有相同的非零特征值，并且重数相同。
 
-> proof
->
+> [!note]- 证明
 > 设 $\lambda>0$，分别记相应的特征空间为
 >
 > $$
@@ -241,8 +237,7 @@ $A^HA$ 与 $AA^H$ 具有相同的非零特征值，并且重数相同。
 
 ## 3. SVD 的存在性证明
 
-> proof
->
+> [!note]- 证明
 > 由谱定理，存在 $\mathbb C^n$ 的一组标准正交基 $v_1,\ldots,v_n$，使得
 >
 > $$
@@ -451,8 +446,7 @@ $$
 \boxed{\|A\|_2=\sigma_1}
 $$
 
-> proof
->
+> [!note]- 证明
 > 对任意 $x\in\mathbb C^n$，写成
 >
 > $$
@@ -476,8 +470,7 @@ $$
 \boxed{\|A\|_F=\left(\sum_{i=1}^r\sigma_i^2\right)^{1/2}.}
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > \|A\|_F^2
@@ -499,8 +492,7 @@ $$
 }
 $$
 
-> proof
->
+> [!note]- 证明
 > 由
 >
 > $$

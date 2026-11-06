@@ -21,7 +21,7 @@ The following statements are equivalent:
 1. $f$ converges to $L$ at $x_0$ in $E$.
 2. For every sequence $(a_n)_{n=0}^{\infty}$ which consists entirely of elements of $E$ and converges to $x_0$, the sequence $(f(a_n))_{n=0}^{\infty}$ converges to $L$.
 
-> proof:
+> [!note]- 证明
 > (1) $\longrightarrow$ (2):
 > (1) $\Longleftrightarrow$ $\forall \epsilon > 0, \exists \delta > 0$, s.t. (($\forall x \in E \wedge d(x_0, x) < \delta$) $\longrightarrow$ $d(f(x), L) < \epsilon$) is true.
 > $(a_n \to x_0) \Longleftrightarrow \forall \delta > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(a_n, x_0) < \delta$.
@@ -61,7 +61,7 @@ The following statements are equivalent:
 1. $\mathbf{x^n} \to \mathbf{y}$
 2. $\forall i \in \{1, 2, \cdots, n\}, (x_i^n)_{n=0}^{\infty} \to y_i$
 
-> proof:
+> [!note]- 证明
 > (1) $\longrightarrow$ (2):
 > $\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, \sqrt{\sum_{i=1}^{n} d(x_i^n,y_i)^2} < \epsilon$
 > so, $\forall i \in \{1, 2, \cdots, n\}, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, d(x_i^n,y_i) \leq \sqrt{\sum_{i=1}^{n} d(x_i^n, y_i)^2} < \epsilon$

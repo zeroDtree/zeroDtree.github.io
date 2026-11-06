@@ -50,7 +50,8 @@ q(\mathbf{x}_i \mid \mathbf{x}_0) = \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\bar{
 \tag{3}
 $$
 
-> **证明.** 对步数 $i$ 使用数学归纳法。
+> [!note]- 证明
+> 对步数 $i$ 使用数学归纳法。
 >
 > **归纳起点（$i = 1$）：** 此时 $\bar{\alpha}_1 = \alpha_1$，$1 - \bar{\alpha}_1 = 1 - \alpha_1 = \beta_1$，与单步转移核 (1) 的定义一致：
 >
@@ -165,7 +166,8 @@ $$
 \tag{8}
 $$
 
-> **证明.** $D$ 维多元高斯分布 $\mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$ 的概率密度满足
+> [!note]- 证明
+> $D$ 维多元高斯分布 $\mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$ 的概率密度满足
 >
 > $$
 > p(\mathbf{x}) \propto \exp\!\left(-\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})\right).
@@ -225,7 +227,8 @@ p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
 \tag{9}
 $$
 
-> **证明.** 由 (6) 可知，分母 $q(\mathbf{x}_i \mid \mathbf{x}_0)$ 不含变量 $\mathbf{x}_{i-1}$，关于 $\mathbf{x}_{i-1}$ 仅起归一化常数的作用。分子是两个高斯分布的乘积：
+> [!note]- 证明
+> 由 (6) 可知，分母 $q(\mathbf{x}_i \mid \mathbf{x}_0)$ 不含变量 $\mathbf{x}_{i-1}$，关于 $\mathbf{x}_{i-1}$ 仅起归一化常数的作用。分子是两个高斯分布的乘积：
 >
 > $$
 > \begin{aligned}
@@ -355,8 +358,7 @@ p^*(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
 \tag{11}
 $$
 
-> **证明.**
->
+> [!note]- 证明
 > **第一部分：等式 (10) 的推导。** 从右端的条件 KL 期望出发，将其改写为积分形式：
 >
 > $$
@@ -545,7 +547,8 @@ $$
 \tag{16}
 $$
 
-> **证明.** 将 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 代入 (9) 中的 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：
+> [!note]- 证明
+> 将 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 代入 (9) 中的 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：
 >
 > $$
 > \begin{aligned}

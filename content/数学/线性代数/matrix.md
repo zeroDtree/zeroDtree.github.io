@@ -84,8 +84,7 @@ $$
 (AB)C = A(BC)
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > ((AB)C)_{ij} &= \sum_{k=1}^p (AB)_{ik} c_{kj} \\
@@ -110,8 +109,7 @@ $$
 A(B + C) = AB + AC
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > (A(B + C))_{ij} &= \sum_{k=1}^n a_{ik} (B + C)_{kj} \\
@@ -145,8 +143,7 @@ $$
 AI = IA = A
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > (AI)_{ij} &= \sum_{k=1}^n a_{ik} (I)_{kj} \\
@@ -238,8 +235,7 @@ Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The transpose of $A$ is the ma
 $A \in F^{m \times n}, B \in F^{n \times p}$, we have:
 $(AB)^T = B^T A^T$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > (AB)^T_{ij} &= (AB)_{ji} \\
@@ -313,7 +309,8 @@ $$
 - $\operatorname{tr}(A^T) = \operatorname{tr}(A)$
 - 若 $A=[a_{ij}],B=[b_{ij}]\in\mathbb C^{m\times n}$，则 $\operatorname{tr}(A^HB)=\displaystyle\sum_{i=1}^m\sum_{j=1}^n\overline{a_{ij}}b_{ij}$
 
-> proof : $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
+> [!note]- 证明
+> $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
 >
 > $$
 > \begin{aligned}
@@ -559,8 +556,7 @@ $$
 A A^{\text{\#}} = A^{\text{\#}} A = \operatorname{det}(A) I
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \begin{aligned}
 > (A A^{\text{\#}})_{ij} &= \sum_{k=1}^n a_{ik} a^{\text{\#}}_{kj} \\

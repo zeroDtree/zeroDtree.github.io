@@ -29,7 +29,7 @@ tags:
   > \forall \varepsilon > 0,\ \exists \delta > 0,\ \text{s.t.}\ \forall x \in X,\ 0 < d(x, x_0) < \delta \implies d\big(f(x), f(x_0) + L(x - x_0)\big) \le \varepsilon\, d(x, x_0).
   > $$
   **Uniqueness of derivatives** Let $E$ be a subset of $\mathbb{R}^n$, $f: E \rightarrow \mathbb{R}^m$ be a function, $x_0 \in E$ be an interior point of $E$, and let $L_1: \mathbb{R}^n \rightarrow \mathbb{R}^m$ and $L_2: \mathbb{R}^n \rightarrow \mathbb{R}^m$ be linear transformations. Suppose that $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
-    > proof:
+    > [!note]- 证明
     > because $L_1 \not= L_2$, so there exists $v \in \mathbb{R}^n \wedge v \not= 0$, s.t. $L_1(v) \not= L_2(v)$.
     > $R_1(t) := f(x_0 + tv) - f(x_0) - L_1(tv)$.
     > $R_2(t) := f(x_0 + tv) - f(x_0) - L_2(tv)$.
@@ -45,8 +45,7 @@ tags:
 
 **可微蕴含连续.** 设 $X\subseteq\mathbb{R}^n$，$x_0\in X$ 是 $X$ 的极限点，$f:X\to\mathbb{R}^m$ 在 $x_0$ 可微。则 $f$ 在 $x_0$ 连续。
 
-> proof
->
+> [!note]- 证明
 > 由可微定义，存在线性映射 $L:\mathbb{R}^n\to\mathbb{R}^m$，使得
 >
 > $$

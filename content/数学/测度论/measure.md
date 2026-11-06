@@ -239,19 +239,20 @@ $$
 - $\#$ 是有限测度当且仅当 $\Omega$ 有限；
 - $\#$ 是 $\sigma$-有限测度当且仅当 $\Omega$ 至多可数。
 
-  **证明** 若 $\Omega$ 至多可数，则可将它写成至多可数个单点集之并，而每个
-  单点集的计数测度均为 $1$，故 $\#$ 是 $\sigma$-有限测度。
-
-  反之，若 $\#$ 是 $\sigma$-有限测度，则存在
-  $\{E_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$，使得
-
-  $$
-  \Omega=\bigcup_{n=1}^{\infty}E_n,
-  \qquad \#(E_n)<\infty.
-  $$
-
-  因此每个 $E_n$ 都是有限集，而有限集的可列并至多可数，所以 $\Omega$
-  至多可数。$\square$
+  > [!note]- 证明
+  > 若 $\Omega$ 至多可数，则可将它写成至多可数个单点集之并，而每个
+  >   单点集的计数测度均为 $1$，故 $\#$ 是 $\sigma$-有限测度。
+  >
+  >   反之，若 $\#$ 是 $\sigma$-有限测度，则存在
+  >   $\{E_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$，使得
+  >
+  >   $$
+  >   \Omega=\bigcup_{n=1}^{\infty}E_n,
+  >   \qquad \#(E_n)<\infty.
+  >   $$
+  >
+  >   因此每个 $E_n$ 都是有限集，而有限集的可列并至多可数，所以 $\Omega$
+  >   至多可数。$\square$
 
 若 $\Omega$ 是非空有限集，则归一化后的计数测度
 

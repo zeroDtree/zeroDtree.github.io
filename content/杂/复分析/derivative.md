@@ -35,7 +35,7 @@ $$
 
 **Uniqueness of derivatives** Let $E$ be a subset of $\mathbb{C}^n$, $f: E \rightarrow \mathbb{C}^m$ be a function, $x_0 \in E$ be an interior point of $E$, and let $L_1: \mathbb{C}^n \rightarrow \mathbb{C}^m$ and $L_2: \mathbb{C}^n \rightarrow \mathbb{C}^m$ be linear transformations. Suppose that $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
 
-> proof:
+> [!note]- 证明
 > because $L_1 \not= L_2$, so there exists $v \in \mathbb{C}^n \wedge v \not= 0$, s.t. $L_1(v) \not= L_2(v)$.
 > $R_1(t) := f(x_0 + tv) - f(x_0) - L_1(tv)$.
 > $R_2(t) := f(x_0 + tv) - f(x_0) - L_2(tv)$.

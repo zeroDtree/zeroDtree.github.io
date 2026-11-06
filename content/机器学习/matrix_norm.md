@@ -30,8 +30,7 @@ $$
 \|A\|_F = \sqrt{\sum_{i=1}^r \sigma_i^2}
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \|A\|_F = \sqrt{tr(A^T A)} = \sqrt{tr(V \Sigma^2 V^T)} = \sqrt{tr(\Sigma^2)} = \sqrt{\sum_{i=1}^r \sigma_i^2}
 > $$
@@ -56,8 +55,7 @@ $$
 \|A\|_2 = \|J A \|_2 = \| A K\|_2, \forall J, K \in \mathbb{R}^{m \times m} \text{ is orthogonal matrix}
 $$
 
-> proof
->
+> [!note]- 证明
 > $$
 > \|A\|_2 = \max_{\|x\|_2 = 1} \|Ax\|_2 = \max_{x} \frac{\|Ax\|_F}{\|x\|_F} = \max_{x} \frac{\|J A x\|_F}{\|x\|_F} = \|J A \|_2
 > $$

@@ -163,7 +163,8 @@ $$
 \tag{10}
 $$
 
-> **证明.** 设 $\mathbf{x}\in\mathbb{R}^D$。协方差 $\sigma^2\mathbf{I}$ 的行列式是 $|\sigma^2\mathbf{I}|=\sigma^{2D}$，故
+> [!note]- 证明
+> 设 $\mathbf{x}\in\mathbb{R}^D$。协方差 $\sigma^2\mathbf{I}$ 的行列式是 $|\sigma^2\mathbf{I}|=\sigma^{2D}$，故
 >
 > $$
 > \begin{aligned}
@@ -260,7 +261,8 @@ p_\phi(\mathbf{z}\mid\mathbf{x})
 \tag{13}
 $$
 
-> **证明.** 生成模型同时有分解 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。于是
+> [!note]- 证明
+> 生成模型同时有分解 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。于是
 >
 > $$
 > \begin{aligned}
@@ -331,7 +333,8 @@ p_\phi(\mathbf{z}\mid\mathbf{x})
 \tag{14}
 $$
 
-> **证明.** $\log p_\phi(\mathbf{x})$ 不依赖 $\mathbf{z}$，可以放进对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 的期望。由 (4) 中 ELBO 的定义，
+> [!note]- 证明
+> $\log p_\phi(\mathbf{x})$ 不依赖 $\mathbf{z}$，可以放进对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 的期望。由 (4) 中 ELBO 的定义，
 >
 > $$
 > \begin{aligned}
@@ -389,24 +392,24 @@ D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{
 \tag{15}
 $$
 
-> **证明.** 由 (13)，左端等于边际 KL 加上期望后验 KL。再用 (14) 把后验 KL 换成 $\log p_\phi(\mathbf{x})-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})$，得到 (15) 的第一个等号。边际 KL 等于 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})-\log p_\phi(\mathbf{x})]$，其中的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 与前一项里的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 相消，得到第二个等号。$\square$
-
-(15) 末行的第一项是真实数据分布的负熵，与 $(\theta,\phi)$ 无关。因此
-
-$$
-\max_{\theta,\phi}
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-[\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})]
-\quad\Longleftrightarrow\quad
-\min_{\theta,\phi}
-D_{\mathrm{KL}}\!\left(
-q_\theta(\mathbf{x},\mathbf{z})
-\,\middle\|\,
-p_\phi(\mathbf{x},\mathbf{z})
-\right).
-\tag{16}
-$$
-
+> [!note]- 证明
+> 由 (13)，左端等于边际 KL 加上期望后验 KL。再用 (14) 把后验 KL 换成 $\log p_\phi(\mathbf{x})-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})$，得到 (15) 的第一个等号。边际 KL 等于 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})-\log p_\phi(\mathbf{x})]$，其中的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 与前一项里的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 相消，得到第二个等号。$\square$
+>
+> (15) 末行的第一项是真实数据分布的负熵，与 $(\theta,\phi)$ 无关。因此
+>
+> $$
+> \max_{\theta,\phi}
+> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> [\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})]
+> \quad\Longleftrightarrow\quad
+> \min_{\theta,\phi}
+> D_{\mathrm{KL}}\!\left(
+> q_\theta(\mathbf{x},\mathbf{z})
+> \,\middle\|\,
+> p_\phi(\mathbf{x},\mathbf{z})
+> \right).
+> \tag{16}
+> $$
 ## 表达力与模糊化
 
 ### 对角高斯是单峰的
@@ -430,7 +433,8 @@ $$
 \tag{17}
 $$
 
-> **证明.** 设编码器已经给定。MSE 目标是
+> [!note]- 证明
+> 设编码器已经给定。MSE 目标是
 >
 > $$
 > \begin{aligned}
@@ -570,7 +574,8 @@ $$
 
 聚合后验是 $q_\theta(\mathbf{z})=\int p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})\,d\mathbf{x}$。
 
-> **证明.** 在被积函数里插入 $q_\theta(\mathbf{z})/q_\theta(\mathbf{z})$：
+> [!note]- 证明
+> 在被积函数里插入 $q_\theta(\mathbf{z})/q_\theta(\mathbf{z})$：
 >
 > $$
 > \begin{aligned}

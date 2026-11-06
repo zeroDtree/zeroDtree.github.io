@@ -62,60 +62,57 @@ $$(x + y)^n = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k}$$
 ---
 
 #### 证明 $\sum_{k=0}^n p_{n,k}(x) = 1$
-
-直接在二项式公式中代入 $y = 1-x$：
-
-$$\sum_{k=0}^n p_{n,k}(x) = \sum_{k=0}^n \binom{n}{k} x^k (1-x)^{n-k} = (x + (1-x))^n = 1^n = 1$$
-
+> [!note]- 证明
+> 直接在二项式公式中代入 $y = 1-x$：
+>
+> $$\sum_{k=0}^n p_{n,k}(x) = \sum_{k=0}^n \binom{n}{k} x^k (1-x)^{n-k} = (x + (1-x))^n = 1^n = 1$$
 #### 证明 $\sum_{k=0}^n \frac{k}{n} p_{n,k}(x) = x$
-
-我们需要求 $k$ 的一次加权和。利用恒等式 $k \binom{n}{k} = n \binom{n-1}{k-1}$：
-
-$$\sum_{k=0}^n k \binom{n}{k} x^k (1-x)^{n-k} = \sum_{k=1}^n n \binom{n-1}{k-1} x^k (1-x)^{n-k}$$
-
-（注意 $k=0$ 时项为 0，所以求和从 $1$ 开始）
-
-提取公因子 $nx$：
-
-$$= nx \sum_{k=1}^n \binom{n-1}{k-1} x^{k-1} (1-x)^{(n-1)-(k-1)}$$
-
-令 $j = k-1$：
-
-$$= nx \sum_{j=0}^{n-1} \binom{n-1}{j} x^j (1-x)^{(n-1)-j} = nx \cdot (x + (1-x))^{n-1} = nx \cdot 1 = nx$$
-
-最后两边除以 $n$：
-
-$$\sum_{k=0}^n \frac{k}{n} p_{n,k}(x) = \frac{1}{n} (nx) = x$$
-
+> [!note]- 证明
+> 我们需要求 $k$ 的一次加权和。利用恒等式 $k \binom{n}{k} = n \binom{n-1}{k-1}$：
+>
+> $$\sum_{k=0}^n k \binom{n}{k} x^k (1-x)^{n-k} = \sum_{k=1}^n n \binom{n-1}{k-1} x^k (1-x)^{n-k}$$
+>
+> （注意 $k=0$ 时项为 0，所以求和从 $1$ 开始）
+>
+> 提取公因子 $nx$：
+>
+> $$= nx \sum_{k=1}^n \binom{n-1}{k-1} x^{k-1} (1-x)^{(n-1)-(k-1)}$$
+>
+> 令 $j = k-1$：
+>
+> $$= nx \sum_{j=0}^{n-1} \binom{n-1}{j} x^j (1-x)^{(n-1)-j} = nx \cdot (x + (1-x))^{n-1} = nx \cdot 1 = nx$$
+>
+> 最后两边除以 $n$：
+>
+> $$\sum_{k=0}^n \frac{k}{n} p_{n,k}(x) = \frac{1}{n} (nx) = x$$
 #### 证明 $\sum_{k=0}^n \left(\frac{k}{n} - x\right)^2 p_{n,k}(x) = \frac{x(1-x)}{n}$
-
-先展开平方项：
-
-$$\left(\frac{k}{n} - x\right)^2 = \frac{k^2}{n^2} - 2x\frac{k}{n} + x^2$$
-
-于是求和式变为：
-
-$$\frac{1}{n^2} \sum k^2 p_{n,k} - 2x \sum \frac{k}{n} p_{n,k} + x^2 \sum p_{n,k}$$
-
-利用前面的结果，后两项为 $-2x(x) + x^2(1) = -x^2$。现在只需计算 $\sum k^2 p_{n,k}$。
-利用技巧 $k^2 = k(k-1) + k$：
-
-$$\sum_{k=0}^n k(k-1) \binom{n}{k} x^k (1-x)^{n-k} = \sum_{k=2}^n n(n-1) \binom{n-2}{k-2} x^k (1-x)^{n-k}$$
-
-提取 $n(n-1)x^2$：
-
-$$= n(n-1)x^2 \sum_{j=0}^{n-2} \binom{n-2}{j} x^j (1-x)^{n-2-j} = n(n-1)x^2$$
-
-所以：
-
-$$\sum k^2 p_{n,k} = \sum (k(k-1) + k) p_{n,k} = n(n-1)x^2 + nx$$
-
-代入总式：
-
-$$\begin{aligned} \text{原式} &= \frac{n(n-1)x^2 + nx}{n^2} - x^2 \\ &= \frac{n^2x^2 - nx^2 + nx}{n^2} - x^2 \\ &= \left(x^2 - \frac{x^2}{n} + \frac{x}{n}\right) - x^2 \\ &= \frac{x - x^2}{n} = \frac{x(1-x)}{n} \end{aligned}$$
-
-Q.E.D.
-
+> [!note]- 证明
+> 先展开平方项：
+>
+> $$\left(\frac{k}{n} - x\right)^2 = \frac{k^2}{n^2} - 2x\frac{k}{n} + x^2$$
+>
+> 于是求和式变为：
+>
+> $$\frac{1}{n^2} \sum k^2 p_{n,k} - 2x \sum \frac{k}{n} p_{n,k} + x^2 \sum p_{n,k}$$
+>
+> 利用前面的结果，后两项为 $-2x(x) + x^2(1) = -x^2$。现在只需计算 $\sum k^2 p_{n,k}$。
+> 利用技巧 $k^2 = k(k-1) + k$：
+>
+> $$\sum_{k=0}^n k(k-1) \binom{n}{k} x^k (1-x)^{n-k} = \sum_{k=2}^n n(n-1) \binom{n-2}{k-2} x^k (1-x)^{n-k}$$
+>
+> 提取 $n(n-1)x^2$：
+>
+> $$= n(n-1)x^2 \sum_{j=0}^{n-2} \binom{n-2}{j} x^j (1-x)^{n-2-j} = n(n-1)x^2$$
+>
+> 所以：
+>
+> $$\sum k^2 p_{n,k} = \sum (k(k-1) + k) p_{n,k} = n(n-1)x^2 + nx$$
+>
+> 代入总式：
+>
+> $$\begin{aligned} \text{原式} &= \frac{n(n-1)x^2 + nx}{n^2} - x^2 \\ &= \frac{n^2x^2 - nx^2 + nx}{n^2} - x^2 \\ &= \left(x^2 - \frac{x^2}{n} + \frac{x}{n}\right) - x^2 \\ &= \frac{x - x^2}{n} = \frac{x(1-x)}{n} \end{aligned}$$
+>
+> Q.E.D.
 ### 利用一致连续性
 
 由于 $[0, 1]$ 是紧集，连续函数 $f$ 在其上**一致连续**。
