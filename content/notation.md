@@ -14,6 +14,7 @@ tags:
 - $\mathbb{F}$ is a filtration.
 - $\mathbb{P}$ is a probability measure.
 - $\mathbb{E}$ is the expectation operator.
+- $X\overset{d}{=}Y$ means $X$ and $Y$ are equal in distribution: $\mathbb{P}(X\in A)=\mathbb{P}(Y\in A)$ for every measurable $A$. It does not require $X=Y$ almost surely.
 - $[n]$ := $\{1,2,\cdots,n\}$
 - $\mathbb{Z}_n$ := $\{0,1,\cdots,n-1\}$
 - $\mathbb{Z}_{\geq n}$ := $\{i \mid i \in \mathbb{Z} \wedge i \geq n\}$
@@ -31,11 +32,11 @@ tags:
 - $\mathcal{B}(X):= \sigma(\mathcal{\tau})$, where $(X, \tau)$ is a topological space
 - $\wedge$ represents the **and** for logic, **min** for function
 - $\vee$ represents the **or** for logic, **max** for function
-- $A:=B$ 表示 $A$ 被定义为 $B$
-- $A=:B$ 表示 $A$ 被记作 $B$
-- $\nabla_{\mathbf{x}} \phi(\mathbf{x})$ or $\nabla \phi(\mathbf{x})$: 标量值函数 $ \nabla \phi(\mathbf{x}) $ 的梯度
-- $\nabla \cdot \phi(\mathbf{x})$: $\phi: \mathbb{R}^d \to \mathbb{R}^d $ 的散度
-- $\nabla \cdot \phi(\mathbf{x})$: $\phi: \mathbb{R}^d \to \mathbb{R}^{d \times d} $ 逐行散度所组成的列向量
+- $A:=B$ means $A$ is defined to be $B$
+- $A=:B$ means $A$ is denoted by $B$
+- $\nabla_{\mathbf{x}} \phi(\mathbf{x})$ or $\nabla \phi(\mathbf{x})$: the gradient of a scalar-valued function $\phi(\mathbf{x})$
+- $\nabla \cdot \phi(\mathbf{x})$: the divergence of $\phi: \mathbb{R}^d \to \mathbb{R}^d$
+- $\nabla \cdot \phi(\mathbf{x})$: the column vector of row-wise divergences of $\phi: \mathbb{R}^d \to \mathbb{R}^{d \times d}$
 
 ## Logic Symbols
 
