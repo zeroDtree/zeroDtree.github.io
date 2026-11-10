@@ -143,135 +143,147 @@ $$
 }
 $$
 
-它确实是一个范数。例如，
-
-$$
-\begin{aligned}
-\|A+B\|_p
-&=\max_{\|x\|_p=1}\|(A+B)x\|_p\\
-&\le
-\max_{\|x\|_p=1}
-\bigl(\|Ax\|_p+\|Bx\|_p\bigr)\\
-&\le \|A\|_p+\|B\|_p.
-\end{aligned}
-$$
-
-绝对齐次性可直接由定义得到；若 $\|A\|_p=0$，则对每个标准基向量 $e_j$ 都有 $Ae_j=0$，所以 $A=0$，正定性也成立。
+> [!abstract] 命题（诱导 $p$-范数是范数）
+> 由上式定义的 $\|A\|_p$ 是 $\mathbb C^{m\times n}$ 上的范数。
+>
+> > [!note]- 证明
+> > 三角不等式：
+> >
+> > $$
+> > \begin{aligned}
+> > \|A+B\|_p
+> > &=\max_{\|x\|_p=1}\|(A+B)x\|_p\\
+> > &\le
+> > \max_{\|x\|_p=1}
+> > \bigl(\|Ax\|_p+\|Bx\|_p\bigr)\\
+> > &\le \|A\|_p+\|B\|_p.
+> > \end{aligned}
+> > $$
+> >
+> > 绝对齐次性可直接由定义得到；若 $\|A\|_p=0$，则对每个标准基向量 $e_j$ 都有 $Ae_j=0$，所以 $A=0$，正定性也成立。
 
 ### 2.3. 次乘性
 
-设 $A\in\mathbb C^{m\times n}$、$B\in\mathbb C^{n\times k}$。由相容性，
-
-$$
-\|ABx\|_p
-\le
-\|A\|_p\|Bx\|_p
-\le
-\|A\|_p\|B\|_p\|x\|_p.
-$$
-
-对所有 $\|x\|_p=1$ 的向量取最大值，得到
-
-$$
-\boxed{
-\|AB\|_p\le \|A\|_p\|B\|_p.
-}
-$$
-
-特别地，
-
-$$
-\|I_n\|_p=1.
-$$
+> [!abstract] 命题（诱导 $p$-范数的次乘性）
+> 设 $A\in\mathbb C^{m\times n}$、$B\in\mathbb C^{n\times k}$。则
+>
+> $$
+> \boxed{
+> \|AB\|_p\le \|A\|_p\|B\|_p.
+> }
+> $$
+>
+> 特别地，
+>
+> $$
+> \|I_n\|_p=1.
+> $$
+>
+> > [!note]- 证明
+> > 由相容性，
+> >
+> > $$
+> > \|ABx\|_p
+> > \le
+> > \|A\|_p\|Bx\|_p
+> > \le
+> > \|A\|_p\|B\|_p\|x\|_p.
+> > $$
+> >
+> > 对所有 $\|x\|_p=1$ 的向量取最大值，得到 $\|AB\|_p\le \|A\|_p\|B\|_p$。
 
 ## 3. 常用诱导矩阵范数
 
 ### 3.1. 诱导 $1$-范数
 
-诱导 $1$-范数等于绝对列和的最大值：
-
-$$
-\boxed{
-\|A\|_1
-=
-\max_{1\le j\le n}\sum_{i=1}^m|a_{ij}|.
-}
-$$
-
-事实上，对任意 $x\in\mathbb C^n$，
-
-$$
-\begin{aligned}
-\|Ax\|_1
-&=\sum_{i=1}^m
-\left|\sum_{j=1}^n a_{ij}x_j\right|\\
-&\le
-\sum_{j=1}^n
-\left(\sum_{i=1}^m|a_{ij}|\right)|x_j|\\
-&\le
-\left(
-\max_j\sum_i|a_{ij}|
-\right)\|x\|_1.
-\end{aligned}
-$$
-
-反过来，取绝对列和最大的第 $j_0$ 列及标准基向量 $e_{j_0}$，便有
-
-$$
-\|Ae_{j_0}\|_1
-=
-\sum_{i=1}^m|a_{ij_0}|.
-$$
-
-所以这个上界可以取到。
+> [!abstract] 命题（诱导 $1$-范数）
+> 诱导 $1$-范数等于绝对列和的最大值：
+>
+> $$
+> \boxed{
+> \|A\|_1
+> =
+> \max_{1\le j\le n}\sum_{i=1}^m|a_{ij}|.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 事实上，对任意 $x\in\mathbb C^n$，
+> >
+> > $$
+> > \begin{aligned}
+> > \|Ax\|_1
+> > &=\sum_{i=1}^m
+> > \left|\sum_{j=1}^n a_{ij}x_j\right|\\
+> > &\le
+> > \sum_{j=1}^n
+> > \left(\sum_{i=1}^m|a_{ij}|\right)|x_j|\\
+> > &\le
+> > \left(
+> > \max_j\sum_i|a_{ij}|
+> > \right)\|x\|_1.
+> > \end{aligned}
+> > $$
+> >
+> > 反过来，取绝对列和最大的第 $j_0$ 列及标准基向量 $e_{j_0}$，便有
+> >
+> > $$
+> > \|Ae_{j_0}\|_1
+> > =
+> > \sum_{i=1}^m|a_{ij_0}|.
+> > $$
+> >
+> > 所以这个上界可以取到。
 
 ### 3.2. 诱导 $\infty$-范数
 
-诱导 $\infty$-范数等于绝对行和的最大值：
-
-$$
-\boxed{
-\|A\|_\infty
-=
-\max_{1\le i\le m}\sum_{j=1}^n|a_{ij}|.
-}
-$$
-
-一方面，
-
-$$
-\begin{aligned}
-\|Ax\|_\infty
-&=
-\max_i\left|\sum_{j=1}^n a_{ij}x_j\right|\\
-&\le
-\max_i\sum_{j=1}^n|a_{ij}|\,|x_j|\\
-&\le
-\left(
-\max_i\sum_j|a_{ij}|
-\right)\|x\|_\infty.
-\end{aligned}
-$$
-
-另一方面，设第 $i_0$ 行的绝对行和最大，并令
-
-$$
-x_j=
-\begin{cases}
-\overline{a_{i_0j}}/|a_{i_0j}|,&a_{i_0j}\ne0,\\
-1,&a_{i_0j}=0.
-\end{cases}
-$$
-
-则 $\|x\|_\infty=1$，而
-
-$$
-(Ax)_{i_0}
-=
-\sum_{j=1}^n|a_{i_0j}|,
-$$
-
-所以上界同样可以取到。
+> [!abstract] 命题（诱导 $\infty$-范数）
+> 诱导 $\infty$-范数等于绝对行和的最大值：
+>
+> $$
+> \boxed{
+> \|A\|_\infty
+> =
+> \max_{1\le i\le m}\sum_{j=1}^n|a_{ij}|.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 一方面，
+> >
+> > $$
+> > \begin{aligned}
+> > \|Ax\|_\infty
+> > &=
+> > \max_i\left|\sum_{j=1}^n a_{ij}x_j\right|\\
+> > &\le
+> > \max_i\sum_{j=1}^n|a_{ij}|\,|x_j|\\
+> > &\le
+> > \left(
+> > \max_i\sum_j|a_{ij}|
+> > \right)\|x\|_\infty.
+> > \end{aligned}
+> > $$
+> >
+> > 另一方面，设第 $i_0$ 行的绝对行和最大，并令
+> >
+> > $$
+> > x_j=
+> > \begin{cases}
+> > \overline{a_{i_0j}}/|a_{i_0j}|,&a_{i_0j}\ne0,\\
+> > 1,&a_{i_0j}=0.
+> > \end{cases}
+> > $$
+> >
+> > 则 $\|x\|_\infty=1$，而
+> >
+> > $$
+> > (Ax)_{i_0}
+> > =
+> > \sum_{j=1}^n|a_{i_0j}|,
+> > $$
+> >
+> > 所以上界同样可以取到。
 
 ### 3.3. 诱导 $2$-范数：谱范数
 
@@ -287,74 +299,79 @@ $$
 }
 $$
 
-由于 $A^HA$ 是 Hermitian 半正定矩阵，
-
-$$
-\|Ax\|_2^2=x^HA^HAx.
-$$
-
-对 $A^HA$ 使用谱定理和 Rayleigh 商可得
-
-$$
-\boxed{
-\|A\|_2
-=
-\sqrt{\lambda_{\max}(A^HA)}.
-}
-$$
-
-其中 $\lambda_{\max}(A^HA)$ 是 $A^HA$ 的最大特征值。特别地，
-
-$$
-\boxed{
-\|A^H\|_2=\|A\|_2.
-}
-$$
-
-也可以直接由 Euclidean 范数的对偶表示
-
-$$
-\|z\|_2
-=
-\max_{\|y\|_2=1}|y^Hz|
-$$
-
-得到最后一个等式。
+> [!abstract] 命题（谱范数的特征值表示）
+> 
+> $$
+> \boxed{
+> \|A\|_2
+> =
+> \sqrt{\lambda_{\max}(A^HA)}.
+> }
+> $$
+>
+> 其中 $\lambda_{\max}(A^HA)$ 是 $A^HA$ 的最大特征值。特别地，
+>
+> $$
+> \boxed{
+> \|A^H\|_2=\|A\|_2.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 由于 $A^HA$ 是 Hermitian 半正定矩阵，
+> >
+> > $$
+> > \|Ax\|_2^2=x^HA^HAx.
+> > $$
+> >
+> > 对 $A^HA$ 使用谱定理和 Rayleigh 商即得第一个等式。
+> >
+> > 最后一个等式也可以直接由 Euclidean 范数的对偶表示
+> >
+> > $$
+> > \|z\|_2
+> > =
+> > \max_{\|y\|_2=1}|y^Hz|
+> > $$
+> >
+> > 得到。
 
 ### 3.4. 谱范数的酉不变性
 
-设
-
-$$
-Q\in\mathbb C^{m\times m},
-\qquad
-W\in\mathbb C^{n\times n}
-$$
-
-都是酉矩阵。酉矩阵保持 Euclidean 范数，并且把单位球面双射到自身，所以
-
-$$
-\begin{aligned}
-\|QAW\|_2
-&=
-\max_{\|x\|_2=1}\|QAWx\|_2\\
-&=
-\max_{\|x\|_2=1}\|AWx\|_2\\
-&=
-\max_{\|y\|_2=1}\|Ay\|_2\\
-&=\|A\|_2.
-\end{aligned}
-$$
-
-因此
-
-$$
-\boxed{
-\|QAW\|_2=\|A\|_2.
-}
-$$
-
-一般的诱导 $p$-范数在 $p\ne2$ 时并不具有任意酉变换下的不变性。
+> [!abstract] 命题（谱范数的酉不变性）
+> 设
+>
+> $$
+> Q\in\mathbb C^{m\times m},
+> \qquad
+> W\in\mathbb C^{n\times n}
+> $$
+>
+> 都是酉矩阵。则
+>
+> $$
+> \boxed{
+> \|QAW\|_2=\|A\|_2.
+> }
+> $$
+>
+> 一般的诱导 $p$-范数在 $p\ne2$ 时并不具有任意酉变换下的不变性。
+>
+> > [!note]- 证明
+> > 酉矩阵保持 Euclidean 范数，并且把单位球面双射到自身，所以
+> >
+> > $$
+> > \begin{aligned}
+> > \|QAW\|_2
+> > &=
+> > \max_{\|x\|_2=1}\|QAWx\|_2\\
+> > &=
+> > \max_{\|x\|_2=1}\|AWx\|_2\\
+> > &=
+> > \max_{\|y\|_2=1}\|Ay\|_2\\
+> > &=\|A\|_2.
+> > \end{aligned}
+> > $$
 
 ## 4. Frobenius 范数
 
@@ -413,156 +430,178 @@ $$
 
 ### 4.2. Frobenius 范数的酉不变性
 
-仍设 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 为酉矩阵。利用 $Q^HQ=I_m$、$WW^H=I_n$ 以及迹的循环不变性，
-
-$$
-\begin{aligned}
-\|QAW\|_F^2
-&=
-\operatorname{tr}\bigl((QAW)^H(QAW)\bigr)\\
-&=
-\operatorname{tr}(W^HA^HQ^HQAW)\\
-&=
-\operatorname{tr}(W^HA^HAW)\\
-&=
-\operatorname{tr}(A^HAWW^H)\\
-&=
-\operatorname{tr}(A^HA).
-\end{aligned}
-$$
-
-因此
-
-$$
-\boxed{
-\|QAW\|_F=\|A\|_F.
-}
-$$
+> [!abstract] 命题（Frobenius 范数的酉不变性）
+> 设 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 为酉矩阵。则
+>
+> $$
+> \boxed{
+> \|QAW\|_F=\|A\|_F.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 利用 $Q^HQ=I_m$、$WW^H=I_n$ 以及迹的循环不变性，
+> >
+> > $$
+> > \begin{aligned}
+> > \|QAW\|_F^2
+> > &=
+> > \operatorname{tr}\bigl((QAW)^H(QAW)\bigr)\\
+> > &=
+> > \operatorname{tr}(W^HA^HQ^HQAW)\\
+> > &=
+> > \operatorname{tr}(W^HA^HAW)\\
+> > &=
+> > \operatorname{tr}(A^HAWW^H)\\
+> > &=
+> > \operatorname{tr}(A^HA).
+> > \end{aligned}
+> > $$
+> >
+> > 因此 $\|QAW\|_F^2=\|A\|_F^2$，故 $\|QAW\|_F=\|A\|_F$。
 
 ### 4.3. 乘积估计
 
-设 $A\in\mathbb C^{m\times n}$、$B\in\mathbb C^{n\times k}$，并把 $B$ 的列记为 $b_1,\ldots,b_k$。则
-
-$$
-\begin{aligned}
-\|AB\|_F^2
-&=
-\sum_{j=1}^k\|Ab_j\|_2^2\\
-&\le
-\sum_{j=1}^k
-\|A\|_2^2\|b_j\|_2^2\\
-&=
-\|A\|_2^2\|B\|_F^2.
-\end{aligned}
-$$
-
-结合共轭转置可得另一侧的估计，故
-
-$$
-\boxed{
-\|AB\|_F
-\le
-\min\bigl\{
-\|A\|_2\|B\|_F,\,
-\|A\|_F\|B\|_2
-\bigr\}.
-}
-$$
-
-又因为 $\|A\|_2\le\|A\|_F$，所以
-
-$$
-\boxed{
-\|AB\|_F\le\|A\|_F\|B\|_F.
-}
-$$
-
-因此 Frobenius 范数也具有次乘性。
+> [!abstract] 命题（Frobenius 范数的乘积估计）
+> 设 $A\in\mathbb C^{m\times n}$、$B\in\mathbb C^{n\times k}$。则
+>
+> $$
+> \boxed{
+> \|AB\|_F
+> \le
+> \min\bigl\{
+> \|A\|_2\|B\|_F,\,
+> \|A\|_F\|B\|_2
+> \bigr\}.
+> }
+> $$
+>
+> 又因为 $\|A\|_2\le\|A\|_F$，所以
+>
+> $$
+> \boxed{
+> \|AB\|_F\le\|A\|_F\|B\|_F.
+> }
+> $$
+>
+> 因此 Frobenius 范数也具有次乘性。
+>
+> > [!note]- 证明
+> > 把 $B$ 的列记为 $b_1,\ldots,b_k$。则
+> >
+> > $$
+> > \begin{aligned}
+> > \|AB\|_F^2
+> > &=
+> > \sum_{j=1}^k\|Ab_j\|_2^2\\
+> > &\le
+> > \sum_{j=1}^k
+> > \|A\|_2^2\|b_j\|_2^2\\
+> > &=
+> > \|A\|_2^2\|B\|_F^2.
+> > \end{aligned}
+> > $$
+> >
+> > 结合共轭转置可得另一侧的估计 $\|AB\|_F\le\|A\|_F\|B\|_2$，故两者中较小者仍是上界。
 
 ## 5. 常用范数之间的关系
 
 ### 5.1. 谱范数与 Frobenius 范数
 
-对任意 $x\in\mathbb C^n$，逐行使用 Cauchy–Schwarz 不等式可得
-
-$$
-\|Ax\|_2^2
-\le
-\left(
-\sum_{i=1}^m\sum_{j=1}^n|a_{ij}|^2
-\right)\|x\|_2^2
-=
-\|A\|_F^2\|x\|_2^2.
-$$
-
-因此
-
-$$
-\|A\|_2\le\|A\|_F.
-$$
-
-另一方面，若 $e_1,\ldots,e_n$ 是 $\mathbb C^n$ 的标准基，则
-
-$$
-\|A\|_F^2
-=
-\sum_{j=1}^n\|Ae_j\|_2^2
-\le
-n\|A\|_2^2.
-$$
-
-对 $A^H$ 使用同样的结论，并利用
-
-$$
-\|A^H\|_F=\|A\|_F,
-\qquad
-\|A^H\|_2=\|A\|_2,
-$$
-
-还可得到 $\|A\|_F\le\sqrt m\,\|A\|_2$。综上，
-
-$$
-\boxed{
-\|A\|_2
-\le
-\|A\|_F
-\le
-\sqrt{\min\{m,n\}}\,\|A\|_2.
-}
-$$
+> [!abstract] 命题（谱范数与 Frobenius 范数的比较）
+> $$
+> \boxed{
+> \|A\|_2
+> \le
+> \|A\|_F
+> \le
+> \sqrt{\min\{m,n\}}\,\|A\|_2.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 对任意 $x\in\mathbb C^n$，逐行使用 Cauchy–Schwarz 不等式可得
+> >
+> > $$
+> > \|Ax\|_2^2
+> > \le
+> > \left(
+> > \sum_{i=1}^m\sum_{j=1}^n|a_{ij}|^2
+> > \right)\|x\|_2^2
+> > =
+> > \|A\|_F^2\|x\|_2^2.
+> > $$
+> >
+> > 因此 $\|A\|_2\le\|A\|_F$。
+> >
+> > 另一方面，若 $e_1,\ldots,e_n$ 是 $\mathbb C^n$ 的标准基，则
+> >
+> > $$
+> > \|A\|_F^2
+> > =
+> > \sum_{j=1}^n\|Ae_j\|_2^2
+> > \le
+> > n\|A\|_2^2.
+> > $$
+> >
+> > 对 $A^H$ 使用同样的结论，并利用
+> >
+> > $$
+> > \|A^H\|_F=\|A\|_F,
+> > \qquad
+> > \|A^H\|_2=\|A\|_2,
+> > $$
+> >
+> > 还可得到 $\|A\|_F\le\sqrt m\,\|A\|_2$。综上，
+> >
+> > $$
+> > \|A\|_2
+> > \le
+> > \|A\|_F
+> > \le
+> > \sqrt{\min\{m,n\}}\,\|A\|_2.
+> > $$
 
 ### 5.2. $1$-范数、$\infty$-范数与谱范数
 
-对任意 $x\in\mathbb C^n$，
-
-$$
-\begin{aligned}
-\|Ax\|_2^2
-&=
-\sum_i
-\left|\sum_j a_{ij}x_j\right|^2\\
-&\le
-\sum_i
-\left(\sum_j|a_{ij}|\right)
-\left(\sum_j|a_{ij}|\,|x_j|^2\right)\\
-&\le
-\|A\|_\infty
-\sum_j
-\left(\sum_i|a_{ij}|\right)|x_j|^2\\
-&\le
-\|A\|_\infty\|A\|_1\|x\|_2^2.
-\end{aligned}
-$$
-
-所以
-
-$$
-\boxed{
-\|A\|_2
-\le
-\sqrt{\|A\|_1\|A\|_\infty}.
-}
-$$
+> [!abstract] 命题（谱范数与 $1$-范数、$\infty$-范数）
+> $$
+> \boxed{
+> \|A\|_2
+> \le
+> \sqrt{\|A\|_1\|A\|_\infty}.
+> }
+> $$
+>
+> > [!note]- 证明
+> > 对任意 $x\in\mathbb C^n$，
+> >
+> > $$
+> > \begin{aligned}
+> > \|Ax\|_2^2
+> > &=
+> > \sum_i
+> > \left|\sum_j a_{ij}x_j\right|^2\\
+> > &\le
+> > \sum_i
+> > \left(\sum_j|a_{ij}|\right)
+> > \left(\sum_j|a_{ij}|\,|x_j|^2\right)\\
+> > &\le
+> > \|A\|_\infty
+> > \sum_j
+> > \left(\sum_i|a_{ij}|\right)|x_j|^2\\
+> > &\le
+> > \|A\|_\infty\|A\|_1\|x\|_2^2.
+> > \end{aligned}
+> > $$
+> >
+> > 所以
+> >
+> > $$
+> > \|A\|_2
+> > \le
+> > \sqrt{\|A\|_1\|A\|_\infty}.
+> > $$
 
 ### 5.3. 谱范数与谱半径
 
@@ -572,35 +611,39 @@ $$
 \rho(A):=\max_{\lambda\in\sigma(A)}|\lambda|.
 $$
 
-若 $Av=\lambda v$ 且 $v\ne0$，则对任意诱导范数都有
-
-$$
-|\lambda|\,\|v\|
-=
-\|Av\|
-\le
-\|A\|\,\|v\|,
-$$
-
-因此
-
-$$
-\boxed{
-\rho(A)\le\|A\|.
-}
-$$
-
-特别地，$\rho(A)\le\|A\|_2$，但一般不取等号。例如
-
-$$
-N=
-\begin{pmatrix}
-0&1\\
-0&0
-\end{pmatrix}
-$$
-
-满足 $\rho(N)=0$，而 $\|N\|_2=1$。
+> [!abstract] 命题（谱半径不超过诱导范数）
+> 对任意诱导范数，
+>
+> $$
+> \boxed{
+> \rho(A)\le\|A\|.
+> }
+> $$
+>
+> 特别地，$\rho(A)\le\|A\|_2$，但一般不取等号。例如
+>
+> $$
+> N=
+> \begin{pmatrix}
+> 0&1\\
+> 0&0
+> \end{pmatrix}
+> $$
+>
+> 满足 $\rho(N)=0$，而 $\|N\|_2=1$。
+>
+> > [!note]- 证明
+> > 若 $Av=\lambda v$ 且 $v\ne0$，则
+> >
+> > $$
+> > |\lambda|\,\|v\|
+> > =
+> > \|Av\|
+> > \le
+> > \|A\|\,\|v\|,
+> > $$
+> >
+> > 故 $|\lambda|\le\|A\|$。对一切特征值取最大即得 $\rho(A)\le\|A\|$。
 
 ## 6. 算例
 
