@@ -25,7 +25,7 @@ $$
 
 ## 2. 线性高斯扩散中的后验均值
 
-### 2.1. 1 前向过程与结论
+### 2.1. 前向过程与后验均值公式
 
 考虑一般的线性高斯前向扩散过程
 
@@ -44,93 +44,93 @@ p(\mathbf{x}_t\mid\mathbf{x}_0)
 \tag{4}
 $$
 
-把该密度写成指数族形式后应用 Tweedie 公式 (2)，即可得到后验均值的显式表达
+> [!abstract] 命题（后验均值公式）
+> 把线性高斯转移密度 (4) 写成指数族形式后应用 Tweedie 公式 (2)，即可得到后验均值的显式表达：
+>
+> $$
+> \mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t]
+> =\frac{b_t^2}{a_t}\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
+> +\frac1{a_t}\mathbf{x}_t.
+> \tag{5}
+> $$
+>
+> > [!note]- 证明
+> > 由 (4)，转移密度为
+> >
+> > $$
+> > p(\mathbf{x}_t\mid\mathbf{x}_0)
+> > =\frac1{(2\pi b_t^2)^{d/2}}
+> > \exp\!\left(-\frac{\|\mathbf{x}_t-a_t\mathbf{x}_0\|^2}{2b_t^2}\right).
+> > $$
+> >
+> > 展开指数项：
+> >
+> > $$
+> > \begin{aligned}
+> > -\frac{\|\mathbf{x}_t-a_t\mathbf{x}_0\|^2}{2b_t^2}
+> > &=-\frac{\mathbf{x}_t^\top\mathbf{x}_t-2a_t\mathbf{x}_t^\top\mathbf{x}_0+a_t^2\mathbf{x}_0^\top\mathbf{x}_0}{2b_t^2}\\
+> > &=-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}
+> > +\frac{a_t}{b_t^2}\mathbf{x}_t^\top\mathbf{x}_0
+> > -\frac{a_t^2\|\mathbf{x}_0\|^2}{2b_t^2}.
+> > \end{aligned}
+> > $$
+> >
+> > 因此转移密度可写成指数族的标准形式
+> >
+> > $$
+> > p(\mathbf{x}_t\mid\mathbf{x}_0)
+> > =p_0(\mathbf{x}_t)\exp\!\bigl(\mathbf{x}_0^\top T(\mathbf{x}_t)-\varphi(\mathbf{x}_0)\bigr),
+> > $$
+> >
+> > 其中各项定义为
+> >
+> > $$
+> > p_0(\mathbf{x}_t):=\frac1{(2\pi b_t^2)^{d/2}}\exp\!\left(-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}\right),
+> > \quad
+> > T(\mathbf{x}_t):=\frac{a_t}{b_t^2}\mathbf{x}_t,
+> > \quad
+> > \varphi(\mathbf{x}_0):=\frac{a_t^2\|\mathbf{x}_0\|^2}{2b_t^2}.
+> > $$
+> >
+> > 于是后验均值 $\hat{\mathbf{x}}_0:=\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t]$ 满足 Tweedie 公式 (2)：
+> >
+> > $$
+> > (\nabla_{\mathbf{x}_t}T(\mathbf{x}_t))^\top\hat{\mathbf{x}}_0
+> > =\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)-\nabla_{\mathbf{x}_t}\log p_0(\mathbf{x}_t).
+> > $$
+> >
+> > 计算充分统计量的梯度：
+> >
+> > $$
+> > \nabla_{\mathbf{x}_t}T(\mathbf{x}_t)
+> > =\nabla_{\mathbf{x}_t}\left(\frac{a_t}{b_t^2}\mathbf{x}_t\right)
+> > =\frac{a_t}{b_t^2}\mathbf{I}.
+> > $$
+> >
+> > 计算基准密度的对数梯度：
+> >
+> > $$
+> > \nabla_{\mathbf{x}_t}\log p_0(\mathbf{x}_t)
+> > =\nabla_{\mathbf{x}_t}\left(-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}\right)
+> > =-\frac{\mathbf{x}_t}{b_t^2}.
+> > $$
+> >
+> > 代入 Tweedie 公式：
+> >
+> > $$
+> > \frac{a_t}{b_t^2}\hat{\mathbf{x}}_0
+> > =\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)+\frac{\mathbf{x}_t}{b_t^2}.
+> > $$
+> >
+> > 两边同乘 $b_t^2/a_t$，即得后验均值的显式表达 (5)：
+> >
+> > $$
+> > \hat{\mathbf{x}}_0
+> > =\frac{b_t^2}{a_t}\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
+> > +\frac1{a_t}\mathbf{x}_t. \quad \square
+> > $$
 
-$$
-\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t]
-=\frac{b_t^2}{a_t}\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
-+\frac1{a_t}\mathbf{x}_t.
-\tag{5}
-$$
-
-### 2.2. 2 推导
-
-由 (4)，转移密度为
-
-$$
-p(\mathbf{x}_t\mid\mathbf{x}_0)
-=\frac1{(2\pi b_t^2)^{d/2}}
-\exp\!\left(-\frac{\|\mathbf{x}_t-a_t\mathbf{x}_0\|^2}{2b_t^2}\right).
-$$
-
-展开指数项：
-
-$$
-\begin{aligned}
--\frac{\|\mathbf{x}_t-a_t\mathbf{x}_0\|^2}{2b_t^2}
-&=-\frac{\mathbf{x}_t^\top\mathbf{x}_t-2a_t\mathbf{x}_t^\top\mathbf{x}_0+a_t^2\mathbf{x}_0^\top\mathbf{x}_0}{2b_t^2}\\
-&=-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}
-+\frac{a_t}{b_t^2}\mathbf{x}_t^\top\mathbf{x}_0
--\frac{a_t^2\|\mathbf{x}_0\|^2}{2b_t^2}.
-\end{aligned}
-$$
-
-因此转移密度可写成指数族的标准形式
-
-$$
-p(\mathbf{x}_t\mid\mathbf{x}_0)
-=p_0(\mathbf{x}_t)\exp\!\bigl(\mathbf{x}_0^\top T(\mathbf{x}_t)-\varphi(\mathbf{x}_0)\bigr),
-$$
-
-其中各项定义为
-
-$$
-p_0(\mathbf{x}_t):=\frac1{(2\pi b_t^2)^{d/2}}\exp\!\left(-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}\right),
-\quad
-T(\mathbf{x}_t):=\frac{a_t}{b_t^2}\mathbf{x}_t,
-\quad
-\varphi(\mathbf{x}_0):=\frac{a_t^2\|\mathbf{x}_0\|^2}{2b_t^2}.
-$$
-
-于是后验均值 $\hat{\mathbf{x}}_0:=\mathbb{E}[\mathbf{x}_0\mid\mathbf{x}_t]$ 满足 Tweedie 公式 (2)：
-
-$$
-(\nabla_{\mathbf{x}_t}T(\mathbf{x}_t))^\top\hat{\mathbf{x}}_0
-=\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)-\nabla_{\mathbf{x}_t}\log p_0(\mathbf{x}_t).
-$$
-
-计算充分统计量的梯度：
-
-$$
-\nabla_{\mathbf{x}_t}T(\mathbf{x}_t)
-=\nabla_{\mathbf{x}_t}\left(\frac{a_t}{b_t^2}\mathbf{x}_t\right)
-=\frac{a_t}{b_t^2}\mathbf{I}.
-$$
-
-计算基准密度的对数梯度：
-
-$$
-\nabla_{\mathbf{x}_t}\log p_0(\mathbf{x}_t)
-=\nabla_{\mathbf{x}_t}\left(-\frac{\|\mathbf{x}_t\|^2}{2b_t^2}\right)
-=-\frac{\mathbf{x}_t}{b_t^2}.
-$$
-
-代入 Tweedie 公式：
-
-$$
-\frac{a_t}{b_t^2}\hat{\mathbf{x}}_0
-=\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)+\frac{\mathbf{x}_t}{b_t^2}.
-$$
-
-两边同乘 $b_t^2/a_t$，即得后验均值的显式表达 (5)：
-
-$$
-\hat{\mathbf{x}}_0
-=\frac{b_t^2}{a_t}\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)
-+\frac1{a_t}\mathbf{x}_t.
-$$
-
-### 2.3. 3 特殊情况
+### 2.2. 特殊情况
 
 公式 (5) 涵盖了扩散模型中的多种重要特殊情况。
 

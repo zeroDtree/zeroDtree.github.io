@@ -9,7 +9,6 @@ tags:
 - [Kronecker-factored Approximate](#kronecker-factored-approximate)
   - [1. 约定](#1-约定)
   - [2. 目标](#2-目标)
-    - [2.1. 证明](#21-证明)
   - [3. Kronecker](#3-kronecker)
     - [3.1. Definition](#31-definition)
     - [3.2. Properties](#32-properties)
@@ -25,47 +24,10 @@ tags:
 
 Fisher 信息阵$F = E\left[\frac{\partial L}{\partial \theta}(\frac{\partial L}{\partial \theta})^T\right]$
 
-### 2.1. 证明
-
-把神经网络的每个权重矩阵逐列向量化，然后按一个确定的顺序排列这些向量，得到一个长向量$\theta$
-对于$y = Wx + b$, 令$g = \frac{\partial L}{\partial y}$
+把神经网络的每个权重矩阵逐列向量化，然后按一个确定的顺序排列这些向量，得到一个长向量$\theta$。对于$y = Wx + b$, 令$g = \frac{\partial L}{\partial y}$，把 $x$ 和 $I$ 在后文中用$a$表示，$\theta_i$ 表示按前述顺序排列的第 $i$ 个权重矩阵的向量化表示。在独立性近似与块对角近似下：
 
 $$
-\frac{\partial L}{\partial W} = \frac{\partial L}{\partial y} \cdot x^T
-$$
-
-$$
-\frac{\partial L}{\partial b} = \frac{\partial L}{\partial y} \cdot I
-$$
-
-把 $x$ 和 $I$ 在后文中用$a$表示
-
-$$
-F =
-\begin{matrix}
-E[\frac{\partial L}{\partial \theta} \cdot \frac{\partial L}{\partial \theta}^T]
-\end{matrix} =
-\begin{bmatrix}
-    E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_1}^T]
-    E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_2}^T]\cdots & E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_n}^T]\\
-    E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_1}^T]  E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_2}^T]  \cdots & E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_n}^T] \\
-    \vdots &\vdots\\
-    E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_1}^T]  E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_2}^T]  \cdots & E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_n}^T]
-\end{bmatrix}
-$$
-
-$\theta_i$ 表示按前述顺序排列的第 i 个权重矩阵的向量化表示。
-取$F$的对角线上的矩阵作为$F$的近似。
-
-$$
-\begin{align*}
-E[\frac{\partial L}{\partial \theta_i}\cdot \frac{\partial L}{\partial \theta_i}^T] &=
-E[vec(g_i \cdot a_i^T)vec(g_i \cdot a_i^T)^T] \\
-&= E[(a_i \otimes g_i)(a_i^T \otimes g_i^T)] \\
-&= E[(a_ia_i^T)\otimes(g_ig_i^T)]\\
-&\approx E[a_ia_i^T] \otimes E[g_ig_i^T] \tag{未证明}\\
-&=:A_i \otimes G_i
-\end{align*}
+E\left[\frac{\partial L}{\partial \theta_i}\cdot \frac{\partial L}{\partial \theta_i}^T\right] \approx E[a_ia_i^T] \otimes E[g_ig_i^T] =: A_i \otimes G_i \tag{未证明}
 $$
 
 $$
@@ -82,17 +44,59 @@ F &\approx diag(A_1\otimes G_1, A_2 \otimes G_2, \ldots, A_n \otimes G_n) \tag{�
 \end{align*}
 $$
 
-把$A_i \otimes G_i$记作$F_i$
-$A_i$ 和 $G_i$ 都是对称矩阵，对称矩阵的逆矩阵为对称矩阵。
-
-$$
-\begin{align*}
-F_i^{-1}\cdot v_i &\approx (A_i^{-1}\otimes G_i^{-1})vec(V_i)\\
-&= vec(G_i^{-1}V_i(A_i^{-1})^T)\\
-&= vec(G_i^{-1}V_iA_i^{-1})\\
-&= vec(E[g_i \cdot g_i^T]^{-1}V_iE[a_i \cdot a_i^T]^{-1})
-\end{align*}
-$$
+> [!abstract] 命题（K-FAC 块对角近似下的逆矩阵向量积）
+> 记第 $i$ 层的 Fisher 对角块近似为 $F_i := A_i \otimes G_i$，其中 $A_i = E[a_i a_i^T]$，$G_i = E[g_i g_i^T]$。对向量 $v_i = vec(V_i)$，有
+>
+> $$
+> F_i^{-1} \cdot v_i = vec\!\left(G_i^{-1} V_i A_i^{-1}\right) = vec\!\left(E[g_i \cdot g_i^T]^{-1} V_i E[a_i \cdot a_i^T]^{-1}\right).
+> $$
+>
+> > [!note]- 证明
+> > 对于 $y = Wx + b$，令 $g = \frac{\partial L}{\partial y}$，有
+> >
+> > $$
+> > \frac{\partial L}{\partial W} = \frac{\partial L}{\partial y} \cdot x^T,
+> > \qquad
+> > \frac{\partial L}{\partial b} = \frac{\partial L}{\partial y} \cdot I.
+> > $$
+> >
+> > 把 $x$ 和 $I$ 统一记为 $a$，则全参数 Fisher 信息阵分块写为
+> >
+> > $$
+> > F =
+> > \begin{matrix}
+> > E[\frac{\partial L}{\partial \theta} \cdot \frac{\partial L}{\partial \theta}^T]
+> > \end{matrix} =
+> > \begin{bmatrix}
+> >     E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_1}^T]
+> >     E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_2}^T]\cdots & E[\frac{\partial L}{\partial \theta_1} \cdot \frac{\partial L}{\partial \theta_n}^T]\\
+> >     E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_1}^T]  E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_2}^T]  \cdots & E[\frac{\partial L}{\partial \theta_2} \cdot \frac{\partial L}{\partial \theta_n}^T] \\
+> >     \vdots &\vdots\\
+> >     E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_1}^T]  E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_2}^T]  \cdots & E[\frac{\partial L}{\partial \theta_n} \cdot \frac{\partial L}{\partial \theta_n}^T]
+> > \end{bmatrix}.
+> > $$
+> >
+> > 对第 $i$ 个对角块，利用向量化与 Kronecker 积性质 $vec(g_i a_i^T) = a_i \otimes g_i$ 及 $(A \otimes B)(C \otimes D) = (AC) \otimes (BD)$：
+> >
+> > $$
+> > \begin{align*}
+> > E\left[\frac{\partial L}{\partial \theta_i}\cdot \frac{\partial L}{\partial \theta_i}^T\right] &=
+> > E[vec(g_i \cdot a_i^T)vec(g_i \cdot a_i^T)^T] \\
+> > &= E[(a_i \otimes g_i)(a_i^T \otimes g_i^T)] \\
+> > &= E[(a_ia_i^T)\otimes(g_ig_i^T)].
+> > \end{align*}
+> > $$
+> >
+> > 在近似 $F_i = A_i \otimes G_i$ 下，由于 $A_i$ 和 $G_i$ 都是对称矩阵，对称矩阵的逆矩阵仍为对称矩阵。结合 $(A_i \otimes G_i)^{-1} = A_i^{-1} \otimes G_i^{-1}$ 与 $(A \otimes B)vec(X) = vec(BXA^T)$，得
+> >
+> > $$
+> > \begin{align*}
+> > F_i^{-1}\cdot v_i &= (A_i^{-1}\otimes G_i^{-1})vec(V_i)\\
+> > &= vec(G_i^{-1}V_i(A_i^{-1})^T)\\
+> > &= vec(G_i^{-1}V_iA_i^{-1})\\
+> > &= vec(E[g_i \cdot g_i^T]^{-1}V_iE[a_i \cdot a_i^T]^{-1}). \quad \square
+> > \end{align*}
+> > $$
 
 ## 3. Kronecker
 

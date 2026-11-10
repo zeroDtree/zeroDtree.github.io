@@ -148,42 +148,43 @@ $\mathbf{z}$ 对 $\theta$ 可微，重构项可以反向传播。
 
 ## 重构项
 
-在 (8) 下，重构项等于负均方误差加常数：
-
-$$
-\mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-[\log p_\phi(\mathbf{x}\mid\mathbf{z})]
-=
--\frac{1}{2\sigma^2}
-\mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-\left[
-\|\mathbf{x}-\boldsymbol{\mu}_\phi(\mathbf{z})\|^2
-\right]
-+C.
-\tag{10}
-$$
-
-> [!note]- 证明
-> 设 $\mathbf{x}\in\mathbb{R}^D$。协方差 $\sigma^2\mathbf{I}$ 的行列式是 $|\sigma^2\mathbf{I}|=\sigma^{2D}$，故
+> [!abstract] 高斯解码下的重构项
+> 在 (8) 下，重构项等于负均方误差加常数：
 >
 > $$
-> \begin{aligned}
-> p_\phi(\mathbf{x}\mid\mathbf{z})
-> &=
-> (2\pi)^{-D/2}\sigma^{-D}
-> \exp\!\left(
+> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> [\log p_\phi(\mathbf{x}\mid\mathbf{z})]
+> =
 > -\frac{1}{2\sigma^2}
+> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> \left[
 > \|\mathbf{x}-\boldsymbol{\mu}_\phi(\mathbf{z})\|^2
-> \right), \\
-> \log p_\phi(\mathbf{x}\mid\mathbf{z})
-> &=
-> -\frac{1}{2\sigma^2}
-> \|\mathbf{x}-\boldsymbol{\mu}_\phi(\mathbf{z})\|^2
-> +C,
-> \end{aligned}
+> \right]
+> +C.
+> \tag{10}
 > $$
 >
-> 其中 $C=\log\bigl((2\pi)^{-D/2}\sigma^{-D}\bigr)$ 只依赖 $D$ 与 $\sigma$，与 $\mathbf{z}$ 和网络参数无关。对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 取期望即得 (10)。$\square$
+> > [!note]- 推导
+> > 设 $\mathbf{x}\in\mathbb{R}^D$。协方差 $\sigma^2\mathbf{I}$ 的行列式是 $|\sigma^2\mathbf{I}|=\sigma^{2D}$，故
+> >
+> > $$
+> > \begin{aligned}
+> > p_\phi(\mathbf{x}\mid\mathbf{z})
+> > &=
+> > (2\pi)^{-D/2}\sigma^{-D}
+> > \exp\!\left(
+> > -\frac{1}{2\sigma^2}
+> > \|\mathbf{x}-\boldsymbol{\mu}_\phi(\mathbf{z})\|^2
+> > \right), \\
+> > \log p_\phi(\mathbf{x}\mid\mathbf{z})
+> > &=
+> > -\frac{1}{2\sigma^2}
+> > \|\mathbf{x}-\boldsymbol{\mu}_\phi(\mathbf{z})\|^2
+> > +C,
+> > \end{aligned}
+> > $$
+> >
+> > 其中 $C=\log\bigl((2\pi)^{-D/2}\sigma^{-D}\bigr)$ 只依赖 $D$ 与 $\sigma$，与 $\mathbf{z}$ 和网络参数无关。对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 取期望即得 (10)。$\square$
 
 ## 正则项
 
@@ -241,70 +242,17 @@ p_\phi(\mathbf{x},\mathbf{z})
 p(\mathbf{z})\,p_\phi(\mathbf{x}\mid\mathbf{z}).
 $$
 
-这里 $p_\phi(\mathbf{z})=p(\mathbf{z})$，因为先验抽样不依赖 $\phi$；$q_\theta(\mathbf{x})=p_{\mathrm{data}}(\mathbf{x})$，因为数据抽样不依赖 $\theta$。联合 KL 拆成边际 KL 与期望后验 KL：
+这里 $p_\phi(\mathbf{z})=p(\mathbf{z})$，因为先验抽样不依赖 $\phi$；$q_\theta(\mathbf{x})=p_{\mathrm{data}}(\mathbf{x})$，因为数据抽样不依赖 $\theta$。
 
-$$
-\begin{aligned}
-&D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{x},\mathbf{z})\,\middle\|\,p_\phi(\mathbf{x},\mathbf{z})\right) \\
-&\quad=
-D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right)
-+
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-\left[
-D_{\mathrm{KL}}\!\left(
-q_\theta(\mathbf{z}\mid\mathbf{x})
-\,\middle\|\,
-p_\phi(\mathbf{z}\mid\mathbf{x})
-\right)
-\right].
-\end{aligned}
-\tag{13}
-$$
-
-> [!note]- 证明
-> 生成模型同时有分解 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。于是
+> [!abstract] 命题（联合 KL 的边际—后验分解）
+> 联合 KL 拆成边际 KL 与期望后验 KL：
 >
 > $$
 > \begin{aligned}
 > &D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{x},\mathbf{z})\,\middle\|\,p_\phi(\mathbf{x},\mathbf{z})\right) \\
 > &\quad=
-> \iint q_\theta(\mathbf{x},\mathbf{z})
-> \log\frac{q_\theta(\mathbf{x},\mathbf{z})}{p_\phi(\mathbf{x},\mathbf{z})}
-> \,d\mathbf{z}\,d\mathbf{x} \\
-> &\quad=
-> \iint q_\theta(\mathbf{x},\mathbf{z})
-> \log\frac{p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})}
-> {p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})}
-> \,d\mathbf{z}\,d\mathbf{x} \\
-> &\quad=
-> \iint q_\theta(\mathbf{x},\mathbf{z})
-> \left[
-> \log\frac{p_{\mathrm{data}}(\mathbf{x})}{p_\phi(\mathbf{x})}
+> D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right)
 > +
-> \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
-> \right]
-> \,d\mathbf{z}\,d\mathbf{x}.
-> \end{aligned}
-> $$
->
-> 第一项先对 $\mathbf{z}$ 积分。$\int q_\theta(\mathbf{x},\mathbf{z})\,d\mathbf{z}=p_{\mathrm{data}}(\mathbf{x})$，故
->
-> $$
-> \iint q_\theta(\mathbf{x},\mathbf{z})
-> \log\frac{p_{\mathrm{data}}(\mathbf{x})}{p_\phi(\mathbf{x})}
-> \,d\mathbf{z}\,d\mathbf{x}
-> =
-> D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right).
-> $$
->
-> 第二项先把 $q_\theta(\mathbf{x},\mathbf{z})=p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})$ 代入，内层就是条件 KL：
->
-> $$
-> \begin{aligned}
-> &\iint q_\theta(\mathbf{x},\mathbf{z})
-> \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
-> \,d\mathbf{z}\,d\mathbf{x} \\
-> &\quad=
 > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
 > \left[
 > D_{\mathrm{KL}}\!\left(
@@ -314,86 +262,143 @@ $$
 > \right)
 > \right].
 > \end{aligned}
+> \tag{13}
 > $$
 >
-> 两项相加即得 (13)。$\square$
+> > [!note]- 证明
+> > 生成模型同时有分解 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。于是
+> >
+> > $$
+> > \begin{aligned}
+> > &D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{x},\mathbf{z})\,\middle\|\,p_\phi(\mathbf{x},\mathbf{z})\right) \\
+> > &\quad=
+> > \iint q_\theta(\mathbf{x},\mathbf{z})
+> > \log\frac{q_\theta(\mathbf{x},\mathbf{z})}{p_\phi(\mathbf{x},\mathbf{z})}
+> > \,d\mathbf{z}\,d\mathbf{x} \\
+> > &\quad=
+> > \iint q_\theta(\mathbf{x},\mathbf{z})
+> > \log\frac{p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > {p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})}
+> > \,d\mathbf{z}\,d\mathbf{x} \\
+> > &\quad=
+> > \iint q_\theta(\mathbf{x},\mathbf{z})
+> > \left[
+> > \log\frac{p_{\mathrm{data}}(\mathbf{x})}{p_\phi(\mathbf{x})}
+> > +
+> > \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
+> > \right]
+> > \,d\mathbf{z}\,d\mathbf{x}.
+> > \end{aligned}
+> > $$
+> >
+> > 第一项先对 $\mathbf{z}$ 积分。$\int q_\theta(\mathbf{x},\mathbf{z})\,d\mathbf{z}=p_{\mathrm{data}}(\mathbf{x})$，故
+> >
+> > $$
+> > \iint q_\theta(\mathbf{x},\mathbf{z})
+> > \log\frac{p_{\mathrm{data}}(\mathbf{x})}{p_\phi(\mathbf{x})}
+> > \,d\mathbf{z}\,d\mathbf{x}
+> > =
+> > D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right).
+> > $$
+> >
+> > 第二项先把 $q_\theta(\mathbf{x},\mathbf{z})=p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})$ 代入，内层就是条件 KL：
+> >
+> > $$
+> > \begin{aligned}
+> > &\iint q_\theta(\mathbf{x},\mathbf{z})
+> > \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
+> > \,d\mathbf{z}\,d\mathbf{x} \\
+> > &\quad=
+> > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> > \left[
+> > D_{\mathrm{KL}}\!\left(
+> > q_\theta(\mathbf{z}\mid\mathbf{x})
+> > \,\middle\|\,
+> > p_\phi(\mathbf{z}\mid\mathbf{x})
+> > \right)
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > 两项相加即得 (13)。$\square$
 
-对数似然与 ELBO 的差就是这个后验 KL：
-
-$$
-\log p_\phi(\mathbf{x})
--
-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})
-=
-D_{\mathrm{KL}}\!\left(
-q_\theta(\mathbf{z}\mid\mathbf{x})
-\,\middle\|\,
-p_\phi(\mathbf{z}\mid\mathbf{x})
-\right).
-\tag{14}
-$$
-
-> [!note]- 证明
-> $\log p_\phi(\mathbf{x})$ 不依赖 $\mathbf{z}$，可以放进对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 的期望。由 (4) 中 ELBO 的定义，
+> [!abstract] 命题（ELBO 变分间隙与后验 KL）
+> 对数似然与 ELBO 的差就是这个后验 KL：
 >
 > $$
-> \begin{aligned}
-> &\log p_\phi(\mathbf{x})
-> -
-> \mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x}) \\
-> &\quad=
-> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-> \left[
 > \log p_\phi(\mathbf{x})
 > -
-> \log\frac{p_\phi(\mathbf{x},\mathbf{z})}{q_\theta(\mathbf{z}\mid\mathbf{x})}
-> \right] \\
-> &\quad=
-> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-> \left[
-> \log\frac{p_\phi(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{x},\mathbf{z})}
-> \right] \\
-> &\quad=
-> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-> \left[
-> \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
-> \right] \\
-> &\quad=
+> \mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})
+> =
 > D_{\mathrm{KL}}\!\left(
 > q_\theta(\mathbf{z}\mid\mathbf{x})
 > \,\middle\|\,
 > p_\phi(\mathbf{z}\mid\mathbf{x})
 > \right).
-> \end{aligned}
+> \tag{14}
 > $$
 >
-> 第三步用了 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。$\square$
+> > [!note]- 证明
+> > $\log p_\phi(\mathbf{x})$ 不依赖 $\mathbf{z}$，可以放进对 $q_\theta(\mathbf{z}\mid\mathbf{x})$ 的期望。由 (4) 中 ELBO 的定义，
+> >
+> > $$
+> > \begin{aligned}
+> > &\log p_\phi(\mathbf{x})
+> > -
+> > \mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x}) \\
+> > &\quad=
+> > \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > \left[
+> > \log p_\phi(\mathbf{x})
+> > -
+> > \log\frac{p_\phi(\mathbf{x},\mathbf{z})}{q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > \right] \\
+> > &\quad=
+> > \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > \left[
+> > \log\frac{p_\phi(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{x},\mathbf{z})}
+> > \right] \\
+> > &\quad=
+> > \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > \left[
+> > \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p_\phi(\mathbf{z}\mid\mathbf{x})}
+> > \right] \\
+> > &\quad=
+> > D_{\mathrm{KL}}\!\left(
+> > q_\theta(\mathbf{z}\mid\mathbf{x})
+> > \,\middle\|\,
+> > p_\phi(\mathbf{z}\mid\mathbf{x})
+> > \right).
+> > \end{aligned}
+> > $$
+> >
+> > 第三步用了 $p_\phi(\mathbf{x},\mathbf{z})=p_\phi(\mathbf{x})\,p_\phi(\mathbf{z}\mid\mathbf{x})$。$\square$
 
-(14) 说明 ELBO 的间隙就是近似后验与真实后验的 KL。$q_\theta(\mathbf{z}\mid\mathbf{x})=p_\phi(\mathbf{z}\mid\mathbf{x})$ 时，下界成为等式。把 (14) 代回 (13)，再展开边际 KL：
+(14) 说明 ELBO 的间隙就是近似后验与真实后验的 KL。$q_\theta(\mathbf{z}\mid\mathbf{x})=p_\phi(\mathbf{z}\mid\mathbf{x})$ 时，下界成为等式。
 
-$$
-\begin{aligned}
-&D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{x},\mathbf{z})\,\middle\|\,p_\phi(\mathbf{x},\mathbf{z})\right) \\
-&\quad=
-D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right)
-+
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-\left[
-\log p_\phi(\mathbf{x})
--
-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})
-\right] \\
-&\quad=
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})]
--
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-[\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})].
-\end{aligned}
-\tag{15}
-$$
-
-> [!note]- 证明
-> 由 (13)，左端等于边际 KL 加上期望后验 KL。再用 (14) 把后验 KL 换成 $\log p_\phi(\mathbf{x})-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})$，得到 (15) 的第一个等号。边际 KL 等于 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})-\log p_\phi(\mathbf{x})]$，其中的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 与前一项里的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 相消，得到第二个等号。$\square$
+> [!abstract] 定理（最大化 ELBO 与最小化联合 KL 的等价性）
+> 把 (14) 代回 (13)，再展开边际 KL，可得：
+>
+> $$
+> \begin{aligned}
+> &D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{x},\mathbf{z})\,\middle\|\,p_\phi(\mathbf{x},\mathbf{z})\right) \\
+> &\quad=
+> D_{\mathrm{KL}}\!\left(p_{\mathrm{data}}(\mathbf{x})\,\middle\|\,p_\phi(\mathbf{x})\right)
+> +
+> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> \left[
+> \log p_\phi(\mathbf{x})
+> -
+> \mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})
+> \right] \\
+> &\quad=
+> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})]
+> -
+> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> [\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})].
+> \end{aligned}
+> \tag{15}
+> $$
 >
 > (15) 末行的第一项是真实数据分布的负熵，与 $(\theta,\phi)$ 无关。因此
 >
@@ -410,6 +415,9 @@ $$
 > \right).
 > \tag{16}
 > $$
+>
+> > [!note]- 证明
+> > 由 (13)，左端等于边际 KL 加上期望后验 KL。再用 (14) 把后验 KL 换成 $\log p_\phi(\mathbf{x})-\mathcal{L}_{\mathrm{ELBO}}(\theta,\phi;\mathbf{x})$，得到 (15) 的第一个等号。边际 KL 等于 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[\log p_{\mathrm{data}}(\mathbf{x})-\log p_\phi(\mathbf{x})]$，其中的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 与前一项里的 $\mathbb{E}[\log p_\phi(\mathbf{x})]$ 相消，得到第二个等号。$\square$
 ## 表达力与模糊化
 
 ### 对角高斯是单峰的
@@ -418,93 +426,11 @@ $$
 
 ### 最优解码器是条件均值
 
-高斯解码器以均方误差为重构目标时，对固定的编码器，最优解码均值是近似后验下 $\mathbf{x}$ 的条件期望。同一 $\mathbf{z}$ 对应多个 $\mathbf{x}$ 时，这个平均值会把生成结果模糊化：
-
-$$
-\boldsymbol{\mu}^*(\mathbf{z})
-=
-\frac{
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-[q_\theta(\mathbf{z}\mid\mathbf{x})\,\mathbf{x}]
-}{
-\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-[q_\theta(\mathbf{z}\mid\mathbf{x})]
-}.
-\tag{17}
-$$
-
-> [!note]- 证明
-> 设编码器已经给定。MSE 目标是
->
-> $$
-> \begin{aligned}
-> &\min_{\boldsymbol{\mu}}
-> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-> \left[
-> \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
-> \left[
-> \|\mathbf{x}-\boldsymbol{\mu}(\mathbf{z})\|^2
-> \right]
-> \right] \\
-> &\quad=
-> \min_{\boldsymbol{\mu}}
-> \int q_\theta(\mathbf{z})
-> \left[
-> \int q_\theta(\mathbf{x}\mid\mathbf{z})
-> \|\mathbf{x}-\boldsymbol{\mu}(\mathbf{z})\|^2
-> \,d\mathbf{x}
-> \right]
-> d\mathbf{z}.
-> \end{aligned}
-> $$
->
-> 外层对 $\mathbf{z}$ 积分，内层可以逐点最小化。固定 $\mathbf{z}$，记
->
-> $$
-> J(\boldsymbol{\mu})
-> =
-> \int q_\theta(\mathbf{x}\mid\mathbf{z})
-> \|\mathbf{x}-\boldsymbol{\mu}\|^2
-> \,d\mathbf{x}.
-> $$
->
-> 对 $\boldsymbol{\mu}$ 求导：
->
-> $$
-> \nabla_{\boldsymbol{\mu}} J
-> =
-> -2\int q_\theta(\mathbf{x}\mid\mathbf{z})(\mathbf{x}-\boldsymbol{\mu})\,d\mathbf{x}.
-> $$
->
-> 令梯度为零，得到
+> [!abstract] 命题（最优解码均值为条件期望）
+> 高斯解码器以均方误差为重构目标时，对固定的编码器，最优解码均值是近似后验下 $\mathbf{x}$ 的条件期望。同一 $\mathbf{z}$ 对应多个 $\mathbf{x}$ 时，这个平均值会把生成结果模糊化：
 >
 > $$
 > \boldsymbol{\mu}^*(\mathbf{z})
-> =
-> \int q_\theta(\mathbf{x}\mid\mathbf{z})\,\mathbf{x}\,d\mathbf{x}
-> =
-> \mathbb{E}_{\mathbf{x}\sim q_\theta(\mathbf{x}\mid\mathbf{z})}[\mathbf{x}].
-> $$
->
-> 由 $q_\theta(\mathbf{x},\mathbf{z})=p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})$，
->
-> $$
-> q_\theta(\mathbf{x}\mid\mathbf{z})
-> =
-> \frac{q_\theta(\mathbf{z}\mid\mathbf{x})\,p_{\mathrm{data}}(\mathbf{x})}{q_\theta(\mathbf{z})},
-> \qquad
-> q_\theta(\mathbf{z})
-> =
-> \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[q_\theta(\mathbf{z}\mid\mathbf{x})].
-> $$
->
-> 代回条件期望：
->
-> $$
-> \boldsymbol{\mu}^*(\mathbf{z})
-> =
-> \frac{1}{q_\theta(\mathbf{z})}
-> \int q_\theta(\mathbf{z}\mid\mathbf{x})\,\mathbf{x}\,p_{\mathrm{data}}(\mathbf{x})\,d\mathbf{x}
 > =
 > \frac{
 > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
@@ -513,9 +439,92 @@ $$
 > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
 > [q_\theta(\mathbf{z}\mid\mathbf{x})]
 > }.
+> \tag{17}
 > $$
 >
-> 这就是 (17)。$\square$
+> > [!note]- 证明
+> > 设编码器已经给定。MSE 目标是
+> >
+> > $$
+> > \begin{aligned}
+> > &\min_{\boldsymbol{\mu}}
+> > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> > \left[
+> > \mathbb{E}_{\mathbf{z}\sim q_\theta(\mathbf{z}\mid\mathbf{x})}
+> > \left[
+> > \|\mathbf{x}-\boldsymbol{\mu}(\mathbf{z})\|^2
+> > \right]
+> > \right] \\
+> > &\quad=
+> > \min_{\boldsymbol{\mu}}
+> > \int q_\theta(\mathbf{z})
+> > \left[
+> > \int q_\theta(\mathbf{x}\mid\mathbf{z})
+> > \|\mathbf{x}-\boldsymbol{\mu}(\mathbf{z})\|^2
+> > \,d\mathbf{x}
+> > \right]
+> > d\mathbf{z}.
+> > \end{aligned}
+> > $$
+> >
+> > 外层对 $\mathbf{z}$ 积分，内层可以逐点最小化。固定 $\mathbf{z}$，记
+> >
+> > $$
+> > J(\boldsymbol{\mu})
+> > =
+> > \int q_\theta(\mathbf{x}\mid\mathbf{z})
+> > \|\mathbf{x}-\boldsymbol{\mu}\|^2
+> > \,d\mathbf{x}.
+> > $$
+> >
+> > 对 $\boldsymbol{\mu}$ 求导：
+> >
+> > $$
+> > \nabla_{\boldsymbol{\mu}} J
+> > =
+> > -2\int q_\theta(\mathbf{x}\mid\mathbf{z})(\mathbf{x}-\boldsymbol{\mu})\,d\mathbf{x}.
+> > $$
+> >
+> > 令梯度为零，得到
+> >
+> > $$
+> > \boldsymbol{\mu}^*(\mathbf{z})
+> > =
+> > \int q_\theta(\mathbf{x}\mid\mathbf{z})\,\mathbf{x}\,d\mathbf{x}
+> > =
+> > \mathbb{E}_{\mathbf{x}\sim q_\theta(\mathbf{x}\mid\mathbf{z})}[\mathbf{x}].
+> > $$
+> >
+> > 由 $q_\theta(\mathbf{x},\mathbf{z})=p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})$，
+> >
+> > $$
+> > q_\theta(\mathbf{x}\mid\mathbf{z})
+> > =
+> > \frac{q_\theta(\mathbf{z}\mid\mathbf{x})\,p_{\mathrm{data}}(\mathbf{x})}{q_\theta(\mathbf{z})},
+> > \qquad
+> > q_\theta(\mathbf{z})
+> > =
+> > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[q_\theta(\mathbf{z}\mid\mathbf{x})].
+> > $$
+> >
+> > 代回条件期望：
+> >
+> > $$
+> > \boldsymbol{\mu}^*(\mathbf{z})
+> > =
+> > \frac{1}{q_\theta(\mathbf{z})}
+> > \int q_\theta(\mathbf{z}\mid\mathbf{x})\,\mathbf{x}\,p_{\mathrm{data}}(\mathbf{x})\,d\mathbf{x}
+> > =
+> > \frac{
+> > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> > [q_\theta(\mathbf{z}\mid\mathbf{x})\,\mathbf{x}]
+> > }{
+> > \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> > [q_\theta(\mathbf{z}\mid\mathbf{x})]
+> > }.
+> > $$
+> >
+> > 这就是 (17)。$\square$
 
 ## KL 系数
 
@@ -556,26 +565,8 @@ $$
 
 ### KL 主导
 
-$\beta$ 较大时，KL 项主导训练。它在数据上的期望可以拆成互信息与聚合后验 KL：
-
-$$
-\begin{aligned}
-&\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
-\left[
-D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{z}\mid\mathbf{x})\,\middle\|\,p(\mathbf{z})\right)
-\right] \\
-&\quad=
-\mathcal{I}_q(\mathbf{x};\mathbf{z})
-+
-D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{z})\,\middle\|\,p(\mathbf{z})\right).
-\end{aligned}
-\tag{20}
-$$
-
-聚合后验是 $q_\theta(\mathbf{z})=\int p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})\,d\mathbf{x}$。
-
-> [!note]- 证明
-> 在被积函数里插入 $q_\theta(\mathbf{z})/q_\theta(\mathbf{z})$：
+> [!abstract] 命题（期望 KL 正则项的互信息—聚合后验分解）
+> $\beta$ 较大时，KL 项主导训练。它在数据上的期望可以拆成互信息与聚合后验 KL：
 >
 > $$
 > \begin{aligned}
@@ -584,24 +575,43 @@ $$
 > D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{z}\mid\mathbf{x})\,\middle\|\,p(\mathbf{z})\right)
 > \right] \\
 > &\quad=
-> \int p_{\mathrm{data}}(\mathbf{x})
-> \int q_\theta(\mathbf{z}\mid\mathbf{x})
-> \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p(\mathbf{z})}
-> \,d\mathbf{z}\,d\mathbf{x} \\
-> &\quad=
-> \int p_{\mathrm{data}}(\mathbf{x})
-> \int q_\theta(\mathbf{z}\mid\mathbf{x})
-> \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{q_\theta(\mathbf{z})}
-> \,d\mathbf{z}\,d\mathbf{x} \\
-> &\qquad+
-> \int p_{\mathrm{data}}(\mathbf{x})
-> \int q_\theta(\mathbf{z}\mid\mathbf{x})
-> \log\frac{q_\theta(\mathbf{z})}{p(\mathbf{z})}
-> \,d\mathbf{z}\,d\mathbf{x}.
+> \mathcal{I}_q(\mathbf{x};\mathbf{z})
+> +
+> D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{z})\,\middle\|\,p(\mathbf{z})\right).
 > \end{aligned}
+> \tag{20}
 > $$
 >
-> 第一项就是 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[D_{\mathrm{KL}}(q_\theta(\mathbf{z}\mid\mathbf{x})\|q_\theta(\mathbf{z}))]$，即 $\mathcal{I}_q(\mathbf{x};\mathbf{z})$。第二项交换积分顺序，内层 $\int p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})\,d\mathbf{x}=q_\theta(\mathbf{z})$，得到 $D_{\mathrm{KL}}(q_\theta(\mathbf{z})\|p(\mathbf{z}))$。$\square$
+> 其中聚合后验是 $q_\theta(\mathbf{z})=\int p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})\,d\mathbf{x}$。
+>
+> > [!note]- 证明
+> > 在被积函数里插入 $q_\theta(\mathbf{z})/q_\theta(\mathbf{z})$：
+> >
+> > $$
+> > \begin{aligned}
+> > &\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}
+> > \left[
+> > D_{\mathrm{KL}}\!\left(q_\theta(\mathbf{z}\mid\mathbf{x})\,\middle\|\,p(\mathbf{z})\right)
+> > \right] \\
+> > &\quad=
+> > \int p_{\mathrm{data}}(\mathbf{x})
+> > \int q_\theta(\mathbf{z}\mid\mathbf{x})
+> > \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{p(\mathbf{z})}
+> > \,d\mathbf{z}\,d\mathbf{x} \\
+> > &\quad=
+> > \int p_{\mathrm{data}}(\mathbf{x})
+> > \int q_\theta(\mathbf{z}\mid\mathbf{x})
+> > \log\frac{q_\theta(\mathbf{z}\mid\mathbf{x})}{q_\theta(\mathbf{z})}
+> > \,d\mathbf{z}\,d\mathbf{x} \\
+> > &\qquad+
+> > \int p_{\mathrm{data}}(\mathbf{x})
+> > \int q_\theta(\mathbf{z}\mid\mathbf{x})
+> > \log\frac{q_\theta(\mathbf{z})}{p(\mathbf{z})}
+> > \,d\mathbf{z}\,d\mathbf{x}.
+> > \end{aligned}
+> > $$
+> >
+> > 第一项就是 $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}}[D_{\mathrm{KL}}(q_\theta(\mathbf{z}\mid\mathbf{x})\|q_\theta(\mathbf{z}))]$，即 $\mathcal{I}_q(\mathbf{x};\mathbf{z})$。第二项交换积分顺序，内层 $\int p_{\mathrm{data}}(\mathbf{x})\,q_\theta(\mathbf{z}\mid\mathbf{x})\,d\mathbf{x}=q_\theta(\mathbf{z})$，得到 $D_{\mathrm{KL}}(q_\theta(\mathbf{z})\|p(\mathbf{z}))$。$\square$
 
 $\mathcal{I}_q(\mathbf{x};\mathbf{z})$ 是 $\mathbf{z}$ 携带的关于 $\mathbf{x}$ 的信息，生成时希望它大；$D_{\mathrm{KL}}(q_\theta(\mathbf{z})\|p(\mathbf{z}))$ 是潜空间整体形状相对先验的偏差，希望它小。互信息过小时，$\mathbf{z}$ 几乎不含 $\mathbf{x}$ 的信息，潜编码难以控制生成。
 

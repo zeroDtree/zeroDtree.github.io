@@ -39,34 +39,38 @@ If $f$ and $g$ are complex differentiable in $\Omega$, then:
 Moreover, if $f : \Omega \to U$ and $g : U \to \mathbb{C}$ are complex differentiable, the chain rule holds
 $$(g \circ f)'(z) = g'(f(z))f'(z) \quad \text{for all } z \in \Omega.$$
 
-For the quotient rule, set $A(z) = f(z) - f(z_0) - f'(z_0)(z - z_0)$ and $B(z) = g(z) - g(z_0) - g'(z_0)(z - z_0)$.
-Given that: $\frac{A(z)}{z-z_0} \to 0, \frac{B(z)}{z-z_0} \to 0$ as $z \to z_0$ (by definition)
-We can write the following ratio:
-
-$$
-\frac{f(z)}{g(z)} - \left(\frac{f(z_0)}{g(z_0)} + L (z - z_0)\right) = \frac{f(z)g(z_0) - f(z_0)g(z) - L(z - z_0)g(z)g(z_0)}{g(z)g(z_0)}
-$$
-
-$f(z) = f(z_0) + f'(z_0)(z - z_0) + A(z)$ and $g(z) = g(z_0) + g'(z_0)(z - z_0) + B(z)$.
-Substituting into the ratio, we get:
-
-$$
-\frac{(f'(z_0)g(z_0) - f(z_0)g'(z_0) - Lg(z)g(z_0))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}
-$$
-
-$L = \frac{f'(z_0)g(z_0) - f(z_0)g'(z_0)}{g(z_0)^2}$.
-We have $f'(z_0)g(z_0) - f(z_0)g'(z_0) = L g(z_0)^2$.
-Therefore
-the ratio is:
-
-$$
- \begin{aligned}
- \frac{(L g(z_0)^2 - L g(z)g(z_0))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}\\
- = \frac{(L g(z_0)(g(z_0) - g(z)))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}
- \end{aligned}
-$$
-
-It is easy to see that the numerator tends to 0 as $z \to z_0$ and the denominator tends to $g(z_0)^2$.
+> [!abstract] 商法则
+> If $g(z_0) \neq 0$, then $f/g$ is complex differentiable at $z_0$ and $(f/g)' = \frac{f'g - fg'}{g^2}$.
+>
+> > [!note]- 推导
+> > For the quotient rule, set $A(z) = f(z) - f(z_0) - f'(z_0)(z - z_0)$ and $B(z) = g(z) - g(z_0) - g'(z_0)(z - z_0)$.
+> > Given that: $\frac{A(z)}{z-z_0} \to 0, \frac{B(z)}{z-z_0} \to 0$ as $z \to z_0$ (by definition)
+> > We can write the following ratio:
+> >
+> > $$
+> > \frac{f(z)}{g(z)} - \left(\frac{f(z_0)}{g(z_0)} + L (z - z_0)\right) = \frac{f(z)g(z_0) - f(z_0)g(z) - L(z - z_0)g(z)g(z_0)}{g(z)g(z_0)}
+> > $$
+> >
+> > $f(z) = f(z_0) + f'(z_0)(z - z_0) + A(z)$ and $g(z) = g(z_0) + g'(z_0)(z - z_0) + B(z)$.
+> > Substituting into the ratio, we get:
+> >
+> > $$
+> > \frac{(f'(z_0)g(z_0) - f(z_0)g'(z_0) - Lg(z)g(z_0))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}
+> > $$
+> >
+> > $L = \frac{f'(z_0)g(z_0) - f(z_0)g'(z_0)}{g(z_0)^2}$.
+> > We have $f'(z_0)g(z_0) - f(z_0)g'(z_0) = L g(z_0)^2$.
+> > Therefore
+> > the ratio is:
+> >
+> > $$
+> >  \begin{aligned}
+> >  \frac{(L g(z_0)^2 - L g(z)g(z_0))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}\\
+> >  = \frac{(L g(z_0)(g(z_0) - g(z)))(z - z_0) + A(z)g(z_0) - f(z_0)B(z)}{g(z)g(z_0)}
+> >  \end{aligned}
+> > $$
+> >
+> > It is easy to see that the numerator tends to 0 as $z \to z_0$ and the denominator tends to $g(z_0)^2$.
 
 ## 2. Holomorphic Function
 
@@ -78,41 +82,38 @@ if $f$ is holomorphic in all of $\mathbb{C}$ we say that $f$ is **entire**.
 
 ### 3.1. Cauchy-Riemann equations
 
-Let $z,z_0 \in \Omega$, $z = x + iy$, $z_0 = x_0 + iy_0$,
-if $f(x+iy) = u(x,y) + iv(x,y)$ be holomorphic in $\Omega$. Then
-
-$$
-
-\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
-
-
-$$
-
-> [!note]- 证明
-> $$
-> \begin{aligned}
-> f'(z_0) &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{f(x_0+iy) - f(x_0+iy_0)}{i(y-y_0)}\\
-> &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) + iv(x_0,y) - u(x_0,y_0) - iv(x_0,y_0)}{i(y-y_0)}\\
-> &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) - u(x_0,y_0)}{i(y-y_0)} + i \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{v(x_0,y) - v(x_0,y_0)}{i(y-y_0)}\\
-> &= \frac{1}{i}\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\\
-> &= -i \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}
-> \end{aligned}
-> $$
->
-> similarly,
->
-> $$
-> \begin{aligned}
-> f'(z_0) &= \lim_{\substack{x \to x_0\\ x \ne x_0}} \frac{f(x+iy_0) - f(x_0+iy_0)}{x-x_0}\\
-> &= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
-> \end{aligned}
-> $$
->
-> Because the two limits above are both equal to $f'(z_0)$, we have
+> [!abstract] 命题（Cauchy–Riemann 方程）
+> Let $z,z_0 \in \Omega$, $z = x + iy$, $z_0 = x_0 + iy_0$, if $f(x+iy) = u(x,y) + iv(x,y)$ be holomorphic in $\Omega$. Then
 >
 > $$
 > \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > f'(z_0) &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{f(x_0+iy) - f(x_0+iy_0)}{i(y-y_0)}\\
+> > &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) + iv(x_0,y) - u(x_0,y_0) - iv(x_0,y_0)}{i(y-y_0)}\\
+> > &= \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{u(x_0,y) - u(x_0,y_0)}{i(y-y_0)} + i \lim_{\substack{y \to y_0\\ y \ne y_0}} \frac{v(x_0,y) - v(x_0,y_0)}{i(y-y_0)}\\
+> > &= \frac{1}{i}\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\\
+> > &= -i \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}
+> > \end{aligned}
+> > $$
+> >
+> > similarly,
+> >
+> > $$
+> > \begin{aligned}
+> > f'(z_0) &= \lim_{\substack{x \to x_0\\ x \ne x_0}} \frac{f(x+iy_0) - f(x_0+iy_0)}{x-x_0}\\
+> > &= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
+> > \end{aligned}
+> > $$
+> >
+> > Because the two limits above are both equal to $f'(z_0)$, we have
+> >
+> > $$
+> > \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+> > $$
 ### 3.2. Derivative and Jacobian Properties of Holomorphic Functions
 
 $$

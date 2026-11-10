@@ -17,6 +17,14 @@
 ## Graph 结构
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     LLM["LLM"]
     CALL["Tool Call"]

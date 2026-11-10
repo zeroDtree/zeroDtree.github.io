@@ -21,6 +21,14 @@
 ---
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     subgraph cap ["能力"]
         direction TB

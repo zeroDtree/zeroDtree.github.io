@@ -9,7 +9,6 @@ tags:
 
 ## Prerequisites
 
--
 - [[线性代数/diagonalization]]
 
 若无特别说明，向量空间定义在 $\mathbb C$ 上，矩阵

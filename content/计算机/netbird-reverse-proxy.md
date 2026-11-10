@@ -15,6 +15,14 @@ tags:
 ## 架构拓扑一览
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart LR
     A["公网用户"]
     B["HTTPS :443<br/>泛域名 *.rp.example.com"]

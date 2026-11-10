@@ -124,47 +124,49 @@ $$
 
 ### 2.1. $A^HA$ 与 $AA^H$ 半正定
 
-$A^HA\in\mathbb C^{n\times n}$ 与 $AA^H\in\mathbb C^{m\times m}$ 都是 Hermitian 半正定矩阵。
-
-> [!note]- 证明
-> 首先，
+> [!abstract] 引理（Gram 矩阵的 Hermitian 半正定性）
+> $A^HA\in\mathbb C^{n\times n}$ 与 $AA^H\in\mathbb C^{m\times m}$ 都是 Hermitian 半正定矩阵。
 >
-> $$
-> (A^HA)^H=A^HA,
-> \qquad
-> (AA^H)^H=AA^H,
-> $$
->
-> 所以二者都是 Hermitian 矩阵。对任意 $x\in\mathbb C^n$、$y\in\mathbb C^m$，
->
-> $$
-> x^HA^HAx=\|Ax\|_2^2\ge0,
-> \qquad
-> y^HAA^Hy=\|A^Hy\|_2^2\ge0.
-> $$
->
-> 因此二者都是半正定矩阵。
+> > [!note]- 证明
+> > 首先，
+> >
+> > $$
+> > (A^HA)^H=A^HA,
+> > \qquad
+> > (AA^H)^H=AA^H,
+> > $$
+> >
+> > 所以二者都是 Hermitian 矩阵。对任意 $x\in\mathbb C^n$、$y\in\mathbb C^m$，
+> >
+> > $$
+> > x^HA^HAx=\|Ax\|_2^2\ge0,
+> > \qquad
+> > y^HAA^Hy=\|A^Hy\|_2^2\ge0.
+> > $$
+> >
+> > 因此二者都是半正定矩阵。
 
 所以它们的特征值均为非负实数，并且都可以酉对角化。
 
 ### 2.2. 核空间
 
-有
-
-$$
-\boxed{\mathcal N(A^HA)=\mathcal N(A),}
-\qquad
-\boxed{\mathcal N(AA^H)=\mathcal N(A^H).}
-$$
-
-> [!note]- 证明
-> 以第一个等式为例，若 $Ax=0$，则显然 $A^HAx=0$；反过来，若 $A^HAx=0$，则
+> [!abstract] 引理（Gram 矩阵的核空间）
+> 有
 >
 > $$
-> 0=x^HA^HAx=\|Ax\|_2^2,
+> \boxed{\mathcal N(A^HA)=\mathcal N(A),}
+> \qquad
+> \boxed{\mathcal N(AA^H)=\mathcal N(A^H).}
 > $$
 >
-> 所以 $Ax=0$。第二个等式同理。
+> > [!note]- 证明
+> > 以第一个等式为例，若 $Ax=0$，则显然 $A^HAx=0$；反过来，若 $A^HAx=0$，则
+> >
+> > $$
+> > 0=x^HA^HAx=\|Ax\|_2^2,
+> > $$
+> >
+> > 所以 $Ax=0$。第二个等式同理。
 
 由秩–零度定理可得
 
@@ -175,183 +177,192 @@ $$
 =r.
 $$
 
-此外，
-
-$$
-\boxed{\mathcal R(A)^\perp=\mathcal N(A^H),}
-\qquad
-\boxed{\mathcal R(A^H)^\perp=\mathcal N(A).}
-$$
-
-> [!note]- 证明
-> 例如，$y\in\mathcal R(A)^\perp$ 当且仅当 $y^HAx=0$ 对所有 $x\in\mathbb C^n$ 成立，也就是 $A^Hy=0$。另一个等式同理。
+> [!abstract] 引理（像空间的正交补与伴随核空间）
+> 此外，
+>
+> $$
+> \boxed{\mathcal R(A)^\perp=\mathcal N(A^H),}
+> \qquad
+> \boxed{\mathcal R(A^H)^\perp=\mathcal N(A).}
+> $$
+>
+> > [!note]- 证明
+> > 例如，$y\in\mathcal R(A)^\perp$ 当且仅当 $y^HAx=0$ 对所有 $x\in\mathbb C^n$ 成立，也就是 $A^Hy=0$。另一个等式同理。
 
 ### 2.3. 非零特征值
 
-$A^HA$ 与 $AA^H$ 具有相同的非零特征值，并且重数相同。
-
-> [!note]- 证明
-> 设 $\lambda>0$，分别记相应的特征空间为
+> [!abstract] 引理（$A^HA$ 与 $AA^H$ 的非零特征值及重数相同）
+> $A^HA$ 与 $AA^H$ 具有相同的非零特征值，并且重数相同。
 >
-> $$
-> E_\lambda(A^HA)
-> \quad\text{和}\quad
-> E_\lambda(AA^H).
-> $$
->
-> 映射
->
-> $$
-> T:E_\lambda(A^HA)\to E_\lambda(AA^H),
-> \qquad
-> T(v)=Av
-> $$
->
-> 是同构，其逆映射为
->
-> $$
-> T^{-1}(u)=\frac1\lambda A^Hu.
-> $$
->
-> 事实上，若 $A^HAv=\lambda v$，则
->
-> $$
-> AA^H(Av)=A(A^HAv)=\lambda Av,
-> $$
->
-> 并且 $Av\ne0$，否则 $\lambda v=A^HAv=0$ 将推出 $v=0$。类似地，若 $AA^Hu=\lambda u$，则
->
-> $$
-> A^HA(A^Hu)=A^H(AA^Hu)=\lambda A^Hu.
-> $$
->
-> 最后，
->
-> $$
-> \frac1\lambda A^H(Av)=v,
-> \qquad
-> A\left(\frac1\lambda A^Hu\right)=u.
-> $$
->
-> 因此两个特征空间同构。由于 $A^HA$ 与 $AA^H$ 都可对角化，非零特征值的几何重数等于代数重数，结论成立。
+> > [!note]- 证明
+> > 设 $\lambda>0$，分别记相应的特征空间为
+> >
+> > $$
+> > E_\lambda(A^HA)
+> > \quad\text{和}\quad
+> > E_\lambda(AA^H).
+> > $$
+> >
+> > 映射
+> >
+> > $$
+> > T:E_\lambda(A^HA)\to E_\lambda(AA^H),
+> > \qquad
+> > T(v)=Av
+> > $$
+> >
+> > 是同构，其逆映射为
+> >
+> > $$
+> > T^{-1}(u)=\frac1\lambda A^Hu.
+> > $$
+> >
+> > 事实上，若 $A^HAv=\lambda v$，则
+> >
+> > $$
+> > AA^H(Av)=A(A^HAv)=\lambda Av,
+> > $$
+> >
+> > 并且 $Av\ne0$，否则 $\lambda v=A^HAv=0$ 将推出 $v=0$。类似地，若 $AA^Hu=\lambda u$，则
+> >
+> > $$
+> > A^HA(A^Hu)=A^H(AA^Hu)=\lambda A^Hu.
+> > $$
+> >
+> > 最后，
+> >
+> > $$
+> > \frac1\lambda A^H(Av)=v,
+> > \qquad
+> > A\left(\frac1\lambda A^Hu\right)=u.
+> > $$
+> >
+> > 因此两个特征空间同构。由于 $A^HA$ 与 $AA^H$ 都可对角化，非零特征值的几何重数等于代数重数，结论成立。
 
 ## 3. SVD 的存在性证明
 
-> [!note]- 证明
-> 由谱定理，存在 $\mathbb C^n$ 的一组标准正交基 $v_1,\ldots,v_n$，使得
->
-> $$
-> A^HAv_i=
-> \begin{cases}
-> \lambda_i v_i,&1\le i\le r,\\
-> 0,&r<i\le n,
-> \end{cases}
-> $$
->
-> 其中
->
-> $$
-> \lambda_1\ge\cdots\ge\lambda_r>0.
-> $$
->
-> 定义
->
-> $$
-> \sigma_i:=\sqrt{\lambda_i},
-> \qquad
-> u_i:=\frac1{\sigma_i}Av_i,
-> \qquad
-> 1\le i\le r.
-> $$
->
-> ### 3.1. $u_1,\ldots,u_r$ 标准正交
->
-> 对 $1\le i,j\le r$，
->
-> $$
-> \begin{aligned}
-> u_i^Hu_j
-> &=\frac1{\sigma_i\sigma_j}v_i^HA^HAv_j\\
-> &=\frac{\sigma_j^2}{\sigma_i\sigma_j}v_i^Hv_j\\
-> &=\delta_{ij}.
-> \end{aligned}
-> $$
->
-> 因此 $u_1,\ldots,u_r$ 标准正交。它们都属于 $\mathcal R(A)$，且数量恰好等于 $\dim\mathcal R(A)=r$，所以
->
-> $$
-> \mathcal R(A)=\operatorname{span}\{u_1,\ldots,u_r\}.
-> $$
->
-> ### 3.2. 左右奇异向量的关系
->
-> 根据定义，
->
-> $$
-> Av_i=\sigma_i u_i.
-> $$
->
-> 同时，
->
-> $$
-> A^Hu_i
-> =\frac1{\sigma_i}A^HAv_i
-> =\frac{\lambda_i}{\sigma_i}v_i
-> =\sigma_i v_i.
-> $$
->
-> 因而 $u_i$ 也是 $AA^H$ 对应于特征值 $\sigma_i^2$ 的特征向量：
->
-> $$
-> AA^Hu_i=\sigma_i^2u_i.
-> $$
->
-> ### 3.3. 补全标准正交基
->
-> 由
->
-> $$
-> \mathcal R(A)^\perp=\mathcal N(A^H)
-> $$
->
-> 可选取 $\mathcal N(A^H)$ 的一组标准正交基 $u_{r+1},\ldots,u_m$。于是
->
-> $$
-> U=[u_1\ \cdots\ u_m]
-> $$
->
-> 是酉矩阵。另一方面，第 2.2 节给出
->
-> $$
-> \mathcal N(A)=\mathcal N(A^HA)
-> =\operatorname{span}\{v_{r+1},\ldots,v_n\},
-> $$
->
-> 所以 $V=[v_1\ \cdots\ v_n]$ 也是酉矩阵。
->
-> 对任意 $x\in\mathbb C^n$，
->
-> $$
-> x=\sum_{i=1}^n(v_i^Hx)v_i,
-> $$
->
-> 并且 $Av_i=0$ 对 $i>r$ 成立。因此
->
-> $$
-> Ax
-> =\sum_{i=1}^r\sigma_i(v_i^Hx)u_i
-> =U\Sigma V^Hx.
-> $$
->
-> 这对一切 $x$ 都成立，故
+> [!abstract] 定理（奇异值分解的存在性）
+> 对任意矩阵 $A\in\mathbb C^{m\times n}$，存在酉矩阵 $U\in\mathbb C^{m\times m}$、$V\in\mathbb C^{n\times n}$ 及非负矩形对角矩阵 $\Sigma\in\mathbb R^{m\times n}$，使得
 >
 > $$
 > \boxed{A=U\Sigma V^H.}
 > $$
 >
-> 当 $A=0$ 时，取 $\Sigma=0$，并任取两个相应尺寸的酉矩阵 $U,V$ 即可。
->
-> Q.E.D.
+> > [!note]- 证明
+> > 由谱定理，存在 $\mathbb C^n$ 的一组标准正交基 $v_1,\ldots,v_n$，使得
+> >
+> > $$
+> > A^HAv_i=
+> > \begin{cases}
+> > \lambda_i v_i,&1\le i\le r,\\
+> > 0,&r<i\le n,
+> > \end{cases}
+> > $$
+> >
+> > 其中
+> >
+> > $$
+> > \lambda_1\ge\cdots\ge\lambda_r>0.
+> > $$
+> >
+> > 定义
+> >
+> > $$
+> > \sigma_i:=\sqrt{\lambda_i},
+> > \qquad
+> > u_i:=\frac1{\sigma_i}Av_i,
+> > \qquad
+> > 1\le i\le r.
+> > $$
+> >
+> > ### 3.1. $u_1,\ldots,u_r$ 标准正交
+> >
+> > 对 $1\le i,j\le r$，
+> >
+> > $$
+> > \begin{aligned}
+> > u_i^Hu_j
+> > &=\frac1{\sigma_i\sigma_j}v_i^HA^HAv_j\\
+> > &=\frac{\sigma_j^2}{\sigma_i\sigma_j}v_i^Hv_j\\
+> > &=\delta_{ij}.
+> > \end{aligned}
+> > $$
+> >
+> > 因此 $u_1,\ldots,u_r$ 标准正交。它们都属于 $\mathcal R(A)$，且数量恰好等于 $\dim\mathcal R(A)=r$，所以
+> >
+> > $$
+> > \mathcal R(A)=\operatorname{span}\{u_1,\ldots,u_r\}.
+> > $$
+> >
+> > ### 3.2. 左右奇异向量的关系
+> >
+> > 根据定义，
+> >
+> > $$
+> > Av_i=\sigma_i u_i.
+> > $$
+> >
+> > 同时，
+> >
+> > $$
+> > A^Hu_i
+> > =\frac1{\sigma_i}A^HAv_i
+> > =\frac{\lambda_i}{\sigma_i}v_i
+> > =\sigma_i v_i.
+> > $$
+> >
+> > 因而 $u_i$ 也是 $AA^H$ 对应于特征值 $\sigma_i^2$ 的特征向量：
+> >
+> > $$
+> > AA^Hu_i=\sigma_i^2u_i.
+> > $$
+> >
+> > ### 3.3. 补全标准正交基
+> >
+> > 由
+> >
+> > $$
+> > \mathcal R(A)^\perp=\mathcal N(A^H)
+> > $$
+> >
+> > 可选取 $\mathcal N(A^H)$ 的一组标准正交基 $u_{r+1},\ldots,u_m$。于是
+> >
+> > $$
+> > U=[u_1\ \cdots\ u_m]
+> > $$
+> >
+> > 是酉矩阵。另一方面，第 2.2 节给出
+> >
+> > $$
+> > \mathcal N(A)=\mathcal N(A^HA)
+> > =\operatorname{span}\{v_{r+1},\ldots,v_n\},
+> > $$
+> >
+> > 所以 $V=[v_1\ \cdots\ v_n]$ 也是酉矩阵。
+> >
+> > 对任意 $x\in\mathbb C^n$，
+> >
+> > $$
+> > x=\sum_{i=1}^n(v_i^Hx)v_i,
+> > $$
+> >
+> > 并且 $Av_i=0$ 对 $i>r$ 成立。因此
+> >
+> > $$
+> > Ax
+> > =\sum_{i=1}^r\sigma_i(v_i^Hx)u_i
+> > =U\Sigma V^Hx.
+> > $$
+> >
+> > 这对一切 $x$ 都成立，故
+> >
+> > $$
+> > \boxed{A=U\Sigma V^H.}
+> > $$
+> >
+> > 当 $A=0$ 时，取 $\Sigma=0$，并任取两个相应尺寸的酉矩阵 $U,V$ 即可。
+> >
+> > Q.E.D.
 
 ## 4. 四个基本子空间
 
@@ -442,64 +453,67 @@ $$
 
 ### 6.1. 谱范数
 
-$$
-\boxed{\|A\|_2=\sigma_1}
-$$
-
-> [!note]- 证明
-> 对任意 $x\in\mathbb C^n$，写成
->
+> [!abstract] 命题（谱范数与最大奇异值）
 > $$
-> x=\sum_{i=1}^n\alpha_i v_i.
+> \boxed{\|A\|_2=\sigma_1}
 > $$
 >
-> 则
->
-> $$
-> \|Ax\|_2^2
-> =\sum_{i=1}^r\sigma_i^2|\alpha_i|^2
-> \le\sigma_1^2\sum_{i=1}^n|\alpha_i|^2
-> =\sigma_1^2\|x\|_2^2.
-> $$
->
-> 当 $x=v_1$ 时取等号；当 $A=0$ 时两边均为零。
+> > [!note]- 证明
+> > 对任意 $x\in\mathbb C^n$，写成
+> >
+> > $$
+> > x=\sum_{i=1}^n\alpha_i v_i.
+> > $$
+> >
+> > 则
+> >
+> > $$
+> > \|Ax\|_2^2
+> > =\sum_{i=1}^r\sigma_i^2|\alpha_i|^2
+> > \le\sigma_1^2\sum_{i=1}^n|\alpha_i|^2
+> > =\sigma_1^2\|x\|_2^2.
+> > $$
+> >
+> > 当 $x=v_1$ 时取等号；当 $A=0$ 时两边均为零。
 
 ### 6.2. Frobenius 范数
 
-$$
-\boxed{\|A\|_F=\left(\sum_{i=1}^r\sigma_i^2\right)^{1/2}.}
-$$
-
-> [!note]- 证明
+> [!abstract] 命题（Frobenius 范数与奇异值平方和）
 > $$
-> \begin{aligned}
-> \|A\|_F^2
-> &=\operatorname{tr}(A^HA)\\
-> &=\operatorname{tr}(\Sigma^H\Sigma)\\
-> &=\sum_{i=1}^r\sigma_i^2.
-> \end{aligned}
+> \boxed{\|A\|_F=\left(\sum_{i=1}^r\sigma_i^2\right)^{1/2}.}
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > \|A\|_F^2
+> > &=\operatorname{tr}(A^HA)\\
+> > &=\operatorname{tr}(\Sigma^H\Sigma)\\
+> > &=\sum_{i=1}^r\sigma_i^2.
+> > \end{aligned}
+> > $$
 
 ### 6.3. 酉不变性
 
-若 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 都是酉矩阵，则
-
-$$
-\boxed{
-\|QAW\|_2=\|A\|_2,
-\qquad
-\|QAW\|_F=\|A\|_F.
-}
-$$
-
-> [!note]- 证明
-> 由
+> [!abstract] 命题（谱范数与 Frobenius 范数的酉不变性）
+> 若 $Q\in\mathbb C^{m\times m}$、$W\in\mathbb C^{n\times n}$ 都是酉矩阵，则
 >
 > $$
-> QAW=(QU)\Sigma(W^HV)^H
+> \boxed{
+> \|QAW\|_2=\|A\|_2,
+> \qquad
+> \|QAW\|_F=\|A\|_F.
+> }
 > $$
 >
-> 可知右侧也是一个 SVD，所以 $QAW$ 与 $A$ 具有相同的奇异值。再由前两节的结论即得所证。
+> > [!note]- 证明
+> > 由
+> >
+> > $$
+> > QAW=(QU)\Sigma(W^HV)^H
+> > $$
+> >
+> > 可知右侧也是一个 SVD，所以 $QAW$ 与 $A$ 具有相同的奇异值。再由前两节的结论即得所证。
 
 ### 6.4. 2-范数条件数
 

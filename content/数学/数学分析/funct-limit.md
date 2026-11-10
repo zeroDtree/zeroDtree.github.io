@@ -20,25 +20,26 @@ $$
 
 ### Equivalent definition
 
-The following statements are equivalent:
-
-1. $f$ converges to $L$ at $x_0$ in $E$.
-2. For every sequence $(a_n)_{n=0}^{\infty}$ which consists entirely of elements of $E$ and converges to $x_0$, the sequence $(f(a_n))_{n=0}^{\infty}$ converges to $L$.
-
-> [!note]- 证明
-> (1) $\longrightarrow$ (2):
-> (1) $\Longleftrightarrow$ $\forall \epsilon > 0, \exists \delta > 0$, s.t. (($\forall x \in E \wedge d(x_0, x) < \delta$) $\longrightarrow$ $d(f(x), L) < \epsilon$) is true.
-> $(a_n \to x_0) \Longleftrightarrow \forall \delta > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(a_n, x_0) < \delta$
-> Then, $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(f(a_n), L) < \epsilon$
-> so, $(f(a_n))_{n=0}^{\infty}$ converges to $L$.
-> (2) $\longrightarrow$ (1):
-> Suppose $f$ does not converge to $L$ at $x_0$ in $E$.
-> It means that $\exists \epsilon > 0,\forall \delta > 0,\exists x \in E\wedge d(x_0, x) < \delta \text{ s.t. } d(f(x), L) \geq \epsilon$
-> Choose $\delta = \frac{1}{n+1}, n \in \mathbb{Z}_{\geq 0}$
-> Then, $\exists x_n \in E, d(x_0, x_n) < \frac{1}{n+1}, d(f(x_n), L) \geq \epsilon$
-> so, $(x_n)_{n=0}^{\infty}$ is a sequence which consists entirely of elements of $E$ and converges to $x_0$, but $(f(x_n))_{n=0}^{\infty}$ does not converge to $L$.
-> This is a contradiction.
-> Therefore, $f$ converges to $L$ at $x_0$ in $E$.
+> [!abstract] 命题（函数极限的序列等价刻画）
+> The following statements are equivalent:
+>
+> 1. $f$ converges to $L$ at $x_0$ in $E$.
+> 2. For every sequence $(a_n)_{n=0}^{\infty}$ which consists entirely of elements of $E$ and converges to $x_0$, the sequence $(f(a_n))_{n=0}^{\infty}$ converges to $L$.
+>
+> > [!note]- 证明
+> > (1) $\longrightarrow$ (2):
+> > (1) $\Longleftrightarrow$ $\forall \epsilon > 0, \exists \delta > 0$, s.t. (($\forall x \in E \wedge d(x_0, x) < \delta$) $\longrightarrow$ $d(f(x), L) < \epsilon$) is true.
+> > $(a_n \to x_0) \Longleftrightarrow \forall \delta > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(a_n, x_0) < \delta$
+> > Then, $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(f(a_n), L) < \epsilon$
+> > so, $(f(a_n))_{n=0}^{\infty}$ converges to $L$.
+> > (2) $\longrightarrow$ (1):
+> > Suppose $f$ does not converge to $L$ at $x_0$ in $E$.
+> > It means that $\exists \epsilon > 0,\forall \delta > 0,\exists x \in E\wedge d(x_0, x) < \delta \text{ s.t. } d(f(x), L) \geq \epsilon$
+> > Choose $\delta = \frac{1}{n+1}, n \in \mathbb{Z}_{\geq 0}$
+> > Then, $\exists x_n \in E, d(x_0, x_n) < \frac{1}{n+1}, d(f(x_n), L) \geq \epsilon$
+> > so, $(x_n)_{n=0}^{\infty}$ is a sequence which consists entirely of elements of $E$ and converges to $x_0$, but $(f(x_n))_{n=0}^{\infty}$ does not converge to $L$.
+> > This is a contradiction.
+> > Therefore, $f$ converges to $L$ at $x_0$ in $E$.
 
 ## For n=1
 
@@ -62,20 +63,21 @@ $\mathbf{x} = (x_1, x_2, \cdots, x_n)^T \in \mathbb{R}^n$
 
 $\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, d(\mathbf{x}^n, \mathbf{y}) < \epsilon$
 
-The following statements are equivalent:
-
-1. $\mathbf{x^n} \to \mathbf{y}$
-2. $\forall i \in \{1, 2, \cdots, n\}, (x_i^n)_{n=0}^{\infty} \to y_i$
-
-> [!note]- 证明
-> (1) $\longrightarrow$ (2):
-> $\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
-> so, $\forall i \in \{1, 2, \cdots, n\}, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| \leq \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
-> (2) $\longrightarrow$ (1):
-> $(x_i^n)_{n=0}^{\infty} \to y_i$ means that $\forall \epsilon > 0, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| < \epsilon/n$
-> Let $N = \max\{N_1, N_2, \cdots, N_n\}$
-> Then, $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} \leq \sum_{i=1}^{n} |x_i^n - y_i| < n (\epsilon/n) = \epsilon$
-> so, $\mathbf{x}^n \to \mathbf{y}$
+> [!abstract] 命题（向量序列收敛与按坐标收敛的等价性）
+> The following statements are equivalent:
+>
+> 1. $\mathbf{x^n} \to \mathbf{y}$
+> 2. $\forall i \in \{1, 2, \cdots, n\}, (x_i^n)_{n=0}^{\infty} \to y_i$
+>
+> > [!note]- 证明
+> > (1) $\longrightarrow$ (2):
+> > $\mathbf{x}^n \to \mathbf{y}$ means that $\forall \epsilon > 0, \exists N \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
+> > so, $\forall i \in \{1, 2, \cdots, n\}, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| \leq \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} < \epsilon$
+> > (2) $\longrightarrow$ (1):
+> > $(x_i^n)_{n=0}^{\infty} \to y_i$ means that $\forall \epsilon > 0, \exists N_i \in \mathbb{Z}_{\geq 0}$, s.t. $\forall n \geq N_i, |x_i^n - y_i| < \epsilon/n$
+> > Let $N = \max\{N_1, N_2, \cdots, N_n\}$
+> > Then, $\forall n \geq N, \sqrt{\sum_{i=1}^{n} (x_i^n - y_i)^2} \leq \sum_{i=1}^{n} |x_i^n - y_i| < n (\epsilon/n) = \epsilon$
+> > so, $\mathbf{x}^n \to \mathbf{y}$
 
 Let $f: X \to \mathbb{R}^m, X \subseteq \mathbb{R}^n, f(\mathbf{x}) = (f_1(\mathbf{x}), f_2(\mathbf{x}), \cdots, f_m(\mathbf{x}))^T$
 

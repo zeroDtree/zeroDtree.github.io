@@ -46,70 +46,72 @@ $C = U \Lambda_C U^T, U \in \mathbb{R}^{m \times m}$
 
 #### 2.1. proposition
 
-$B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geometric multiplicity).
-
-> [!note]- 证明
-> $$
-> \begin{gathered}
-> B v = A^T A v= \lambda v \Longrightarrow\\
-> C Av = A A^T A v = \lambda A v
-> \end{gathered}
-> $$
+> [!abstract] 命题（$A^T A$ 与 $A A^T$ 的非零特征值及几何重数相同）
+> $B$ and $C$ have the same non-zero eigenvalues with the same multiplicity(geometric multiplicity).
 >
-> if $\lambda$ is an eigenvalue of $B$, then it is also an eigenvalue of $C$.
-> similarly,
->
-> $$
-> \begin{gathered}
-> C v = A A^T v = \lambda v \Longrightarrow\\
-> B A^T v = A^T A A^T v = \lambda A^T v
-> \end{gathered}
-> $$
->
-> if $\lambda$ is an eigenvalue of $C$, then it is also an eigenvalue of $B$.
-> so $B$ and $C$ have the same eigenvalues.
-> we analyze the geometric multiplicity of the non-zero eigenvalues.
->
-> $$
-> v \in Ker(A^T A - \lambda I) \Longleftrightarrow B v = A^T A v = \lambda v \Longrightarrow
-> $$
->
-> $$
-> C Av = A A^T A v = \lambda A v \Longleftrightarrow Av \in Ker(A A^T - \lambda I)
-> $$
->
-> consider the linear map:
->
-> $$
-> \begin{gathered}
-> f: Ker(A^T A - \lambda I) \to Ker(A A^T - \lambda I)\\
-> f(v) = Av
-> \end{gathered}
-> $$
->
-> if $f(v)=Av=\lambda v=0$, because $\lambda \neq 0$, so $v=0$.
-> so $f$ is injective.
-> for any $w \in Ker(A A^T - \lambda I)$, there exists $v=(1/\lambda)A^T w \in Ker(A^T A - \lambda I)$ such that $f(v)=A (1/\lambda)A^T w = (1/\lambda)A A^T w = (1/\lambda) \lambda w = w$.
-> so $f$ is surjective.
-> so $f$ is an isomorphism.
-> Therefore, $B$ and $C$ have the same non-zero eigenvalues with the same geometric multiplicity.
+> > [!note]- 证明
+> > $$
+> > \begin{gathered}
+> > B v = A^T A v= \lambda v \Longrightarrow\\
+> > C Av = A A^T A v = \lambda A v
+> > \end{gathered}
+> > $$
+> >
+> > if $\lambda$ is an eigenvalue of $B$, then it is also an eigenvalue of $C$.
+> > similarly,
+> >
+> > $$
+> > \begin{gathered}
+> > C v = A A^T v = \lambda v \Longrightarrow\\
+> > B A^T v = A^T A A^T v = \lambda A^T v
+> > \end{gathered}
+> > $$
+> >
+> > if $\lambda$ is an eigenvalue of $C$, then it is also an eigenvalue of $B$.
+> > so $B$ and $C$ have the same eigenvalues.
+> > we analyze the geometric multiplicity of the non-zero eigenvalues.
+> >
+> > $$
+> > v \in Ker(A^T A - \lambda I) \Longleftrightarrow B v = A^T A v = \lambda v \Longrightarrow
+> > $$
+> >
+> > $$
+> > C Av = A A^T A v = \lambda A v \Longleftrightarrow Av \in Ker(A A^T - \lambda I)
+> > $$
+> >
+> > consider the linear map:
+> >
+> > $$
+> > \begin{gathered}
+> > f: Ker(A^T A - \lambda I) \to Ker(A A^T - \lambda I)\\
+> > f(v) = Av
+> > \end{gathered}
+> > $$
+> >
+> > if $f(v)=Av=\lambda v=0$, because $\lambda \neq 0$, so $v=0$.
+> > so $f$ is injective.
+> > for any $w \in Ker(A A^T - \lambda I)$, there exists $v=(1/\lambda)A^T w \in Ker(A^T A - \lambda I)$ such that $f(v)=A (1/\lambda)A^T w = (1/\lambda)A A^T w = (1/\lambda) \lambda w = w$.
+> > so $f$ is surjective.
+> > so $f$ is an isomorphism.
+> > Therefore, $B$ and $C$ have the same non-zero eigenvalues with the same geometric multiplicity.
 
 #### 2.2. proposition
 
-$$
-Ker(A) = Ker(A^T A)
-$$
-
-> [!note]- 证明
+> [!abstract] 命题（$A$ 与 $A^T A$ 的零空间相等）
 > $$
-> x \in Ker(A) \Longleftrightarrow A x = 0 \implies A^T A x = 0 \Longleftrightarrow x \in Ker(A^T A)
+> Ker(A) = Ker(A^T A)
 > $$
 >
-> $$
-> x \in Ker(A^T A) \Longleftrightarrow A^T A x = 0 \implies x^T A^T A x = 0 \implies A x = 0 \Longleftrightarrow x \in Ker(A)
-> $$
->
-> Therefore, $Ker(A) = Ker(A^T A)$.
+> > [!note]- 证明
+> > $$
+> > x \in Ker(A) \Longleftrightarrow A x = 0 \implies A^T A x = 0 \Longleftrightarrow x \in Ker(A^T A)
+> > $$
+> >
+> > $$
+> > x \in Ker(A^T A) \Longleftrightarrow A^T A x = 0 \implies x^T A^T A x = 0 \implies A x = 0 \Longleftrightarrow x \in Ker(A)
+> > $$
+> >
+> > Therefore, $Ker(A) = Ker(A^T A)$.
 
 ## 3. Construction and proof
 

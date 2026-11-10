@@ -15,6 +15,14 @@ date: 2026-11-06
 既然 VAE / HVAE 训练后理想上有聚合后验 $q_\theta(\mathbf{z}) \approx p_{\mathrm{prior}}(\mathbf{z})$，当仅以逼近真实数据分布为目标时，不必强求学习一个可训练的编码器——我们可以直接将前向编码过程固定为确定性的逐步高斯噪声注入，而只用神经网络学习逆向去噪生成过程。这就是去噪扩散概率模型（Denoising Diffusion Probabilistic Models, DDPM）。
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart LR
     x0["$$\mathbf{x}_0$$"] -->|"$$q(\mathbf{x}_1 \mid \mathbf{x}_0)$$"| x1["$$\mathbf{x}_1$$"]
     x1 -.-> xtm1["$$\mathbf{x}_{t-1}$$"]
@@ -43,64 +51,65 @@ $$
 
 ### 过渡核的递归合并
 
-定义累积乘积 $\bar{\alpha}_i := \prod_{k=1}^i \alpha_k$。通过对单步高斯过渡核进行递归合并，可以不经逐步迭代，直接从 $\mathbf{x}_0$ 一步采样任意第 $i$ 步的带噪样本：
-
-$$
-q(\mathbf{x}_i \mid \mathbf{x}_0) = \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0, (1 - \bar{\alpha}_i)\mathbf{I}\right).
-\tag{3}
-$$
-
-> [!note]- 证明
-> 对步数 $i$ 使用数学归纳法。
->
-> **归纳起点（$i = 1$）：** 此时 $\bar{\alpha}_1 = \alpha_1$，$1 - \bar{\alpha}_1 = 1 - \alpha_1 = \beta_1$，与单步转移核 (1) 的定义一致：
+> [!abstract] 命题（前向边际转移核的闭式解）
+> 定义累积乘积 $\bar{\alpha}_i := \prod_{k=1}^i \alpha_k$。通过对单步高斯过渡核进行递归合并，可以不经逐步迭代，直接从 $\mathbf{x}_0$ 一步采样任意第 $i$ 步的带噪样本：
 >
 > $$
-> q(\mathbf{x}_1 \mid \mathbf{x}_0)
-> = \mathcal{N}\!\left(\mathbf{x}_1; \sqrt{\alpha_1}\,\mathbf{x}_0, \beta_1\mathbf{I}\right)
-> = \mathcal{N}\!\left(\mathbf{x}_1; \sqrt{\bar{\alpha}_1}\,\mathbf{x}_0, (1 - \bar{\alpha}_1)\mathbf{I}\right).
+> q(\mathbf{x}_i \mid \mathbf{x}_0) = \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0, (1 - \bar{\alpha}_i)\mathbf{I}\right).
+> \tag{3}
 > $$
 >
-> **归纳假设：** 假设第 $i-1$ 步已合并为
->
-> $$
-> q(\mathbf{x}_{i-1} \mid \mathbf{x}_0)
-> = \mathcal{N}\!\left(\mathbf{x}_{i-1}; \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0, (1 - \bar{\alpha}_{i-1})\mathbf{I}\right),
-> $$
->
-> 其重参数化形式为
->
-> $$
-> \mathbf{x}_{i-1} = \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_{i-1}}\,\boldsymbol{\epsilon},
-> \qquad
-> \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}).
-> $$
->
-> **归纳递推：** 将上式代入第 $i$ 步的更新式 $\mathbf{x}_i = \sqrt{\alpha_i}\,\mathbf{x}_{i-1} + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i$，其中 $\boldsymbol{\epsilon}_i \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ 且与 $\boldsymbol{\epsilon}$ 相互独立：
->
-> $$
-> \begin{aligned}
-> \mathbf{x}_i
-> &= \sqrt{\alpha_i}\!\left(\sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_{i-1}}\,\boldsymbol{\epsilon}\right) + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i \\
-> &= \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0 + \sqrt{\alpha_i(1 - \bar{\alpha}_{i-1})}\,\boldsymbol{\epsilon} + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i.
-> \end{aligned}
-> $$
->
-> 两个相互独立的各向同性高斯随机变量的线性组合仍服从高斯分布，其方差等于各自方差之和：
->
-> $$
-> \alpha_i(1 - \bar{\alpha}_{i-1}) + \beta_i
-> = \alpha_i - \alpha_i\bar{\alpha}_{i-1} + (1 - \alpha_i)
-> = 1 - \bar{\alpha}_i,
-> $$
->
-> 其中用到了 $\beta_i = 1 - \alpha_i$ 与 $\bar{\alpha}_i = \alpha_i\bar{\alpha}_{i-1}$。因此存在标准正态噪声 $\boldsymbol{\epsilon}' \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$，使得
->
-> $$
-> \mathbf{x}_i = \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}',
-> $$
->
-> 即 $q(\mathbf{x}_i \mid \mathbf{x}_0) = \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0, (1 - \bar{\alpha}_i)\mathbf{I}\right)$。由数学归纳法，(3) 对任意步数 $i$ 成立。$\square$
+> > [!note]- 证明
+> > 对步数 $i$ 使用数学归纳法。
+> >
+> > **归纳起点（$i = 1$）：** 此时 $\bar{\alpha}_1 = \alpha_1$，$1 - \bar{\alpha}_1 = 1 - \alpha_1 = \beta_1$，与单步转移核 (1) 的定义一致：
+> >
+> > $$
+> > q(\mathbf{x}_1 \mid \mathbf{x}_0)
+> > = \mathcal{N}\!\left(\mathbf{x}_1; \sqrt{\alpha_1}\,\mathbf{x}_0, \beta_1\mathbf{I}\right)
+> > = \mathcal{N}\!\left(\mathbf{x}_1; \sqrt{\bar{\alpha}_1}\,\mathbf{x}_0, (1 - \bar{\alpha}_1)\mathbf{I}\right).
+> > $$
+> >
+> > **归纳假设：** 假设第 $i-1$ 步已合并为
+> >
+> > $$
+> > q(\mathbf{x}_{i-1} \mid \mathbf{x}_0)
+> > = \mathcal{N}\!\left(\mathbf{x}_{i-1}; \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0, (1 - \bar{\alpha}_{i-1})\mathbf{I}\right),
+> > $$
+> >
+> > 其重参数化形式为
+> >
+> > $$
+> > \mathbf{x}_{i-1} = \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_{i-1}}\,\boldsymbol{\epsilon},
+> > \qquad
+> > \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}).
+> > $$
+> >
+> > **归纳递推：** 将上式代入第 $i$ 步的更新式 $\mathbf{x}_i = \sqrt{\alpha_i}\,\mathbf{x}_{i-1} + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i$，其中 $\boldsymbol{\epsilon}_i \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ 且与 $\boldsymbol{\epsilon}$ 相互独立：
+> >
+> > $$
+> > \begin{aligned}
+> > \mathbf{x}_i
+> > &= \sqrt{\alpha_i}\!\left(\sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_{i-1}}\,\boldsymbol{\epsilon}\right) + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i \\
+> > &= \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0 + \sqrt{\alpha_i(1 - \bar{\alpha}_{i-1})}\,\boldsymbol{\epsilon} + \sqrt{\beta_i}\,\boldsymbol{\epsilon}_i.
+> > \end{aligned}
+> > $$
+> >
+> > 两个相互独立的各向同性高斯随机变量的线性组合仍服从高斯分布，其方差等于各自方差之和：
+> >
+> > $$
+> > \alpha_i(1 - \bar{\alpha}_{i-1}) + \beta_i
+> > = \alpha_i - \alpha_i\bar{\alpha}_{i-1} + (1 - \alpha_i)
+> > = 1 - \bar{\alpha}_i,
+> > $$
+> >
+> > 其中用到了 $\beta_i = 1 - \alpha_i$ 与 $\bar{\alpha}_i = \alpha_i\bar{\alpha}_{i-1}$。因此存在标准正态噪声 $\boldsymbol{\epsilon}' \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$，使得
+> >
+> > $$
+> > \mathbf{x}_i = \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}',
+> > $$
+> >
+> > 即 $q(\mathbf{x}_i \mid \mathbf{x}_0) = \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\bar{\alpha}_i}\,\mathbf{x}_0, (1 - \bar{\alpha}_i)\mathbf{I}\right)$。由数学归纳法，(3) 对任意步数 $i$ 成立。$\square$
 
 当总步数 $L \to \infty$ 时，$\bar{\alpha}_L \to 0$，终端分布收敛到标准正态先验：
 
@@ -150,180 +159,182 @@ $$
 
 ### 引理：二次型与高斯分布的统计特征
 
-若 $D$ 维随机变量 $\mathbf{x}$ 的概率密度指数项可写为关于 $\mathbf{x}$ 的标准二次型
-
-$$
-p(\mathbf{x}) \propto \exp\!\left(-\frac{1}{2}\!\left[\mathbf{x}^\top\mathbf{A}\mathbf{x} - 2\mathbf{b}^\top\mathbf{x} + c\right]\right),
-\tag{7}
-$$
-
-其中 $\mathbf{A}$ 为对称正定矩阵，$c$ 为与 $\mathbf{x}$ 无关的常数，则 $\mathbf{x} \sim \mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$，且其协方差矩阵与均值满足
-
-$$
-\boldsymbol{\Sigma} = \mathbf{A}^{-1},
-\qquad
-\boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{b}.
-\tag{8}
-$$
-
-> [!note]- 证明
-> $D$ 维多元高斯分布 $\mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$ 的概率密度满足
+> [!abstract] 引理（二次型与高斯分布的统计特征）
+> 若 $D$ 维随机变量 $\mathbf{x}$ 的概率密度指数项可写为关于 $\mathbf{x}$ 的标准二次型
 >
 > $$
-> p(\mathbf{x}) \propto \exp\!\left(-\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})\right).
+> p(\mathbf{x}) \propto \exp\!\left(-\frac{1}{2}\!\left[\mathbf{x}^\top\mathbf{A}\mathbf{x} - 2\mathbf{b}^\top\mathbf{x} + c\right]\right),
+> \tag{7}
 > $$
 >
-> 将指数中的二次型展开：
+> 其中 $\mathbf{A}$ 为对称正定矩阵，$c$ 为与 $\mathbf{x}$ 无关的常数，则 $\mathbf{x} \sim \mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$，且其协方差矩阵与均值满足
 >
 > $$
-> \begin{aligned}
-> -\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})
-> &= -\frac{1}{2}\!\left[
-> \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
-> - \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
-> - \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
-> + \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
-> \right].
-> \end{aligned}
+> \boldsymbol{\Sigma} = \mathbf{A}^{-1},
+> \qquad
+> \boldsymbol{\mu} = \mathbf{A}^{-1}\mathbf{b}.
+> \tag{8}
 > $$
 >
-> 由于精度矩阵 $\boldsymbol{\Sigma}^{-1}$ 对称，中间两项互为转置且均为标量，故彼此相等：
->
-> $$
-> \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu} = \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x} = (\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})^\top\mathbf{x}.
-> $$
->
-> 整理可得
->
-> $$
-> -\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})
-> = -\frac{1}{2}\!\left[
-> \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
-> - 2(\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})^\top\mathbf{x}
-> + \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
-> \right].
-> $$
->
-> 与标准形式 $-\frac{1}{2}\!\left[\mathbf{x}^\top\mathbf{A}\mathbf{x} - 2\mathbf{b}^\top\mathbf{x} + c\right]$ 逐项比对系数：
->
-> - **二次项：** $\mathbf{A} = \boldsymbol{\Sigma}^{-1} \implies \boldsymbol{\Sigma} = \mathbf{A}^{-1}$；
-> - **一次项：** $\mathbf{b} = \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu} \implies \boldsymbol{\mu} = \boldsymbol{\Sigma}\mathbf{b} = \mathbf{A}^{-1}\mathbf{b}$。$\square$
+> > [!note]- 证明
+> > $D$ 维多元高斯分布 $\mathcal{N}(\mathbf{x}; \boldsymbol{\mu}, \boldsymbol{\Sigma})$ 的概率密度满足
+> >
+> > $$
+> > p(\mathbf{x}) \propto \exp\!\left(-\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})\right).
+> > $$
+> >
+> > 将指数中的二次型展开：
+> >
+> > $$
+> > \begin{aligned}
+> > -\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})
+> > &= -\frac{1}{2}\!\left[
+> > \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
+> > - \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
+> > - \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
+> > + \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > 由于精度矩阵 $\boldsymbol{\Sigma}^{-1}$ 对称，中间两项互为转置且均为标量，故彼此相等：
+> >
+> > $$
+> > \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu} = \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x} = (\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})^\top\mathbf{x}.
+> > $$
+> >
+> > 整理可得
+> >
+> > $$
+> > -\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^\top\boldsymbol{\Sigma}^{-1}(\mathbf{x} - \boldsymbol{\mu})
+> > = -\frac{1}{2}\!\left[
+> > \mathbf{x}^\top\boldsymbol{\Sigma}^{-1}\mathbf{x}
+> > - 2(\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu})^\top\mathbf{x}
+> > + \boldsymbol{\mu}^\top\boldsymbol{\Sigma}^{-1}\boldsymbol{\mu}
+> > \right].
+> > $$
+> >
+> > 与标准形式 $-\frac{1}{2}\!\left[\mathbf{x}^\top\mathbf{A}\mathbf{x} - 2\mathbf{b}^\top\mathbf{x} + c\right]$ 逐项比对系数：
+> >
+> > - **二次项：** $\mathbf{A} = \boldsymbol{\Sigma}^{-1} \implies \boldsymbol{\Sigma} = \mathbf{A}^{-1}$；
+> > - **一次项：** $\mathbf{b} = \boldsymbol{\Sigma}^{-1}\boldsymbol{\mu} \implies \boldsymbol{\mu} = \boldsymbol{\Sigma}\mathbf{b} = \mathbf{A}^{-1}\mathbf{b}$。$\square$
 
 ### 条件逆向核的闭式解
 
-利用上述引理，条件逆向核 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 仍是一个各向同性的高斯分布：
-
-$$
-\begin{aligned}
-p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
-&= \mathcal{N}\!\left(
-\mathbf{x}_{i-1};
-\frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}\mathbf{x}_0
-+ \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i,
-\frac{1 - \bar{\alpha}_{i-1}}{1 - \bar{\alpha}_i}\beta_i\mathbf{I}
-\right) \\
-&=: \mathcal{N}\!\left(\mathbf{x}_{i-1}; \boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i), \sigma^2(i)\mathbf{I}\right).
-\end{aligned}
-\tag{9}
-$$
-
-> [!note]- 证明
-> 由 (6) 可知，分母 $q(\mathbf{x}_i \mid \mathbf{x}_0)$ 不含变量 $\mathbf{x}_{i-1}$，关于 $\mathbf{x}_{i-1}$ 仅起归一化常数的作用。分子是两个高斯分布的乘积：
+> [!abstract] 命题（条件逆向核的闭式解）
+> 利用上述引理，条件逆向核 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 仍是一个各向同性的高斯分布：
 >
 > $$
 > \begin{aligned}
-> q(\mathbf{x}_i \mid \mathbf{x}_{i-1}) &= \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\alpha_i}\,\mathbf{x}_{i-1}, \beta_i\mathbf{I}\right), \\
-> q(\mathbf{x}_{i-1} \mid \mathbf{x}_0) &= \mathcal{N}\!\left(\mathbf{x}_{i-1}; \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0, (1 - \bar{\alpha}_{i-1})\mathbf{I}\right).
+> p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
+> &= \mathcal{N}\!\left(
+> \mathbf{x}_{i-1};
+> \frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}\mathbf{x}_0
+> + \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i,
+> \frac{1 - \bar{\alpha}_{i-1}}{1 - \bar{\alpha}_i}\beta_i\mathbf{I}
+> \right) \\
+> &=: \mathcal{N}\!\left(\mathbf{x}_{i-1}; \boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i), \sigma^2(i)\mathbf{I}\right).
 > \end{aligned}
+> \tag{9}
 > $$
 >
-> 两个高斯密度相乘时指数相加，两个二次型之和仍是关于 $\mathbf{x}_{i-1}$ 的二次型，因此条件后验 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 仍是高斯分布。分别展开分子两项的指数部分：
->
-> **① 展开 $q(\mathbf{x}_i \mid \mathbf{x}_{i-1})$ 的指数项：**
->
-> $$
-> \begin{aligned}
-> \text{指数项}_1
-> &= -\frac{1}{2}\cdot\frac{1}{\beta_i}\|\mathbf{x}_i - \sqrt{\alpha_i}\,\mathbf{x}_{i-1}\|^2 \\
-> &= -\frac{1}{2}\!\left[
-> \frac{\alpha_i}{\beta_i}\mathbf{x}_{i-1}^\top\mathbf{x}_{i-1}
-> - \frac{2\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i^\top\mathbf{x}_{i-1}
-> + \frac{1}{\beta_i}\mathbf{x}_i^\top\mathbf{x}_i
-> \right].
-> \end{aligned}
-> $$
->
-> **② 展开 $q(\mathbf{x}_{i-1} \mid \mathbf{x}_0)$ 的指数项：**
->
-> $$
-> \begin{aligned}
-> \text{指数项}_2
-> &= -\frac{1}{2}\cdot\frac{1}{1 - \bar{\alpha}_{i-1}}\|\mathbf{x}_{i-1} - \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0\|^2 \\
-> &= -\frac{1}{2}\!\left[
-> \frac{1}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_{i-1}^\top\mathbf{x}_{i-1}
-> - \frac{2\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top\mathbf{x}_{i-1}
-> + \frac{\bar{\alpha}_{i-1}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top\mathbf{x}_0
-> \right].
-> \end{aligned}
-> $$
->
-> 将两部分相加，把所有不含 $\mathbf{x}_{i-1}$ 的项合并入常数 $c$，整理成标准二次型 $-\frac{1}{2}\!\left[\mathbf{x}_{i-1}^\top\mathbf{A}\mathbf{x}_{i-1} - 2\mathbf{b}^\top\mathbf{x}_{i-1} + c\right]$：
->
-> **提取二次项系数 $\mathbf{A}$（精度矩阵）：**
->
-> $$
-> \mathbf{A} = \left(\frac{\alpha_i}{\beta_i} + \frac{1}{1 - \bar{\alpha}_{i-1}}\right)\mathbf{I}.
-> $$
->
-> 代入 $\alpha_i = 1 - \beta_i$ 并通分：
->
-> $$
-> \frac{1 - \beta_i}{\beta_i} + \frac{1}{1 - \bar{\alpha}_{i-1}}
-> = \frac{(1 - \beta_i)(1 - \bar{\alpha}_{i-1}) + \beta_i}{\beta_i(1 - \bar{\alpha}_{i-1})}
-> = \frac{1 - \beta_i - \bar{\alpha}_{i-1} + \beta_i\bar{\alpha}_{i-1} + \beta_i}{\beta_i(1 - \bar{\alpha}_{i-1})}.
-> $$
->
-> 注意到 $\bar{\alpha}_i = \alpha_i\bar{\alpha}_{i-1} = (1 - \beta_i)\bar{\alpha}_{i-1} = \bar{\alpha}_{i-1} - \beta_i\bar{\alpha}_{i-1}$，分子化简为
->
-> $$
-> 1 - \bar{\alpha}_{i-1} + \beta_i\bar{\alpha}_{i-1} = 1 - \bar{\alpha}_i.
-> $$
->
-> 因此精度矩阵为
->
-> $$
-> \mathbf{A} = \frac{1 - \bar{\alpha}_i}{\beta_i(1 - \bar{\alpha}_{i-1})}\mathbf{I}.
-> $$
->
-> **提取一次项系数 $\mathbf{b}$：**
->
-> $$
-> \mathbf{b}^\top = \frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i^\top + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top
-> \implies
-> \mathbf{b} = \frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0.
-> $$
->
-> **求解方差 $\sigma^2(i)\mathbf{I}$ 与均值 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：**
->
-> 由 (8) 对 $\mathbf{A}$ 求逆，即得协方差矩阵：
->
-> $$
-> \boldsymbol{\Sigma}_{\mathrm{new}} = \mathbf{A}^{-1} = \frac{1 - \bar{\alpha}_{i-1}}{1 - \bar{\alpha}_i}\beta_i\mathbf{I} =: \sigma^2(i)\mathbf{I}.
-> $$
->
-> 再计算均值 $\boldsymbol{\mu}_{\mathrm{new}} = \mathbf{A}^{-1}\mathbf{b}$：
->
-> $$
-> \begin{aligned}
-> \boldsymbol{\mu}_{\mathrm{new}}
-> &= \frac{\beta_i(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}
-> \left(\frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0\right) \\
-> &= \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i
-> + \frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}\mathbf{x}_0.
-> \end{aligned}
-> $$
->
-> 这就得到了 (9)。$\square$
+> > [!note]- 证明
+> > 由 (6) 可知，分母 $q(\mathbf{x}_i \mid \mathbf{x}_0)$ 不含变量 $\mathbf{x}_{i-1}$，关于 $\mathbf{x}_{i-1}$ 仅起归一化常数的作用。分子是两个高斯分布的乘积：
+> >
+> > $$
+> > \begin{aligned}
+> > q(\mathbf{x}_i \mid \mathbf{x}_{i-1}) &= \mathcal{N}\!\left(\mathbf{x}_i; \sqrt{\alpha_i}\,\mathbf{x}_{i-1}, \beta_i\mathbf{I}\right), \\
+> > q(\mathbf{x}_{i-1} \mid \mathbf{x}_0) &= \mathcal{N}\!\left(\mathbf{x}_{i-1}; \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0, (1 - \bar{\alpha}_{i-1})\mathbf{I}\right).
+> > \end{aligned}
+> > $$
+> >
+> > 两个高斯密度相乘时指数相加，两个二次型之和仍是关于 $\mathbf{x}_{i-1}$ 的二次型，因此条件后验 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 仍是高斯分布。分别展开分子两项的指数部分：
+> >
+> > **① 展开 $q(\mathbf{x}_i \mid \mathbf{x}_{i-1})$ 的指数项：**
+> >
+> > $$
+> > \begin{aligned}
+> > \text{指数项}_1
+> > &= -\frac{1}{2}\cdot\frac{1}{\beta_i}\|\mathbf{x}_i - \sqrt{\alpha_i}\,\mathbf{x}_{i-1}\|^2 \\
+> > &= -\frac{1}{2}\!\left[
+> > \frac{\alpha_i}{\beta_i}\mathbf{x}_{i-1}^\top\mathbf{x}_{i-1}
+> > - \frac{2\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i^\top\mathbf{x}_{i-1}
+> > + \frac{1}{\beta_i}\mathbf{x}_i^\top\mathbf{x}_i
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > **② 展开 $q(\mathbf{x}_{i-1} \mid \mathbf{x}_0)$ 的指数项：**
+> >
+> > $$
+> > \begin{aligned}
+> > \text{指数项}_2
+> > &= -\frac{1}{2}\cdot\frac{1}{1 - \bar{\alpha}_{i-1}}\|\mathbf{x}_{i-1} - \sqrt{\bar{\alpha}_{i-1}}\,\mathbf{x}_0\|^2 \\
+> > &= -\frac{1}{2}\!\left[
+> > \frac{1}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_{i-1}^\top\mathbf{x}_{i-1}
+> > - \frac{2\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top\mathbf{x}_{i-1}
+> > + \frac{\bar{\alpha}_{i-1}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top\mathbf{x}_0
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > 将两部分相加，把所有不含 $\mathbf{x}_{i-1}$ 的项合并入常数 $c$，整理成标准二次型 $-\frac{1}{2}\!\left[\mathbf{x}_{i-1}^\top\mathbf{A}\mathbf{x}_{i-1} - 2\mathbf{b}^\top\mathbf{x}_{i-1} + c\right]$：
+> >
+> > **提取二次项系数 $\mathbf{A}$（精度矩阵）：**
+> >
+> > $$
+> > \mathbf{A} = \left(\frac{\alpha_i}{\beta_i} + \frac{1}{1 - \bar{\alpha}_{i-1}}\right)\mathbf{I}.
+> > $$
+> >
+> > 代入 $\alpha_i = 1 - \beta_i$ 并通分：
+> >
+> > $$
+> > \frac{1 - \beta_i}{\beta_i} + \frac{1}{1 - \bar{\alpha}_{i-1}}
+> > = \frac{(1 - \beta_i)(1 - \bar{\alpha}_{i-1}) + \beta_i}{\beta_i(1 - \bar{\alpha}_{i-1})}
+> > = \frac{1 - \beta_i - \bar{\alpha}_{i-1} + \beta_i\bar{\alpha}_{i-1} + \beta_i}{\beta_i(1 - \bar{\alpha}_{i-1})}.
+> > $$
+> >
+> > 注意到 $\bar{\alpha}_i = \alpha_i\bar{\alpha}_{i-1} = (1 - \beta_i)\bar{\alpha}_{i-1} = \bar{\alpha}_{i-1} - \beta_i\bar{\alpha}_{i-1}$，分子化简为
+> >
+> > $$
+> > 1 - \bar{\alpha}_{i-1} + \beta_i\bar{\alpha}_{i-1} = 1 - \bar{\alpha}_i.
+> > $$
+> >
+> > 因此精度矩阵为
+> >
+> > $$
+> > \mathbf{A} = \frac{1 - \bar{\alpha}_i}{\beta_i(1 - \bar{\alpha}_{i-1})}\mathbf{I}.
+> > $$
+> >
+> > **提取一次项系数 $\mathbf{b}$：**
+> >
+> > $$
+> > \mathbf{b}^\top = \frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i^\top + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0^\top
+> > \implies
+> > \mathbf{b} = \frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0.
+> > $$
+> >
+> > **求解方差 $\sigma^2(i)\mathbf{I}$ 与均值 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：**
+> >
+> > 由 (8) 对 $\mathbf{A}$ 求逆，即得协方差矩阵：
+> >
+> > $$
+> > \boldsymbol{\Sigma}_{\mathrm{new}} = \mathbf{A}^{-1} = \frac{1 - \bar{\alpha}_{i-1}}{1 - \bar{\alpha}_i}\beta_i\mathbf{I} =: \sigma^2(i)\mathbf{I}.
+> > $$
+> >
+> > 再计算均值 $\boldsymbol{\mu}_{\mathrm{new}} = \mathbf{A}^{-1}\mathbf{b}$：
+> >
+> > $$
+> > \begin{aligned}
+> > \boldsymbol{\mu}_{\mathrm{new}}
+> > &= \frac{\beta_i(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}
+> > \left(\frac{\sqrt{\alpha_i}}{\beta_i}\mathbf{x}_i + \frac{\sqrt{\bar{\alpha}_{i-1}}}{1 - \bar{\alpha}_{i-1}}\mathbf{x}_0\right) \\
+> > &= \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i
+> > + \frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}\mathbf{x}_0.
+> > \end{aligned}
+> > $$
+> >
+> > 这就得到了 (9)。$\square$
 
 ## 训练目标
 
@@ -331,163 +342,164 @@ $$
 
 ### 边际 KL 与条件 KL 最小化的等价性
 
-对任意第 $i$ 步，下列恒等式成立：
-
-$$
-\begin{aligned}
-&\mathbb{E}_{\mathbf{x}_i \sim p_i(\mathbf{x}_i)}\!\left[
-D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-\right] \\
-&\quad=
-\mathbb{E}_{\mathbf{x}_0 \sim p_{\mathrm{data}}(\mathbf{x}_0)}
-\mathbb{E}_{\mathbf{x}_i \sim p(\mathbf{x}_i \mid \mathbf{x}_0)}\!\left[
-D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-\right] + C,
-\end{aligned}
-\tag{10}
-$$
-
-其中 $C = -\mathbb{E}_{p(\mathbf{x}_i)}\!\left[\mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)\right]\right]$ 是与模型参数 $\phi$ 无关的常数。此外，(10) 的理论最优解满足
-
-$$
-p^*(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
-= p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
-= \mathbb{E}_{\mathbf{x}_0 \sim p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\right],
-\qquad
-\mathbf{x}_i \sim p_i.
-\tag{11}
-$$
-
-> [!note]- 证明
-> **第一部分：等式 (10) 的推导。** 从右端的条件 KL 期望出发，将其改写为积分形式：
->
-> $$
-> \mathbb{E}_{p(\mathbf{x}_0, \mathbf{x}_i)}\!\left[
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> \right]
-> = \iint p(\mathbf{x}_0, \mathbf{x}_i)\,
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> d\mathbf{x}_0\,d\mathbf{x}_i.
-> $$
->
-> 按照 KL 散度的定义展开内层：
->
-> $$
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> = \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}\,d\mathbf{x}_{i-1}.
-> $$
->
-> 代回期望，得到三重积分：
->
-> $$
-> \iiint p(\mathbf{x}_0, \mathbf{x}_i)\,p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \,d\mathbf{x}_{i-1}\,d\mathbf{x}_0\,d\mathbf{x}_i.
-> $$
->
-> 利用概率链式法则 $p(\mathbf{x}_0, \mathbf{x}_i) = p(\mathbf{x}_i)\,p(\mathbf{x}_0 \mid \mathbf{x}_i)$，将积分写为嵌套形式：
->
-> $$
-> \int p(\mathbf{x}_i) \int p(\mathbf{x}_0 \mid \mathbf{x}_i) \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \,d\mathbf{x}_{i-1}\,d\mathbf{x}_0\,d\mathbf{x}_i,
-> $$
->
-> 即嵌套期望：
->
-> $$
-> \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \right]
-> \right]
-> \right].
-> $$
->
-> 接下来，引入中间分布 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$ 对对数项进行插项分解：
->
-> $$
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> = \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> + \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}.
-> $$
->
-> 代回嵌套期望，拆成两项之和：
+> [!abstract] 定理（边际 KL 与条件 KL 最小化的等价性）
+> 对任意第 $i$ 步，下列恒等式成立：
 >
 > $$
 > \begin{aligned}
-> &\mathbb{E}_{p(\mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \right]
-> \right]
-> \right] \\
-> &\quad+
-> \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \right]
-> \right]
-> \right].
-> \end{aligned}
-> $$
->
-> 对于第二项，由于对数内的被积函数 $\log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}$ 不依赖于 $\mathbf{x}_0$，由全概率公式 $\int p(\mathbf{x}_0 \mid \mathbf{x}_i)\,p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\,d\mathbf{x}_0 = p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$，内层两个期望合并为
->
-> $$
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \right]
-> \right]
-> = \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}\!\left[
-> \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
-> \right]
-> = D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right).
-> $$
->
-> 对于第一项，内层关于 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 的期望恰好是 KL 散度
->
-> $$
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> \right],
-> $$
->
-> 它完全不含参数 $\phi$。将两项合在一起，得到分解恒等式：
->
-> $$
-> \begin{aligned}
-> &\mathbb{E}_{p(\mathbf{x}_0, \mathbf{x}_i)}\!\left[
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> &\mathbb{E}_{\mathbf{x}_i \sim p_i(\mathbf{x}_i)}\!\left[
+> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
 > \right] \\
 > &\quad=
-> \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
-> \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> \right]
-> \right]
-> + \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
-> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
-> \right].
+> \mathbb{E}_{\mathbf{x}_0 \sim p_{\mathrm{data}}(\mathbf{x}_0)}
+> \mathbb{E}_{\mathbf{x}_i \sim p(\mathbf{x}_i \mid \mathbf{x}_0)}\!\left[
+> D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> \right] + C,
 > \end{aligned}
+> \tag{10}
 > $$
 >
-> 移项即得 (10)。
->
-> **第二部分：最优性 (11) 的证明。** 在参数化族足够丰富的假设下，KL 散度 $D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)$ 当且仅当 $p^*(\mathbf{x}_{i-1} \mid \mathbf{x}_i) = p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$ 时取得最小值 $0$，这给出了 (11) 的第一个等号；第二个等号直接由全概率公式
+> 其中 $C = -\mathbb{E}_{p(\mathbf{x}_i)}\!\left[\mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)\right]\right]$ 是与模型参数 $\phi$ 无关的常数。此外，(10) 的理论最优解满足
 >
 > $$
-> p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
-> = \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\,p(\mathbf{x}_0 \mid \mathbf{x}_i)\,d\mathbf{x}_0
-> = \mathbb{E}_{\mathbf{x}_0 \sim p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\right]
+> p^*(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
+> = p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
+> = \mathbb{E}_{\mathbf{x}_0 \sim p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\right],
+> \qquad
+> \mathbf{x}_i \sim p_i.
+> \tag{11}
 > $$
 >
-> 得到。$\square$
+> > [!note]- 证明
+> > **第一部分：等式 (10) 的推导。** 从右端的条件 KL 期望出发，将其改写为积分形式：
+> >
+> > $$
+> > \mathbb{E}_{p(\mathbf{x}_0, \mathbf{x}_i)}\!\left[
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > \right]
+> > = \iint p(\mathbf{x}_0, \mathbf{x}_i)\,
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > d\mathbf{x}_0\,d\mathbf{x}_i.
+> > $$
+> >
+> > 按照 KL 散度的定义展开内层：
+> >
+> > $$
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > = \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}\,d\mathbf{x}_{i-1}.
+> > $$
+> >
+> > 代回期望，得到三重积分：
+> >
+> > $$
+> > \iiint p(\mathbf{x}_0, \mathbf{x}_i)\,p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \,d\mathbf{x}_{i-1}\,d\mathbf{x}_0\,d\mathbf{x}_i.
+> > $$
+> >
+> > 利用概率链式法则 $p(\mathbf{x}_0, \mathbf{x}_i) = p(\mathbf{x}_i)\,p(\mathbf{x}_0 \mid \mathbf{x}_i)$，将积分写为嵌套形式：
+> >
+> > $$
+> > \int p(\mathbf{x}_i) \int p(\mathbf{x}_0 \mid \mathbf{x}_i) \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \,d\mathbf{x}_{i-1}\,d\mathbf{x}_0\,d\mathbf{x}_i,
+> > $$
+> >
+> > 即嵌套期望：
+> >
+> > $$
+> > \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \right]
+> > \right]
+> > \right].
+> > $$
+> >
+> > 接下来，引入中间分布 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$ 对对数项进行插项分解：
+> >
+> > $$
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > = \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > + \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}.
+> > $$
+> >
+> > 代回嵌套期望，拆成两项之和：
+> >
+> > $$
+> > \begin{aligned}
+> > &\mathbb{E}_{p(\mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \right]
+> > \right]
+> > \right] \\
+> > &\quad+
+> > \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \right]
+> > \right]
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > 对于第二项，由于对数内的被积函数 $\log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}$ 不依赖于 $\mathbf{x}_0$，由全概率公式 $\int p(\mathbf{x}_0 \mid \mathbf{x}_i)\,p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\,d\mathbf{x}_0 = p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$，内层两个期望合并为
+> >
+> > $$
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)}\!\left[
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \right]
+> > \right]
+> > = \mathbb{E}_{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}\!\left[
+> > \log\frac{p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}{p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)}
+> > \right]
+> > = D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right).
+> > $$
+> >
+> > 对于第一项，内层关于 $p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)$ 的期望恰好是 KL 散度
+> >
+> > $$
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > \right],
+> > $$
+> >
+> > 它完全不含参数 $\phi$。将两项合在一起，得到分解恒等式：
+> >
+> > $$
+> > \begin{aligned}
+> > &\mathbb{E}_{p(\mathbf{x}_0, \mathbf{x}_i)}\!\left[
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > \right] \\
+> > &\quad=
+> > \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
+> > \mathbb{E}_{p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0) \,\middle\|\, p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > \right]
+> > \right]
+> > + \mathbb{E}_{p(\mathbf{x}_i)}\!\left[
+> > D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)
+> > \right].
+> > \end{aligned}
+> > $$
+> >
+> > 移项即得 (10)。
+> >
+> > **第二部分：最优性 (11) 的证明。** 在参数化族足够丰富的假设下，KL 散度 $D_{\mathrm{KL}}\!\left(p(\mathbf{x}_{i-1} \mid \mathbf{x}_i) \,\middle\|\, p_\phi(\mathbf{x}_{i-1} \mid \mathbf{x}_i)\right)$ 当且仅当 $p^*(\mathbf{x}_{i-1} \mid \mathbf{x}_i) = p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)$ 时取得最小值 $0$，这给出了 (11) 的第一个等号；第二个等号直接由全概率公式
+> >
+> > $$
+> > p(\mathbf{x}_{i-1} \mid \mathbf{x}_i)
+> > = \int p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\,p(\mathbf{x}_0 \mid \mathbf{x}_i)\,d\mathbf{x}_0
+> > = \mathbb{E}_{\mathbf{x}_0 \sim p(\mathbf{x}_0 \mid \mathbf{x}_i)}\!\left[p(\mathbf{x}_{i-1} \mid \mathbf{x}_i, \mathbf{x}_0)\right]
+> > $$
+> >
+> > 得到。$\square$
 
 ### 同方差高斯下的均值匹配损失
 
@@ -539,41 +551,42 @@ $$
 \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}),
 $$
 
-反解出 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 并代入条件后验均值 (9)，消去 $\mathbf{x}_0$ 可得：
-
-$$
-\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)
-= \frac{1}{\sqrt{\alpha_i}}\!\left(\mathbf{x}_i - \frac{\beta_i}{\sqrt{1 - \bar{\alpha}_i}}\boldsymbol{\epsilon}\right).
-\tag{16}
-$$
-
-> [!note]- 证明
-> 将 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 代入 (9) 中的 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：
+> [!abstract] 条件后验均值的噪声参数化
+> 反解出 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 并代入条件后验均值 (9)，消去 $\mathbf{x}_0$ 可得：
 >
 > $$
-> \begin{aligned}
 > \boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)
-> &= \frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}
-> \cdot \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)
-> + \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i \\
-> &= \left[
-> \frac{\beta_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
-> + \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}
-> \right]\mathbf{x}_i
-> - \frac{\beta_i}{\sqrt{\alpha_i}\sqrt{1 - \bar{\alpha}_i}}\boldsymbol{\epsilon},
-> \end{aligned}
+> = \frac{1}{\sqrt{\alpha_i}}\!\left(\mathbf{x}_i - \frac{\beta_i}{\sqrt{1 - \bar{\alpha}_i}}\boldsymbol{\epsilon}\right).
+> \tag{16}
 > $$
 >
-> 其中用到了 $\frac{\sqrt{\bar{\alpha}_{i-1}}}{\sqrt{\bar{\alpha}_i}} = \frac{1}{\sqrt{\alpha_i}}$。化简 $\mathbf{x}_i$ 前的系数，通分并代入 $\beta_i = 1 - \alpha_i$：
->
-> $$
-> \frac{\beta_i + \alpha_i(1 - \bar{\alpha}_{i-1})}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
-> = \frac{1 - \alpha_i + \alpha_i - \bar{\alpha}_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
-> = \frac{1 - \bar{\alpha}_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
-> = \frac{1}{\sqrt{\alpha_i}}.
-> $$
->
-> 代回即得 (16)。$\square$
+> > [!note]- 推导
+> > 将 $\mathbf{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)$ 代入 (9) 中的 $\boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)$：
+> >
+> > $$
+> > \begin{aligned}
+> > \boldsymbol{\mu}(\mathbf{x}_i, \mathbf{x}_0, i)
+> > &= \frac{\sqrt{\bar{\alpha}_{i-1}}\,\beta_i}{1 - \bar{\alpha}_i}
+> > \cdot \frac{1}{\sqrt{\bar{\alpha}_i}}\!\left(\mathbf{x}_i - \sqrt{1 - \bar{\alpha}_i}\,\boldsymbol{\epsilon}\right)
+> > + \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}\mathbf{x}_i \\
+> > &= \left[
+> > \frac{\beta_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
+> > + \frac{\sqrt{\alpha_i}(1 - \bar{\alpha}_{i-1})}{1 - \bar{\alpha}_i}
+> > \right]\mathbf{x}_i
+> > - \frac{\beta_i}{\sqrt{\alpha_i}\sqrt{1 - \bar{\alpha}_i}}\boldsymbol{\epsilon},
+> > \end{aligned}
+> > $$
+> >
+> > 其中用到了 $\frac{\sqrt{\bar{\alpha}_{i-1}}}{\sqrt{\bar{\alpha}_i}} = \frac{1}{\sqrt{\alpha_i}}$。化简 $\mathbf{x}_i$ 前的系数，通分并代入 $\beta_i = 1 - \alpha_i$：
+> >
+> > $$
+> > \frac{\beta_i + \alpha_i(1 - \bar{\alpha}_{i-1})}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
+> > = \frac{1 - \alpha_i + \alpha_i - \bar{\alpha}_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
+> > = \frac{1 - \bar{\alpha}_i}{\sqrt{\alpha_i}(1 - \bar{\alpha}_i)}
+> > = \frac{1}{\sqrt{\alpha_i}}.
+> > $$
+> >
+> > 代回即得 (16)。$\square$
 
 由于给定 $\mathbf{x}_i$ 时真实后验均值仅取决于注入的噪声 $\boldsymbol{\epsilon}$，我们可以不直接用神经网络预测均值 $\boldsymbol{\mu}_\phi$，而是用网络 $\boldsymbol{\epsilon}_\phi(\mathbf{x}_i, i)$ 预测注入的随机噪声 $\boldsymbol{\epsilon}$，并将模型均值参数化为
 

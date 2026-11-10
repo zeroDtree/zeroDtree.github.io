@@ -205,54 +205,62 @@ $$
 事实上，若其中某个 $A_n$ 无限，则等式两端均为 $+\infty$；否则这就是
 有限个两两不交的有限集的基数公式。
 
-下面验证测度公理：
+> [!abstract] 命题（计数测度）
+> $\#$ 是 $(\Omega,\mathcal{P}(\Omega))$ 上的测度。
+>
+> > [!note]- 证明
+> > 下面验证测度公理：
+> >
+> > 1. **非负性与空集**：显然 $\#(A)\in[0,+\infty]$，且
+> >    $\#(\emptyset)=0$。
+> > 2. **可列可加性**：记 $A=\biguplus_{n=1}^{\infty}A_n$。
+> >    - 若某个 $A_k$ 为无限集，则 $A$ 也是无限集，等式两端均为
+> >      $+\infty$。
+> >    - 若每个 $A_n$ 都是有限集，则
+> >
+> >      $$
+> >      \#(A)
+> >      =\lim_{N\to\infty}
+> >        \#\left(\biguplus_{n=1}^N A_n\right)
+> >      =\lim_{N\to\infty}\sum_{n=1}^N\#(A_n)
+> >      =\sum_{n=1}^{\infty}\#(A_n).
+> >      $$
+> >
+> >      第一处等号可直接由基数验证：若 $A$ 有限，则只有有限多个
+> >      $A_n$ 非空，有限并最终稳定；若 $A$ 无限，则有限并的基数趋于
+> >      $+\infty$。
+> >
+> > 因此
+> >
+> > $$
+> > \#\left(\biguplus_{n=1}^{\infty}A_n\right)
+> > =\sum_{n=1}^{\infty}\#(A_n),
+> > $$
+> >
+> > 即 $\#$ 是 $(\Omega,\mathcal{P}(\Omega))$ 上的测度。
 
-1. **非负性与空集**：显然 $\#(A)\in[0,+\infty]$，且
-   $\#(\emptyset)=0$。
-2. **可列可加性**：记 $A=\biguplus_{n=1}^{\infty}A_n$。
-   - 若某个 $A_k$ 为无限集，则 $A$ 也是无限集，等式两端均为
-     $+\infty$。
-   - 若每个 $A_n$ 都是有限集，则
-
-     $$
-     \#(A)
-     =\lim_{N\to\infty}
-       \#\left(\biguplus_{n=1}^N A_n\right)
-     =\lim_{N\to\infty}\sum_{n=1}^N\#(A_n)
-     =\sum_{n=1}^{\infty}\#(A_n).
-     $$
-
-     第一处等号可直接由基数验证：若 $A$ 有限，则只有有限多个
-     $A_n$ 非空，有限并最终稳定；若 $A$ 无限，则有限并的基数趋于
-     $+\infty$。
-
-因此
-
-$$
-\#\left(\biguplus_{n=1}^{\infty}A_n\right)
-=\sum_{n=1}^{\infty}\#(A_n),
-$$
-
-即 $\#$ 是 $(\Omega,\mathcal{P}(\Omega))$ 上的测度。它具有以下性质：
+它具有以下性质：
 
 - $\#(\{\omega\})=1$，$\omega\in\Omega$；
 - $\#$ 是有限测度当且仅当 $\Omega$ 有限；
-- $\#$ 是 $\sigma$-有限测度当且仅当 $\Omega$ 至多可数。
 
-  > [!note]- 证明
-  > 若 $\Omega$ 至多可数，则可将它写成至多可数个单点集之并，而每个
-  >   单点集的计数测度均为 $1$，故 $\#$ 是 $\sigma$-有限测度。
-  >
-  >   反之，若 $\#$ 是 $\sigma$-有限测度，则存在
-  >   $\{E_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$，使得
-  >
-  >   $$
-  >   \Omega=\bigcup_{n=1}^{\infty}E_n,
-  >   \qquad \#(E_n)<\infty.
-  >   $$
-  >
-  >   因此每个 $E_n$ 都是有限集，而有限集的可列并至多可数，所以 $\Omega$
-  >   至多可数。$\square$
+> [!abstract] 命题（计数测度 $\sigma$-有限的充要条件）
+> $\#$ 是 $\sigma$-有限测度当且仅当 $\Omega$ 至多可数。
+>
+> > [!note]- 证明
+> > 若 $\Omega$ 至多可数，则可将它写成至多可数个单点集之并，而每个
+> > 单点集的计数测度均为 $1$，故 $\#$ 是 $\sigma$-有限测度。
+> >
+> > 反之，若 $\#$ 是 $\sigma$-有限测度，则存在
+> > $\{E_n\}_{n\geqslant1}\subseteq\mathcal{P}(\Omega)$，使得
+> >
+> > $$
+> > \Omega=\bigcup_{n=1}^{\infty}E_n,
+> > \qquad \#(E_n)<\infty.
+> > $$
+> >
+> > 因此每个 $E_n$ 都是有限集，而有限集的可列并至多可数，所以 $\Omega$
+> > 至多可数。$\square$
 
 若 $\Omega$ 是非空有限集，则归一化后的计数测度
 
@@ -369,60 +377,61 @@ $$
 \delta_{\omega_0}(A)=\#(A\cap\{\omega_0\}).
 $$
 
-更一般地，若 $\{\omega_n:n\in I\}$ 至多可数、各点两两不同，且对每个
-$n\in I$ 都有 $\{\omega_n\}\in\mathcal{F}$，并且
-$p_n\geqslant0$、$\sum_{n\in I}p_n=1$，则
-
-$$
-P=\sum_{n\in I}p_n\delta_{\omega_n}
-$$
-
-是离散概率测度。
-
-> [!note]- 证明
-> 事实上，对任意 $A\in\mathcal{F}$，
+> [!abstract] 命题（Dirac 测度的凸组合为离散概率测度）
+> 更一般地，若 $\{\omega_n:n\in I\}$ 至多可数、各点两两不同，且对每个
+> $n\in I$ 都有 $\{\omega_n\}\in\mathcal{F}$，并且
+> $p_n\geqslant0$、$\sum_{n\in I}p_n=1$，则
 >
 > $$
-> P(A)
-> =\sum_{n\in I}p_n\delta_{\omega_n}(A)
-> =\sum_{\{n\in I:\,\omega_n\in A\}}p_n.
+> P=\sum_{n\in I}p_n\delta_{\omega_n}
 > $$
 >
-> 因此 $P(A)\geqslant0$、$P(\emptyset)=0$，并且
+> 是离散概率测度。
 >
-> $$
-> P(\Omega)=\sum_{n\in I}p_n=1.
-> $$
->
-> 再设 $\{A_k\}_{k\geqslant1}\subseteq\mathcal{F}$ 两两不交。对每个
-> $n\in I$，至多有一个 $A_k$ 包含 $\omega_n$，故
->
-> $$
-> \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)
-> =\sum_{k=1}^{\infty}\delta_{\omega_n}(A_k).
-> $$
->
-> 由于所有项均非负，可以交换两个求和的次序，从而
->
-> $$
-> \begin{aligned}
-> P\left(\biguplus_{k=1}^{\infty}A_k\right)
-> &=\sum_{n\in I}p_n
->   \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)\\
-> &=\sum_{n\in I}\sum_{k=1}^{\infty}
->   p_n\delta_{\omega_n}(A_k)\\
-> &=\sum_{k=1}^{\infty}\sum_{n\in I}
->   p_n\delta_{\omega_n}(A_k)\\
-> &=\sum_{k=1}^{\infty}P(A_k).
-> \end{aligned}
-> $$
->
-> 所以 $P$ 具有可列可加性；结合 $P(\Omega)=1$，可知 $P$ 是概率测度。
-> 最后，由各 $\omega_n$ 两两不同，
->
-> $$
-> P(\{\omega_n\})
-> =\sum_{m\in I}p_m\delta_{\omega_m}(\{\omega_n\})
-> =p_n.
-> \qquad\square
-$$
+> > [!note]- 证明
+> > 事实上，对任意 $A\in\mathcal{F}$，
+> >
+> > $$
+> > P(A)
+> > =\sum_{n\in I}p_n\delta_{\omega_n}(A)
+> > =\sum_{\{n\in I:\,\omega_n\in A\}}p_n.
+> > $$
+> >
+> > 因此 $P(A)\geqslant0$、$P(\emptyset)=0$，并且
+> >
+> > $$
+> > P(\Omega)=\sum_{n\in I}p_n=1.
+> > $$
+> >
+> > 再设 $\{A_k\}_{k\geqslant1}\subseteq\mathcal{F}$ 两两不交。对每个
+> > $n\in I$，至多有一个 $A_k$ 包含 $\omega_n$，故
+> >
+> > $$
+> > \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)
+> > =\sum_{k=1}^{\infty}\delta_{\omega_n}(A_k).
+> > $$
+> >
+> > 由于所有项均非负，可以交换两个求和的次序，从而
+> >
+> > $$
+> > \begin{aligned}
+> > P\left(\biguplus_{k=1}^{\infty}A_k\right)
+> > &=\sum_{n\in I}p_n
+> >   \delta_{\omega_n}\left(\biguplus_{k=1}^{\infty}A_k\right)\\
+> > &=\sum_{n\in I}\sum_{k=1}^{\infty}
+> >   p_n\delta_{\omega_n}(A_k)\\
+> > &=\sum_{k=1}^{\infty}\sum_{n\in I}
+> >   p_n\delta_{\omega_n}(A_k)\\
+> > &=\sum_{k=1}^{\infty}P(A_k).
+> > \end{aligned}
+> > $$
+> >
+> > 所以 $P$ 具有可列可加性；结合 $P(\Omega)=1$，可知 $P$ 是概率测度。
+> > 最后，由各 $\omega_n$ 两两不同，
+> >
+> > $$
+> > P(\{\omega_n\})
+> > =\sum_{m\in I}p_m\delta_{\omega_m}(\{\omega_n\})
+> > =p_n.
+> > \qquad\square
+> > $$

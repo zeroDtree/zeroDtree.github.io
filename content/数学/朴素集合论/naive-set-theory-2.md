@@ -10,10 +10,12 @@ tags:
 
 ## 偏序
 
-超限归纳法：$A$是良序集，$P$是$A$上的某种性质，若$\forall a \in A((\forall b < a(P(b)\text{ is True}))\rightarrow P(a)\text{ is True})$，则$P$对$A$成立
+> [!abstract] 定理（超限归纳法）
+> $A$是良序集，$P$是$A$上的某种性质，若$\forall a \in A((\forall b < a(P(b)\text{ is True}))\rightarrow P(a)\text{ is True})$，则$P$对$A$成立
+>
+> > [!note]- 证明
+> > $P(\min A)$空真。设$B=\{a \in A|P(a)\text{ is False}\}$，$B$非空，$B$有最小元$a$，由归纳假设可得，$P(a)$为真。与$a \in B$矛盾。
 
-> [!note]- 证明
-> $P(\min A)$空真。设$B=\{a \in A|P(a)\text{ is False}\}$，$B$非空，$B$有最小元$a$，由归纳假设可得，$P(a)$为真。与$a \in B$矛盾。
 ## 集合的势
 
 - 势的比较: 若存在$A$到$B$的单射，则称$|A| \leq |B|$

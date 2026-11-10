@@ -73,7 +73,15 @@ tags:
 下图对任意的一个不可约多项式都成立。特别的对于$f(x)$的不可约因子也成立
 
 ```mermaid
-graph LR
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
+flowchart LR
     F["`$$F$$`"] -->|构造域上多项式环| Fx["`$$F[x]$$`"] --> E["`$$E$$`"]
     Fx -->|因子环（域）| Fx_p["`$$F[x]/\langle p(x) \rangle$$`"]
     Fx_p -->|子域| Fx_p_F["`$$\{a+\langle p(x) \rangle|a \in F\}$$`"]
@@ -87,7 +95,15 @@ graph LR
 设$F$为一个域，$E$为$F$的扩域，$\alpha \in E$为$F$的代数元, $p(x):=\text{irr}(\alpha, F)$为$\alpha$的不可约多项式。$\phi(x):F[x]\mapsto E$为估值环同态映射，$F[\alpha]$为$\phi$的像（即$F$的单扩域）
 
 ```mermaid
-graph LR
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
+flowchart LR
     F["`$$F$$`"] -->|构造域上多项式环| Fx["`$$F[x]$$`"] -->|估值同态映射| E["`$$E$$`"]
     Fx -->|因子环（域）| Fx_p["`$$F[x]/\langle p(x) \rangle$$`"]
     Fx_p -->|子域| Fx_p_F["`$$\{a+\langle p(x) \rangle|a \in F\}$$`"]

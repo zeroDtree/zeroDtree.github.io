@@ -270,7 +270,7 @@ class DAGMermiad:
         redundant_list: list[tuple[str, str, str]],
         raw_ref_map: Optional[dict[tuple[str, str, str], list[str]]] = None,
     ) -> None:
-        """从原始 .md 文件中删除冗余的 wikilink 引用。"""
+        """从原始 .md 文件中删除作为依赖声明的冗余 wikilink 行。"""
         from collections import defaultdict
 
         file_to_refs: dict = defaultdict(list)
@@ -291,18 +291,13 @@ class DAGMermiad:
             for ref, link_type in refs_to_remove:
                 escaped = re.escape(ref)
                 if link_type == "include":
-                    pat = r"!\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
+                    link_pattern = r"!\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
                 else:
-                    # 匹配 [[ref]]、[[ref#section]]、[[ref|alias]]，但不匹配 ![[ref]]
-                    pat = r"(?<!!)\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
-                content = re.sub(pat, "", content)
-
-            # 清理：合并行内多余空格，移除仅含空白的行（保留空行的段落结构）
-            lines = content.splitlines()
-            cleaned = [re.sub(r" {2,}", " ", line).rstrip() for line in lines]
-            content = "\n".join(cleaned)
-            if not content.endswith("\n"):
-                content += "\n"
+                    link_pattern = r"\[\[" + escaped + r"(?:#[^\]|]*)?(?:\|[^\]]*)?]]"
+                # 依赖只来自独占一行的顶层列表项；限定删除同样的整行，
+                # 避免误删正文中的同名链接或破坏 Markdown 缩进。
+                line_pattern = rf"(?m)^- {link_pattern}[ \t]*(?:\r?\n|$)"
+                content = re.sub(line_pattern, "", content)
 
             with open(original_path, "w", encoding="utf-8") as f:
                 f.write(content)

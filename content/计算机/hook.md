@@ -17,6 +17,14 @@ tags:
 ## 四者关系
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     Reflection["反射 Reflection\n运行时自审自身结构"]
     Annotation["注解 Annotation\n声明式元数据标签"]

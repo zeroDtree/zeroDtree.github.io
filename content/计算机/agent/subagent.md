@@ -15,6 +15,14 @@ Orchestrator 调度 14 个内置 Subagent。委派由 Orchestrator 发出；Suba
 ### 关系
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TB
  U[用户目标 / 约束 / 授权]
  O[Orchestrator<br/>唯一主控与最终验收者]

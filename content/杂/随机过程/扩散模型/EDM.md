@@ -216,90 +216,106 @@ $$
 
 ### 3.1 输入和输出尺度
 
-因为
-
-$$
-\operatorname{Var}(x_j)
-=\sigma_{\mathrm{data}}^2+\sigma^2,
-$$
-
-$c_{\mathrm{in}}$ 使输入每个分量具有近似单位方差。
-
-去掉 skip 后，网络要预测的目标是
-
-$$
-\mathbf r
-=
-\frac{
-\mathbf y-c_{\mathrm{skip}}\mathbf x}
-{c_{\mathrm{out}}}.
-$$
-
-用下节得到的 $c_{\mathrm{skip}}$ 计算，
-
-$$
-\operatorname{Var}
-(\mathbf y-c_{\mathrm{skip}}\mathbf x)
-=
-\frac{
-\sigma^2\sigma_{\mathrm{data}}^2}
-{\sigma^2+\sigma_{\mathrm{data}}^2},
-$$
-
-其标准差正是 $c_{\mathrm{out}}$，所以网络目标在各噪声级保持近似单位尺度。
+> [!abstract] EDM 输入与残差目标的尺度归一化
+> $c_{\mathrm{in}}$ 使输入每个分量具有近似单位方差；用下节得到的 $c_{\mathrm{skip}}$ 时，
+>
+> $$
+> \mathbf r
+> =
+> \frac{
+> \mathbf y-c_{\mathrm{skip}}\mathbf x}
+> {c_{\mathrm{out}}}
+> $$
+>
+> 也具有近似单位尺度。
+>
+> > [!note]- 推导
+> > 因为
+> >
+> > $$
+> > \operatorname{Var}(x_j)
+> > =\sigma_{\mathrm{data}}^2+\sigma^2,
+> > $$
+> >
+> > 所以 $c_{\mathrm{in}}=1/\sqrt{\sigma^2+\sigma_{\mathrm{data}}^2}$ 将输入方差归一化。去掉 skip 后，网络要预测的目标是
+> >
+> > $$
+> > \mathbf r
+> > =
+> > \frac{
+> > \mathbf y-c_{\mathrm{skip}}\mathbf x}
+> > {c_{\mathrm{out}}}.
+> > $$
+> >
+> > 用下节得到的 $c_{\mathrm{skip}}$ 计算，
+> >
+> > $$
+> > \operatorname{Var}
+> > (\mathbf y-c_{\mathrm{skip}}\mathbf x)
+> > =
+> > \frac{
+> > \sigma^2\sigma_{\mathrm{data}}^2}
+> > {\sigma^2+\sigma_{\mathrm{data}}^2},
+> > $$
+> >
+> > 其标准差正是 $c_{\mathrm{out}}$，故残差目标也被归一化。
 
 ### 3.2 $c_{\mathrm{skip}}$ 的 LMMSE 推导
 
-在标量线性估计族
-
-$$
-\widehat{\mathbf y}=a\mathbf x
-$$
-
-中最小化
-
-$$
-J(a)
-=\mathbb E\|\mathbf y-a\mathbf x\|_2^2.
-$$
-
-求导并令零：
-
-$$
-\begin{aligned}
-J'(a)
-&=-2\mathbb E[\mathbf y^\top\mathbf x]
-+2a\mathbb E[\mathbf x^\top\mathbf x]=0,\\
-a^\star
-&=
-\frac{\mathbb E[\mathbf y^\top\mathbf x]}
-{\mathbb E[\mathbf x^\top\mathbf x]}.
-\end{aligned}
-$$
-
-由 $\mathbf x=\mathbf y+\mathbf n$ 及不相关性，
-
-$$
-\mathbb E[\mathbf y^\top\mathbf x]
-=d\sigma_{\mathrm{data}}^2,
-$$
-
-$$
-\mathbb E[\mathbf x^\top\mathbf x]
-=d(\sigma_{\mathrm{data}}^2+\sigma^2).
-$$
-
-因此
-
-$$
-a^\star
-=
-\frac{\sigma_{\mathrm{data}}^2}
-{\sigma_{\mathrm{data}}^2+\sigma^2}
-=c_{\mathrm{skip}}(\sigma).
-$$
-
-所以当主网络输出为零时，skip 分支已经是该各向同性标量线性类中的 LMMSE 估计。它不声称对任意非高斯数据都是完整 MMSE 后验均值；非线性残差由网络学习。
+> [!abstract] $c_{\mathrm{skip}}$ 是标量线性 LMMSE 系数
+> 在标量线性估计族 $\widehat{\mathbf y}=a\mathbf x$ 中，
+>
+> $$
+> a^\star
+> =
+> \frac{\sigma_{\mathrm{data}}^2}
+> {\sigma_{\mathrm{data}}^2+\sigma^2}
+> =c_{\mathrm{skip}}(\sigma).
+> $$
+>
+> 因而当主网络输出为零时，skip 分支已经是该各向同性标量线性类中的 LMMSE 估计。它不声称对任意非高斯数据都是完整 MMSE 后验均值；非线性残差由网络学习。
+>
+> > [!note]- 推导
+> > 在标量线性估计族
+> >
+> > $$
+> > \widehat{\mathbf y}=a\mathbf x
+> > $$
+> >
+> > 中最小化
+> >
+> > $$
+> > J(a)
+> > =\mathbb E\|\mathbf y-a\mathbf x\|_2^2.
+> > $$
+> >
+> > 求导并令零：
+> >
+> > $$
+> > \begin{aligned}
+> > J'(a)
+> > &=-2\mathbb E[\mathbf y^\top\mathbf x]
+> > +2a\mathbb E[\mathbf x^\top\mathbf x]=0,\\
+> > a^\star
+> > &=
+> > \frac{\mathbb E[\mathbf y^\top\mathbf x]}
+> > {\mathbb E[\mathbf x^\top\mathbf x]}.
+> > \end{aligned}
+> > $$
+> >
+> > 由 $\mathbf x=\mathbf y+\mathbf n$ 及不相关性，
+> >
+> > $$
+> > \mathbb E[\mathbf y^\top\mathbf x]
+> > =d\sigma_{\mathrm{data}}^2,
+> > $$
+> >
+> > $$
+> > \mathbb E[\mathbf x^\top\mathbf x]
+> > =d(\sigma_{\mathrm{data}}^2+\sigma^2).
+> > $$
+> >
+> > 代回即得结论。
 
 ## 4. 训练目标与权重
 

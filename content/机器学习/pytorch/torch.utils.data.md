@@ -14,7 +14,15 @@ tags:
 ## 1. 数据流
 
 ```mermaid
-graph TD
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
+flowchart TD
 o_data[[原始数据]]
 map_dataset[Map-style Dataset
  \_\_len\_\_

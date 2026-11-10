@@ -41,6 +41,14 @@ If a Turing machine can always enter the accepting state or the rejecting state 
 A decider that recognizes some language also is said to **decide** that language. Call a language **Turing-decidable** or simply **decidable** if some Turing machine decides it.
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     subgraph Turing-recognizable
         subgraph decidable

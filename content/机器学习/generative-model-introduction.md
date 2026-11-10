@@ -91,60 +91,62 @@ $$
 
 **定义（Vitali 集）：** 由选择公理，从每个等价类中恰好选出一个代表元，这些代表元构成的集合 $V \subseteq [0, 1]$ 与每个等价类恰好交于一点，称 $V$ 为 **Vitali 集**。
 
-**定理（Vitali 集不可测）：** Vitali 集 $V$ 不是 Lebesgue 可测集。
-
-> [!note]- 证明
-> 反设 $V$ 是 Lebesgue 可测集。对每个有理数 $q \in \mathbb{Q} \cap [-1, 1]$，定义平移集
+> [!abstract] 定理（Vitali 集不可测）
+> Vitali 集 $V$ 不是 Lebesgue 可测集。
 >
-> $$
-> V_q := V + q = \{v + q \mid v \in V\}.
-> $$
->
-> 集合族 $\{V_q\}_{q \in \mathbb{Q} \cap [-1, 1]}$ 具有以下两条性质：
->
-> 1. **两两互不相交：** 若 $V_q \cap V_{q'} \neq \varnothing$，则存在 $v, v' \in V$ 使得 $v + q = v' + q'$，从而 $v - v' = q' - q \in \mathbb{Q}$，即 $v \sim v'$。由于 $V$ 在每个等价类中仅含唯一代表元，必有 $v = v'$，进而 $q = q'$。
-> 2. **夹逼 $[0, 1]$：** 对任意 $x \in [0, 1]$，设 $v \in V$ 是 $x$ 所在等价类的代表元，则 $q := x - v \in \mathbb{Q}$。因为 $x, v \in [0, 1]$，必有 $q \in [-1, 1]$，且 $x = v + q \in V_q$。另一方面，由 $V \subseteq [0, 1]$ 与 $q \in [-1, 1]$ 可知 $V_q \subseteq [-1, 2]$。因此
->    $$
->    [0, 1] \subseteq \bigsqcup_{q \in \mathbb{Q} \cap [-1, 1]} V_q \subseteq [-1, 2].
->    $$
->
-> 由 Lebesgue 测度的平移不变性，每个 $V_q$ 均可测且 $m(V_q) = m(V)$。再由可数可加性与单调性：
->
-> $$
-> 1 = m([0, 1]) \le m\!\left(\bigsqcup_{q \in \mathbb{Q} \cap [-1, 1]} V_q\right) = \sum_{q \in \mathbb{Q} \cap [-1, 1]} m(V_q) = \sum_{q \in \mathbb{Q} \cap [-1, 1]} m(V) \le m([-1, 2]) = 3.
-> $$
->
-> 然而 $\mathbb{Q} \cap [-1, 1]$ 是可数无穷集：若 $m(V) = 0$，则无穷级数之和为 $0$，与 $\ge 1$ 矛盾；若 $m(V) > 0$，则无穷级数之和为 $+\infty$，与 $\le 3$ 矛盾。因此 $V$ 不可测。$\square$
+> > [!note]- 证明
+> > 反设 $V$ 是 Lebesgue 可测集。对每个有理数 $q \in \mathbb{Q} \cap [-1, 1]$，定义平移集
+> >
+> > $$
+> > V_q := V + q = \{v + q \mid v \in V\}.
+> > $$
+> >
+> > 集合族 $\{V_q\}_{q \in \mathbb{Q} \cap [-1, 1]}$ 具有以下两条性质：
+> >
+> > 1. **两两互不相交：** 若 $V_q \cap V_{q'} \neq \varnothing$，则存在 $v, v' \in V$ 使得 $v + q = v' + q'$，从而 $v - v' = q' - q \in \mathbb{Q}$，即 $v \sim v'$。由于 $V$ 在每个等价类中仅含唯一代表元，必有 $v = v'$，进而 $q = q'$。
+> > 2. **夹逼 $[0, 1]$：** 对任意 $x \in [0, 1]$，设 $v \in V$ 是 $x$ 所在等价类的代表元，则 $q := x - v \in \mathbb{Q}$。因为 $x, v \in [0, 1]$，必有 $q \in [-1, 1]$，且 $x = v + q \in V_q$。另一方面，由 $V \subseteq [0, 1]$ 与 $q \in [-1, 1]$ 可知 $V_q \subseteq [-1, 2]$。因此
+> >    $$
+> >    [0, 1] \subseteq \bigsqcup_{q \in \mathbb{Q} \cap [-1, 1]} V_q \subseteq [-1, 2].
+> >    $$
+> >
+> > 由 Lebesgue 测度的平移不变性，每个 $V_q$ 均可测且 $m(V_q) = m(V)$。再由可数可加性与单调性：
+> >
+> > $$
+> > 1 = m([0, 1]) \le m\!\left(\bigsqcup_{q \in \mathbb{Q} \cap [-1, 1]} V_q\right) = \sum_{q \in \mathbb{Q} \cap [-1, 1]} m(V_q) = \sum_{q \in \mathbb{Q} \cap [-1, 1]} m(V) \le m([-1, 2]) = 3.
+> > $$
+> >
+> > 然而 $\mathbb{Q} \cap [-1, 1]$ 是可数无穷集：若 $m(V) = 0$，则无穷级数之和为 $0$，与 $\ge 1$ 矛盾；若 $m(V) > 0$，则无穷级数之和为 $+\infty$，与 $\le 3$ 矛盾。因此 $V$ 不可测。$\square$
 
 上述构造可以推广到一般群作用下的测度空间。
 
 **定义（轨道与横截面）：** 设群 $G$ 作用于集合 $X$。点 $x \in X$ 的**轨道**定义为 $G \cdot x := \{g \cdot x \mid g \in G\}$。全体轨道构成 $X$ 的一个划分，商集记为 $X / G$。若子集 $V \subseteq X$ 与每条轨道恰好交于一点（等价地，商映射 $X \to X / G$ 限制在 $V$ 上是双射），则称 $V$ 为该作用的**横截面**（transversal）。Vitali 集即有理平移作用下的横截面。
 
-**定理（群作用下的不可测横截面）：** 设 $(X, \mathcal{M}, \mu)$ 为测度空间，可数无限群 $G$ 自由地作用于 $X$。假设对每个 $g \in G$：
-
-1. 映射 $x \mapsto g \cdot x$ 保持可测性，即 $E \in \mathcal{M} \implies gE \in \mathcal{M}$；
-2. 测度 $\mu$ 在群作用下不变，即 $\mu(gE) = \mu(E)$。
-
-设 $V$ 为该作用的横截面。若存在可数无限子集 $H \subseteq G$ 以及可测集 $B, C \in \mathcal{M}$，使得
-
-$$
-B \subseteq \bigcup_{g \in H} gV \subseteq C,
-\qquad
-0 < \mu(B) \le \mu(C) < +\infty,
-$$
-
-则横截面 $V \notin \mathcal{M}$。
-
-> [!note]- 证明
-> 先证集合族 $\{gV : g \in G\}$ 两两不相交。若 $gV \cap hV \neq \varnothing$，则存在 $v, w \in V$ 使得 $g \cdot v = h \cdot w$，说明 $v$ 与 $w$ 位于同一轨道；由横截面定义得 $v = w$，再由群作用的自由性得 $g = h$。
+> [!abstract] 定理（群作用下的不可测横截面）
+> 设 $(X, \mathcal{M}, \mu)$ 为测度空间，可数无限群 $G$ 自由地作用于 $X$。假设对每个 $g \in G$：
 >
-> 反设 $V \in \mathcal{M}$。则对每个 $g \in H$，$gV \in \mathcal{M}$ 且 $\mu(gV) = \mu(V)$。因 $H$ 可数无穷且 $\{gV\}_{g \in H}$ 两两不交，由可数可加性得
+> 1. 映射 $x \mapsto g \cdot x$ 保持可测性，即 $E \in \mathcal{M} \implies gE \in \mathcal{M}$；
+> 2. 测度 $\mu$ 在群作用下不变，即 $\mu(gE) = \mu(E)$。
+>
+> 设 $V$ 为该作用的横截面。若存在可数无限子集 $H \subseteq G$ 以及可测集 $B, C \in \mathcal{M}$，使得
 >
 > $$
-> \mu\!\left(\bigsqcup_{g \in H} gV\right) = \sum_{g \in H} \mu(gV) = \sum_{g \in H} \mu(V).
+> B \subseteq \bigcup_{g \in H} gV \subseteq C,
+> \qquad
+> 0 < \mu(B) \le \mu(C) < +\infty,
 > $$
 >
-> 由夹逼条件，上式左端落在 $[\mu(B), \mu(C)] \subseteq (0, +\infty)$ 内。但 $H$ 是可数无限集：若 $\mu(V) = 0$ 则右端为 $0$；若 $\mu(V) > 0$ 则右端为 $+\infty$，均产生矛盾。故 $V \notin \mathcal{M}$。$\square$
+> 则横截面 $V \notin \mathcal{M}$。
+>
+> > [!note]- 证明
+> > 先证集合族 $\{gV : g \in G\}$ 两两不相交。若 $gV \cap hV \neq \varnothing$，则存在 $v, w \in V$ 使得 $g \cdot v = h \cdot w$，说明 $v$ 与 $w$ 位于同一轨道；由横截面定义得 $v = w$，再由群作用的自由性得 $g = h$。
+> >
+> > 反设 $V \in \mathcal{M}$。则对每个 $g \in H$，$gV \in \mathcal{M}$ 且 $\mu(gV) = \mu(V)$。因 $H$ 可数无穷且 $\{gV\}_{g \in H}$ 两两不交，由可数可加性得
+> >
+> > $$
+> > \mu\!\left(\bigsqcup_{g \in H} gV\right) = \sum_{g \in H} \mu(gV) = \sum_{g \in H} \mu(V).
+> > $$
+> >
+> > 由夹逼条件，上式左端落在 $[\mu(B), \mu(C)] \subseteq (0, +\infty)$ 内。但 $H$ 是可数无限集：若 $\mu(V) = 0$ 则右端为 $0$；若 $\mu(V) > 0$ 则右端为 $+\infty$，均产生矛盾。故 $V \notin \mathcal{M}$。$\square$
 
 ### 随机变量与随机向量
 
@@ -232,106 +234,109 @@ u \in (0, 1).
 \tag{6}
 $$
 
-**命题（广义逆函数的单调保序性质）：** 对任意累积分布函数 $F$、任意 $u \in (0, 1)$ 与 $x \in \mathbb{R}$，有
-
-$$
-F^{-1}(u) \le x \iff u \le F(x).
-\tag{7}
-$$
-
-> [!note]- 证明
-> 记集合 $A_u := \{y \in \mathbb{R} : F(y) \ge u\}$，则广义逆定义为下确界 $F^{-1}(u) = \inf A_u$。
->
-> - **充分性（$\implies$）：** 设 $F^{-1}(u) = \inf A_u \le x$。由下确界的定义，对任意正整数 $n \ge 1$，存在 $y_n \in A_u$ 使得 $y_n < x + \frac{1}{n}$。因为 $y_n \in A_u$，故 $F(y_n) \ge u$；又由 $F$ 的单调不减性，有
->   $$
->   u \le F(y_n) \le F\!\left(x + \frac{1}{n}\right).
->   $$
->   令 $n \to \infty$，由 $F$ 的**右连续性**及极限保序性，即得 $u \le F(x)$。
-> - **必要性（$\Longleftarrow$）：** 设 $u \le F(x)$。由 $A_u$ 的定义可知 $x \in A_u$。既然 $x$ 属于集合 $A_u$，它必然大于或等于该集合的下确界，即 $\inf A_u = F^{-1}(u) \le x$。$\square$
-
-**定理（逆变换采样）：** 设 $U \sim \mathrm{Uniform}(0, 1)$，令随机变量 $X = F^{-1}(U)$，则 $X$ 的累积分布函数恰好为 $F$。
-
-> [!note]- 证明
-> 对任意 $x \in \mathbb{R}$，由广义逆函数的保序性质 (7) 及 $U$ 在 $(0, 1)$ 上的均匀分布性质，有
+> [!abstract] 命题（广义逆函数的单调保序性质）
+> 对任意累积分布函数 $F$、任意 $u \in (0, 1)$ 与 $x \in \mathbb{R}$，有
 >
 > $$
-> P(X \le x) = P\!\left(F^{-1}(U) \le x\right) = P\!\left(U \le F(x)\right) = F(x).
+> F^{-1}(u) \le x \iff u \le F(x).
+> \tag{7}
 > $$
 >
-> 第一步由均匀分布提供基础概率质量，第二步通过分位数函数将其重排为目标分布。$\square$
+> > [!note]- 证明
+> > 记集合 $A_u := \{y \in \mathbb{R} : F(y) \ge u\}$，则广义逆定义为下确界 $F^{-1}(u) = \inf A_u$。
+> >
+> > - **充分性（$\implies$）：** 设 $F^{-1}(u) = \inf A_u \le x$。由下确界的定义，对任意正整数 $n \ge 1$，存在 $y_n \in A_u$ 使得 $y_n < x + \frac{1}{n}$。因为 $y_n \in A_u$，故 $F(y_n) \ge u$；又由 $F$ 的单调不减性，有
+> >   $$
+> >   u \le F(y_n) \le F\!\left(x + \frac{1}{n}\right).
+> >   $$
+> >   令 $n \to \infty$，由 $F$ 的**右连续性**及极限保序性，即得 $u \le F(x)$。
+> > - **必要性（$\Longleftarrow$）：** 设 $u \le F(x)$。由 $A_u$ 的定义可知 $x \in A_u$。既然 $x$ 属于集合 $A_u$，它必然大于或等于该集合的下确界，即 $\inf A_u = F^{-1}(u) \le x$。$\square$
+
+> [!abstract] 定理（逆变换采样）
+> 设 $U \sim \mathrm{Uniform}(0, 1)$，令随机变量 $X = F^{-1}(U)$，则 $X$ 的累积分布函数恰好为 $F$。
+>
+> > [!note]- 证明
+> > 对任意 $x \in \mathbb{R}$，由广义逆函数的保序性质 (7) 及 $U$ 在 $(0, 1)$ 上的均匀分布性质，有
+> >
+> > $$
+> > P(X \le x) = P\!\left(F^{-1}(U) \le x\right) = P\!\left(U \le F(x)\right) = F(x).
+> > $$
+> >
+> > 第一步由均匀分布提供基础概率质量，第二步通过分位数函数将其重排为目标分布。$\square$
 
 ### Box-Muller 变换
 
 逆变换采样在一维情形需要已知 $F^{-1}$。对于标准正态分布，虽然一维高斯 CDF 没有初等函数闭式逆，但可以通过二维极坐标变换实现精确采样。
 
-**定理（Box-Muller 变换）：** 设 $U_1, U_2 \sim \mathrm{Uniform}(0, 1)$ 独立同分布，定义
-
-$$
-\begin{cases}
-Z_1 = \sqrt{-2\ln U_1}\cos(2\pi U_2), \\[4pt]
-Z_2 = \sqrt{-2\ln U_1}\sin(2\pi U_2),
-\end{cases}
-\tag{8}
-$$
-
-则 $Z_1, Z_2 \sim \mathcal{N}(0, 1)$ 且相互独立。
-
-> [!note]- 证明
-> 分四步推导该变换。
->
-> **第一步：极坐标变换与雅可比行列式。** 设 $(Z_1, Z_2)$ 是两个相互独立的标准正态随机变量，其联合概率密度函数为
+> [!abstract] 定理（Box-Muller 变换）
+> 设 $U_1, U_2 \sim \mathrm{Uniform}(0, 1)$ 独立同分布，定义
 >
 > $$
-> f_{Z_1, Z_2}(z_1, z_2) = \frac{1}{2\pi}e^{-(z_1^2 + z_2^2)/2}.
+> \begin{cases}
+> Z_1 = \sqrt{-2\ln U_1}\cos(2\pi U_2), \\[4pt]
+> Z_2 = \sqrt{-2\ln U_1}\sin(2\pi U_2),
+> \end{cases}
+> \tag{8}
 > $$
 >
-> 引入极坐标变换 $g: (r, \theta) \mapsto (z_1, z_2)$，其中 $z_1 = r\cos\theta,\; z_2 = r\sin\theta$（$r \ge 0,\; \theta \in [0, 2\pi)$）。其雅可比矩阵与行列式为
+> 则 $Z_1, Z_2 \sim \mathcal{N}(0, 1)$ 且相互独立。
 >
-> $$
-> Dg(r, \theta) = \begin{pmatrix}
-> \dfrac{\partial z_1}{\partial r} & \dfrac{\partial z_1}{\partial \theta} \\[6pt]
-> \dfrac{\partial z_2}{\partial r} & \dfrac{\partial z_2}{\partial \theta}
-> \end{pmatrix}
-> = \begin{pmatrix}
-> \cos\theta & -r\sin\theta \\
-> \sin\theta & r\cos\theta
-> \end{pmatrix},
-> \qquad
-> |J| = |\det Dg(r, \theta)| = r(\cos^2\theta + \sin^2\theta) = r.
-> $$
->
-> 因此极坐标随机变量 $(R, \Theta)$ 的联合密度为
->
-> $$
-> f_{R, \Theta}(r, \theta)
-> = f_{Z_1, Z_2}(r\cos\theta, r\sin\theta)\cdot |J|
-> = \frac{r}{2\pi}e^{-r^2/2},
-> \qquad
-> r \ge 0,\; \theta \in [0, 2\pi).
-> $$
->
-> **第二步：边缘分布分解与独立性。** 联合密度可以拆成仅含 $r$ 与仅含 $\theta$ 的两个归一化密度的乘积：
->
-> $$
-> f_{R, \Theta}(r, \theta)
-> = \underbrace{\left(r e^{-r^2/2}\right)}_{f_R(r)} \cdot \underbrace{\left(\frac{1}{2\pi}\right)}_{f_\Theta(\theta)}.
-> $$
->
-> 这说明径向变量 $R$ 与角度变量 $\Theta$ 相互独立，其中：
->
-> - $\Theta \sim \mathrm{Uniform}(0, 2\pi)$，密度为 $f_\Theta(\theta) = \frac{1}{2\pi}$；
-> - $R$ 服从瑞利分布（Rayleigh distribution），密度为 $f_R(r) = r e^{-r^2/2}\;(r \ge 0)$。
->
-> **第三步：对 $R$ 与 $\Theta$ 分别做逆变换采样。**
->
-> - 对 $\Theta$，其 CDF 为 $F_\Theta(\theta) = \frac{\theta}{2\pi}$。取 $U_2 \sim \mathrm{Uniform}(0, 1)$，令 $\frac{\Theta}{2\pi} = U_2$，得 $\Theta = 2\pi U_2$；
-> - 对 $R$，其 CDF 为
->   $$
->   F_R(r) = \int_0^r x e^{-x^2/2}\,dx = 1 - e^{-r^2/2}.
->   $$
->   取独立于 $U_2$ 的 $\tilde{U}_1 \sim \mathrm{Uniform}(0, 1)$，令 $1 - e^{-R^2/2} = \tilde{U}_1$。由于 $U_1 := 1 - \tilde{U}_1$ 仍服从 $\mathrm{Uniform}(0, 1)$，直接令 $e^{-R^2/2} = U_1$，反解即得 $R = \sqrt{-2\ln U_1}$。
->
-> **第四步：反向映射回直角坐标。** 将采样得到的 $R = \sqrt{-2\ln U_1}$ 与 $\Theta = 2\pi U_2$ 代回 $Z_1 = R\cos\Theta,\; Z_2 = R\sin\Theta$，即得两个相互独立的标准正态随机变量 (8)。$\square$
+> > [!note]- 证明
+> > 分四步推导该变换。
+> >
+> > **第一步：极坐标变换与雅可比行列式。** 设 $(Z_1, Z_2)$ 是两个相互独立的标准正态随机变量，其联合概率密度函数为
+> >
+> > $$
+> > f_{Z_1, Z_2}(z_1, z_2) = \frac{1}{2\pi}e^{-(z_1^2 + z_2^2)/2}.
+> > $$
+> >
+> > 引入极坐标变换 $g: (r, \theta) \mapsto (z_1, z_2)$，其中 $z_1 = r\cos\theta,\; z_2 = r\sin\theta$（$r \ge 0,\; \theta \in [0, 2\pi)$）。其雅可比矩阵与行列式为
+> >
+> > $$
+> > Dg(r, \theta) = \begin{pmatrix}
+> > \dfrac{\partial z_1}{\partial r} & \dfrac{\partial z_1}{\partial \theta} \\[6pt]
+> > \dfrac{\partial z_2}{\partial r} & \dfrac{\partial z_2}{\partial \theta}
+> > \end{pmatrix}
+> > = \begin{pmatrix}
+> > \cos\theta & -r\sin\theta \\
+> > \sin\theta & r\cos\theta
+> > \end{pmatrix},
+> > \qquad
+> > |J| = |\det Dg(r, \theta)| = r(\cos^2\theta + \sin^2\theta) = r.
+> > $$
+> >
+> > 因此极坐标随机变量 $(R, \Theta)$ 的联合密度为
+> >
+> > $$
+> > f_{R, \Theta}(r, \theta)
+> > = f_{Z_1, Z_2}(r\cos\theta, r\sin\theta)\cdot |J|
+> > = \frac{r}{2\pi}e^{-r^2/2},
+> > \qquad
+> > r \ge 0,\; \theta \in [0, 2\pi).
+> > $$
+> >
+> > **第二步：边缘分布分解与独立性。** 联合密度可以拆成仅含 $r$ 与仅含 $\theta$ 的两个归一化密度的乘积：
+> >
+> > $$
+> > f_{R, \Theta}(r, \theta)
+> > = \underbrace{\left(r e^{-r^2/2}\right)}_{f_R(r)} \cdot \underbrace{\left(\frac{1}{2\pi}\right)}_{f_\Theta(\theta)}.
+> > $$
+> >
+> > 这说明径向变量 $R$ 与角度变量 $\Theta$ 相互独立，其中：
+> >
+> > - $\Theta \sim \mathrm{Uniform}(0, 2\pi)$，密度为 $f_\Theta(\theta) = \frac{1}{2\pi}$；
+> > - $R$ 服从瑞利分布（Rayleigh distribution），密度为 $f_R(r) = r e^{-r^2/2}\;(r \ge 0)$。
+> >
+> > **第三步：对 $R$ 与 $\Theta$ 分别做逆变换采样。**
+> >
+> > - 对 $\Theta$，其 CDF 为 $F_\Theta(\theta) = \frac{\theta}{2\pi}$。取 $U_2 \sim \mathrm{Uniform}(0, 1)$，令 $\frac{\Theta}{2\pi} = U_2$，得 $\Theta = 2\pi U_2$；
+> > - 对 $R$，其 CDF 为
+> >   $$
+> >   F_R(r) = \int_0^r x e^{-x^2/2}\,dx = 1 - e^{-r^2/2}.
+> >   $$
+> >   取独立于 $U_2$ 的 $\tilde{U}_1 \sim \mathrm{Uniform}(0, 1)$，令 $1 - e^{-R^2/2} = \tilde{U}_1$。由于 $U_1 := 1 - \tilde{U}_1$ 仍服从 $\mathrm{Uniform}(0, 1)$，直接令 $e^{-R^2/2} = U_1$，反解即得 $R = \sqrt{-2\ln U_1}$。
+> >
+> > **第四步：反向映射回直角坐标。** 将采样得到的 $R = \sqrt{-2\ln U_1}$ 与 $\Theta = 2\pi U_2$ 代回 $Z_1 = R\cos\Theta,\; Z_2 = R\sin\Theta$，即得两个相互独立的标准正态随机变量 (8)。$\square$
 
 ## 深度生成建模：神经网络作为推前测度
 
@@ -479,34 +484,35 @@ $$
 \tag{17}
 $$
 
-**定理（$f$-散度的非负性）：** 若 $f(u)$ 是凸函数且 $f(1) = 0$，则对任意两个概率分布 $p$ 和 $q$，都有
-
-$$
-\mathcal{D}_f(p \parallel q) \ge 0.
-\tag{18}
-$$
-
-若进一步假设 $f$ 在 $u = 1$ 处严格凸，则 $\mathcal{D}_f(p \parallel q) = 0$ 当且仅当 $p(\mathbf{x}) = q(\mathbf{x})$ 几乎处处成立。
-
-> [!note]- 证明
-> 设 $p \ll q$，记似然比随机变量 $U(\mathbf{x}) := \frac{p(\mathbf{x})}{q(\mathbf{x})}$。因为 $f$ 是凸函数，由 Jensen 不等式 $\mathbb{E}[f(U)] \ge f(\mathbb{E}[U])$，可将期望移入 $f$ 内部：
+> [!abstract] 定理（$f$-散度的非负性）
+> 若 $f(u)$ 是凸函数且 $f(1) = 0$，则对任意两个概率分布 $p$ 和 $q$，都有
 >
 > $$
-> \mathcal{D}_f(p \parallel q)
-> = \mathbb{E}_{\mathbf{x} \sim q}[f(U)]
-> \ge f\!\left(\mathbb{E}_{\mathbf{x} \sim q}\!\left[\frac{p(\mathbf{x})}{q(\mathbf{x})}\right]\right).
+> \mathcal{D}_f(p \parallel q) \ge 0.
+> \tag{18}
 > $$
 >
-> 计算 $f$ 内部的期望值：
+> 若进一步假设 $f$ 在 $u = 1$ 处严格凸，则 $\mathcal{D}_f(p \parallel q) = 0$ 当且仅当 $p(\mathbf{x}) = q(\mathbf{x})$ 几乎处处成立。
 >
-> $$
-> \mathbb{E}_{\mathbf{x} \sim q}\!\left[\frac{p(\mathbf{x})}{q(\mathbf{x})}\right]
-> = \int q(\mathbf{x})\frac{p(\mathbf{x})}{q(\mathbf{x})}\,d\mathbf{x}
-> = \int p(\mathbf{x})\,d\mathbf{x}
-> = 1.
-> $$
->
-> 代入即得 $\mathcal{D}_f(p \parallel q) \ge f(1) = 0$。当 $f$ 在 $1$ 处严格凸时，Jensen 不等式取等号当且仅当 $U(\mathbf{x}) = \frac{p(\mathbf{x})}{q(\mathbf{x})}$ 几乎处处为常数 $1$，即 $p = q$ 几乎处处成立。$\square$
+> > [!note]- 证明
+> > 设 $p \ll q$，记似然比随机变量 $U(\mathbf{x}) := \frac{p(\mathbf{x})}{q(\mathbf{x})}$。因为 $f$ 是凸函数，由 Jensen 不等式 $\mathbb{E}[f(U)] \ge f(\mathbb{E}[U])$，可将期望移入 $f$ 内部：
+> >
+> > $$
+> > \mathcal{D}_f(p \parallel q)
+> > = \mathbb{E}_{\mathbf{x} \sim q}[f(U)]
+> > \ge f\!\left(\mathbb{E}_{\mathbf{x} \sim q}\!\left[\frac{p(\mathbf{x})}{q(\mathbf{x})}\right]\right).
+> > $$
+> >
+> > 计算 $f$ 内部的期望值：
+> >
+> > $$
+> > \mathbb{E}_{\mathbf{x} \sim q}\!\left[\frac{p(\mathbf{x})}{q(\mathbf{x})}\right]
+> > = \int q(\mathbf{x})\frac{p(\mathbf{x})}{q(\mathbf{x})}\,d\mathbf{x}
+> > = \int p(\mathbf{x})\,d\mathbf{x}
+> > = 1.
+> > $$
+> >
+> > 代入即得 $\mathcal{D}_f(p \parallel q) \ge f(1) = 0$。当 $f$ 在 $1$ 处严格凸时，Jensen 不等式取等号当且仅当 $U(\mathbf{x}) = \frac{p(\mathbf{x})}{q(\mathbf{x})}$ 几乎处处为常数 $1$，即 $p = q$ 几乎处处成立。$\square$
 
 **特例（由 $f$-散度导出 KL 散度）：** 取生成函数 $f(u) := u\ln u$（在 $(0, +\infty)$ 上二阶导数 $f''(u) = 1/u > 0$ 严格凸，且 $f(1) = 0$），代入 (17) 即还原出 KL 散度：
 
@@ -550,38 +556,45 @@ $$
 
 #### 例 1：同均值、同方差但分布不同
 
-设 $P = \mathcal{N}(0, 1)$ 为标准正态分布，$Q = \mathrm{Uniform}[-a, a]$ 为区间 $[-a, a]$ 上的均匀分布（其中 $a = \sqrt{3}$，$Q$ 的密度为 $q(x) = \frac{1}{2a},\; |x| \le a$）。
-
-> [!note]- 各阶矩的计算与比较
-> **一阶矩与二阶矩：** 标准正态分布满足 $\mathbb{E}_{x \sim P}[x] = 0,\; \mathbb{E}_{x \sim P}[x^2] = 1$。对于均匀分布 $Q$，由于 $x q(x)$ 是对称区间 $[-a, a]$ 上的奇函数，有
+> [!abstract] 各阶矩的计算与比较
+> 设 $P = \mathcal{N}(0, 1)$ 为标准正态分布，$Q = \mathrm{Uniform}[-a, a]$ 为区间 $[-a, a]$ 上的均匀分布（其中 $a = \sqrt{3}$，$Q$ 的密度为 $q(x) = \frac{1}{2a},\; |x| \le a$）。则 $P$ 与 $Q$ 的一阶矩、二阶矩相同，但四阶矩不同：
 >
 > $$
-> \mathbb{E}_{x \sim Q}[x] = \frac{1}{2a}\int_{-a}^a x\,dx = 0,
+> \Delta_x(P, Q) = \Delta_{x^2}(P, Q) = 0,
 > \qquad
-> \mathbb{E}_{x \sim Q}[x^2] = \frac{1}{2a}\int_{-a}^a x^2\,dx = \frac{1}{2a}\cdot\frac{2a^3}{3} = \frac{a^2}{3} = \frac{3}{3} = 1.
+> \Delta_{x^4}(P, Q) = \left|3 - \frac{9}{5}\right| = \frac{6}{5} \neq 0.
 > $$
 >
-> 因此对测试函数 $g(x) = x$ 与 $g(x) = x^2$，均有 $\Delta_g(P, Q) = 0$。
->
-> **四阶矩：** 对于均匀分布 $Q$，直接积分得
->
-> $$
-> \mathbb{E}_{x \sim Q}[x^4] = \frac{1}{2a}\int_{-a}^a x^4\,dx = \frac{1}{2a}\cdot\frac{2a^5}{5} = \frac{a^4}{5} = \frac{9}{5}.
-> $$
->
-> 对于标准正态分布 $P$，其密度 $p(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$ 满足导数恒等式 $p'(x) = -x p(x)$，利用分部积分法可得
->
-> $$
-> \begin{aligned}
-> \mathbb{E}_{x \sim P}[x^4]
-> &= \int_{\mathbb{R}} x^3 \bigl(x p(x)\bigr)\,dx
-> = \int_{\mathbb{R}} x^3 \bigl(-p'(x)\bigr)\,dx \\
-> &= -\Bigl[x^3 p(x)\Bigr]_{-\infty}^{+\infty} + 3\int_{\mathbb{R}} x^2 p(x)\,dx \\
-> &= 3\mathbb{E}_{x \sim P}[x^2] = 3.
-> \end{aligned}
-> $$
->
-> 由此可见 $\Delta_{x^4}(P, Q) = \left|3 - \frac{9}{5}\right| = \frac{6}{5} \neq 0$，证得 $P \neq Q$。$\square$
+> > [!note]- 推导
+> > **一阶矩与二阶矩：** 标准正态分布满足 $\mathbb{E}_{x \sim P}[x] = 0,\; \mathbb{E}_{x \sim P}[x^2] = 1$。对于均匀分布 $Q$，由于 $x q(x)$ 是对称区间 $[-a, a]$ 上的奇函数，有
+> >
+> > $$
+> > \mathbb{E}_{x \sim Q}[x] = \frac{1}{2a}\int_{-a}^a x\,dx = 0,
+> > \qquad
+> > \mathbb{E}_{x \sim Q}[x^2] = \frac{1}{2a}\int_{-a}^a x^2\,dx = \frac{1}{2a}\cdot\frac{2a^3}{3} = \frac{a^2}{3} = \frac{3}{3} = 1.
+> > $$
+> >
+> > 因此对测试函数 $g(x) = x$ 与 $g(x) = x^2$，均有 $\Delta_g(P, Q) = 0$。
+> >
+> > **四阶矩：** 对于均匀分布 $Q$，直接积分得
+> >
+> > $$
+> > \mathbb{E}_{x \sim Q}[x^4] = \frac{1}{2a}\int_{-a}^a x^4\,dx = \frac{1}{2a}\cdot\frac{2a^5}{5} = \frac{a^4}{5} = \frac{9}{5}.
+> > $$
+> >
+> > 对于标准正态分布 $P$，其密度 $p(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}$ 满足导数恒等式 $p'(x) = -x p(x)$，利用分部积分法可得
+> >
+> > $$
+> > \begin{aligned}
+> > \mathbb{E}_{x \sim P}[x^4]
+> > &= \int_{\mathbb{R}} x^3 \bigl(x p(x)\bigr)\,dx
+> > = \int_{\mathbb{R}} x^3 \bigl(-p'(x)\bigr)\,dx \\
+> > &= -\Bigl[x^3 p(x)\Bigr]_{-\infty}^{+\infty} + 3\int_{\mathbb{R}} x^2 p(x)\,dx \\
+> > &= 3\mathbb{E}_{x \sim P}[x^2] = 3.
+> > \end{aligned}
+> > $$
+> >
+> > 由此可见 $\Delta_{x^4}(P, Q) = \left|3 - \frac{9}{5}\right| = \frac{6}{5} \neq 0$，证得 $P \neq Q$。$\square$
 
 #### 例 2：有限样本与不可观测属性
 
@@ -617,6 +630,14 @@ $$
 3. **如何产生样本？** 是单步直接映射、逐维自回归祖先采样、MCMC，还是多步迭代去噪。
 
 ```mermaid
+---
+config:
+  layout: elk
+  elk:
+    lineHops: true
+  flowchart:
+    curve: stepAfter
+---
 flowchart TD
     Root["深度生成模型"] --> Explicit["显式密度模型"]
     Root --> Implicit["隐式 / 无似然模型"]

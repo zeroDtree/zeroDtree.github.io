@@ -78,47 +78,49 @@ Let $A = [a_{ij}]\in F^{m \times n}$ and $B = [b_{ij}]\in F^{n \times p}$ be two
 
 #### 5.1.1. Associativity
 
-Let $A = [a_{ij}]\in F^{m \times n}$, $B = [b_{ij}]\in F^{n \times p}$, $C = [c_{ij}]\in F^{p \times q}$ be three matrices.
-
-$$
-(AB)C = A(BC)
-$$
-
-> [!note]- 证明
-> $$
-> \begin{aligned}
-> ((AB)C)_{ij} &= \sum_{k=1}^p (AB)_{ik} c_{kj} \\
-> & = \sum_{k=1}^p (\sum_{l=1}^n a_{il} b_{lk}) c_{kj} \\
-> & = \sum_{k=1}^p \sum_{l=1}^n a_{il} b_{lk} c_{kj} \\
-> \end{aligned}
-> $$
+> [!abstract] 命题（矩阵乘法的结合律）
+> Let $A = [a_{ij}]\in F^{m \times n}$, $B = [b_{ij}]\in F^{n \times p}$, $C = [c_{ij}]\in F^{p \times q}$ be three matrices.
 >
 > $$
-> \begin{aligned}
-> A(BC)_{ij} &= \sum_{l=1}^n a_{il} (BC)_{lj} \\
-> & = \sum_{l=1}^n a_{il} \sum_{k=1}^p b_{lk} c_{kj} \\
-> & = \sum_{l=1}^n \sum_{k=1}^p a_{il} b_{lk} c_{kj} \\
-> & = \sum_{k=1}^p \sum_{l=1}^n a_{il} b_{lk} c_{kj} \\
-> & = ((AB)C)_{ij}
-> \end{aligned}
+> (AB)C = A(BC)
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > ((AB)C)_{ij} &= \sum_{k=1}^p (AB)_{ik} c_{kj} \\
+> > & = \sum_{k=1}^p (\sum_{l=1}^n a_{il} b_{lk}) c_{kj} \\
+> > & = \sum_{k=1}^p \sum_{l=1}^n a_{il} b_{lk} c_{kj} \\
+> > \end{aligned}
+> > $$
+> >
+> > $$
+> > \begin{aligned}
+> > A(BC)_{ij} &= \sum_{l=1}^n a_{il} (BC)_{lj} \\
+> > & = \sum_{l=1}^n a_{il} \sum_{k=1}^p b_{lk} c_{kj} \\
+> > & = \sum_{l=1}^n \sum_{k=1}^p a_{il} b_{lk} c_{kj} \\
+> > & = \sum_{k=1}^p \sum_{l=1}^n a_{il} b_{lk} c_{kj} \\
+> > & = ((AB)C)_{ij}
+> > \end{aligned}
+> > $$
 
 #### 5.1.2. Distributivity
 
-$$
-A(B + C) = AB + AC
-$$
-
-> [!note]- 证明
+> [!abstract] 命题（矩阵乘法的分配律）
 > $$
-> \begin{aligned}
-> (A(B + C))_{ij} &= \sum_{k=1}^n a_{ik} (B + C)_{kj} \\
-> & = \sum_{k=1}^n a_{ik} (b_{kj} + c_{kj}) \\
-> & = \sum_{k=1}^n a_{ik} b_{kj} + \sum_{k=1}^n a_{ik} c_{kj} \\
-> & = (AB)_{ij} + (AC)_{ij} \\
-> & = (AB + AC)_{ij}
-> \end{aligned}
+> A(B + C) = AB + AC
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > (A(B + C))_{ij} &= \sum_{k=1}^n a_{ik} (B + C)_{kj} \\
+> > & = \sum_{k=1}^n a_{ik} (b_{kj} + c_{kj}) \\
+> > & = \sum_{k=1}^n a_{ik} b_{kj} + \sum_{k=1}^n a_{ik} c_{kj} \\
+> > & = (AB)_{ij} + (AC)_{ij} \\
+> > & = (AB + AC)_{ij}
+> > \end{aligned}
+> > $$
 
 #### 5.1.3. Square Matrix
 
@@ -137,22 +139,23 @@ I_n = \begin{bmatrix}
 \end{bmatrix}
 $$
 
-$I$ is the identity element of $\langle F^{n \times n}, \cdot \rangle$.
-
-$$
-AI = IA = A
-$$
-
-> [!note]- 证明
+> [!abstract] 命题（单位矩阵的乘法单位元性质）
+> $I$ is the identity element of $\langle F^{n \times n}, \cdot \rangle$.
+>
 > $$
-> \begin{aligned}
-> (AI)_{ij} &= \sum_{k=1}^n a_{ik} (I)_{kj} \\
-> & = \sum_{k=1}^n a_{ik} \delta_{kj} \\
-> & = a_{ij}
-> \end{aligned}
+> AI = IA = A
 > $$
 >
-> similar, we have $IA = A$.
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > (AI)_{ij} &= \sum_{k=1}^n a_{ik} (I)_{kj} \\
+> > & = \sum_{k=1}^n a_{ik} \delta_{kj} \\
+> > & = a_{ij}
+> > \end{aligned}
+> > $$
+> >
+> > similar, we have $IA = A$.
 
 $\langle F^{n \times n}, +, \cdot \rangle$ is a ring with identity.
 
@@ -232,18 +235,22 @@ $$
 
 Let $A = [a_{ij}]\in F^{m \times n}$ be a matrix. The transpose of $A$ is the matrix $A^T = [a_{ji}]\in F^{n \times m}$ defined by $a_{ji} = a_{ij}$.
 
-$A \in F^{m \times n}, B \in F^{n \times p}$, we have:
-$(AB)^T = B^T A^T$
-
-> [!note]- 证明
+> [!abstract] 命题（乘积的转置）
+> $A \in F^{m \times n}, B \in F^{n \times p}$, we have:
+>
 > $$
-> \begin{aligned}
-> (AB)^T_{ij} &= (AB)_{ji} \\
-> &= \sum_{k=1}^n a_{jk} b_{ki} \\
-> &= \sum_{k=1}^n (A^T)_{kj} (B^T)_{ik} \\
-> &= (B^T A^T)_{ij}
-> \end{aligned}
+> (AB)^T = B^T A^T
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > (AB)^T_{ij} &= (AB)_{ji} \\
+> > &= \sum_{k=1}^n a_{jk} b_{ki} \\
+> > &= \sum_{k=1}^n (A^T)_{kj} (B^T)_{ik} \\
+> > &= (B^T A^T)_{ij}
+> > \end{aligned}
+> > $$
 
 ## 9. Orthogonal matrix
 
@@ -304,22 +311,24 @@ $$
 
 - $\operatorname{tr}(A + B) = \operatorname{tr}(A) + \operatorname{tr}(B)$
 - $\operatorname{tr}(cA) = c\operatorname{tr}(A)$
-- $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
 - $\overline{\operatorname{tr}(A)} = \operatorname{tr}(\overline{A})$
 - $\operatorname{tr}(A^T) = \operatorname{tr}(A)$
 - 若 $A=[a_{ij}],B=[b_{ij}]\in\mathbb C^{m\times n}$，则 $\operatorname{tr}(A^HB)=\displaystyle\sum_{i=1}^m\sum_{j=1}^n\overline{a_{ij}}b_{ij}$
 
-> [!note]- 证明
-> $\operatorname{tr}(AB) = \operatorname{tr}(BA)$
+> [!abstract] 命题（矩阵乘积迹的轮换性）
+> $$
+> \operatorname{tr}(AB) = \operatorname{tr}(BA)
+> $$
 >
-> $$
-> \begin{aligned}
-> \operatorname{tr}(AB) &= \sum_{i=1}^n (AB)_{ii} \\
-> &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} b_{ji} \\
-> &= \sum_{j=1}^n \sum_{i=1}^n b_{ji} a_{ij} \\
-> &= \operatorname{tr}(BA)
-> \end{aligned}
-> $$
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > \operatorname{tr}(AB) &= \sum_{i=1}^n (AB)_{ii} \\
+> > &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} b_{ji} \\
+> > &= \sum_{j=1}^n \sum_{i=1}^n b_{ji} a_{ij} \\
+> > &= \operatorname{tr}(BA)
+> > \end{aligned}
+> > $$
 
 ## 13. Inner Product
 
@@ -552,18 +561,19 @@ $A_{ij}$ is the submatrix of $A$ obtained by deleting the $i$-th row and $j$-th 
 
 Let $A = [a_{ij}]\in F^{n \times n}$ be a square matrix. The adjugate of $A$ is the matrix $A^{\text{\#}}:=\operatorname{adj}(A) = [a^{\text{\#}}_{ij}]\in F^{n \times n}$ defined by $a^{\text{\#}}_{ij} = (-1)^{i+j} \operatorname{det}(A_{ji})$.
 
-$$
-A A^{\text{\#}} = A^{\text{\#}} A = \operatorname{det}(A) I
-$$
-
-> [!note]- 证明
+> [!abstract] 定理（伴随矩阵恒等式）
 > $$
-> \begin{aligned}
-> (A A^{\text{\#}})_{ij} &= \sum_{k=1}^n a_{ik} a^{\text{\#}}_{kj} \\
-> &= \sum_{k=1}^n a_{ik} (-1)^{k+j} \operatorname{det}(A_{jk}) \\
-> &= \operatorname{det}(A) \delta_{ij}
-> \end{aligned}
+> A A^{\text{\#}} = A^{\text{\#}} A = \operatorname{det}(A) I
 > $$
+>
+> > [!note]- 证明
+> > $$
+> > \begin{aligned}
+> > (A A^{\text{\#}})_{ij} &= \sum_{k=1}^n a_{ik} a^{\text{\#}}_{kj} \\
+> > &= \sum_{k=1}^n a_{ik} (-1)^{k+j} \operatorname{det}(A_{jk}) \\
+> > &= \operatorname{det}(A) \delta_{ij}
+> > \end{aligned}
+> > $$
 
 - $A$ is invertible if and only if $\operatorname{det}(A) \not= 0$
 - if $A$ is invertible, then $A^{-1} = \frac{1_F}{\operatorname{det}(A)} A^{\text{\#}}$
