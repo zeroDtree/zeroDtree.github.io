@@ -8,12 +8,16 @@ graph TD
 1["机器学习/VAE"] --> 7["机器学习/ddpm"]
 9["机器学习/posterior_mean"] --> 8["机器学习/DPS"]
 11["机器学习/Dirac分布"] --> 10["机器学习/fourier"]
+13["机器学习/PCA"] --> 12["机器学习/SFA"]
+14["机器学习/拉格朗日乘子法"] --> 12["机器学习/SFA"]
+15["机器学习/FSDTMC"] --> 12["机器学习/SFA"]
+16["数学/数学分析/平方可积"] --> 12["机器学习/SFA"]
 classDef leaf fill:#fde68a,stroke:#b45309
-class 0,3,5,7,8,10 leaf
+class 0,3,5,7,8,10,12 leaf
 classDef root fill:#bfdbfe,stroke:#1d4ed8
-class 1,2,4,9,11 root
+class 1,2,4,9,11,13,14,15 root
 classDef foundationRoot fill:#bbf7d0,stroke:#15803d
-class 6 foundationRoot
+class 6,16 foundationRoot
 click 0 "/机器学习/vq-vae" "机器学习/VQ-VAE"
 click 1 "/机器学习/vae" "机器学习/VAE"
 click 2 "/机器学习/straight-through-estimator" "机器学习/Straight-Through-Estimator"
@@ -26,4 +30,9 @@ click 8 "/机器学习/dps" "机器学习/DPS"
 click 9 "/机器学习/posterior_mean" "机器学习/posterior_mean"
 click 10 "/机器学习/fourier" "机器学习/fourier"
 click 11 "/机器学习/dirac分布" "机器学习/Dirac分布"
+click 12 "/机器学习/sfa" "机器学习/SFA"
+click 13 "/机器学习/pca" "机器学习/PCA"
+click 14 "/机器学习/拉格朗日乘子法" "机器学习/拉格朗日乘子法"
+click 15 "/机器学习/fsdtmc" "机器学习/FSDTMC"
+click 16 "/数学/数学分析/平方可积" "数学/数学分析/平方可积"
 ```
