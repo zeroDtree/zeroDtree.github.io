@@ -6,7 +6,7 @@ tags:
 
 - [1. 数据流](#1-数据流)
 - [2. 说明 for Map-style Dataset](#2-说明-for-map-style-dataset)
-  - [2.1. collate_fn](#21-collate_fn)
+  - [2.1. collate\_fn](#21-collate_fn)
   - [2.2. 直接指定](#22-直接指定)
 - [3. 测试程序](#3-测试程序)
 - [4. 参考资料](#4-参考资料)
@@ -25,12 +25,12 @@ config:
 flowchart TD
 o_data[[原始数据]]
 map_dataset[Map-style Dataset
- \_\_len\_\_
- \_\_getitem\_\_
-\_\_getitems\_\_
+ __len__
+ __getitem__
+__getitems__
 ]
 iter_dataset[Iterable-style Dataset
-\_\_iter\_\_
+__iter__
 ]
 
 subgraph dataloader_parameters
