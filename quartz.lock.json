@@ -109,12 +109,6 @@
       "commit": "4afb630a1cc9034267beb93c928e81d0fa2f4d4b",
       "installedAt": "2026-06-06T07:39:31.205Z"
     },
-    "explorer": {
-      "source": "github:quartz-community/explorer",
-      "resolved": "https://github.com/quartz-community/explorer.git",
-      "commit": "a2dfd1373abe58ace461ebea0b4e94cb287f894e",
-      "installedAt": "2026-06-06T07:39:40.536Z"
-    },
     "favicon": {
       "source": "github:quartz-community/favicon",
       "resolved": "https://github.com/quartz-community/favicon.git",
@@ -186,6 +180,12 @@
       "resolved": "https://github.com/quartz-community/page-title.git",
       "commit": "a1c1fe0a9c6a5ce1acf6efa01d473a7d9850e2a3",
       "installedAt": "2026-06-06T07:39:43.449Z"
+    },
+    "quartz-v5-plugin-explorer": {
+      "source": "github:zeroDtree/quartz-v5-plugin-explorer",
+      "resolved": "https://github.com/zeroDtree/quartz-v5-plugin-explorer.git",
+      "commit": "9c467952d4e1642f0c18ab729f3a5c459e077ffa",
+      "installedAt": "2026-11-21T10:51:23.809Z"
     },
     "quartz-v5-plugin-friends": {
       "source": "./my-plugins/quartz-v5-plugin-friends",

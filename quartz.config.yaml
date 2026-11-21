@@ -168,8 +168,15 @@ plugins:
       slug: friends
       pageSize: 12
       sortBy: order
-  - source: github:quartz-community/explorer
+  - source: github:zeroDtree/quartz-v5-plugin-explorer
     enabled: true
+    options:
+      exclude:
+        - dependency_graph
+        - notation
+        - about
+        - friends
+        - style
     layout:
       position: left
       priority: 50
