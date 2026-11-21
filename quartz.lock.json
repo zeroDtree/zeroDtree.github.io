@@ -266,10 +266,10 @@
       "installedAt": "2026-06-06T07:39:44.435Z"
     },
     "tag-page": {
-      "source": "github:quartz-community/tag-page",
-      "resolved": "https://github.com/quartz-community/tag-page.git",
-      "commit": "eabf3eec55c0bab7f49e69957341f34d2ae3c5a1",
-      "installedAt": "2026-06-06T07:39:40.284Z"
+      "source": "github:zeroDtree/tag-page",
+      "resolved": "https://github.com/zeroDtree/tag-page.git",
+      "commit": "6c9c504535442ef86269935ae1dbbc9cec0e7ccb",
+      "installedAt": "2026-11-21T09:20:12.963Z"
     },
     "unlisted-pages": {
       "source": "github:quartz-community/unlisted-pages",
