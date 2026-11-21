@@ -205,6 +205,12 @@
       "commit": "3df820b8f3acf128bd4b609afa0797c22443c14f",
       "installedAt": "2026-11-03T08:55:07.262Z"
     },
+    "quartz-v5-plugin-tag-page": {
+      "source": "github:zeroDtree/quartz-v5-plugin-tag-page",
+      "resolved": "https://github.com/zeroDtree/quartz-v5-plugin-tag-page.git",
+      "commit": "6c9c504535442ef86269935ae1dbbc9cec0e7ccb",
+      "installedAt": "2026-11-21T11:01:43.508Z"
+    },
     "quartz-v5-plugin-top-card": {
       "source": "./my-plugins/quartz-v5-plugin-top-card",
       "resolved": "/Users/zengls/repo/quartz/my-plugins/quartz-v5-plugin-top-card",
@@ -264,12 +270,6 @@
       "resolved": "https://github.com/quartz-community/tag-list.git",
       "commit": "c48324e2ba768e2a0a5c4c17cd0661b190d075c5",
       "installedAt": "2026-06-06T07:39:44.435Z"
-    },
-    "tag-page": {
-      "source": "github:zeroDtree/tag-page",
-      "resolved": "https://github.com/zeroDtree/tag-page.git",
-      "commit": "6c9c504535442ef86269935ae1dbbc9cec0e7ccb",
-      "installedAt": "2026-11-21T09:20:12.963Z"
     },
     "unlisted-pages": {
       "source": "github:quartz-community/unlisted-pages",

@@ -154,7 +154,7 @@ plugins:
     enabled: true
   - source: github:quartz-community/folder-page
     enabled: true
-  - source: github:zeroDtree/tag-page
+  - source: github:zeroDtree/quartz-v5-plugin-tag-page
     enabled: true
   - source: github:zeroDtree/quartz-v5-plugin-top-card
     enabled: true
