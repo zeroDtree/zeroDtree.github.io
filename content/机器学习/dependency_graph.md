@@ -14,17 +14,21 @@ graph TD
 17["机器学习/大模型轻量化"] --> 16["机器学习/知识蒸馏"]
 19["机器学习/强化学习"] --> 18["机器学习/PPO"]
 1["机器学习/机器学习的分类"] --> 19["机器学习/强化学习"]
-20["机器学习/PCA"] --> 13["机器学习/SFA"]
-21["机器学习/拉格朗日乘子法"] --> 13["机器学习/SFA"]
-22["机器学习/FSDTMC"] --> 13["机器学习/SFA"]
-23["数学/数学分析/平方可积"] --> 13["机器学习/SFA"]
-17["机器学习/大模型轻量化"] --> 24["机器学习/quantization"]
+21["机器学习/拉格朗日乘子法"] --> 20["机器学习/广义特征值"]
+22["机器学习/矩阵微分演算"] --> 20["机器学习/广义特征值"]
+23["机器学习/矩阵分解/Cholesky分解"] --> 20["机器学习/广义特征值"]
+20["机器学习/广义特征值"] --> 24["机器学习/Rayleigh商"]
+25["机器学习/PCA"] --> 13["机器学习/SFA"]
+24["机器学习/Rayleigh商"] --> 13["机器学习/SFA"]
+26["机器学习/FSDTMC"] --> 13["机器学习/SFA"]
+27["数学/数学分析/平方可积"] --> 13["机器学习/SFA"]
+17["机器学习/大模型轻量化"] --> 28["机器学习/quantization"]
 classDef leaf fill:#fde68a,stroke:#b45309
-class 2,5,7,9,10,12,14,16,18,24 leaf
+class 2,5,7,9,10,12,14,16,18,28 leaf
 classDef root fill:#bfdbfe,stroke:#1d4ed8
-class 1,4,6,11,15,17,20,21,22 root
+class 1,4,6,11,15,17,21,22,23,25,26 root
 classDef foundationRoot fill:#bbf7d0,stroke:#15803d
-class 8,23 foundationRoot
+class 8,27 foundationRoot
 click 0 "/机器学习/generative-model-introduction" "机器学习/generative-model-introduction"
 click 1 "/机器学习/机器学习的分类" "机器学习/机器学习的分类"
 click 2 "/机器学习/vq-vae" "机器学习/VQ-VAE"
@@ -45,9 +49,13 @@ click 16 "/机器学习/知识蒸馏" "机器学习/知识蒸馏"
 click 17 "/机器学习/大模型轻量化" "机器学习/大模型轻量化"
 click 18 "/机器学习/ppo" "机器学习/PPO"
 click 19 "/机器学习/强化学习" "机器学习/强化学习"
-click 20 "/机器学习/pca" "机器学习/PCA"
+click 20 "/机器学习/广义特征值" "机器学习/广义特征值"
 click 21 "/机器学习/拉格朗日乘子法" "机器学习/拉格朗日乘子法"
-click 22 "/机器学习/fsdtmc" "机器学习/FSDTMC"
-click 23 "/数学/数学分析/平方可积" "数学/数学分析/平方可积"
-click 24 "/机器学习/quantization" "机器学习/quantization"
+click 22 "/机器学习/矩阵微分演算" "机器学习/矩阵微分演算"
+click 23 "/机器学习/矩阵分解/cholesky分解" "机器学习/矩阵分解/Cholesky分解"
+click 24 "/机器学习/rayleigh商" "机器学习/Rayleigh商"
+click 25 "/机器学习/pca" "机器学习/PCA"
+click 26 "/机器学习/fsdtmc" "机器学习/FSDTMC"
+click 27 "/数学/数学分析/平方可积" "数学/数学分析/平方可积"
+click 28 "/机器学习/quantization" "机器学习/quantization"
 ```
