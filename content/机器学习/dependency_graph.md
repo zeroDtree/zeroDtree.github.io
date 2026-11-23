@@ -18,17 +18,15 @@ graph TD
 22["机器学习/矩阵微分演算"] --> 20["机器学习/广义特征值"]
 23["机器学习/矩阵分解/Cholesky分解"] --> 20["机器学习/广义特征值"]
 20["机器学习/广义特征值"] --> 24["机器学习/Rayleigh商"]
-25["机器学习/PCA"] --> 13["机器学习/SFA"]
 24["机器学习/Rayleigh商"] --> 13["机器学习/SFA"]
-26["机器学习/FSDTMC"] --> 13["机器学习/SFA"]
-27["数学/数学分析/平方可积"] --> 13["机器学习/SFA"]
-17["机器学习/大模型轻量化"] --> 28["机器学习/quantization"]
+25["数学/数学分析/平方可积"] --> 13["机器学习/SFA"]
+17["机器学习/大模型轻量化"] --> 26["机器学习/quantization"]
 classDef leaf fill:#fde68a,stroke:#b45309
-class 2,5,7,9,10,12,14,16,18,28 leaf
+class 2,5,7,9,10,12,14,16,18,26 leaf
 classDef root fill:#bfdbfe,stroke:#1d4ed8
-class 1,4,6,11,15,17,21,22,23,25,26 root
+class 1,4,6,11,15,17,21,22,23 root
 classDef foundationRoot fill:#bbf7d0,stroke:#15803d
-class 8,27 foundationRoot
+class 8,25 foundationRoot
 click 0 "/机器学习/generative-model-introduction" "机器学习/generative-model-introduction"
 click 1 "/机器学习/机器学习的分类" "机器学习/机器学习的分类"
 click 2 "/机器学习/vq-vae" "机器学习/VQ-VAE"
@@ -54,8 +52,6 @@ click 21 "/机器学习/拉格朗日乘子法" "机器学习/拉格朗日乘子�
 click 22 "/机器学习/矩阵微分演算" "机器学习/矩阵微分演算"
 click 23 "/机器学习/矩阵分解/cholesky分解" "机器学习/矩阵分解/Cholesky分解"
 click 24 "/机器学习/rayleigh商" "机器学习/Rayleigh商"
-click 25 "/机器学习/pca" "机器学习/PCA"
-click 26 "/机器学习/fsdtmc" "机器学习/FSDTMC"
-click 27 "/数学/数学分析/平方可积" "数学/数学分析/平方可积"
-click 28 "/机器学习/quantization" "机器学习/quantization"
+click 25 "/数学/数学分析/平方可积" "数学/数学分析/平方可积"
+click 26 "/机器学习/quantization" "机器学习/quantization"
 ```
