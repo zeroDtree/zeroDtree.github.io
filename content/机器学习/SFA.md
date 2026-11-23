@@ -183,23 +183,41 @@ SFA 中 $A\succeq0$，所以全部 $\lambda_j\ge0$，慢度就是对应的广义
 
 ## 离散时间差分形式
 
-对离散时间或给定滞后步长 $\tau > 0$ 的情形，以有限步长差分替代时间导数，慢度目标定义为
+对离散时间或给定滞后步长 $\tau > 0$ 的情形，以有限步长差分替代时间导数。$\mathbf{x}(t+\tau)$ 只在 $t$ 与 $t+\tau$ 同时属于 $T$ 时有定义，故时间平均取在配对窗口上。记
 
 $$
-\Delta_\tau(\mathbf{w}) := \left\langle \bigl[ y(t+\tau) - y(t) \bigr]^2 \right\rangle_t,
-\qquad y(t) = \mathbf{w}^\top \mathbf{x}(t).
+T_\tau := \{\, t \in T : t+\tau \in T \,\},
+\qquad
+\mu_{T_\tau} := \frac{1}{\mu_T(T_\tau)}\,\mu_T|_{T_\tau},
 $$
 
-记差分向量 $\Delta \mathbf{x}_\tau(t) := \mathbf{x}(t+\tau) - \mathbf{x}(t) \in \mathbb{R}^d$，定义差分协方差矩阵
+并设 $\mu_T(T_\tau) > 0$。对可积函数 $f$，定义滞后平均
 
 $$
-A_\tau := \left\langle \Delta \mathbf{x}_\tau(t)\Delta \mathbf{x}_\tau(t)^\top \right\rangle_t = \int_T \Delta \mathbf{x}_\tau(t)\Delta \mathbf{x}_\tau(t)^\top\,\mu_T(\mathrm{d}t) \succeq 0,
+\langle f(t) \rangle_{t,\tau}
+:= \int_{T_\tau} f(t)\,\mu_{T_\tau}(\mathrm{d}t)
+= \frac{1}{\mu_T(T_\tau)} \int_{T_\tau} f(t)\,\mu_T(\mathrm{d}t).
 $$
 
-则 $\Delta_\tau(\mathbf{w}) = \mathbf{w}^\top A_\tau \mathbf{w}$。在约束 $W^\top B W = I_m$ 下，最优投影方向由广义特征值问题
+设 $\mathbf{x}$ 在 $T_\tau$ 上已中心化，且 $\mathbf{x}(t), \mathbf{x}(t+\tau) \in L^2(T_\tau, \mu_{T_\tau}; \mathbb{R}^d)$。取 $y(t) = \mathbf{w}^\top \mathbf{x}(t)$，定义差分 $\Delta \mathbf{x}_\tau(t) := \mathbf{x}(t+\tau) - \mathbf{x}(t)$ 及
 
 $$
-A_\tau \mathbf{w} = \lambda B \mathbf{w}
+A_\tau := \left\langle \Delta \mathbf{x}_\tau(t)\Delta \mathbf{x}_\tau(t)^\top \right\rangle_{t,\tau} \succeq 0,
+\qquad
+B := \left\langle \mathbf{x}(t)\mathbf{x}(t)^\top \right\rangle_{t,\tau} \succeq 0.
 $$
 
-的前 $m$ 个最小广义特征值对应的 $B$-标准正交特征向量给出。
+$B$ 与 §线性SFA 的瞬时协方差相同，只是平均窗口换成 $T_\tau$；平稳时二者一致。于是
+
+$$
+\begin{aligned}
+\Delta_\tau(\mathbf{w})
+&:= \left\langle \bigl[ y(t+\tau) - y(t) \bigr]^2 \right\rangle_{t,\tau} \\
+&= \left\langle \bigl[ \mathbf{w}^\top \bigl( \mathbf{x}(t+\tau) - \mathbf{x}(t) \bigr) \bigr]^2 \right\rangle_{t,\tau} \\
+&= \left\langle \mathbf{w}^\top \Delta \mathbf{x}_\tau(t) \Delta \mathbf{x}_\tau(t)^\top \mathbf{w} \right\rangle_{t,\tau} \\
+&= \mathbf{w}^\top \left\langle \Delta \mathbf{x}_\tau(t) \Delta \mathbf{x}_\tau(t)^\top \right\rangle_{t,\tau} \mathbf{w} \\
+&= \mathbf{w}^\top A_\tau \mathbf{w}.
+\end{aligned}
+$$
+
+约束仍为 $W^\top B W = I_m$。这已化为 §线性SFA 的约束二次规划。
