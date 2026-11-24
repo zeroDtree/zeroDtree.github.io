@@ -1,3 +1,158 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// ============================================================================
+// Top Card：悬浮圆角导航条（贴顶但两侧不顶到头）+ 滚动方向自动收起/展开
+// ----------------------------------------------------------------------------
+// header 插槽位于 .center > .page-header，而 .center 是网格中间列，
+// .page-header 还有 6rem margin-top —— 所以顶栏只有正文列宽且被下推。
+// 这里把它固定到视口顶部，并用 --topcard-* 变量统一控制尺寸与留白。
+// 收起/展开由 quartz.ts 里的 top-card-scroll 脚本切换 <html>.topcard-hidden，
+// 向下滚动收起、向上滚动展开；脚本只在真正滚动时动，样式负责过渡动画。
+// ============================================================================
+
+:root {
+  --topcard-height: 3.75rem; // 60px
+  --topcard-offset: 0.75rem; // 悬浮时离视口顶部的间距
+  --topcard-radius: 16px;
+  --topcard-width: 860px; // 紧凑宽度：约等于正文列 + 一点留白
+}
+
+// ---- 1. 悬浮条本体（header 只负责定位，卡片宽度受 max-width 限制）----
+header:has(.top-card) {
+  position: fixed;
+  top: var(--topcard-offset);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0 1rem;
+  pointer-events: none; // 条带两侧的空白不挡点击
+  transition:
+    top 0.3s ease,
+    opacity 0.25s ease;
+}
+
+.top-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--topcard-width); // 两边不顶到头
+  height: var(--topcard-height);
+  pointer-events: auto;
+  border: 1px solid var(--lightgray);
+  border-radius: var(--topcard-radius);
+  background: color-mix(in srgb, var(--light) 94%, var(--tertiary) 6%);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.top-card__inner {
+  box-sizing: border-box;
+  height: 100%;
+  max-width: none;
+  padding: 0 0.75rem 0 1.25rem;
+  flex-wrap: nowrap;
+}
+
+// 导航项做成圆角药丸，选中项填充 + 下方一个小圆点
+.top-card__links {
+  gap: 0.15rem 0.35rem;
+}
+
+.top-card__link {
+  border-radius: 10px;
+  padding: 0.35rem 0.75rem;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.top-card__link:hover {
+  background: color-mix(in srgb, var(--darkgray) 8%, transparent);
+}
+
+.top-card__link--active {
+  background: color-mix(in srgb, var(--tertiary) 20%, transparent);
+}
+
+.top-card__link--active::after {
+  left: 50%;
+  right: auto;
+  bottom: 0.28rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  transform: translateX(-50%);
+}
+
+// ---- 2. 收起状态（脚本向下滚动时加到 <html> 上）----
+html.topcard-hidden header:has(.top-card) {
+  top: calc(-1 * (var(--topcard-height) + var(--topcard-offset) + 0.5rem));
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header:has(.top-card) {
+    transition: none;
+  }
+}
+
+// ---- 3. 正文与两侧栏让出导航条 ----
+body:has(.top-card) {
+  padding-top: calc(var(--topcard-height) + var(--topcard-offset) + 0.5rem);
+}
+
+html {
+  scroll-padding-top: calc(var(--topcard-height) + var(--topcard-offset) + 1rem);
+}
+
+.page > #quartz-body .page-header {
+  margin-top: 1.5rem;
+}
+
+@media all and not ($mobile) {
+  .page > #quartz-body .sidebar {
+    top: calc(var(--topcard-height) + var(--topcard-offset));
+    height: calc(100vh - var(--topcard-height) - var(--topcard-offset));
+    padding-top: 1.5rem;
+  }
+}
+
+// ---- 4. 手机端 ----
+@media all and ($mobile) {
+  :root {
+    --topcard-height: 3.5rem; // 56px
+    --topcard-offset: 0.5rem;
+    --topcard-radius: 14px;
+  }
+
+  header:has(.top-card) {
+    padding: 0 0.75rem;
+  }
+
+  .page > #quartz-body .sidebar.left {
+    padding-top: 0.75rem;
+  }
+
+  // 抽屉是全屏 fixed 面板：顶栏 + 汉堡按钮占了上方一段，这里补足内边距
+  .page > #quartz-body .explorer-content {
+    padding-top: calc(var(--topcard-height) + var(--topcard-offset) + 4.25rem);
+  }
+
+  .top-card__inner {
+    padding: 0 0.5rem 0 0.75rem;
+  }
+
+  .top-card__links {
+    gap: 0.15rem 0.25rem;
+  }
+
+  .top-card__link {
+    font-size: 0.875rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
