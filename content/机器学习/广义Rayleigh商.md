@@ -1,5 +1,5 @@
 ---
-title: Rayleigh 商
+title: 广义 Rayleigh 商（Generalized Rayleigh Quotient）
 tags:
   - 线性代数
   - 最优化
@@ -13,7 +13,7 @@ date: 2026-11-22
 
 ## 定义
 
-设 $A,B\in\mathbb{R}^{d\times d}$ 实对称。对使 $\mathbf{w}^\top B\mathbf{w}\ne0$ 的非零 $\mathbf{w}$，定义 Rayleigh 商
+设 $A,B\in\mathbb{R}^{d\times d}$ 实对称。对使 $\mathbf{w}^\top B\mathbf{w}\ne0$ 的非零 $\mathbf{w}$，定义广义 Rayleigh 商
 
 $$
 \rho(\mathbf{w})
@@ -77,7 +77,7 @@ $$
 > >
 > > 这是 $\lambda_i$ 的加权平均，故位于 $[\lambda_1,\lambda_d]$。取 $\mathbf{z}=\pm\mathbf{e}_1$ 或 $\pm\mathbf{e}_d$ 即分别达到下界与上界；重根时对应特征子空间中的任意 $B$-单位向量都可取。$\square$
 
-> [!abstract] 命题（逐次变分）
+> [!abstract] 命题（逐次变分，最小值）
 > 设前 $j-1$ 个方向取为 $\mathbf{v}_1,\ldots,\mathbf{v}_{j-1}$。则
 >
 > $$
@@ -106,7 +106,70 @@ $$
 > > =\lambda_j.
 > > $$
 > >
-> > 等号当且仅当对所有 $\lambda_i>\lambda_j$ 的 $i$ 有 $z_i=0$，即 $\mathbf{w}\in\operatorname{span}\{\mathbf{v}_i:i\ge j,\ \lambda_i=\lambda_j\}$。这里“剩余”是指前 $j-1$ 个方向已被约束排除，只保留 $i\ge j$ 的部分；单根时只剩 $\mathbf{v}_j$。$\mathbf{z}=\pm\mathbf{e}_j$ 达到下界，对应 $\mathbf{w}=\pm\mathbf{v}_j$。$\square$
+> > 等号条件也可直接读出：由
+> >
+> > $$
+> > \mathbf{w}^\top A\mathbf{w}-\lambda_j
+> > =\sum_{i=j}^d(\lambda_i-\lambda_j)z_i^2\ge0,
+> > $$
+> >
+> > 及 $\lambda_i-\lambda_j\ge0\ (i\ge j)$，等号当且仅当每个非负项为零，即对所有 $\lambda_i>\lambda_j$ 的 $i$ 有 $z_i=0$。又 $\mathbf{w}=S^{-\top}Q\mathbf{z}=\sum_{i=1}^d z_i\mathbf{v}_i$，非零的 $z_i$ 只出现在 $\lambda_i=\lambda_j$ 处，且 $i<j$ 的已被约束排除，故
+> >
+> > $$
+> > \mathbf{w}=\sum_{\substack{i\ge j\\ \lambda_i=\lambda_j}}z_i\mathbf{v}_i
+> > \in\operatorname{span}\{\mathbf{v}_i:i\ge j,\ \lambda_i=\lambda_j\},
+> > \qquad
+> > \|\mathbf{w}\|_B=\|\mathbf{z}\|_2=1.
+> > $$
+> >
+> > 反过来，任取该子空间中的 $B$-单位向量 $\mathbf{w}$：它由 $\mathbf{v}_i\ (i\ge j)$ 张成，与 $\mathbf{v}_1,\ldots,\mathbf{v}_{j-1}$ 都 $B$-正交，满足全部约束，且 $\mathbf{w}^\top A\mathbf{w}=\lambda_j\|\mathbf{w}\|_B^2=\lambda_j$，故等号可达。单根时该子空间为 $\mathbb{R}\mathbf{v}_j$，即 $\mathbf{w}=\pm\mathbf{v}_j$。$\square$
+
+> [!abstract] 命题（逐次变分，最大值）
+> 设后 $d-j$ 个方向取为 $\mathbf{v}_{j+1},\ldots,\mathbf{v}_d$。则
+>
+> $$
+> \max_{\substack{\mathbf{w}^\top B\mathbf{w}=1\\ \mathbf{v}_r^\top B\mathbf{w}=0,\ r>j}}
+> \mathbf{w}^\top A\mathbf{w}
+> =\lambda_j.
+> $$
+>
+> 等号当且仅当 $\mathbf{w}\in\operatorname{span}\{\mathbf{v}_i:i\le j,\ \lambda_i=\lambda_j\}$ 且 $\|\mathbf{w}\|_B=1$。单根时 $\mathbf{w}=\pm\mathbf{v}_j$；重根时可在对应特征子空间中任取 $B$-标准正交基。
+>
+> > [!note]- 证明
+> > 令 $\mathbf{u}=S^\top\mathbf{w}$，$\mathbf{z}=Q^\top\mathbf{u}$。约束 $\mathbf{w}^\top B\mathbf{w}=1$ 等价于 $\|\mathbf{z}\|_2=1$；又
+> >
+> > $$
+> > \mathbf{v}_r^\top B\mathbf{w}
+> > =\mathbf{q}_r^\top S^{-1}SS^\top S^{-\top}\mathbf{u}
+> > =z_r,
+> > $$
+> >
+> > 故后 $d-j$ 个约束等价于 $z_{j+1}=\cdots=z_d=0$。于是
+> >
+> > $$
+> > \mathbf{w}^\top A\mathbf{w}
+> > =\sum_{i=1}^j\lambda_i z_i^2
+> > \le\lambda_j\sum_{i=1}^j z_i^2
+> > =\lambda_j.
+> > $$
+> >
+> > 等号条件也可直接读出：由
+> >
+> > $$
+> > \lambda_j-\mathbf{w}^\top A\mathbf{w}
+> > =\sum_{i=1}^j(\lambda_j-\lambda_i)z_i^2\ge0,
+> > $$
+> >
+> > 及 $\lambda_j-\lambda_i\ge0\ (i\le j)$，等号当且仅当每个非负项为零，即对所有 $\lambda_i<\lambda_j$ 的 $i$ 有 $z_i=0$。又 $\mathbf{w}=S^{-\top}Q\mathbf{z}=\sum_{i=1}^d z_i\mathbf{v}_i$，非零的 $z_i$ 只出现在 $\lambda_i=\lambda_j$ 处，且 $i>j$ 的已被约束排除，故
+> >
+> > $$
+> > \mathbf{w}=\sum_{\substack{i\le j\\ \lambda_i=\lambda_j}}z_i\mathbf{v}_i
+> > \in\operatorname{span}\{\mathbf{v}_i:i\le j,\ \lambda_i=\lambda_j\},
+> > \qquad
+> > \|\mathbf{w}\|_B=\|\mathbf{z}\|_2=1.
+> > $$
+> >
+> > 反过来，任取该子空间中的 $B$-单位向量 $\mathbf{w}$：它由 $\mathbf{v}_i\ (i\le j)$ 张成，与 $\mathbf{v}_{j+1},\ldots,\mathbf{v}_d$ 都 $B$-正交，满足全部约束，且 $\mathbf{w}^\top A\mathbf{w}=\lambda_j\|\mathbf{w}\|_B^2=\lambda_j$，故等号可达。单根时该子空间为 $\mathbb{R}\mathbf{v}_j$，即 $\mathbf{w}=\pm\mathbf{v}_j$。$\square$
 
 ## 矩阵形式
 
@@ -275,12 +338,11 @@ $$
 
 所以矩阵形式允许最优子空间内的正交混合甚至列交换；逐次变分额外要求方向按 $\lambda_1\le\cdots\le\lambda_m$ 嵌套排列。若只关心总目标值或最优子空间，两者等价；若要得到有序的第 $1$、第 $2$、……个慢特征方向，应使用逐次变分，或在得到最优子空间后再对角化 $W^\top AW$。
 
-
 ## 约束优化视角
 
 约束二次规划也会导出同一特征值方程。
 
-> [!abstract] 命题（约束二次规划与 Rayleigh 商）
+> [!abstract] 命题（约束二次规划与广义 Rayleigh 商）
 > 设 $A$ 实对称，$B\succ0$。约束问题
 >
 > $$

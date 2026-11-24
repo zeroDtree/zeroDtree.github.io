@@ -9,7 +9,7 @@ date: 2026-11-09
 
 ## 前置
 
-- [[机器学习/Rayleigh商|Rayleigh 商]]
+- [[机器学习/广义Rayleigh商|广义 Rayleigh 商]]
 - [[数学/数学分析/平方可积|平方可积空间 L²]]
 
 ## 目标
@@ -127,7 +127,7 @@ $$
 
 ## 广义特征值与白化求解
 
-线性 SFA 的约束二次规划可以交给 [[机器学习/Rayleigh商|Rayleigh 商]] 处理。对单个方向，约束优化
+线性 SFA 的约束二次规划可以交给 [[机器学习/广义Rayleigh商|广义 Rayleigh 商]] 处理。对单个方向，约束优化
 
 $$
 \min_{\mathbf{w}^\top B\mathbf{w}=1}\mathbf{w}^\top A\mathbf{w}
@@ -141,9 +141,9 @@ A\mathbf{w}=\lambda B\mathbf{w},
 \lambda=\frac{\mathbf{w}^\top A\mathbf{w}}{\mathbf{w}^\top B\mathbf{w}},
 $$
 
-这是 [[机器学习/Rayleigh商#约束优化视角|约束优化视角]] 的直接结论。
+这是 [[机器学习/广义Rayleigh商#约束优化视角|约束优化视角]] 的直接结论。
 
-对 $m$ 个方向，[[机器学习/Rayleigh商#变分刻画|变分刻画]] 中的矩阵形式定理给出
+对 $m$ 个方向，[[机器学习/广义Rayleigh商#变分刻画|变分刻画]] 中的矩阵形式定理给出
 
 $$
 \min_{W^\top BW=I_m}\operatorname{tr}(W^\top AW)=\sum_{j=1}^m\lambda_j,
