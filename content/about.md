@@ -7,6 +7,7 @@ tags:
 ## Project
 
 - [GSAD](https://github.com/zeroDtree/server-manager) 一个用于管理 GPU 服务器 SSH 访问权限的平台（GPU Server Access Dashboard）。
+- [comonad](https://github.com/zeroDtree/comonad-vscode-extension) 一个 VS Code 的 Agent 插件（类似于 Codex、Claude、Cursor），可以较好地控制 AI 的能力及其作用范围。
 
 ## Publication
 
