@@ -16,3 +16,4 @@ quartz/cli/tui/dist/
 content/**/*.typ
 content/**/*.pdf
 .comonad
+.security/
