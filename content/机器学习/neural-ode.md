@@ -1,5 +1,5 @@
 ---
-title: 神经常微分方程：连续归一化流与瞬时换元
+title: Neural ODE
 tags:
   - 机器学习
   - 生成模型

@@ -1,5 +1,5 @@
 ---
-title: 流匹配：条件路径、CFM 与整流流
+title: Flow Matching
 tags:
   - 机器学习
   - 生成模型

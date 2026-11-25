@@ -1,5 +1,5 @@
 ---
-title: 归一化流：可逆变换与精确似然
+title: Normalizing Flows
 tags:
   - 机器学习
   - 生成模型
